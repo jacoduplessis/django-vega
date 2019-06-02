@@ -1,0 +1,10 @@
+db.sqlite3
+test/media
+.idea
+venv
+*.egg-info
+dist
+node_modules
+django_vega/static/
+test/*.png
+test/*.svg

@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Django Altair</title>
+</head>
+<body>
+<div id="viz" style="display: flex; justify-content: center; margin: 1rem; padding: 0"></div>
+
+<script src="{% static 'django_vega/vega.min.js' %}"></script>
+<script src="{% static 'django_vega/vega-lite.min.js' %}"></script>
+<script src="{% static 'django_vega/vega-embed.min.js' %}"></script>
+{{ options|json_script:'options' }}
+{{ spec|json_script:'spec' }}
+<script>
+  var options = JSON.parse(document.getElementById('options').textContent)
+  var spec = JSON.parse(document.getElementById('spec').textContent)
+  vegaEmbed('#viz', spec, options)
+</script>
+</body>
+</html>
