@@ -1,1 +1,13239 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t(e.vl={})}(this,function(e){"use strict";function t(e,t,n){return e.fields=t||[],e.fname=n,e}function l(e){throw Error(e)}function a(e){var t,n,r,i=[],o=null,a=0,u=e.length,s="";function c(){i.push(s+e.substring(t,n)),s="",t=n+1}for(e+="",t=n=0;n<u;++n)if("\\"===(r=e[n]))s+=e.substring(t,n),t=++n;else if(r===o)c(),o=null,a=-1;else{if(o)continue;t===a&&'"'===r?(t=n+1,o=r):t===a&&"'"===r?(t=n+1,o=r):"."!==r||a?"["===r?(t<n&&c(),a=t=n+1):"]"===r&&(a||l("Access path missing open bracket: "+e),0<a&&c(),a=0,t=n+1):t<n?c():t=n+1}return a&&l("Access path missing closing bracket: "+e),o&&l("Access path missing closing quote: "+e),t<n&&(n++,c()),i}var S=Array.isArray;function E(e){return e===Object(e)}function m(e){return"string"==typeof e}function N(e){return S(e)?"["+e.map(N)+"]":E(e)||m(e)?JSON.stringify(e).replace("\u2028","\\u2028").replace("\u2029","\\u2029"):e}var n,r,i,o,u=[];i=a(n="id"),o="return _["+i.map(N).join("][")+"];",t(Function("_",o),[n=1===i.length?i[0]:n],r||n),t(function(e){return e},u,"identity"),t(function(){return 0},u,"zero"),t(function(){return 1},u,"one"),t(function(){return!0},u,"true"),t(function(){return!1},u,"false");function s(e,t,n){var r=[t].concat([].slice.call(n));console[e].apply(console,r)}function c(e){return"boolean"==typeof e}function x(e){return"number"==typeof e}function f(e){for(var t={},n=0,r=e.length;n<r;++n)t[e[n]]=!0;return t}var d=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])};function h(e,t){function n(){this.constructor=e}d(e,t),e.prototype=null===t?Object.create(t):(n.prototype=t.prototype,new n)}var I=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var i in t=arguments[n])Object.prototype.hasOwnProperty.call(t,i)&&(e[i]=t[i]);return e};function z(e,t){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&t.indexOf(r)<0&&(n[r]=e[r]);if(null!=e&&"function"==typeof Object.getOwnPropertySymbols){var i=0;for(r=Object.getOwnPropertySymbols(e);i<r.length;i++)t.indexOf(r[i])<0&&(n[r[i]]=e[r[i]])}return n}var p,g,v,y,b={'"':'"',"\\":"\\","/":"/",b:"\b",f:"\f",n:"\n",r:"\r",t:"\t"},w=function(e){throw{name:"SyntaxError",message:e,at:p,text:v}},k=function(e){return e&&e!==g&&w("Expected '"+e+"' instead of '"+g+"'"),g=v.charAt(p),p+=1,g},O=function(){var e,t="";for("-"===g&&k(t="-");"0"<=g&&g<="9";)t+=g,k();if("."===g)for(t+=".";k()&&"0"<=g&&g<="9";)t+=g;if("e"===g||"E"===g)for(t+=g,k(),"-"!==g&&"+"!==g||(t+=g,k());"0"<=g&&g<="9";)t+=g,k();if(e=+t,isFinite(e))return e;w("Bad number")},_=function(){var e,t,n,r="";if('"'===g)for(;k();){if('"'===g)return k(),r;if("\\"===g)if(k(),"u"===g){for(t=n=0;t<4&&(e=parseInt(k(),16),isFinite(e));t+=1)n=16*n+e;r+=String.fromCharCode(n)}else{if("string"!=typeof b[g])break;r+=b[g]}else r+=g}w("Bad string")},T=function(){for(;g&&g<=" ";)k()};y=function(){switch(T(),g){case"{":return function(){var e,t={};if("{"===g){if(k("{"),T(),"}"===g)return k("}"),t;for(;g;){if(e=_(),T(),k(":"),Object.hasOwnProperty.call(t,e)&&w('Duplicate key "'+e+'"'),t[e]=y(),T(),"}"===g)return k("}"),t;k(","),T()}}w("Bad object")}();case"[":return function(){var e=[];if("["===g){if(k("["),T(),"]"===g)return k("]"),e;for(;g;){if(e.push(y()),T(),"]"===g)return k("]"),e;k(","),T()}}w("Bad array")}();case'"':return _();case"-":return O();default:return"0"<=g&&g<="9"?O():function(){switch(g){case"t":return k("t"),k("r"),k("u"),k("e"),!0;case"f":return k("f"),k("a"),k("l"),k("s"),k("e"),!1;case"n":return k("n"),k("u"),k("l"),k("l"),null}w("Unexpected '"+g+"'")}()}};var C,A,D,R=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,L={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"};function F(e){return R.lastIndex=0,R.test(e)?'"'+e.replace(R,function(e){var t=L[e];return"string"==typeof t?t:"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})+'"':'"'+e+'"'}var j="undefined"!=typeof JSON?JSON:{parse:function(e,a){var t;return v=e,p=0,g=" ",t=y(),T(),g&&w("Syntax error"),"function"==typeof a?function e(t,n){var r,i,o=t[n];if(o&&"object"==typeof o)for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(void 0!==(i=e(o,r))?o[r]=i:delete o[r]);return a.call(t,n,o)}({"":t},""):t},stringify:function(e,t,n){var r;if(A=C="","number"==typeof n)for(r=0;r<n;r+=1)A+=" ";else"string"==typeof n&&(A=n);if((D=t)&&"function"!=typeof t&&("object"!=typeof t||"number"!=typeof t.length))throw new Error("JSON.stringify");return function e(t,n){var r,i,o,a,u,s=C,c=n[t];switch(c&&"object"==typeof c&&"function"==typeof c.toJSON&&(c=c.toJSON(t)),"function"==typeof D&&(c=D.call(n,t,c)),typeof c){case"string":return F(c);case"number":return isFinite(c)?String(c):"null";case"boolean":case"null":return String(c);case"object":if(!c)return"null";if(C+=A,u=[],"[object Array]"===Object.prototype.toString.apply(c)){for(a=c.length,r=0;r<a;r+=1)u[r]=e(r,c)||"null";return o=0===u.length?"[]":C?"[\n"+C+u.join(",\n"+C)+"\n"+s+"]":"["+u.join(",")+"]",C=s,o}if(D&&"object"==typeof D)for(a=D.length,r=0;r<a;r+=1)"string"==typeof(i=D[r])&&(o=e(i,c))&&u.push(F(i)+(C?": ":":")+o);else for(i in c)Object.prototype.hasOwnProperty.call(c,i)&&(o=e(i,c))&&u.push(F(i)+(C?": ":":")+o);return o=0===u.length?"{}":C?"{\n"+C+u.join(",\n"+C)+"\n"+s+"}":"{"+u.join(",")+"}",C=s,o}}("",{"":e})}},U=function(e,t){t||(t={}),"function"==typeof t&&(t={cmp:t});var p=t.space||"";"number"==typeof p&&(p=Array(p+1).join(" "));var o,h="boolean"==typeof t.cycles&&t.cycles,m=t.replacer||function(e,t){return t},g=t.cmp&&(o=t.cmp,function(i){return function(e,t){var n={key:e,value:i[e]},r={key:t,value:i[t]};return o(n,r)}}),v=[];return function e(t,n,r,i){var o=p?"\n"+new Array(i+1).join(p):"",a=p?": ":":";if(r&&r.toJSON&&"function"==typeof r.toJSON&&(r=r.toJSON()),void 0!==(r=m.call(t,n,r))){if("object"!=typeof r||null===r)return j.stringify(r);if(P(r)){for(var u=[],s=0;s<r.length;s++){var c=e(r,s,r[s],i+1)||j.stringify(null);u.push(o+p+c)}return"["+u.join(",")+o+"]"}if(-1!==v.indexOf(r)){if(h)return j.stringify("__cycle__");throw new TypeError("Converting circular structure to JSON")}v.push(r);var l=M(r).sort(g&&g(r));for(u=[],s=0;s<l.length;s++){var f=e(r,n=l[s],r[n],i+1);if(f){var d=j.stringify(n)+a+f;u.push(o+p+d)}}return v.splice(v.indexOf(r),1),"{"+u.join(",")+o+"}"}}({"":e},"",e,0)},P=Array.isArray||function(e){return"[object Array]"==={}.toString.call(e)},M=Object.keys||function(e){var t=Object.prototype.hasOwnProperty||function(){return!0},n=[];for(var r in e)t.call(e,r)&&n.push(r);return n};function H(e){return!!e.or}function q(e){return!!e.and}function W(e){return!!e.not}function G(e,t){for(var n={},r=0,i=t;r<i.length;r++){var o=i[r];e.hasOwnProperty(o)&&(n[o]=e[o])}return n}function B(e,t){for(var n=I({},e),r=0,i=t;r<i.length;r++){delete n[i[r]]}return n}var Y=U;function V(e){if(x(e))return e;var t=m(e)?e:U(e);if(t.length<100)return t;for(var n=0,r=0;r<t.length;r++){n=(n<<5)-n+t.charCodeAt(r),n&=n}return n}function X(e,t){return-1<e.indexOf(t)}function Q(e,t){return e.filter(function(e){return!X(t,e)})}function K(e,t){for(var n=0,r=0;r<e.length;r++)if(t(e[r],r,n++))return!0;return!1}function J(e,t){for(var n=0,r=0;r<e.length;r++)if(!t(e[r],r,n++))return!1;return!0}function Z(e){return[].concat.apply([],e)}function $(e){for(var t=[],n=1;n<arguments.length;n++)t[n-1]=arguments[n];for(var r=0,i=t;r<i.length;r++){e=ee(e,i[r])}return e}function ee(e,t){if("object"!=typeof t||null===t)return e;for(var n in t)t.hasOwnProperty(n)&&void 0!==t[n]&&("object"!=typeof t[n]||S(t[n])||null===t[n]?e[n]=t[n]:"object"!=typeof e[n]||null===e[n]?e[n]=$(S(t[n].constructor)?[]:{},t[n]):$(e[n],t[n]));return e}function te(e,t){for(var n,r=[],i={},o=0,a=e;o<a.length;o++){var u=a[o];(n=t(u))in i||(i[n]=1,r.push(u))}return r}function ne(e,t){for(var n in e)if(e.hasOwnProperty(n)&&t[n]&&e[n]&&t[n]!==e[n])return!0;return!1}function re(e,t){for(var n in e)if(n in t)return!0;return!1}var ie=Object.keys;function oe(e){var t=[];for(var n in e)e.hasOwnProperty(n)&&t.push(e[n]);return t}function ae(e){return ie(e)}function ue(e){return JSON.parse(JSON.stringify(e))}function se(e){return!0===e||!1===e}function ce(e){var t=e.replace(/\W/g,"_");return(e.match(/^\d+/)?"_":"")+t}function le(e,t){return W(e)?"!("+le(e.not,t)+")":q(e)?"("+e.and.map(function(e){return le(e,t)}).join(") && (")+")":H(e)?"("+e.or.map(function(e){return le(e,t)}).join(") || (")+")":t(e)}function fe(e,t){if(0===t.length)return!0;var n=t.shift();return fe(e[n],t)&&delete e[n],0===Object.keys(e).length}function de(e){return e.charAt(0).toUpperCase()+e.substr(1)}function pe(e,t){void 0===t&&(t="datum");for(var n=a(e),r=[],i=1;i<=n.length;i++){var o="["+n.slice(0,i).map(N).join("][")+"]";r.push(""+t+o)}return r.join(" && ")}function he(e,t){return void 0===t&&(t="datum"),t+"["+N(a(e).join("."))+"]"}function me(e){return""+a(e).map(function(e){return e.replace(".","\\.")}).join("\\.")}function ge(e){return""+a(e).join(".")}function ve(e){return e?a(e).length:0}var ye=Object.freeze({pick:G,omit:B,stringify:Y,hash:V,contains:X,without:Q,union:function(e,t){return e.concat(Q(t,e))},some:K,every:J,flatten:Z,mergeDeep:$,unique:te,differ:ne,hasIntersection:re,isNumeric:function(e){return!isNaN(e)},differArray:function(e,t){if(e.length!==t.length)return!0;e.sort(),t.sort();for(var n=0;n<e.length;n++)if(t[n]!==e[n])return!0;return!1},keys:ie,vals:oe,flagKeys:ae,duplicate:ue,isBoolean:se,varName:ce,logicalExpr:le,deleteNestedProperty:fe,titlecase:de,accessPathWithDatum:pe,flatAccessWithDatum:he,replacePathInField:me,removePathFromField:ge,accessPathDepth:ve}),be={argmax:1,argmin:1,average:1,count:1,distinct:1,max:1,mean:1,median:1,min:1,missing:1,q1:1,q3:1,ci0:1,ci1:1,stderr:1,stdev:1,stdevp:1,sum:1,valid:1,values:1,variance:1,variancep:1},xe=ae(be);function Se(e){return!!be[e]}var Ee=["count","valid","missing","distinct"];function we(e){return e&&X(Ee,e)}var ke=["count","sum","distinct","valid","missing"],Ne=["mean","average","median","q1","q3","min","max"],Oe=f(Ne),_e=Object.freeze({AGGREGATE_OPS:xe,isAggregateOp:Se,COUNTING_OPS:Ee,isCountingAggregateOp:we,SUM_OPS:ke,SHARED_DOMAIN_OPS:Ne,SHARED_DOMAIN_OP_INDEX:Oe}),Te=["domain","grid","labels","ticks","title"],Ce={grid:"grid",gridScale:"grid",domain:"main",labels:"main",labelFlush:"main",labelOverlap:"main",minExtent:"main",maxExtent:"main",offset:"main",ticks:"main",title:"main",values:"both",scale:"both",zindex:"both"},Ae={orient:1,domain:1,format:1,grid:1,labelBound:1,labelFlush:1,labelPadding:1,labels:1,labelOverlap:1,maxExtent:1,minExtent:1,offset:1,position:1,tickCount:1,ticks:1,tickSize:1,title:1,titlePadding:1,values:1,zindex:1},De=I({},Ae,{encoding:1,labelAngle:1,titleMaxLength:1});function Ie(e){return!!De[e]}var ze,Re,Le=ae(I({scale:1},Ae,{gridScale:1,encode:1})),Fe=ae(De),je=Object.freeze({AXIS_PARTS:Te,AXIS_PROPERTY_TYPE:Ce,isAxisProperty:Ie,VG_AXIS_PROPERTIES:Le,AXIS_PROPERTIES:Fe});(Re=ze||(ze={})).ROW="row",Re.COLUMN="column",Re.X="x",Re.Y="y",Re.X2="x2",Re.Y2="y2",Re.LATITUDE="latitude",Re.LONGITUDE="longitude",Re.LATITUDE2="latitude2",Re.LONGITUDE2="longitude2",Re.COLOR="color",Re.FILL="fill",Re.STROKE="stroke",Re.SHAPE="shape",Re.SIZE="size",Re.OPACITY="opacity",Re.TEXT="text",Re.ORDER="order",Re.DETAIL="detail",Re.KEY="key",Re.TOOLTIP="tooltip",Re.HREF="href";var Ue=ze.X,Pe=ze.Y,Me=ze.X2,He=ze.Y2,qe=ze.LATITUDE,We=ze.LATITUDE2,Ge=ze.LONGITUDE,Be=ze.LONGITUDE2,Ye=ze.ROW,Ve=ze.COLUMN,Xe=ze.SHAPE,Qe=ze.SIZE,Ke=ze.COLOR,Je=ze.FILL,Ze=ze.STROKE,$e=ze.TEXT,et=ze.DETAIL,tt=ze.KEY,nt=ze.ORDER,rt=ze.OPACITY,it=ze.TOOLTIP,ot=ze.HREF,at={longitude:1,longitude2:1,latitude:1,latitude2:1},ut=ae(at),st=I({x:1,y:1,x2:1,y2:1},at,{color:1,fill:1,stroke:1,opacity:1,size:1,shape:1,order:1,text:1,detail:1,key:1,tooltip:1,href:1});function ct(e){return"color"===e||"fill"===e||"stroke"===e}var lt=I({},st,{row:1,column:1}),ft=ae(lt),dt=(lt.order,lt.detail,ae(z(lt,["order","detail"])));function pt(e){return!!lt[e]}var ht=ae(st),mt=(st.x,st.y,st.x2,st.y2,st.latitude,st.longitude,st.latitude2,st.longitude2,z(st,["x","y","x2","y2","latitude","longitude","latitude2","longitude2"])),gt=ae(mt),vt={x:1,y:1},yt=ae(vt),bt=z(mt,["text","tooltip","href","detail","key","order"]),xt=ae(bt),St=I({},vt,bt),Et=ae(St);function wt(e){return!!St[e]}function kt(e,t){return t in Nt(e)}function Nt(e){switch(e){case Ke:case Je:case Ze:case et:case tt:case it:case ot:case nt:case rt:case Ye:case Ve:return{point:!0,tick:!0,rule:!0,circle:!0,square:!0,bar:!0,rect:!0,line:!0,trail:!0,area:!0,text:!0,geoshape:!0};case Ue:case Pe:case qe:case Ge:return{point:!0,tick:!0,rule:!0,circle:!0,square:!0,bar:!0,rect:!0,line:!0,trail:!0,area:!0,text:!0};case Me:case He:case We:case Be:return{rule:!0,bar:!0,rect:!0,area:!0};case Qe:return{point:!0,tick:!0,rule:!0,circle:!0,square:!0,bar:!0,text:!0,line:!0,trail:!0};case Xe:return{point:!0,geoshape:!0};case $e:return{text:!0}}}function Ot(e){switch(e){case Ue:case Pe:case Qe:case rt:case Me:case He:return"continuous";case Ye:case Ve:case Xe:case $e:case it:case ot:return"discrete";case Ke:case Je:case Ze:return"flexible";case qe:case Ge:case We:case Be:case et:case tt:case nt:return}throw new Error("rangeType not implemented for "+e)}var _t=Object.freeze({get Channel(){return ze},X:Ue,Y:Pe,X2:Me,Y2:He,LATITUDE:qe,LATITUDE2:We,LONGITUDE:Ge,LONGITUDE2:Be,ROW:Ye,COLUMN:Ve,SHAPE:Xe,SIZE:Qe,COLOR:Ke,FILL:Je,STROKE:Ze,TEXT:$e,DETAIL:et,KEY:tt,ORDER:nt,OPACITY:rt,TOOLTIP:it,HREF:ot,GEOPOSITION_CHANNEL_INDEX:at,GEOPOSITION_CHANNELS:ut,isColorChannel:ct,CHANNELS:ft,SINGLE_DEF_CHANNELS:dt,isChannel:pt,UNIT_CHANNELS:ht,NONPOSITION_CHANNELS:gt,POSITION_SCALE_CHANNELS:yt,NONPOSITION_SCALE_CHANNELS:xt,SCALE_CHANNELS:Et,isScaleChannel:wt,supportMark:kt,getSupportedMark:Nt,rangeType:Ot});function Tt(t){return c(t)?"bin":"bin"+ie(t).map(function(e){return ce("_"+e+"_"+t[e])}).join("")}function Ct(e){return e&&!c(e)}function At(e){switch(e){case Ye:case Ve:case Qe:case Ke:case Je:case Ze:case rt:case Xe:return 6;default:return 10}}var Dt,It,zt=Object.freeze({binToString:Tt,isBinParams:Ct,autoMaxBins:At});(It=Dt||(Dt={})).AREA="area",It.BAR="bar",It.LINE="line",It.POINT="point",It.RECT="rect",It.RULE="rule",It.TEXT="text",It.TICK="tick",It.TRAIL="trail",It.CIRCLE="circle",It.SQUARE="square",It.GEOSHAPE="geoshape";var Rt=Dt.AREA,Lt=Dt.BAR,Ft=Dt.LINE,jt=Dt.POINT,Ut=Dt.TEXT,Pt=Dt.TICK,Mt=Dt.TRAIL,Ht=Dt.RECT,qt=Dt.RULE,Wt=Dt.GEOSHAPE,Gt=Dt.CIRCLE,Bt=Dt.SQUARE,Yt={area:1,bar:1,line:1,point:1,text:1,tick:1,trail:1,rect:1,geoshape:1,rule:1,circle:1,square:1};function Vt(e){return X(["line","area","trail"],e)}var Xt=ae(Yt);function Qt(e){return e.type}var Kt=f(Xt);function Jt(e){return(Qt(e)?e.type:e)in Kt}var Zt,$t,en,tn,nn=["stroke","strokeWidth","strokeDash","strokeDashOffset","strokeOpacity","strokeJoin","strokeMiterLimit"],rn=["fill","fillOpacity"],on=[].concat(nn,rn),an=["filled","color"],un={area:["line","point"],bar:["binSpacing","continuousBandSize","discreteBandSize"],line:["point"],text:["shortTimeLabels"],tick:["bandSize","thickness"]},sn={color:"#4c78a8"},cn={binSpacing:1,continuousBandSize:5},ln={thickness:1},fn=Object.freeze({get Mark(){return Dt},AREA:Rt,BAR:Lt,LINE:Ft,POINT:jt,TEXT:Ut,TICK:Pt,TRAIL:Mt,RECT:Ht,RULE:qt,GEOSHAPE:Wt,CIRCLE:Gt,SQUARE:Bt,isMark:function(e){return!!Yt[e]},isPathMark:Vt,PRIMITIVE_MARKS:Xt,isMarkDef:Qt,isPrimitiveMark:Jt,STROKE_CONFIG:nn,FILL_CONFIG:rn,FILL_STROKE_CONFIG:on,VL_ONLY_MARK_CONFIG_PROPERTIES:an,VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX:un,defaultMarkConfig:sn,defaultBarConfig:cn,defaultTickConfig:ln}),dn=($t=2||0,{level:function(e){return arguments.length?($t=+e,this):$t},error:function(){return 1<=$t&&s(Zt||"error","ERROR",arguments),this},warn:function(){return 2<=$t&&s(Zt||"warn","WARN",arguments),this},info:function(){return 3<=$t&&s(Zt||"log","INFO",arguments),this},debug:function(){return 4<=$t&&s(Zt||"log","DEBUG",arguments),this}}),pn=dn;function hn(){for(var e=[],t=0;t<arguments.length;t++)e[t]=arguments[t];pn.warn.apply(pn,arguments)}(tn=en||(en={})).INVALID_SPEC="Invalid spec",tn.FIT_NON_SINGLE='Autosize "fit" only works for single views and layered views.',tn.CANNOT_FIX_RANGE_STEP_WITH_FIT='Cannot use a fixed value of "rangeStep" when "autosize" is "fit".',tn.cannotProjectOnChannelWithoutField=function(e){return'Cannot project a selection on encoding channel "'+e+'", which has no field.'},tn.nearestNotSupportForContinuous=function(e){return'The "nearest" transform is not supported for '+e+" marks."},tn.selectionNotFound=function(e){return'Cannot find a selection named "'+e+'"'},tn.SCALE_BINDINGS_CONTINUOUS="Scale bindings are currently only supported for scales with unbinned, continuous domains.",tn.noSuchRepeatedValue=function(e){return'Unknown repeated value "'+e+'".'},tn.CONCAT_CANNOT_SHARE_AXIS="Axes cannot be shared in concatenated views.",tn.REPEAT_CANNOT_SHARE_AXIS="Axes cannot be shared in repeated views.",tn.cannotSetTitleAnchor=function(e){return'Cannot set title "anchor" for a '+e+" spec"},tn.unrecognizedParse=function(e){return'Unrecognized parse "'+e+'".'},tn.differentParse=function(e,t,n){return'An ancestor parsed field "'+e+'" as '+n+" but a child wants to parse the field as "+t+"."},tn.invalidTransformIgnored=function(e){return"Ignoring an invalid transform: "+Y(e)+"."},tn.NO_FIELDS_NEEDS_AS='If "from.fields" is not specified, "as" has to be a string that specifies the key to be used for the data from the secondary source.',tn.encodingOverridden=function(e){return"Layer's shared "+e.join(",")+" channel "+(1===e.length?"is":"are")+" overriden"},tn.projectionOverridden=function(e){var t=e.parentProjection,n=e.projection;return"Layer's shared projection "+Y(t)+" is overridden by a child projection "+Y(n)+"."},tn.primitiveChannelDef=function(e,t,n){return"Channel "+e+" is a "+t+". Converted to {value: "+Y(n)+"}."},tn.invalidFieldType=function(e){return'Invalid field type "'+e+'"'},tn.nonZeroScaleUsedWithLengthMark=function(e,t,n){return"A "+(n.scaleType?n.scaleType+" scale":n.zeroFalse?"scale with zero=false":"scale with custom domain that excludes zero")+" is used to encode "+e+"'s "+t+". This can be misleading as the "+("x"===t?"width":"height")+" of the "+e+" can be arbitrary based on the scale domain. You may want to use point mark instead."},tn.invalidFieldTypeForCountAggregate=function(e,t){return'Invalid field type "'+e+'" for aggregate: "'+t+'", using "quantitative" instead.'},tn.invalidAggregate=function(e){return'Invalid aggregation operator "'+e+'"'},tn.emptyOrInvalidFieldType=function(e,t,n){return'Invalid field type "'+e+'" for channel "'+t+'", using "'+n+'" instead.'},tn.droppingColor=function(e,t){var n=t.fill,r=t.stroke;return"Dropping color "+e+" as the plot also has "+(n&&r?"fill and stroke":n?"fill":"stroke")},tn.emptyFieldDef=function(e,t){return"Dropping "+Y(e)+' from channel "'+t+'" since it does not contain data field or value.'},tn.latLongDeprecated=function(e,t,n){return e+"-encoding with type "+t+" is deprecated. Replacing with "+n+"-encoding."},tn.LINE_WITH_VARYING_SIZE="Line marks cannot encode size with a non-groupby field. You may want to use trail marks instead.",tn.incompatibleChannel=function(e,t,n){return e+' dropped as it is incompatible with "'+t+'"'+(n?" when "+n:"")+"."},tn.invalidEncodingChannel=function(e){return e+"-encoding is dropped as "+e+" is not a valid encoding channel."},tn.facetChannelShouldBeDiscrete=function(e){return e+" encoding should be discrete (ordinal / nominal / binned)."},tn.discreteChannelCannotEncode=function(e,t){return'Using discrete channel "'+e+'" to encode "'+t+'" field can be misleading as it does not encode '+("ordinal"===t?"order":"magnitude")+"."},tn.BAR_WITH_POINT_SCALE_AND_RANGESTEP_NULL="Bar mark should not be used with point scale when rangeStep is null. Please use band scale instead.",tn.lineWithRange=function(e,t){return"Line mark is for continuous lines and thus cannot be used with "+(e&&t?"x2 and y2":e?"x2":"y2")+". We will use the rule mark (line segments) instead."},tn.orientOverridden=function(e,t){return'Specified orient "'+e+'" overridden with "'+t+'"'},tn.CANNOT_UNION_CUSTOM_DOMAIN_WITH_FIELD_DOMAIN="custom domain scale cannot be unioned with default field-based domain",tn.cannotUseScalePropertyWithNonColor=function(e){return'Cannot use the scale property "'+e+'" with non-color channel.'},tn.unaggregateDomainHasNoEffectForRawField=function(e){return"Using unaggregated domain with raw field has no effect ("+Y(e)+")."},tn.unaggregateDomainWithNonSharedDomainOp=function(e){return'Unaggregated domain not applicable for "'+e+'" since it produces values outside the origin domain of the source data.'},tn.unaggregatedDomainWithLogScale=function(e){return"Unaggregated domain is currently unsupported for log scale ("+Y(e)+")."},tn.cannotApplySizeToNonOrientedMark=function(e){return'Cannot apply size to non-oriented mark "'+e+'".'},tn.rangeStepDropped=function(e){return'rangeStep for "'+e+'" is dropped as top-level '+("x"===e?"width":"height")+" is provided."},tn.scaleTypeNotWorkWithChannel=function(e,t,n){return'Channel "'+e+'" does not work with "'+t+'" scale. We are using "'+n+'" scale instead.'},tn.scaleTypeNotWorkWithFieldDef=function(e,t){return'FieldDef does not work with "'+e+'" scale. We are using "'+t+'" scale instead.'},tn.scalePropertyNotWorkWithScaleType=function(e,t,n){return n+"-scale's \""+t+'" is dropped as it does not work with '+e+" scale."},tn.scaleTypeNotWorkWithMark=function(e,t){return'Scale type "'+t+'" does not work with mark "'+e+'".'},tn.mergeConflictingProperty=function(e,t,n,r){return"Conflicting "+t.toString()+' property "'+e.toString()+'" ('+Y(n)+" and "+Y(r)+").  Using "+Y(n)+"."},tn.independentScaleMeansIndependentGuide=function(e){return'Setting the scale to be independent for "'+e+'" means we also have to set the guide (axis or legend) to be independent.'},tn.domainSortDropped=function(e){return"Dropping sort property "+Y(e)+" as unioned domains only support boolean or op 'count'."},tn.UNABLE_TO_MERGE_DOMAINS="Unable to merge domains",tn.MORE_THAN_ONE_SORT="Domains that should be unioned has conflicting sort properties. Sort will be set to true.",tn.INVALID_CHANNEL_FOR_AXIS="Invalid channel for axis.",tn.cannotStackRangedMark=function(e){return'Cannot stack "'+e+'" if there is already "'+e+'2"'},tn.cannotStackNonLinearScale=function(e){return"Cannot stack non-linear scale ("+e+")"},tn.stackNonSummativeAggregate=function(e){return'Stacking is applied even though the aggregate function is non-summative ("'+e+'")'},tn.invalidTimeUnit=function(e,t){return"Invalid "+e+": "+Y(t)},tn.dayReplacedWithDate=function(e){return'Time unit "'+e+'" is not supported. We are replacing it with '+e.replace("day","date")+"."},tn.droppedDay=function(e){return"Dropping day from datetime "+Y(e)+" as day cannot be combined with other units."};var mn=2006;function gn(e){return!!(e&&(e.year||e.quarter||e.month||e.date||e.day||e.hours||e.minutes||e.seconds||e.milliseconds))}var vn=["january","february","march","april","may","june","july","august","september","october","november","december"],yn=vn.map(function(e){return e.substr(0,3)}),bn=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"],xn=bn.map(function(e){return e.substr(0,3)});function Sn(e,t){void 0===t&&(t=!1);var n=[];if(t&&void 0!==e.day&&1<ie(e).length&&(hn(en.droppedDay(e)),delete(e=ue(e)).day),void 0!==e.year?n.push(e.year):void 0!==e.day?n.push(mn):n.push(0),void 0!==e.month){var r=t?function(e){if(x(e))return e-1+"";var t=e.toLowerCase(),n=vn.indexOf(t);if(-1!==n)return n+"";var r=t.substr(0,3),i=yn.indexOf(r);if(-1!==i)return i+"";throw new Error(en.invalidTimeUnit("month",e))}(e.month):e.month;n.push(r)}else if(void 0!==e.quarter){var i=t?function(e){if(x(e))return 4<e&&hn(en.invalidTimeUnit("quarter",e)),e-1+"";throw new Error(en.invalidTimeUnit("quarter",e))}(e.quarter):e.quarter;n.push(i+"*3")}else n.push(0);if(void 0!==e.date)n.push(e.date);else if(void 0!==e.day){var o=t?function(e){if(x(e))return e%7+"";var t=e.toLowerCase(),n=bn.indexOf(t);if(-1!==n)return n+"";var r=t.substr(0,3),i=xn.indexOf(r);if(-1!==i)return i+"";throw new Error(en.invalidTimeUnit("day",e))}(e.day):e.day;n.push(o+"+1")}else n.push(1);for(var a=0,u=["hours","minutes","seconds","milliseconds"];a<u.length;a++){var s=u[a];void 0!==e[s]?n.push(e[s]):n.push(0)}return e.utc?"utc("+n.join(", ")+")":"datetime("+n.join(", ")+")"}var En,wn,kn=Object.freeze({isDateTime:gn,MONTHS:vn,SHORT_MONTHS:yn,DAYS:bn,SHORT_DAYS:xn,dateTimeExpr:Sn});(wn=En||(En={})).YEAR="year",wn.MONTH="month",wn.DAY="day",wn.DATE="date",wn.HOURS="hours",wn.MINUTES="minutes",wn.SECONDS="seconds",wn.MILLISECONDS="milliseconds",wn.YEARMONTH="yearmonth",wn.YEARMONTHDATE="yearmonthdate",wn.YEARMONTHDATEHOURS="yearmonthdatehours",wn.YEARMONTHDATEHOURSMINUTES="yearmonthdatehoursminutes",wn.YEARMONTHDATEHOURSMINUTESSECONDS="yearmonthdatehoursminutesseconds",wn.MONTHDATE="monthdate",wn.HOURSMINUTES="hoursminutes",wn.HOURSMINUTESSECONDS="hoursminutesseconds",wn.MINUTESSECONDS="minutesseconds",wn.SECONDSMILLISECONDS="secondsmilliseconds",wn.QUARTER="quarter",wn.YEARQUARTER="yearquarter",wn.QUARTERMONTH="quartermonth",wn.YEARQUARTERMONTH="yearquartermonth",wn.UTCYEAR="utcyear",wn.UTCMONTH="utcmonth",wn.UTCDAY="utcday",wn.UTCDATE="utcdate",wn.UTCHOURS="utchours",wn.UTCMINUTES="utcminutes",wn.UTCSECONDS="utcseconds",wn.UTCMILLISECONDS="utcmilliseconds",wn.UTCYEARMONTH="utcyearmonth",wn.UTCYEARMONTHDATE="utcyearmonthdate",wn.UTCYEARMONTHDATEHOURS="utcyearmonthdatehours",wn.UTCYEARMONTHDATEHOURSMINUTES="utcyearmonthdatehoursminutes",wn.UTCYEARMONTHDATEHOURSMINUTESSECONDS="utcyearmonthdatehoursminutesseconds",wn.UTCMONTHDATE="utcmonthdate",wn.UTCHOURSMINUTES="utchoursminutes",wn.UTCHOURSMINUTESSECONDS="utchoursminutesseconds",wn.UTCMINUTESSECONDS="utcminutesseconds",wn.UTCSECONDSMILLISECONDS="utcsecondsmilliseconds",wn.UTCQUARTER="utcquarter",wn.UTCYEARQUARTER="utcyearquarter",wn.UTCQUARTERMONTH="utcquartermonth",wn.UTCYEARQUARTERMONTH="utcyearquartermonth";var Nn={year:1,quarter:1,month:1,day:1,date:1,hours:1,minutes:1,seconds:1,milliseconds:1},On=ae(Nn);function _n(e){return!!Nn[e]}var Tn={utcyear:1,utcquarter:1,utcmonth:1,utcday:1,utcdate:1,utchours:1,utcminutes:1,utcseconds:1,utcmilliseconds:1};function Cn(e){return!!Tn[e]}var An={utcyearquarter:1,utcyearquartermonth:1,utcyearmonth:1,utcyearmonthdate:1,utcyearmonthdatehours:1,utcyearmonthdatehoursminutes:1,utcyearmonthdatehoursminutesseconds:1,utcquartermonth:1,utcmonthdate:1,utchoursminutes:1,utchoursminutesseconds:1,utcminutesseconds:1,utcsecondsmilliseconds:1},Dn=I({},Tn,An);function In(e){return!!Dn[e]}function zn(e){return e.substr(3)}var Rn=I({},Nn,Tn,{yearquarter:1,yearquartermonth:1,yearmonth:1,yearmonthdate:1,yearmonthdatehours:1,yearmonthdatehoursminutes:1,yearmonthdatehoursminutesseconds:1,quartermonth:1,monthdate:1,hoursminutes:1,hoursminutesseconds:1,minutesseconds:1,secondsmilliseconds:1},An),Ln=ae(Rn);var Fn={year:"setFullYear",month:"setMonth",date:"setDate",hours:"setHours",minutes:"setMinutes",seconds:"setSeconds",milliseconds:"setMilliseconds",quarter:null,day:null};function jn(e,t){var n=Fn[e];return{setDateMethod:t?"setUTC"+n.substr(3):n,getDateMethod:"get"+(t?"UTC":"")+n.substr(3)}}function Un(n){return On.reduce(function(e,t){return Pn(n,t)?e.concat(t):e},[])}function Pn(e,t){var n=e.indexOf(t);return-1<n&&(t!==En.SECONDS||0===n||"i"!==e.charAt(n-1))}function Mn(r,e){var i=pe(e),o=In(r)?"utc":"";return Sn(On.reduce(function(e,t){var n;return Pn(r,t)&&(e[t]=(n=t)===En.QUARTER?"("+o+"quarter("+i+")-1)":""+o+n+"("+i+")"),e},{}))}function Hn(e,t,n,r){if(e){var i=[],o="",a=Pn(e,En.YEAR);Pn(e,En.QUARTER)&&(o="'Q' + quarter("+t+")"),Pn(e,En.MONTH)&&i.push(!1!==n?"%b":"%B"),Pn(e,En.DAY)?i.push(n?"%a":"%A"):Pn(e,En.DATE)&&i.push("%d"+(a?",":"")),a&&i.push(n?"%y":"%Y");var u=[];Pn(e,En.HOURS)&&u.push("%H"),Pn(e,En.MINUTES)&&u.push("%M"),Pn(e,En.SECONDS)&&u.push("%S"),Pn(e,En.MILLISECONDS)&&u.push("%L");var s=[];return 0<i.length&&s.push(i.join(" ")),0<u.length&&s.push(u.join(":")),0<s.length&&(o&&(o+=" + ' ' + "),o+=r?"utcFormat("+t+", '"+s.join(" ")+"')":"timeFormat("+t+", '"+s.join(" ")+"')"),o||void 0}}function qn(e){return"day"!==e&&0<=e.indexOf("day")?(hn(en.dayReplacedWithDate(e)),e.replace("day","date")):e}var Wn,Gn,Bn=Object.freeze({get TimeUnit(){return En},TIMEUNIT_PARTS:On,isLocalSingleTimeUnit:_n,isUtcSingleTimeUnit:Cn,isUTCTimeUnit:In,getLocalTimeUnit:zn,TIMEUNITS:Ln,isTimeUnit:function(e){return!!Rn[e]},convert:function(e,t){for(var n=In(e),r=n?new Date(Date.UTC(0,0,1,0,0,0,0)):new Date(0,0,1,0,0,0,0),i=0,o=On;i<o.length;i++){var a=o[i];if(Pn(e,a))switch(a){case En.DAY:throw new Error("Cannot convert to TimeUnits containing 'day'");case En.QUARTER:var u=jn("month",n),s=u.getDateMethod;r[u.setDateMethod](3*Math.floor(t[s]()/3));break;default:var c=jn(a,n),l=c.getDateMethod;r[c.setDateMethod](t[l]())}}return r},getTimeUnitParts:Un,containsTimeUnit:Pn,fieldExpr:Mn,formatExpression:Hn,normalizeTimeUnit:qn});(Gn=Wn||(Wn={})).QUANTITATIVE="quantitative",Gn.ORDINAL="ordinal",Gn.TEMPORAL="temporal",Gn.NOMINAL="nominal",Gn.LATITUDE="latitude",Gn.LONGITUDE="longitude",Gn.GEOJSON="geojson";var Yn={quantitative:1,ordinal:1,temporal:1,nominal:1,latitude:1,longitude:1,geojson:1};var Vn=Wn.QUANTITATIVE,Xn=Wn.ORDINAL,Qn=Wn.TEMPORAL,Kn=Wn.NOMINAL,Jn=Wn.GEOJSON;function Zn(e){if(e)switch(e=e.toLowerCase()){case"q":case Vn:return"quantitative";case"t":case Qn:return"temporal";case"o":case Xn:return"ordinal";case"n":case Kn:return"nominal";case Wn.LATITUDE:return"latitude";case Wn.LONGITUDE:return"longitude";case Jn:return"geojson"}}var $n=Object.freeze({get Type(){return Wn},TYPE_INDEX:Yn,isType:function(e){return!!Yn[e]},QUANTITATIVE:Vn,ORDINAL:Xn,TEMPORAL:Qn,NOMINAL:Kn,GEOJSON:Jn,getFullName:Zn});function er(e){return e.selection}function tr(e){return e&&!m(e)&&"repeat"in e}function nr(e){var t=e.field,n=e.timeUnit,r=e.bin,i=e.aggregate;return I({},n?{timeUnit:n}:{},r?{bin:r}:{},i?{aggregate:i}:{},{field:t})}function rr(e){return!!e&&!!e.condition}function ir(e){return!!e&&!!e.condition&&!S(e.condition)&&ar(e.condition)}function or(e){return!!e&&!!e.condition&&(S(e.condition)||sr(e.condition))}function ar(e){return!(!e||!e.field&&"count"!==e.aggregate)}function ur(e){return ar(e)&&m(e.field)}function sr(e){return e&&"value"in e&&void 0!==e.value}function cr(e){return!(!e||!e.scale&&!e.sort)}function lr(e,t){void 0===t&&(t={});var n=e.field,r=t.prefix,i=t.suffix;if(pr(e))n="count_*";else{var o=void 0;t.nofn||(e.op?o=e.op:e.bin?(o=Tt(e.bin),i=t.binSuffix||""):e.aggregate?o=String(e.aggregate):e.timeUnit&&(o=String(e.timeUnit))),o&&(n=n?o+"_"+n:o)}return i&&(n=n+"_"+i),r&&(n=r+"_"+n),t.expr?he(n,t.expr):me(n)}function fr(e){switch(e.type){case"nominal":case"ordinal":case"geojson":return!0;case"quantitative":return!!e.bin;case"latitude":case"longitude":case"temporal":return!1}throw new Error(en.invalidFieldType(e.type))}function dr(e){return!fr(e)}function pr(e){return"count"===e.aggregate}function hr(e,t){var n=e.field,r=e.bin,i=e.timeUnit,o=e.aggregate;return"count"===o?t.countTitle:r?n+" (binned)":i?n+" ("+Un(i).join("-")+")":o?de(o)+" of "+n:n}function mr(e,t){var n=e.aggregate||e.timeUnit||e.bin&&"bin";return n?n.toUpperCase()+"("+e.field+")":e.field}var gr=function(e,t){switch(t.fieldTitle){case"plain":return e.field;case"functional":return mr(e);default:return hr(e,t)}},vr=gr;function yr(e){vr=e}function br(){yr(gr)}function xr(e,t){return vr(e,t)}function Sr(e,t){if(e.timeUnit)return"temporal";if(e.bin)return"quantitative";switch(Ot(t)){case"continuous":return"quantitative";case"discrete":case"flexible":return"nominal";default:return"quantitative"}}function Er(e){return ar(e)?e:ir(e)?e.condition:void 0}function wr(e,t){if(m(e)||x(e)||c(e)){var n=m(e)?"string":x(e)?"number":"boolean";return hn(en.primitiveChannelDef(t,n,e)),{value:e}}return ar(e)?kr(e,t):ir(e)?I({},e,{condition:kr(e.condition,t)}):e}function kr(e,t){if(e.aggregate&&!Se(e.aggregate)){e.aggregate;var n=z(e,["aggregate"]);hn(en.invalidAggregate(e.aggregate)),e=n}if(e.timeUnit&&(e=I({},e,{timeUnit:qn(e.timeUnit)})),e.bin&&(e=I({},e,{bin:Nr(e.bin,t)})),e.type){var r=Zn(e.type);e.type!==r&&(e=I({},e,{type:r})),"quantitative"!==e.type&&we(e.aggregate)&&(hn(en.invalidFieldTypeForCountAggregate(e.type,e.aggregate)),e=I({},e,{type:"quantitative"}))}else{var i=Sr(e,t);hn(en.emptyOrInvalidFieldType(e.type,t,i)),e=I({},e,{type:i})}var o=_r(e,t),a=o.compatible,u=o.warning;return a||hn(u),e}function Nr(e,t){return c(e)?{maxbins:At(t)}:e.maxbins||e.step?e:I({},e,{maxbins:At(t)})}var Or={compatible:!0};function _r(e,t){var n=e.type;switch(t){case"row":case"column":return dr(e)?{compatible:!1,warning:en.facetChannelShouldBeDiscrete(t)}:Or;case"x":case"y":case"color":case"fill":case"stroke":case"text":case"detail":case"key":case"tooltip":case"href":return Or;case"longitude":case"longitude2":case"latitude":case"latitude2":return n!==Vn?{compatible:!1,warning:"Channel "+t+" should be used with a quantitative field only, not "+e.type+" field."}:Or;case"opacity":case"size":case"x2":case"y2":return"nominal"===n&&!e.sort||"geojson"===n?{compatible:!1,warning:"Channel "+t+" should not be used with an unsorted discrete field."}:Or;case"shape":return"nominal"!==e.type&&"geojson"!==e.type?{compatible:!1,warning:"Shape channel should be used with only either nominal or geojson data"}:Or;case"order":return"nominal"!==e.type||"sort"in e?Or:{compatible:!1,warning:"Channel order is inappropriate for nominal field, which has no inherent order."}}throw new Error("channelCompatability not implemented for channel "+t)}function Tr(e){return"quantitative"===e.type||!!e.bin}function Cr(e){return"temporal"===e.type||!!e.timeUnit}function Ar(e,t){var n,r=t.timeUnit,i=t.type,o=t.time,a=t.undefinedIfExprNotRequired,u=void 0;return gn(e)?u=Sn(e,!0):(m(e)||x(e))&&(r||"temporal"===i)&&(u=_n(r)?Sn(((n={})[r]=e,n),!0):Cn(r)?Ar(e,{timeUnit:zn(r)}):"datetime("+JSON.stringify(e)+")"),u?o?"time("+u+")":u:a?void 0:JSON.stringify(e)}function Dr(e,t){var n=e.timeUnit,r=e.type;return t.map(function(e){var t=Ar(e,{timeUnit:n,type:r,undefinedIfExprNotRequired:!0});return void 0!==t?{signal:t}:e})}var Ir=Object.freeze({isConditionalSelection:er,isRepeatRef:tr,toFieldDefBase:nr,isConditionalDef:rr,hasConditionalFieldDef:ir,hasConditionalValueDef:or,isFieldDef:ar,isStringFieldDef:ur,isValueDef:sr,isScaleFieldDef:cr,vgField:lr,isDiscrete:fr,isContinuous:dr,isCount:pr,verbalTitleFormatter:hr,functionalTitleFormatter:mr,defaultTitleFormatter:gr,setTitleFormatter:yr,resetTitleFormatter:br,title:xr,defaultType:Sr,getFieldDef:Er,normalize:wr,normalizeFieldDef:kr,normalizeBin:Nr,channelCompatibility:_r,isNumberFieldDef:Tr,isTimeFieldDef:Cr,valueExpr:Ar,valueArray:Dr});function zr(e,t){var n=e&&e[t];return!!n&&(S(n)?K(n,function(e){return!!e.field}):ar(n)||ir(n))}function Rr(r){return K(ft,function(e){if(zr(r,e)){var t=r[e];if(S(t))return K(t,function(e){return!!e.aggregate});var n=Er(t);return n&&!!n.aggregate}return!1})}function Lr(s,c){return ie(s).reduce(function(e,n){var t;if(!pt(n))return hn(en.invalidEncodingChannel(n)),e;if(!kt(n,c))return hn(en.incompatibleChannel(n,c)),e;if("size"===n&&"line"===c&&((i=Er(s[n]))&&i.aggregate))return hn(en.LINE_WITH_VARYING_SIZE),e;if("color"===n&&("fill"in s||"stroke"in s))return hn(en.droppingColor("encoding",{fill:"fill"in s,stroke:"stroke"in s})),e;var r=s[n];if("detail"===n||"order"===n&&!S(r)&&!sr(r)||"tooltip"===n&&S(r))r&&(e[n]=(S(r)?r:[r]).reduce(function(e,t){return ar(t)?e.push(kr(t,n)):hn(en.emptyFieldDef(t,n)),e},[]));else{var i;if((i=Er(s[n]))&&X([Wn.LATITUDE,Wn.LONGITUDE],i.type)){var o=n,a=(e[o],z(e,["symbol"==typeof o?o:o+""])),u="x"===n?"longitude":"y"===n?"latitude":"x2"===n?"longitude2":"y2"===n?"latitude2":void 0;return hn(en.latLongDeprecated(n,i.type,u)),I({},a,((t={})[u]=I({},wr(i,n),{type:"quantitative"}),t))}if(!ar(r)&&!sr(r)&&!rr(r))return hn(en.emptyFieldDef(r,n)),e;e[n]=wr(r,n)}return e},{})}function Fr(e){return e&&(!!e.x&&!!e.x2||!!e.y&&!!e.y2)}function jr(n){var r=[];return ft.forEach(function(e){if(zr(n,e)){var t=n[e];(S(t)?t:[t]).forEach(function(e){ar(e)?r.push(e):ir(e)&&r.push(e.condition)})}}),r}function Ur(e,n,r){if(e)for(var t=function(t){S(e[t])?e[t].forEach(function(e){n.call(r,e,t)}):n.call(r,e[t],t)},i=0,o=ie(e);i<o.length;i++){t(o[i])}}function Pr(r,i,e,o){return r?ie(r).reduce(function(e,n){var t=r[n];return S(t)?t.reduce(function(e,t){return i.call(o,e,t,n)},e):i.call(o,e,t,n)},e):e}var Mr=Object.freeze({channelHasField:zr,isAggregate:Rr,normalizeEncoding:Lr,isRanged:Fr,fieldDefs:jr,forEach:Ur,reduce:Pr});function Hr(e,t){var n,r=e[t];return void 0!==r?((n={})[t]={value:r},n):{}}var qr="box-plot";function Wr(e){return!!e.type}var Gr=["x","y","color","detail","opacity","size"];var Br={};function Yr(e,t){Br[e]=t}var Vr=["boxWhisker","box","boxMid"],Xr=I({},{box:["size","color","extent"],boxWhisker:["color"],boxMid:["color"]});function Qr(e,t){var n=Qt(e.mark)?e.mark.type:e.mark,r=Br[n];if(r)return r(e,t);throw new Error('Invalid mark type "'+n+'"')}Yr(qr,function(e,t){var n,r,i,o,a,u=(e=I({},a=e,{encoding:Pr(a.encoding,function(e,t,n){return-1<Gr.indexOf(n)?e[n]=t:hn(en.incompatibleChannel(n,qr)),e},{})})).mark,s=(e.encoding,e.selection),c=(e.projection,z(e,["mark","encoding","selection","projection"])),l=void 0;x(t.box.extent)&&(l=t.box.extent),Wr(u)&&u.extent&&"min-max"===u.extent&&(l=void 0);var f=function(e,t,n){var r=function(e,t){e.mark;var n,r,i=e.encoding;if(e.projection,z(e,["mark","encoding","projection"]),"vertical"===t?(r="y",n=i.y):(r="x",n=i.x),n&&n.aggregate){var o=n.aggregate,a=z(n,["aggregate"]);o!==qr&&hn("Continuous axis should not have customized aggregation function "+o),n=a}return{continuousAxisChannelDef:n,continuousAxis:r}}(e,t),i=r.continuousAxisChannelDef,a=r.continuousAxis,u=e.encoding,o=void 0===n,s=[{op:"q1",field:i.field,as:"lower_box_"+i.field},{op:"q3",field:i.field,as:"upper_box_"+i.field},{op:"median",field:i.field,as:"mid_box_"+i.field}],c=[];s.push({op:"min",field:i.field,as:(o?"lower_whisker_":"min_")+i.field}),s.push({op:"max",field:i.field,as:(o?"upper_whisker_":"max_")+i.field}),o||(c=[{calculate:"datum.upper_box_"+i.field+" - datum.lower_box_"+i.field,as:"iqr_"+i.field},{calculate:"min(datum.upper_box_"+i.field+" + datum.iqr_"+i.field+" * "+n+", datum.max_"+i.field+")",as:"upper_whisker_"+i.field},{calculate:"max(datum.lower_box_"+i.field+" - datum.iqr_"+i.field+" * "+n+", datum.min_"+i.field+")",as:"lower_whisker_"+i.field}]);var l=[],f=[],d=[],p={};return Ur(u,function(e,t){if(t!==a)if(ar(e)){if(e.aggregate&&e.aggregate!==qr)s.push({op:e.aggregate,field:e.field,as:lr(e)});else if(void 0===e.aggregate){var n=lr(e),r=e.bin;if(r){var i=e.field;f.push({bin:r,field:i,as:n})}else if(e.timeUnit){var o=e.timeUnit;i=e.field,d.push({timeUnit:o,field:i,as:n})}l.push(n)}p[t]={field:lr(e),type:e.type}}else p[t]=u[t]}),{transform:[].concat(f,d,[{aggregate:s,groupby:l}],c),continuousAxisChannelDef:i,continuousAxis:a,encodingWithoutContinuousAxis:p}}(e,function(e){var t=e.mark,n=e.encoding;if(e.projection,z(e,["mark","encoding","projection"]),ar(n.x)&&dr(n.x)){if(ar(n.y)&&dr(n.y)){if(void 0===n.x.aggregate&&n.y.aggregate===qr)return"vertical";if(void 0===n.y.aggregate&&n.x.aggregate===qr)return"horizontal";if(n.x.aggregate===qr&&n.y.aggregate===qr)throw new Error("Both x and y cannot have aggregate");return Wr(t)&&t.orient?t.orient:"vertical"}return"horizontal"}if(ar(n.y)&&dr(n.y))return"vertical";throw new Error("Need a valid continuous axis for boxplots")}(e),l),d=f.transform,p=f.continuousAxisChannelDef,h=f.continuousAxis,m=f.encodingWithoutContinuousAxis,g=m.size,v=z(m,["color","size"]),y=g?{size:g}:Hr(t.box,"size"),b={};return p.scale&&(b.scale=p.scale),p.axis&&(b.axis=p.axis),I({},c,{transform:d,layer:[{mark:{type:"rule",style:"boxWhisker"},encoding:I((n={},n[h]=I({field:"lower_whisker_"+p.field,type:p.type},b),n[h+"2"]={field:"lower_box_"+p.field,type:p.type},n),v,Hr(t.boxWhisker,"color"))},{mark:{type:"rule",style:"boxWhisker"},encoding:I((r={},r[h]={field:"upper_box_"+p.field,type:p.type},r[h+"2"]={field:"upper_whisker_"+p.field,type:p.type},r),v,Hr(t.boxWhisker,"color"))},I({},s?{selection:s}:{},{mark:{type:"bar",style:"box"},encoding:I((i={},i[h]={field:"lower_box_"+p.field,type:p.type},i[h+"2"]={field:"upper_box_"+p.field,type:p.type},i),m,m.color?{}:Hr(t.box,"color"),y)}),{mark:{type:"tick",style:"boxMid"},encoding:I((o={},o[h]={field:"mid_box_"+p.field,type:p.type},o),v,Hr(t.boxMid,"color"),y)}]})}),Yr("error-bar",function(e){e.mark,e.selection,e.projection;var t=e.encoding,n=z(e,["mark","selection","projection","encoding"]),r=(t.size,z(t,["size"])),i=(t.x2,t.y2,z(t,["x2","y2"])),o=z(i,["x","y"]);if(!t.x2&&!t.y2)throw new Error("Neither x2 or y2 provided");return I({},n,{layer:[{mark:"rule",encoding:r},{mark:"tick",encoding:i},{mark:"tick",encoding:t.x2?I({x:t.x2,y:t.y},o):I({x:t.x,y:t.y2},o)}]})});var Kr,Jr,Zr=Object.freeze({add:Yr,remove:function(e){delete Br[e]},COMPOSITE_MARK_STYLES:Vr,VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX:Xr,normalize:Qr}),$r=["shortTimeLabels"],ei={},ti={entryPadding:1,format:1,offset:1,orient:1,padding:1,tickCount:1,title:1,type:1,values:1,zindex:1},ni=I({},ti,{opacity:1,shape:1,stroke:1,fill:1,size:1,encode:1}),ri=ae(ti),ii=ae(ni),oi=Object.freeze({defaultLegendConfig:ei,LEGEND_PROPERTIES:ri,VG_LEGEND_PROPERTIES:ii});(Jr=Kr||(Kr={})).LINEAR="linear",Jr.BIN_LINEAR="bin-linear",Jr.LOG="log",Jr.POW="pow",Jr.SQRT="sqrt",Jr.TIME="time",Jr.UTC="utc",Jr.SEQUENTIAL="sequential",Jr.QUANTILE="quantile",Jr.QUANTIZE="quantize",Jr.THRESHOLD="threshold",Jr.ORDINAL="ordinal",Jr.BIN_ORDINAL="bin-ordinal",Jr.POINT="point",Jr.BAND="band";var ai={linear:"numeric",log:"numeric",pow:"numeric",sqrt:"numeric","bin-linear":"bin-linear",time:"time",utc:"time",sequential:"sequential",ordinal:"ordinal","bin-ordinal":"bin-ordinal",point:"ordinal-position",band:"ordinal-position"},ui=ie(ai);function si(e,t){var n=ai[e],r=ai[t];return n===r||"ordinal-position"===n&&"time"===r||"ordinal-position"===r&&"time"===n}var ci={linear:0,log:1,pow:1,sqrt:1,time:0,utc:0,point:10,band:11,"bin-linear":0,sequential:0,ordinal:0,"bin-ordinal":0};function li(e){return ci[e]}var fi=["linear","bin-linear","log","pow","sqrt","time","utc"],di=f(fi),pi=fi.concat(["sequential"]),hi=f(pi),mi=["ordinal","bin-ordinal","point","band"],gi=f(mi),vi=f(["bin-linear","bin-ordinal"]);function yi(e){return e in gi}function bi(e){return e in vi}function xi(e){return e in hi}function Si(e){return e in di}var Ei={textXRangeStep:90,rangeStep:21,pointPadding:.5,bandPaddingInner:.1,facetSpacing:16,minBandSize:2,minFontSize:8,maxFontSize:40,minOpacity:.3,maxOpacity:.8,minSize:9,minStrokeWidth:1,maxStrokeWidth:4};function wi(e){return e&&!!e.name}function ki(e){return e&&e.selection}var Ni={type:1,domain:1,range:1,rangeStep:1,scheme:1,reverse:1,round:1,clamp:1,nice:1,base:1,exponent:1,interpolate:1,zero:1,padding:1,paddingInner:1,paddingOuter:1},Oi=ae(Ni),_i=ae(z(Ni,["type","domain","range","rangeStep","scheme"])),Ti=function(){for(var e={},t=0,n=ft;t<n.length;t++)for(var r=n[t],i=0,o=ie(Yn);i<o.length;i++)for(var a=o[i],u=0,s=ui;u<s.length;u++)for(var c=s[u],l=0,f=[!1,!0];l<f.length;l++){var d=f[l],p=zi(r,a,d);Ii(r,c)&&Di(c,a,d)&&(e[p]=e[p]||[],e[p].push(c))}return e}();function Ci(e,t){switch(t){case"type":case"domain":case"reverse":case"range":return!0;case"scheme":return X(["sequential","ordinal","bin-ordinal","quantile","quantize"],e);case"interpolate":return X(["linear","bin-linear","pow","log","sqrt","utc","time"],e);case"round":return Si(e)||"band"===e||"point"===e;case"padding":return Si(e)||X(["point","band"],e);case"paddingOuter":case"rangeStep":return X(["point","band"],e);case"paddingInner":return"band"===e;case"clamp":return Si(e)||"sequential"===e;case"nice":return Si(e)||"sequential"===e||"quantize"===e;case"exponent":return"pow"===e;case"base":return"log"===e;case"zero":return xi(e)&&!X(["log","time","utc","bin-linear","threshold","quantile"],e)}throw new Error("Invalid scale property "+t+".")}function Ai(e,t){switch(t){case"interpolate":case"scheme":return ct(e)?void 0:en.cannotUseScalePropertyWithNonColor(e);case"type":case"domain":case"range":case"base":case"exponent":case"nice":case"padding":case"paddingInner":case"paddingOuter":case"rangeStep":case"reverse":case"round":case"clamp":case"zero":return}throw new Error('Invalid scale property "'+t+'".')}function Di(e,t,n){return X([Wn.ORDINAL,Wn.NOMINAL],t)?void 0===e||yi(e):t===Wn.TEMPORAL?X([Kr.TIME,Kr.UTC,Kr.SEQUENTIAL,void 0],e):t!==Wn.QUANTITATIVE||X(n?[Kr.BIN_LINEAR,Kr.BIN_ORDINAL,Kr.LINEAR]:[Kr.LOG,Kr.POW,Kr.SQRT,Kr.QUANTILE,Kr.QUANTIZE,Kr.LINEAR,Kr.SEQUENTIAL,void 0],e)}function Ii(e,t){switch(e){case ze.X:case ze.Y:case ze.SIZE:case ze.OPACITY:return Si(t)||X(["band","point"],t);case ze.COLOR:case ze.FILL:case ze.STROKE:return"band"!==t;case ze.SHAPE:return"ordinal"===t}return!1}function zi(e,t,n){var r=e+"_"+t;return n?r+"_bin":r}var Ri=Object.freeze({get ScaleType(){return Kr},SCALE_TYPES:ui,scaleCompatible:si,scaleTypePrecedence:li,CONTINUOUS_TO_CONTINUOUS_SCALES:fi,CONTINUOUS_DOMAIN_SCALES:pi,DISCRETE_DOMAIN_SCALES:mi,TIME_SCALE_TYPES:["time","utc"],hasDiscreteDomain:yi,isBinScale:bi,hasContinuousDomain:xi,isContinuousToContinuous:Si,defaultScaleConfig:Ei,isExtendedScheme:wi,isSelectionDomain:ki,SCALE_PROPERTIES:Oi,NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES:_i,SCALE_TYPE_INDEX:Ti,scaleTypeSupportProperty:Ci,channelScalePropertyIncompatability:Ai,scaleTypeSupportDataType:Di,channelSupportScaleType:Ii,getSupportedScaleType:function(e,t,n){return Ti[zi(e,t,n)]}}),Li="_vgsid_";function Fi(e){var t=e.anchor,n=e.offset,r=e.orient,i=e.color,o=z(e,["anchor","offset","orient","color"]);return{mark:I({},o,i?{fill:i}:{}),nonMark:I({},t?{anchor:t}:{},n?{offset:n}:{},r?{orient:r}:{})}}var ji={width:200,height:200},Ui={padding:5,timeFormat:"",countTitle:"Number of Records",invalidValues:"filter",view:ji,mark:sn,area:{},bar:cn,circle:{},geoshape:{},line:{},point:{},rect:{},rule:{color:"black"},square:{},text:{color:"black"},tick:ln,trail:{},box:{size:14,extent:1.5},boxWhisker:{},boxMid:{color:"white"},scale:Ei,projection:{},axis:{},axisX:{},axisY:{minExtent:30},axisLeft:{},axisRight:{},axisTop:{},axisBottom:{},axisBand:{},legend:ei,selection:{single:{on:"click",fields:[Li],resolve:"global",empty:"all"},multi:{on:"click",fields:[Li],toggle:"event.shiftKey",resolve:"global",empty:"all"},interval:{on:"[mousedown, window:mouseup] > window:mousemove!",encodings:["x","y"],translate:"[mousedown, window:mouseup] > window:mousemove!",zoom:"wheel!",mark:{fill:"#333",fillOpacity:.125,stroke:"white"},resolve:"global"}},style:{},title:{}};function Pi(e){return $(ue(Ui),e)}var Mi=["view"].concat(Xt,Vr),Hi=["padding","numberFormat","timeFormat","countTitle","stack","scale","selection","invalidValues","overlay"],qi=I({view:["width","height"]},un,Xr);function Wi(e){e=ue(e);for(var t=0,n=Hi;t<n.length;t++){delete e[o=n[t]]}if(e.axis)for(var r=0,i=$r;r<i.length;r++){var o=i[r];delete e.axis[o]}if(e.legend)for(var a=0,u=$r;a<u.length;a++){o=u[a];delete e.legend[o]}if(e.mark)for(var s=0,c=an;s<c.length;s++){o=c[s];delete e.mark[o]}for(var l=0,f=Mi;l<f.length;l++){for(var d=f[l],p=0,h=an;p<h.length;p++){o=h[p];delete e[d][o]}var m=qi[d];if(m)for(var g=0,v=m;g<v.length;g++){o=v[g];delete e[d][o]}Gi(e,d)}for(var o in Gi(e,"title","group-title"),e)E(e[o])&&0===ie(e[o]).length&&delete e[o];return 0<ie(e).length?e:void 0}function Gi(e,t,n){var r="title"===t?Fi(e.title).mark:e[t];"view"===t&&(n="cell");var i=I({},r,e.style[t]);0<ie(i).length&&(e.style[n||t]=i),delete e[t]}var Bi=Object.freeze({defaultViewConfig:ji,defaultConfig:Ui,initConfig:Pi,stripAndRedirectConfig:Wi}),Yi={zero:1,center:1,normalize:1};function Vi(e){return!!Yi[e]}var Xi=[Lt,Rt,qt,jt,Gt,Bt,Ft,Ut,Pt],Qi=[Lt,Rt];function Ki(e,t,n){var r=Qt(e)?e.type:e;if(!X(Xi,r))return null;var i=function(e){var t=e.x,n=e.y;if(ar(t)&&ar(n))if("quantitative"===t.type&&"quantitative"===n.type){if(t.stack)return"x";if(n.stack)return"y";if(!!t.aggregate!=!!n.aggregate)return t.aggregate?"x":"y"}else{if("quantitative"===t.type)return"x";if("quantitative"===n.type)return"y"}else{if(ar(t)&&"quantitative"===t.type)return"x";if(ar(n)&&"quantitative"===n.type)return"y"}}(t);if(!i)return null;var o=t[i],a=ur(o)?lr(o,{}):void 0,u="x"===i?"y":"x",s=t[u],c=ur(s)?lr(s,{}):void 0,l=gt.reduce(function(r,i){if(zr(t,i)){var e=t[i];(S(e)?e:[e]).forEach(function(e){var t=Er(e);if(!t.aggregate){var n=ur(t)?lr(t,{}):void 0;(!n||n!==c&&n!==a)&&r.push({channel:i,fieldDef:t})}})}return r},[]);if(0===l.length)return null;var f=void 0;return(f=void 0!==o.stack?o.stack:X(Qi,r)&&void 0===n?"zero":n)&&Vi(f)?(o.scale&&o.scale.type&&o.scale.type!==Kr.LINEAR&&hn(en.cannotStackNonLinearScale(o.scale.type)),zr(t,i===Ue?Me:He)?(void 0!==o.stack&&hn(en.cannotStackRangedMark(i)),null):(o.aggregate&&!X(ke,o.aggregate)&&hn(en.stackNonSummativeAggregate(o.aggregate)),{groupbyChannel:s?u:void 0,fieldChannel:i,impute:Vt(r),stackBy:l,offset:f})):null}var Ji=Object.freeze({isStackOffset:Vi,STACKABLE_MARKS:Xi,STACK_BY_DEFAULT_MARKS:Qi,stack:Ki});function Zi(e){return void 0!==e.facet}function $i(e){return!!e.mark}function eo(e){return void 0!==e.layer}function to(e){return void 0!==e.repeat}function no(e){return ro(e)||io(e)}function ro(e){return void 0!==e.vconcat}function io(e){return void 0!==e.hconcat}function oo(e,t){if(Zi(e))return r=t,i=(n=e).spec,o=z(n,["spec"]),I({},o,{spec:oo(i,r)});var n,r,i,o,a,u,s,c,l,f,d,p,h,m,g,v,y,b,x,S,E,w,k,N,O,_,T,C;if(eo(e))return function t(e,n,r,i){var o=e.layer,a=e.encoding,u=e.projection,s=z(e,["layer","encoding","projection"]);var c=ao({parentEncoding:r,encoding:a});var l=uo({parentProjection:i,projection:u});return I({},s,{layer:o.map(function(e){return eo(e)?t(e,n,c,l):so(e,n,c,l)})})}(e,t);if(to(e))return u=t,s=(a=e).spec,c=z(a,["spec"]),I({},c,{spec:oo(s,u)});if(ro(e))return f=t,d=(l=e).vconcat,p=z(l,["vconcat"]),I({},p,{vconcat:d.map(function(e){return oo(e,f)})});if(io(e))return m=t,g=(h=e).hconcat,v=z(h,["hconcat"]),I({},v,{hconcat:g.map(function(e){return oo(e,m)})});if($i(e)){var A=zr(e.encoding,Ye),D=zr(e.encoding,Ve);return A||D?(b=t,x=(y=e).encoding,S=x.row,E=x.column,w=z(x,["row","column"]),k=y.mark,N=y.width,O=y.projection,_=y.height,T=y.selection,y.encoding,C=z(y,["mark","width","projection","height","selection","encoding"]),I({},C,{facet:I({},S?{row:S}:{},E?{column:E}:{}),spec:so(I({},O?{projection:O}:{},{mark:k},N?{width:N}:{},_?{height:_}:{},{encoding:w},T?{selection:T}:{}),b)})):so(e,t)}throw new Error(en.INVALID_SPEC)}function ao(e){var t=e.parentEncoding,n=e.encoding;if(t&&n){var r=ie(t).reduce(function(e,t){return n[t]&&e.push(t),e},[]);0<r.length&&hn(en.encodingOverridden(r))}var i=I({},t||{},n||{});return 0<ie(i).length?i:void 0}function uo(e){var t=e.parentProjection,n=e.projection;return t&&n&&hn(en.projectionOverridden({parentProjection:t,projection:n})),n||t}function so(e,t,n,r){var i=e.encoding,o=e.projection,a=Qt(e.mark)?e.mark.type:e.mark;if(n||r){var u=uo({parentProjection:r,projection:o}),s=ao({parentEncoding:n,encoding:i});return so(I({},e,u?{projection:u}:{},s?{encoding:s}:{}),t)}return Jt(e.mark)?Fr(i)?function(e){var t=zr(e.encoding,Ue),n=zr(e.encoding,Pe),r=zr(e.encoding,Me),i=zr(e.encoding,He);if(r&&!t||i&&!n){var o=ue(e);return r&&!t&&(o.encoding.x=o.encoding.x2,delete o.encoding.x2),i&&!n&&(o.encoding.y=o.encoding.y2,delete o.encoding.y2),o}return e}(e):"line"===a&&(i.x2||i.y2)?(hn(en.lineWithRange(!!i.x2,!!i.y2)),so(I({mark:"rule"},e),t,n,r)):Vt(a)?function(e,t){void 0===t&&(t={});var n,r=e.selection,i=e.projection,o=e.encoding,a=e.mark,u=z(e,["selection","projection","encoding","mark"]),s=Qt(a)?a:{type:a},c=(p=s,h=t[s.type],m=o,"transparent"===p.point?{opacity:0}:p.point?E(p.point)?p.point:{}:void 0!==p.point?null:h.point||m.shape?E(h.point)?h.point:{}:null),l="area"===s.type&&(f=s,d=t[s.type],f.line?!0===f.line?{}:f.line:void 0!==f.line?null:d.line?!0===d.line?{}:d.line:null);var f,d;var p,h,m;if(!c&&!l)return I({},e,{mark:co(s)});var g=[I({},r?{selection:r}:{},{mark:co(I({},s,"area"===s.type?{opacity:.7}:{})),encoding:B(o,["shape"])})],v=Ki(s,o,t?t.stack:void 0),y=o;if(v){var b=v.fieldChannel,x=v.offset;y=I({},o,((n={})[b]=I({},o[b],x?{stack:x}:{}),n))}l&&g.push(I({},i?{projection:i}:{},{mark:I({type:"line"},G(s,["clip","interpolate"]),l),encoding:y}));c&&g.push(I({},i?{projection:i}:{},{mark:I({type:"point",opacity:1,filled:!0},G(s,["clip"]),c),encoding:y}));return I({},u,{layer:g})}(e,t):e:Qr(e,t)}function co(e){e.point,e.line;var t=z(e,["point","line"]);return 1<ie(t).length?t:t.type}function lo(t,e){return e.forEach(function(n){var e=V(["field","type","value","timeUnit","bin","aggregate"].reduce(function(e,t){return void 0!==n[t]&&(e[t]=n[t]),e},{}));t[e]=t[e]||n}),t}var fo=Object.freeze({isFacetSpec:Zi,isUnitSpec:$i,isLayerSpec:eo,isRepeatSpec:to,isConcatSpec:no,isVConcatSpec:ro,isHConcatSpec:io,normalize:oo,fieldDefs:function(e){return oe(function t(e,n){return void 0===n&&(n={}),eo(e)?e.layer.forEach(function(e){$i(e)?lo(n,jr(e.encoding)):t(e,n)}):Zi(e)?(lo(n,jr(e.facet)),t(e.spec,n)):to(e)?t(e.spec,n):no(e)?(ro(e)?e.vconcat:e.hconcat).forEach(function(e){return t(e,n)}):lo(n,jr(e.encoding)),n}(e))},isStacked:function(e,t){return t=t||e.config,!!Jt(e.mark)&&null!==Ki(e.mark,e.encoding,t?t.stack:void 0)}});function po(e){return m(e)?{type:e}:e||{}}var ho=["background","padding","datasets"];function mo(n){return ho.reduce(function(e,t){return n&&void 0!==n[t]&&(e[t]=n[t]),e},{})}function go(e){return!!e.url}function vo(e){return!!e.values}function yo(e){return!!e.name&&!go(e)&&!vo(e)}var bo="main",xo="raw",So=Object.freeze({isUrlData:go,isInlineData:vo,isNamedData:yo,MAIN:bo,RAW:xo});function Eo(e,t,n){return wo=t||No,ko=n||Lo,jo(e.trim()).map(Uo)}var wo,ko,No="view",Oo="[",_o="]",To="{",Co="}",Ao=":",Do=",",Io="@",zo=">",Ro=/[[\]{}]/,Lo={"*":1,arc:1,area:1,group:1,image:1,line:1,path:1,rect:1,rule:1,shape:1,symbol:1,text:1,trail:1};function Fo(e,t,n,r,i){for(var o,a=0,u=e.length;t<u;++t){if(o=e[t],!a&&o===n)return t;i&&0<=i.indexOf(o)?--a:r&&0<=r.indexOf(o)&&++a}return t}function jo(e){for(var t=[],n=0,r=e.length,i=0;i<r;)i=Fo(e,i,Do,Oo+To,_o+Co),t.push(e.substring(n,i).trim()),n=++i;if(0===t.length)throw"Empty event selector: "+e;return t}function Uo(e){return"["===e[0]?function(e){var t,n,r=e.length,i=1;if((i=Fo(e,i,_o,Oo,_o))===r)throw"Empty between selector: "+e;if(2!==(t=jo(e.substring(1,i))).length)throw"Between selector must have two elements: "+e;if((e=e.slice(i+1).trim())[0]!==zo)throw"Expected '>' after between selector: "+e;{if(t=t.map(Uo),(n=Uo(e.slice(1).trim())).between)return{between:t,stream:n};n.between=t}return n}(e):function(t){var e,n,r={source:wo},i=[],o=[0,0],a=0,u=0,s=t.length,c=0;if(t[s-1]===Co){if(!(0<=(c=t.lastIndexOf(To))))throw"Unmatched right brace: "+t;try{o=function(n){var e=n.split(Do);if(!n.length||2<e.length)throw n;return e.map(function(e){var t=+e;if(t!=t)throw n;return t})}(t.substring(c+1,s-1))}catch(e){throw"Invalid throttle specification: "+t}t=t.slice(0,c).trim(),s=t.length,c=0}if(!s)throw t;t[0]===Io&&(a=++c);(e=Fo(t,c,Ao))<s&&(i.push(t.substring(u,e).trim()),u=c=++e);if((c=Fo(t,c,Oo))===s)i.push(t.substring(u,s).trim());else if(i.push(t.substring(u,c).trim()),n=[],(u=++c)===s)throw"Unmatched left bracket: "+t;for(;c<s;){if((c=Fo(t,c,_o))===s)throw"Unmatched left bracket: "+t;if(n.push(t.substring(u,c).trim()),c<s-1&&t[++c]!==Oo)throw"Expected left bracket: "+t;u=++c}if(!(s=i.length)||Ro.test(i[s-1]))throw"Invalid event selector: "+t;1<s?(r.type=i[1],a?r.markname=i[0].slice(1):(l=i[0],ko.hasOwnProperty(l)?r.marktype=i[0]:r.source=i[0])):r.type=i[0];var l;"!"===r.type.slice(-1)&&(r.consume=!0,r.type=r.type.slice(0,-1));null!=n&&(r.filter=n);o[0]&&(r.throttle=o[0]);o[1]&&(r.debounce=o[1]);return r}(e)}function Po(e){return!!e.signal}function Mo(e){return!!e.step}function Ho(e){return!S(e)&&("field"in e&&"data"in e)}var qo=ae({opacity:1,fill:1,fillOpacity:1,stroke:1,strokeCap:1,strokeWidth:1,strokeOpacity:1,strokeDash:1,strokeDashOffset:1,strokeJoin:1,strokeMiterLimit:1,size:1,shape:1,interpolate:1,tension:1,orient:1,align:1,baseline:1,text:1,dir:1,dx:1,dy:1,ellipsis:1,limit:1,radius:1,theta:1,angle:1,font:1,fontSize:1,fontWeight:1,fontStyle:1,cursor:1,href:1,tooltip:1,cornerRadius:1});function Wo(e,n,t,r){void 0===r&&(r={header:!1});var i=e.combine(),o=i.orient,a=i.scale,u=i.title,s=i.zindex,c=z(i,["orient","scale","title","zindex"]);if(ie(c).forEach(function(e){var t=Ce[e];t&&t!==n&&"both"!==t&&delete c[e]}),"grid"===n){if(!c.grid)return;if(c.encode){var l=c.encode.grid;c.encode=I({},l?{grid:l}:{}),0===ie(c.encode).length&&delete c.encode}return I({scale:a,orient:o},c,{domain:!1,labels:!1,maxExtent:0,minExtent:0,ticks:!1,zindex:void 0!==s?s:0})}if(r.header||!e.mainExtracted){if(c.encode){for(var f=0,d=Te;f<d.length;f++){var p=d[f];e.hasAxisPart(p)||delete c.encode[p]}0===ie(c.encode).length&&delete c.encode}var h,m,g=(m=t,S(h=u)?h.map(function(e){return xr(e,m)}).join(", "):h);return I({scale:a,orient:o,grid:!1},g?{title:g}:{},c,{zindex:void 0!==s?s:1})}}var Go={titleAnchor:"anchor",titleAngle:"angle",titleBaseline:"baseline",titleColor:"color",titleFont:"font",titleFontSize:"fontSize",titleFontWeight:"fontWeight",titleLimit:"limit"},Bo={labelAngle:"angle",labelColor:"color",labelFont:"font",labelFontSize:"fontSize",labelLimit:"limit"},Yo=Object.keys(Go),Vo=Object.keys(Bo),Xo=Object.freeze({HEADER_TITLE_PROPERTIES_MAP:Go,HEADER_LABEL_PROPERTIES_MAP:Bo,HEADER_TITLE_PROPERTIES:Yo,HEADER_LABEL_PROPERTIES:Vo});function Qo(e){return!(!e||"count"!==e.op&&!e.field||!e.op)}function Ko(e){return!!e&&S(e)}var Jo=Object.freeze({isSortField:Qo,isSortArray:Ko});function Zo(e,t){var n=t[e+"Offset"];if(n)return n}function $o(e,t,n,r){return ea(e,t,{binSuffix:"start"===n?void 0:"end"},r?{offset:r}:{})}function ea(e,t,n,r){var i=I({},t?{scale:t}:{},{field:lr(e,n)});return r?I({},i,r):i}function ta(e,t){return void 0===t&&(t=!0),{scale:e,band:t}}function na(e,t,n,r,i,o){if(t){if(ar(t)){if(t.bin)return X([Ue,Pe],e)&&t.type===Vn?i&&i.impute?ea(t,n,{binSuffix:"mid"}):{signal:'(scale("'+(c=n)+'", '+lr(s=t,{expr:"datum"})+') + scale("'+c+'", '+lr(s,{binSuffix:"end",expr:"datum"})+"))/2"}:ea(t,n,Ia(t,e)?{binSuffix:"range"}:{});if(r){var a=r.get("type");if(yi(a))return"band"===a?ea(t,n,{binSuffix:"range"},{band:.5}):ea(t,n,{binSuffix:"range"})}return ea(t,n,{})}if(sr(t)){var u=t.value;return X(["x","x2"],e)&&"width"===u?{field:{group:"width"}}:X(["y","y2"],e)&&"height"===u?{field:{group:"height"}}:{value:u}}}var s,c;return"function"==typeof o?o():o}function ra(e,t){if(e){if(ar(e))return Sa(e,e.format,"datum",t);if(sr(e))return{value:e.value}}}function ia(e){return I({},e,{mult:.5})}function oa(t,n,r,i,o){return function(){if(m(t)){if(r){var e=i.get("type");if(X([Kr.LOG,Kr.TIME,Kr.UTC],e))"bar"!==o&&"area"!==o||hn(en.nonZeroScaleUsedWithLengthMark(o,n,{scaleType:e}));else{if(function(e){if(!1!==e.get("zero"))return!0;var t=e.domains;return!!S(t)&&K(t,function(e){return S(e)&&2===e.length&&e[0]<=0&&0<=e[1]})}(i))return{scale:r,value:0};"bar"!==o&&"area"!==o||hn(en.nonZeroScaleUsedWithLengthMark(o,n,{zeroFalse:!1===i.explicit.zero}))}}return"zeroOrMin"===t?"x"===n?{value:0}:{field:{group:"height"}}:"x"===n?{field:{group:"width"}}:{value:0}}return t}}function aa(e,t){var n,r;void 0===t&&(t={valueOnly:!1});var i=e.markDef,o=e.encoding,a=e.config,u=i.filled,s=i.type,c={fill:xa("fill",i,a),stroke:xa("stroke",i,a),color:xa("color",i,a)},l=X(["bar","point","circle","square","geoshape"],s)?"transparent":void 0,f={fill:i.fill||c.fill||l,stroke:i.stroke||c.stroke},d=u?"fill":"stroke",p=I({},f.fill?{fill:{value:f.fill}}:{},f.stroke?{stroke:{value:f.stroke}}:{});return o.fill||o.stroke?(i.color&&hn(en.droppingColor("property",{fill:"fill"in o,stroke:"stroke"in o})),I({},la("fill",e,{defaultValue:f.fill||l}),la("stroke",e,{defaultValue:f.stroke}))):o.color?I({},p,la("color",e,{vgChannel:d,defaultValue:i[d]||i.color||c[d]||c.color||(u?l:void 0)})):i.fill||i.stroke?(i.color&&hn(en.droppingColor("property",{fill:"fill"in i,stroke:"stroke"in i})),p):i.color?I({},p,((n={})[d]={value:i.color},n)):c.fill||c.stroke?p:c.color?I({},l?{fill:{value:"transparent"}}:{},((r={})[d]={value:c.color},r)):{}}function ua(e,t){return I({},(n=e.markDef,r=t,qo.reduce(function(e,t){return void 0!==n[t]&&"ignore"!==r[t]&&(e[t]={value:n[t]}),e},{})),aa(e),la("opacity",e),function(r){var e="tooltip",t=r.encoding[e];{if(S(t)){var n=t.map(function(e){var t=void 0!==e.title?e.title:lr(e,{binSuffix:"range"}),n=ra(e,r.config).signal;return'"'+t+'": '+n});return{tooltip:{signal:"{"+n.join(", ")+"}"}}}return pa(r,e,t)}}(e),da(e,"href"));var n,r}function sa(e){return e+" !== null && !isNaN("+e+")"}function ca(n){if("filter"===n.config.invalidValues){var e=["x","y"].map(function(e){var t=n.getScaleComponent(e);if(t&&xi(t.get("type")))return n.vgField(e,{expr:"datum"})}).filter(function(e){return!!e}).map(sa);if(0<e.length)return{defined:{signal:e.join(" && ")}}}return{}}function la(t,n,e){void 0===e&&(e={});var r=e.defaultValue,i=e.vgChannel,o=e.defaultRef||(void 0!==r?{value:r}:void 0),a=n.encoding[t];return fa(n,a,i||t,function(e){return na(t,e,n.scaleName(t),n.getScaleComponent(t),null,o)})}function fa(r,e,t,i){var n,o,a=e&&e.condition,u=i(e);if(a){var s=(S(a)?a:[a]).map(function(e){var t=i(e),n=er(e)?ks(r,e.selection):Ms(r,e.test);return I({test:n},t)});return(n={})[t]=s.concat(void 0!==u?[u]:[]),n}return void 0!==u?((o={})[t]=u,o):{}}function da(e,t){return void 0===t&&(t="text"),pa(e,t,e.encoding[t])}function pa(t,e,n){return fa(t,n,e,function(e){return ra(e,t.config)})}function ha(e,t,n){var r,i,o,a=n.scaleName(t),u="x"===t?"width":"height";if(n.encoding.size||void 0!==n.markDef.size)if(n.markDef.orient){var s=((r={})[t+"c"]=ea(e,a,{},{band:.5}),r);if(Er(n.encoding.size))return I({},s,la("size",n,{vgChannel:u}));if(sr(n.encoding.size))return I({},s,la("size",n,{vgChannel:u}));if(void 0!==n.markDef.size)return I({},s,((i={})[u]={value:n.markDef.size},i))}else hn(en.cannotApplySizeToNonOrientedMark(n.markDef.type));return(o={})[t]=ea(e,a,{binSuffix:"range"}),o[u]=ta(a),o}function ma(e,t,n,r){var i="x"===e?"width":"height";return I({},va(e,t,n,"x"===e?"xc":"yc"),la("size",t,{defaultRef:r,vgChannel:i}))}function ga(e,t,n,r,i){return"x"===t?{x2:$o(e,n,"start",i?0:r),x:$o(e,n,"end",i?r:0)}:{y2:$o(e,n,"start",i?r:0),y:$o(e,n,"end",i?0:r)}}function va(e,t,n,r){var i,o,a,u,s,c,l,f=t.encoding,d=t.mark,p=t.stack,h=f[e],m=t.scaleName(e),g=t.getScaleComponent(e),v=Zo(e,t.markDef),y=h||!f.latitude&&!f.longitude?I({},(a=f[o=e],c=p,l=oa(n,e,u=m,s=g,d),ar(a)&&c&&o===c.fieldChannel?ea(a,u,{suffix:"end"}):na(o,a,u,s,c,l)),v?{offset:v}:{}):{field:t.getName(e)};return(i={})[r||e]=y,i}function ya(e,t,n){var r,i,o,a,u,s,c,l,f=e.encoding,d=e.mark,p=e.stack,h="x2"===n?"x":"y",m=f[h],g=e.scaleName(h),v=e.getScaleComponent(h),y=Zo(n,e.markDef),b=m||!f.latitude&&!f.longitude?I({},(o=m,a=f[i=n],c=p,l=oa(t,h,u=g,s=v,d),ar(o)&&c&&i.charAt(0)===c.fieldChannel.charAt(0)?ea(o,u,{suffix:"start"}):na(i,a,u,s,c,l)),y?{offset:y}:{}):{field:e.getName(n)};return(r={})[n]=b,r}function ba(e){return[].concat(e.type,e.style||[])}function xa(e,t,n){var r=n.mark[e],i=n[t.type];void 0!==i[e]&&(r=i[e]);for(var o=0,a=ba(t);o<a.length;o++){var u=a[o],s=n.style[u],c=e;s&&void 0!==s[c]&&(r=s[c])}return r}function Sa(e,t,n,r){var i=wa(e,t,r);if(e.bin)return{signal:Oa(lr(e,{expr:n}),lr(e,{expr:n,binSuffix:"end"}),i,r)};if("quantitative"===e.type)return{signal:""+ka(lr(e,{expr:n,binSuffix:"range"}),i)};if(Cr(e)){var o=cr(e)&&e.scale&&e.scale.type===Kr.UTC;return{signal:_a(lr(e,{expr:n}),e.timeUnit,t,r.text.shortTimeLabels,r.timeFormat,o,!0)}}return{signal:"''+"+lr(e,{expr:n})}}function Ea(e,t){return void 0!==e?e:t}function wa(e,t,n){if(e.type===Vn)return t||n.numberFormat}function ka(e,t){return"format("+e+', "'+(t||"")+'")'}function Na(e,t,n){return ka(e,t||n.numberFormat)}function Oa(e,t,n,r){return e+" === null || isNaN("+e+') ? "null" : '+Na(e,n,r)+' + " - " + '+Na(t,n,r)}function _a(e,t,n,r,i,o,a){return void 0===a&&(a=!1),!t||n?(n=n||i)||a?(o?"utc":"time")+"Format("+e+", '"+n+"')":void 0:Hn(t,e,r,o)}function Ta(e,n){return(S(e)?e:[e]).reduce(function(e,t){return e.field.push(lr(t,n)),e.order.push(t.sort||"ascending"),e},{field:[],order:[]})}function Ca(e,t){var i=e.slice();return t.forEach(function(e){for(var t=0,n=i;t<n.length;t++){var r=n[t];if(Y(r)===Y(e))return}i.push(e)}),i}function Aa(e,t){return e===t?e:e+", "+t}function Da(e,t){if(S(e.value)&&S(t.value))return{explicit:e.explicit,value:Ca(e.value,t.value)};if(!S(e.value)&&!S(t.value))return{explicit:e.explicit,value:Aa(e.value,t.value)};throw new Error("It should never reach here")}function Ia(e,t){return e.bin?wt(t)&&X(["ordinal","nominal"],e.type):(console.warn("Only use this method with binned field defs"),!1)}function za(r,i){return ie(r).reduce(function(e,t){var n=r[t];return I({},e,fa(i,n,t,function(e){return{value:e.value}}))},{})}var Ra=function(){function e(e,t){this.debugName=t,this._children=[],this._parent=null,e&&(this.parent=e)}return e.prototype.clone=function(){throw new Error("Cannot clone node")},e.prototype.producedFields=function(){return{}},e.prototype.dependentFields=function(){return{}},Object.defineProperty(e.prototype,"parent",{get:function(){return this._parent},set:function(e){(this._parent=e).addChild(this)},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"children",{get:function(){return this._children},enumerable:!0,configurable:!0}),e.prototype.numChildren=function(){return this._children.length},e.prototype.addChild=function(e){this._children.push(e)},e.prototype.removeChild=function(e){this._children.splice(this._children.indexOf(e),1)},e.prototype.remove=function(){for(var e=0,t=this._children;e<t.length;e++){t[e].parent=this._parent}this._parent.removeChild(this)},e.prototype.insertAsParentOf=function(e){var t=e.parent;t.removeChild(this),this.parent=t,e.parent=this},e.prototype.swapWithParent=function(){for(var e=this._parent,t=e.parent,n=0,r=this._children;n<r.length;n++){r[n].parent=e}this._children=[],e.removeChild(this),e.parent.removeChild(e),this.parent=t,e.parent=this},e}(),La=function(o){function e(e,t,n,r){var i=o.call(this,e,t)||this;return i.type=n,i.refCounts=r,i._source=i._name=t,!i.refCounts||i._name in i.refCounts||(i.refCounts[i._name]=0),i}return h(e,o),e.prototype.clone=function(){var e=new this.constructor;return e.debugName="clone_"+this.debugName,e._source=this._source,e._name="clone_"+this._name,e.type=this.type,e.refCounts=this.refCounts,e.refCounts[e._name]=0,e},e.prototype.getSource=function(){return this.refCounts[this._name]++,this._source},e.prototype.isRequired=function(){return!!this.refCounts[this._name]},e.prototype.setSource=function(e){this._source=e},e}(Ra),Fa=function(r){function u(e,t){var n=r.call(this,e)||this;return n.transform=t,n}return h(u,r),u.prototype.clone=function(){return new u(null,ue(this.transform))},u.parseAllForSortIndex=function(a,e){return e.forEachFieldDef(function(e,t){if(cr(e)&&Ko(e.sort)){var n=e.field,r=e.timeUnit,i=e.sort,o=i.map(function(e,t){return qs({field:n,timeUnit:r,equal:e})+" ? "+t+" : "}).join("")+i.length;a=new u(a,{calculate:o,as:ja(e,t)})}}),a},u.prototype.producedFields=function(){var e={};return e[this.transform.as]=!0,e},u.prototype.assemble=function(){return{type:"formula",expr:this.transform.calculate,as:this.transform.as}},u}(Ra);function ja(e,t,n){return lr(e,{prefix:t,suffix:"sort_index",expr:n})}var Ua=["row","column"],Pa=["header","footer"];function Ma(e,t){for(var n=e.component.layoutHeaders[t],r=[],i=0,o=Pa;i<o.length;i++){var a=o[i];if(n[a])for(var u=0,s=n[a];u<s.length;u++){var c=s[u];r.push(Ha(e,t,a,n,c))}}return r}function Ha(e,t,n,r,i){var o,a,u,s,c;if(i){var l=null,f=r.facetFieldDef;if(f&&i.labels){var d=f.header,p=void 0===d?{}:d,h=p.format,m=p.labelAngle,g=e.config?e.config:void 0,v=I({},(90+(c=((c=m)%360+360)%360))%180==0?{}:c<90||270<c?{align:{value:"right"}}:135<=c&&c<225?{align:{value:"left"}}:{});l=I({text:Sa(f,h,"parent",e.config),offset:10,orient:"row"===t?"left":"top",style:"guide-label"},qa(g,f,Vo,Bo),0<ie(v).length?{encode:{update:v}}:{})}var y=i.axes,b=y&&0<y.length;if(l||b){var x="row"===t?"height":"width";return I({name:e.getName(t+"_"+n),type:"group",role:t+"-"+n},r.facetFieldDef?{from:{data:e.getName(t+"_domain")},sort:(a=f,u=t,s=a.sort,Qo(s)?{field:lr(s,{expr:"datum"}),order:s.order||"ascending"}:S(s)?{field:ja(a,u,"datum"),order:"ascending"}:{field:lr(a,{expr:"datum"}),order:s||"ascending"})}:{},l?{title:l}:{},i.sizeSignal?{encode:{update:(o={},o[x]=i.sizeSignal,o)}}:{},b?{axes:y}:{})}}return null}function qa(e,t,n,r){for(var i={},o=0,a=n;o<a.length;o++){var u=a[o];e&&e.header&&e.header[u]&&(i[r[u]]=e.header[u]),t&&t.header&&t.header[u]&&(i[r[u]]=t.header[u])}return i}function Wa(e){return[].concat(Ga(e,"width"),Ga(e,"height"))}function Ga(e,t){var n="width"===t?"x":"y",r=e.component.layoutSize.get(t);if(!r||"merged"===r)return[];var i=e.getSizeSignalRef(t).signal;if("range-step"===r){var o=e.getScaleComponent(n);if(o){var a=o.get("type"),u=o.get("range");if(yi(a)&&Mo(u)){var s=e.scaleName(n);if(Yu(e.parent))if("independent"===e.parent.component.resolve.scale[n])return[Ba(s,u)];return[Ba(s,u),{name:i,update:Ya(s,o,"domain('"+s+"').length")}]}}throw new Error("layout size is range step although there is no rangeStep.")}return[{name:i,value:r}]}function Ba(e,t){return{name:e+"_step",value:t.step}}function Ya(e,t,n){var r=t.get("type"),i=t.get("padding"),o=t.get("paddingOuter");o=void 0!==o?o:i;var a=t.get("paddingInner");return"bandspace("+n+", "+(a="band"===r?void 0!==a?a:i:1)+", "+o+") * "+e+"_step"}function Va(e,t){var n=e.scale[t],r=X(yt,t)?"axis":"legend";return"independent"===n?("shared"===e[r][t]&&hn(en.independentScaleMeansIndependentGuide(t)),"independent"):e[r][t]||"shared"}var Xa=function(){function e(e,t){void 0===e&&(e={}),void 0===t&&(t={}),this.explicit=e,this.implicit=t}return e.prototype.clone=function(){return new e(ue(this.explicit),ue(this.implicit))},e.prototype.combine=function(){return I({},this.explicit,this.implicit)},e.prototype.get=function(e){return void 0!==this.explicit[e]?this.explicit[e]:this.implicit[e]},e.prototype.getWithExplicit=function(e){return void 0!==this.explicit[e]?{explicit:!0,value:this.explicit[e]}:void 0!==this.implicit[e]?{explicit:!1,value:this.implicit[e]}:{explicit:!1,value:void 0}},e.prototype.setWithExplicit=function(e,t){void 0!==t.value&&this.set(e,t.value,t.explicit)},e.prototype.set=function(e,t,n){return delete this[n?"implicit":"explicit"][e],this[n?"explicit":"implicit"][e]=t,this},e.prototype.copyKeyFromSplit=function(e,t){void 0!==t.explicit[e]?this.set(e,t.explicit[e],!0):void 0!==t.implicit[e]&&this.set(e,t.implicit[e],!1)},e.prototype.copyKeyFromObject=function(e,t){void 0!==t[e]&&this.set(e,t[e],!0)},e.prototype.copyAll=function(e){for(var t=0,n=ie(e.combine());t<n.length;t++){var r=n[t],i=e.getWithExplicit(r);this.setWithExplicit(r,i)}},e}();function Qa(e){return{explicit:!0,value:e}}function Ka(e){return{explicit:!1,value:e}}function Ja(o){return function(e,t,n,r){var i=o(e.value,t.value);return 0<i?e:i<0?t:Za(e,t,n,r)}}function Za(e,t,n,r){return e.explicit&&t.explicit&&hn(en.mergeConflictingProperty(n,r,e.value,t.value)),e}function $a(e,t,n,r,i){return void 0===i&&(i=Za),void 0===e||void 0===e.value?t:e.explicit&&!t.explicit?e:t.explicit&&!e.explicit?t:Y(e.value)===Y(t.value)?e:i(e,t,n,r)}var eu=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return h(t,e),t}(Xa);function tu(e){return ru(e,function(e,t){return Math.max(e,t.value)})}function nu(e){return ru(e,function(e,t){return void 0!==e?e:t.value})}function ru(e,t){return or(e)?(S(e.condition)?e.condition:[e.condition]).reduce(t,e.value):sr(e)?e.value:void 0}var iu=Object.freeze({symbols:function(e,t,n,r,i){if("gradient"!==i){var o=I({},function(e,t,n){for(var r=0,i=n;r<i.length;r++){var o=i[r],a=xa(o,t.markDef,t.config);void 0!==a&&(e[o]={value:a})}return e}({},n,on),aa(n));switch(n.mark){case Lt:case Pt:case Ut:o.shape={value:"square"};break;case Gt:case Bt:o.shape={value:n.mark}}var a=n.markDef,u=n.encoding,s=a.filled;if(o.fill)if("fill"===r||s&&r===Ke)delete o.fill;else if(o.fill.field)delete o.fill;else if(S(o.fill)){var c=nu(u.fill||u.color)||a.fill||s&&a.color;c&&(o.fill={value:c})}if(o.stroke)if("stroke"===r||!s&&r===Ke)delete o.stroke;else if(o.stroke.field)delete o.stroke;else if(S(o.stroke)){var l=nu(u.stroke||u.color)||a.stroke||!s&&a.color;l&&(o.stroke={value:l})}if(o.fill&&"transparent"!==o.fill.value&&!o.stroke&&(o.stroke={value:"transparent"}),r!==Xe){var f=nu(u.shape)||a.shape;f&&(o.shape={value:f})}if(r!==rt){var d=tu(u.opacity)||a.opacity;d&&(o.opacity={value:d})}return o=I({},o,t),0<ie(o).length?o:void 0}},gradient:function(e,t,n,r,i){var o={};if("gradient"===i){var a=tu(n.encoding.opacity)||n.markDef.opacity;a&&(o.opacity={value:a})}return o=I({},o,t),0<ie(o).length?o:void 0},labels:function(e,t,n,r,i){var o=n.legend(r),a=n.config,u={};if(Cr(e)){var s=n.getScaleComponent(r).get("type")===Kr.UTC,c=_a("datum.value",e.timeUnit,o.format,a.legend.shortTimeLabels,a.timeFormat,s);t=I({},c?{text:{signal:c}}:{},t)}return u=I({},u,t),0<ie(u).length?u:void 0}});function ou(e){var r,i;Bu(e)?e.component.legends=(i=(r=e).encoding,[Ke,Je,Ze,Qe,Xe,rt].reduce(function(e,t){var n=i[t];return!r.legend(t)||!r.getScaleComponent(t)||ar(n)&&t===Xe&&n.type===Jn||(e[t]=function(i,o){var a=i.fieldDef(o),r=i.legend(o),u=new eu({},function(e,t){var n;switch(t){case Ke:var r=e.scaleName(Ke);return e.markDef.filled?{fill:r}:{stroke:r};case Je:case Ze:case Qe:case Xe:case rt:return(n={})[t]=e.scaleName(t),n}}(i,o));ri.forEach(function(e){var t=function(e,t,n,r){var i=r.fieldDef(n);switch(e){case"format":return wa(i,t.format,r.config);case"title":var o=void 0!==i.title?i.title:t.title||(void 0===t.title?void 0:null);return Ea(o,xr(i,r.config))||void 0;case"values":return function(e,t){var n=e.values;if(n)return Dr(t,n)}(t,i);case"type":return Ea(t.type,function(e,t,n){if(ct(t)&&("quantitative"===e&&!bi(n)||"temporal"===e&&X(["time","utc"],n)))return"gradient"}(i.type,n,r.getScaleComponent(n).get("type")))}return t[e]}(e,r,o,i);if(void 0!==t){var n="values"===e?!!r.values:"title"===e&&t===i.fieldDef(o).title||t===r[e];(n||void 0===i.config.legend[e])&&u.set(e,t,n)}});var s=r.encoding||{},e=["labels","legend","title","symbols","gradient"].reduce(function(e,t){var n=za(s[t]||{},i),r=iu[t]?iu[t](a,n,i,o,u.get("type")):n;return void 0!==r&&0<ie(r).length&&(e[t]={update:r}),e},{});return 0<ie(e).length&&u.set("encode",e,!!r.encoding),u}(r,t)),e},{})):e.component.legends=function(i){for(var e=i.component,n=e.legends,o=e.resolve,t=function(t){ou(t),ie(t.component.legends).forEach(function(e){o.legend[e]=Va(i.component.resolve,e),"shared"===o.legend[e]&&(n[e]=au(n[e],t.component.legends[e]),n[e]||(o.legend[e]="independent",delete n[e]))})},r=0,a=i.children;r<a.length;r++){var u=a[r];t(u)}return ie(n).forEach(function(e){for(var t=0,n=i.children;t<n.length;t++){var r=n[t];r.component.legends[e]&&"shared"===o.legend[e]&&delete r.component.legends[e]}}),n}(e)}function au(t,r){if(!t)return r.clone();var e=t.getWithExplicit("orient"),n=r.getWithExplicit("orient");if(!e.explicit||!n.explicit||e.value===n.value){for(var i=!1,o=function(n){var e=$a(t.getWithExplicit(n),r.getWithExplicit(n),n,"legend",function(e,t){switch(n){case"title":return Da(e,t);case"type":return i=!0,Ka("symbol")}return Za(e,t,n,"legend")});t.setWithExplicit(n,e)},a=0,u=ii;a<u.length;a++){o(u[a])}return i&&(((t.implicit||{}).encode||{}).gradient&&fe(t.implicit,["encode","gradient"]),((t.explicit||{}).encode||{}).gradient&&fe(t.explicit,["encode","gradient"])),t}}function uu(e){for(var t=e.component.legends,n={},r=0,i=ie(t);r<i.length;r++){var o=i[r],a=e.getScaleComponent(o),u=Y(a.domains);if(n[u])for(var s=0,c=n[u];s<c.length;s++){au(c[s],t[o])||n[u].push(t[o])}else n[u]=[t[o].clone()]}return Z(oe(n)).map(function(e){return e.combine()})}function su(e){return Qu(e)||Xu(e)||Vu(e)?(t=e).children.reduce(function(e,t){return e.concat(t.assembleProjections())},cu(t)):cu(e);var t}function cu(r){var e=r.component.projection;if(!e||e.merged)return[];var t=e.combine(),n=t.name,i=z(t,["name"]),o={signal:"["+e.size.map(function(e){return e.signal}).join(", ")+"]"},a=e.data.reduce(function(e,t){var n=Po(t)?t.signal:"data('"+r.lookupDataSource(t)+"')";return X(e,n)||e.push(n),e},[]);if(a.length<=0)throw new Error("Projection's fit didn't find any data sources");return[I({name:n,size:o,fit:{signal:1<a.length?"["+a.join(", ")+"]":a[0]}},i)]}var lu=["type","clipAngle","clipExtent","center","rotate","precision","coefficient","distance","fraction","lobes","parallel","radius","ratio","spacing","tilt"],fu=function(o){function e(e,t,n,r){var i=o.call(this,I({},t),{name:e})||this;return i.specifiedProjection=t,i.size=n,i.data=r,i.merged=!1,i}return h(e,o),e}(Xa);function du(e){Bu(e)?e.component.projection=function(t){var e=t.specifiedProjection,n=t.config;if(t.hasProjection){var r=[];return[[Ge,qe],[Be,We]].forEach(function(e){(t.channelHasField(e[0])||t.channelHasField(e[1]))&&r.push({signal:t.getName("geojson_"+r.length)})}),t.channelHasField(Xe)&&t.fieldDef(Xe).type===Jn&&r.push({signal:t.getName("geojson_"+r.length)}),0===r.length&&r.push(t.requestDataName(bo)),new fu(t.projectionName(!0),I({},n.projection||{},e||{}),[t.getSizeSignalRef("width"),t.getSizeSignalRef("height")],r)}return}(e):e.component.projection=function(e){if(0===e.children.length)return;var r,t=J(e.children,function(e){du(e);var t=e.component.projection;if(t){if(r){var n=function(t,n){var e=J(lu,function(e){return!t.explicit.hasOwnProperty(e)&&!n.explicit.hasOwnProperty(e)||!(!t.explicit.hasOwnProperty(e)||!n.explicit.hasOwnProperty(e)||Y(t.get(e))!==Y(n.get(e)))});if(Y(t.size)===Y(n.size)){if(e)return t;if(Y(t.explicit)===Y({}))return n;if(Y(n.explicit)===Y({}))return t}return null}(r,t);return n&&(r=n),!!n}return r=t,!0}return!0});if(r&&t){var n=e.projectionName(!0),i=new fu(n,r.specifiedProjection,r.size,ue(r.data));return e.children.forEach(function(e){e.component.projection&&(i.data=i.data.concat(e.component.projection.data),e.renameProjection(e.component.projection.get("name"),n),e.component.projection.merged=!0)}),i}return}(e)}var pu=function(i){function d(e,t,n){var r=i.call(this,e)||this;return r.dimensions=t,r.measures=n,r}return h(d,i),d.prototype.clone=function(){return new d(null,I({},this.dimensions),ue(this.measures))},d.makeFromEncoding=function(e,u){var t=!1;u.forEachFieldDef(function(e){e.aggregate&&(t=!0)});var s={},c={};return t?(u.forEachFieldDef(function(e,t){var n,r,i,o=e.aggregate,a=e.field;o?"count"===o?(s["*"]=s["*"]||{},s["*"].count=lr(e)):(s[a]=s[a]||{},s[a][o]=lr(e),wt(t)&&"unaggregated"===u.scaleDomain(t)&&(s[a].min=lr({field:a,aggregate:"min"}),s[a].max=lr({field:a,aggregate:"max"}))):(n=c,r=t,(i=e).bin?(n[lr(i,{})]=!0,n[lr(i,{binSuffix:"end"})]=!0,Ia(i,r)&&(n[lr(i,{binSuffix:"range"})]=!0)):n[lr(i)]=!0)}),ie(c).length+ie(s).length===0?null:new d(e,c,s)):null},d.makeFromTransform=function(e,t){for(var n={},r={},i=0,o=t.aggregate;i<o.length;i++){var a=(f=o[i]).op,u=f.field,s=f.as;a&&("count"===a?(r["*"]=r["*"]||{},r["*"].count=s||lr(f)):(r[u]=r[u]||{},r[u][a]=s||lr(f)))}for(var c=0,l=t.groupby||[];c<l.length;c++){var f;n[f=l[c]]=!0}return ie(n).length+ie(r).length===0?null:new d(e,n,r)},d.prototype.merge=function(e){ne(this.dimensions,e.dimensions)?function(){for(var e=[],t=0;t<arguments.length;t++)e[t]=arguments[t];pn.debug.apply(pn,arguments)}("different dimensions, cannot merge"):(!function(e,t){for(var n in t)if(t.hasOwnProperty(n)){var r=t[n];for(var i in r)r.hasOwnProperty(i)&&(n in e?e[n][i]=r[i]:e[n]={op:r[i]})}}(this.measures,e.measures),e.remove())},d.prototype.addDimensions=function(e){var t=this;e.forEach(function(e){return t.dimensions[e]=!0})},d.prototype.dependentFields=function(){var t={};return ie(this.dimensions).forEach(function(e){return t[e]=!0}),ie(this.measures).forEach(function(e){return t[e]=!0}),t},d.prototype.producedFields=function(){var e=this,n={};return ie(this.measures).forEach(function(t){ie(e.measures[t]).forEach(function(e){n[e+"_"+t]=!0})}),n},d.prototype.assemble=function(){for(var e=[],t=[],n=[],r=0,i=ie(this.measures);r<i.length;r++)for(var o=i[r],a=0,u=ie(this.measures[o]);a<u.length;a++){var s=u[a];n.push(this.measures[o][s]),e.push(s),t.push(o)}return{type:"aggregate",groupby:ie(this.dimensions),ops:e,fields:t,as:n}},d}(Ra),hu=function(f){function e(e,t,n,r){var i=f.call(this,e)||this;i.model=t,i.name=n,i.data=r;for(var o=0,a=[Ve,Ye];o<a.length;o++){var u=a[o],s=t.facet[u];if(s){var c=s.bin,l=s.sort;i[u]=I({name:t.getName(u+"_domain"),fields:[lr(s)].concat(c?[lr(s,{binSuffix:"end"})]:[])},Qo(l)?{sortField:l}:S(l)?{sortIndexField:ja(s,u)}:{})}}return i.childModel=t.child,i}return h(e,f),Object.defineProperty(e.prototype,"fields",{get:function(){return(this.column&&this.column.fields||[]).concat(this.row&&this.row.fields||[])},enumerable:!0,configurable:!0}),e.prototype.getSource=function(){return this.name},e.prototype.getChildIndependentFieldsWithStep=function(){for(var e={},t=0,n=["x","y"];t<n.length;t++){var r=n[t],i=this.childModel.component.scales[r];if(i&&!i.merged){var o=i.get("type"),a=i.get("range");if(yi(o)&&Mo(a)){var u=Du(Iu(this.childModel,r));u?e[r]=u:hn("Unknown field for ${channel}.  Cannot calculate view size.")}}}return e},e.prototype.assembleRowColumnData=function(e,t,n){var r="row"===e?"y":"x",i=[],o=[],a=[];n[r]&&(t?(i.push("distinct_"+n[r]),o.push("max")):(i.push(n[r]),o.push("distinct")),a.push("distinct_"+n[r]));var u=this[e],s=u.sortField,c=u.sortIndexField;if(s){var l=s.op,f=s.field;i.push(f),o.push(l),a.push(lr(s))}else c&&(i.push(c),o.push("max"),a.push(c));return{name:this[e].name,source:t||this.data,transform:[I({type:"aggregate",groupby:this[e].fields},i.length?{fields:i,ops:o,as:a}:{})]}},e.prototype.assemble=function(){var e=[],t=null,n=this.getChildIndependentFieldsWithStep();if(this.column&&this.row&&(n.x||n.y)){t="cross_"+this.column.name+"_"+this.row.name;var r=[].concat(n.x?[n.x]:[],n.y?[n.y]:[]),i=r.map(function(){return"distinct"});e.push({name:t,source:this.data,transform:[{type:"aggregate",groupby:this.column.fields.concat(this.row.fields),fields:r,ops:i}]})}for(var o=0,a=[Ve,Ye];o<a.length;o++){var u=a[o];this[u]&&e.push(this.assembleRowColumnData(u,t,n))}return e},e}(Ra),mu=function(r){function a(e,t){var n=r.call(this,e)||this;return n.fieldDefs=t,n}return h(a,r),a.prototype.clone=function(){return new a(null,I({},this.fieldDefs))},a.make=function(e,i){var t=i.config,o=i.mark;if("filter"!==t.invalidValues)return null;var n=i.reduceFieldDef(function(e,t,n){var r=wt(n)&&i.getScaleComponent(n);r&&(!xi(r.get("type"))||t.aggregate||Vt(o)||(e[t.field]=t));return e},{});return ie(n).length?new a(e,n):null},Object.defineProperty(a.prototype,"filter",{get:function(){return this.fieldDefs},enumerable:!0,configurable:!0}),a.prototype.assemble=function(){var i=this,e=ie(this.filter).reduce(function(e,t){var n=i.fieldDefs[t],r=lr(n,{expr:"datum"});return null!==n&&(e.push(r+" !== null"),e.push("!isNaN("+r+")")),e},[]);return 0<e.length?{type:"filter",expr:e.join(" && ")}:null},a}(Ra);var gu=function(r){function g(e,t){var n=r.call(this,e)||this;return n._parse=t,n}return h(g,r),g.prototype.clone=function(){return new g(null,ue(this._parse))},g.makeExplicit=function(e,t,n){var r={},i=t.data;return i&&i.format&&i.format.parse&&(r=i.format.parse),this.makeWithAncestors(e,r,{},n)},g.makeImplicitFromFilterTransform=function(e,t,n){var r={};return function e(t,n){if(W(t))e(t.not,n);else if(q(t))for(var r=0,i=t.and;r<i.length;r++)e(i[r],n);else if(H(t))for(var o=0,a=t.or;o<a.length;o++)e(a[o],n);else n(t)}(t.filter,function(e){if(Ps(e)){var t=null;Is(e)?t=e.equal:js(e)?t=e.range[0]:Us(e)&&(t=(e.oneOf||e.in)[0]),t&&(gn(t)?r[e.field]="date":x(t)?r[e.field]="number":m(t)&&(r[e.field]="string")),e.timeUnit&&(r[e.field]="date")}}),0===ie(r).length?null:this.makeWithAncestors(e,{},r,n)},g.makeImplicitFromEncoding=function(e,t,n){var r={};return(Bu(t)||Yu(t))&&t.forEachFieldDef(function(e){Cr(e)?r[e.field]="date":Tr(e)?we(e.aggregate)||(r[e.field]="number"):1<ve(e.field)?e.field in r||(r[e.field]="flatten"):cr(e)&&Qo(e.sort)&&1<ve(e.sort.field)&&(e.sort.field in r||(r[e.sort.field]="flatten"))}),this.makeWithAncestors(e,{},r,n)},g.makeWithAncestors=function(e,t,n,r){for(var i=0,o=ie(n);i<o.length;i++){var a=o[i];void 0!==(c=r.getWithExplicit(a)).value&&(c.explicit||c.value===n[a]||"derived"===c.value||"flatten"===n[a]?delete n[a]:hn(en.differentParse(a,n[a],c.value)))}for(var u=0,s=ie(t);u<s.length;u++){var c;a=s[u];void 0!==(c=r.get(a))&&(c===t[a]?delete t[a]:hn(en.differentParse(a,t[a],c)))}var l=new Xa(t,n);r.copyAll(l);for(var f={},d=0,p=ie(l.combine());d<p.length;d++){var h=p[d],m=l.get(h);null!==m&&(f[h]=m)}return 0===ie(f).length||r.parseNothing?null:new g(e,f)},Object.defineProperty(g.prototype,"parse",{get:function(){return this._parse},enumerable:!0,configurable:!0}),g.prototype.merge=function(e){this._parse=I({},this._parse,e.parse),e.remove()},g.prototype.assembleFormatParse=function(){for(var e={},t=0,n=ie(this._parse);t<n.length;t++){var r=n[t],i=this._parse[r];1===ve(r)&&(e[r]=i)}return e},g.prototype.producedFields=function(){return f(ie(this._parse))},g.prototype.dependentFields=function(){return f(ie(this._parse))},g.prototype.assembleTransforms=function(t){var o=this;return void 0===t&&(t=!1),ie(this._parse).filter(function(e){return!t||1<ve(e)}).map(function(e){var t,n,r,i=(t=e,n=o._parse[e],r=pe(t),"number"===n?"toNumber("+r+")":"boolean"===n?"toBoolean("+r+")":"string"===n?"toString("+r+")":"date"===n?"toDate("+r+")":"flatten"===n?r:0===n.indexOf("date:")?"timeParse("+r+","+n.slice(5,n.length)+")":0===n.indexOf("utc:")?"utcParse("+r+","+n.slice(4,n.length)+")":(hn(en.unrecognizedParse(n)),null));return i?{type:"formula",expr:i,as:ge(e)}:null}).filter(function(e){return null!==e})},g}(Ra),vu=function(o){function e(e){var t=o.call(this,null)||this;if(vo(e=e||{name:"source"}))t._data={values:e.values};else if(go(e)){if(t._data={url:e.url},e.format||(e.format={}),!e.format||!e.format.type){var n=/(?:\.([^.]+))?$/.exec(e.url)[1];X(["json","csv","tsv","dsv","topojson"],n)||(n="json"),e.format.type=n}}else yo(e)&&(t._data={});if(e.name&&(t._name=e.name),e.format){var r=e.format,i=(r.parse,z(r,["parse"]));t._data.format=i}return t}return h(e,o),Object.defineProperty(e.prototype,"data",{get:function(){return this._data},enumerable:!0,configurable:!0}),e.prototype.hasName=function(){return!!this._name},Object.defineProperty(e.prototype,"dataName",{get:function(){return this._name},set:function(e){this._name=e},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"parent",{set:function(e){throw new Error("Source nodes have to be roots.")},enumerable:!0,configurable:!0}),e.prototype.remove=function(){throw new Error("Source nodes are roots and cannot be removed.")},e.prototype.hash=function(){return vo(this._data)?(this._hash||(this._hash=V(this._data)),this._hash):go(this._data)?V([this._data.url,this._data.format]):this._name},e.prototype.assemble=function(){return I({name:this._name},this._data,{transform:[]})},e}(Ra),yu=function(r){function i(e,t){var n=r.call(this,e)||this;return n.formula=t,n}return h(i,r),i.prototype.clone=function(){return new i(null,ue(this.formula))},i.makeFromEncoding=function(e,t){var n=t.reduceFieldDef(function(e,t){if(t.timeUnit){var n=lr(t);e[n]={as:n,timeUnit:t.timeUnit,field:t.field}}return e},{});return 0===ie(n).length?null:new i(e,n)},i.makeFromTransform=function(e,t){var n;return new i(e,((n={})[t.field]={as:t.as,timeUnit:t.timeUnit,field:t.field},n))},i.prototype.merge=function(e){this.formula=I({},this.formula,e.formula),e.remove()},i.prototype.producedFields=function(){var t={};return oe(this.formula).forEach(function(e){t[e.as]=!0}),t},i.prototype.dependentFields=function(){var t={};return oe(this.formula).forEach(function(e){t[e.field]=!0}),t},i.prototype.assemble=function(){return oe(this.formula).map(function(e){return{type:"formula",as:e.as,expr:Mn(e.timeUnit,e.field)}})},i}(Ra);function bu(r){return function e(t){if(!(t instanceof vu)){var n=t.parent;r(t)&&e(n)}}}function xu(e){var t=e.parent;if(e instanceof gu){if(t instanceof vu)return!1;if(1<t.numChildren())return!0;if(t instanceof gu)t.merge(e);else{if(re(t.producedFields(),e.dependentFields()))return!0;e.swapWithParent()}}return!0}function Su(e){return!(e instanceof La||0<e.numChildren()||e instanceof hu)&&(e.remove(),!0)}function Eu(e){var n={};return bu(function(e){if(e instanceof yu){var t=e.producedFields();ie(t).every(function(e){return!!n[e]})?e.remove():n=I({},n,t)}return!0})(e)}var wu=function(r){function p(e,t){var n=r.call(this,e)||this;return n._stack=t,n}return h(p,r),p.prototype.clone=function(){return new p(null,ue(this._stack))},p.makeFromTransform=function(e,t){var n,r=t.stack,i=t.groupby,o=t.as,a=t.offset,u=void 0===a?"zero":a,s=[],c=[];if(void 0!==t.sort)for(var l=0,f=t.sort;l<f.length;l++){var d=f[l];s.push(d.field),c.push(void 0===d.order?"ascending":d.order)}return new p(e,{stackField:r,groupby:i,offset:u,sort:{field:s,order:c},facetby:[],as:S(n=o)&&n.every(function(e){return m(e)})&&1<n.length?o:m(o)?[o,o+"_end"]:[t.stack+"_start",t.stack+"_end"]})},p.makeFromEncoding=function(e,t){var n,r=t.stack;if(!r)return null;r.groupbyChannel&&(n=t.fieldDef(r.groupbyChannel));var i,o=t.stack.stackBy.reduce(function(e,t){var n=lr(t.fieldDef);return n&&e.push(n),e},[]),a=t.encoding.order;i=S(a)||ar(a)?Ta(a):o.reduce(function(e,t){return e.field.push(t),e.order.push("descending"),e},{field:[],order:[]});var u=t.vgField(r.fieldChannel);return new p(e,{dimensionFieldDef:n,stackField:u,facetby:[],stackby:o,sort:i,offset:r.offset,impute:r.impute,as:[u+"_start",u+"_end"]})},Object.defineProperty(p.prototype,"stack",{get:function(){return this._stack},enumerable:!0,configurable:!0}),p.prototype.addDimensions=function(e){this._stack.facetby=this._stack.facetby.concat(e)},p.prototype.dependentFields=function(){var t={};t[this._stack.stackField]=!0,this.getGroupbyFields().forEach(function(e){return t[e]=!0}),this._stack.facetby.forEach(function(e){return t[e]=!0});var e=this._stack.sort.field;return S(e)?e.forEach(function(e){return t[e]=!0}):t[e]=!0,t},p.prototype.producedFields=function(){return this._stack.as.reduce(function(e,t){return e[t]=!0,e},{})},p.prototype.getGroupbyFields=function(){var e=this._stack,t=e.dimensionFieldDef,n=e.impute,r=e.groupby;return t?t.bin?n?[lr(t,{binSuffix:"mid"})]:[lr(t,{}),lr(t,{binSuffix:"end"})]:[lr(t)]:r||[]},p.prototype.assemble=function(){var e=[],t=this._stack,n=t.facetby,r=t.dimensionFieldDef,i=t.stackField,o=t.stackby,a=t.sort,u=t.offset,s=t.impute,c=t.as;if(s&&r){var l=r?lr(r,{binSuffix:"mid"}):void 0;r.bin&&e.push({type:"formula",expr:"("+lr(r,{expr:"datum"})+"+"+lr(r,{expr:"datum",binSuffix:"end"})+")/2",as:l}),e.push({type:"impute",field:i,groupby:o,key:l,method:"value",value:0})}return e.push({type:"stack",groupby:this.getGroupbyFields().concat(n),field:i,sort:a,as:c,offset:u}),e},p}(Ra),ku="scale_";function Nu(t){if(t instanceof hu)if(1!==t.numChildren()||t.children[0]instanceof La){!function e(t){if(t instanceof La&&t.type===bo&&1===t.numChildren()){var n=t.children[0];n instanceof hu||(n.swapWithParent(),e(t))}}(t.model.component.data.main),Z(t.children.map((i=t,function e(t){if(!(t instanceof hu)){var n=t.clone();if(n instanceof La){var r=ku+n.getSource();n.setSource(r),i.model.component.data.outputNodes[r]=n}else(n instanceof pu||n instanceof wu)&&n.addDimensions(i.fields);return Z(t.children.map(e)).forEach(function(e){return e.parent=n}),[n]}return Z(t.children.map(e))}))).forEach(function(e){return e.parent=t.model.component.data.main})}else{var e=t.children[0];(e instanceof pu||e instanceof wu)&&e.addDimensions(t.fields),e.swapWithParent(),Nu(t)}else t.children.forEach(Nu);var i}function Ou(e){e instanceof mu&&J(oe(e.filter),function(e){return null===e})&&e.remove(),e instanceof La&&!e.isRequired()&&e.remove(),e.children.forEach(Ou)}function _u(e){var n=[];return e.forEach(function e(t){0===t.numChildren()?n.push(t):t.children.forEach(e)}),n}function Tu(e){var h,m,g;Bu(e)?(m=(h=e).specifiedScales,g=h.component.scales,ie(g).forEach(function(e){var t,n,r,i,o=m[e],a=o?o.domain:void 0,u=(n=e,r=(t=h).getScaleComponent(n).get("type"),(i=function(e,t,n,r){if("unaggregated"===e){var i=Au(t,n),o=i.valid,a=i.reason;if(!o)return void hn(a)}else if(void 0===e&&r.useUnaggregatedDomain){var o=Au(t,n).valid;if(o)return"unaggregated"}return e}(t.scaleDomain(n),t.fieldDef(n),r,t.config.scale))!==t.scaleDomain(n)&&(t.specifiedScales[n]=I({},t.specifiedScales[n],{domain:i})),"x"===n&&t.channelHasField("x2")?t.channelHasField("x")?Cu(r,i,t,"x").concat(Cu(r,i,t,"x2")):Cu(r,i,t,"x2"):"y"===n&&t.channelHasField("y2")?t.channelHasField("y")?Cu(r,i,t,"y").concat(Cu(r,i,t,"y2")):Cu(r,i,t,"y2"):Cu(r,i,t,n)),s=g[e];if(s.domains=u,ki(a)&&s.set("domainRaw",{signal:Es+V(a)},!0),h.component.data.isFaceted){for(var c=h;!Yu(c)&&c.parent;)c=c.parent;var l=c.component.resolve.scale[e];if("shared"===l)for(var f=0,d=u;f<d.length;f++){var p=d[f];Ho(p)&&(p.data=ku+p.data.replace(ku,""))}}})):function(s){for(var e=0,t=s.children;e<t.length;e++){var n=t[e];Tu(n)}var c=s.component.scales;ie(c).forEach(function(e){for(var t,n=null,r=0,i=s.children;r<i.length;r++){var o=i[r],a=o.component.scales[e];if(a){t=void 0===t?a.domains:t.concat(a.domains);var u=a.get("domainRaw");n&&u&&n.signal!==u.signal&&hn("The same selection must be used to override scale domains in a layered view."),n=u}}c[e].domains=t,n&&c[e].set("domainRaw",n,!0)})}(e)}function Cu(e,t,n,r){var i,o,a=n.fieldDef(r);if(t&&"unaggregated"!==t&&!ki(t)){var u=a.type,s=a.timeUnit;return"temporal"===u||s?(i=u,o=s,t.map(function(e){return{signal:"{data: "+Ar(e,{timeUnit:o,type:i})+"}"}})):[t]}var c=n.stack;if(c&&r===c.fieldChannel)return"normalize"===c.offset?[[0,1]]:[{data:f=n.requestDataName(bo),field:n.vgField(r,{suffix:"start"})},{data:f,field:n.vgField(r,{suffix:"end"})}];var l=wt(r)?function(e,t,n){if(!yi(n))return;var r=e.fieldDef(t),i=r.sort;if(Ko(i))return{op:"min",field:ja(r,t),order:"ascending"};if(Qo(i))return I({},i,i.field?{field:me(i.field)}:{});if("descending"===i)return{op:"min",field:e.vgField(t),order:"descending"};if(X(["ascending",void 0],i))return!0;return}(n,r,e):void 0;if("unaggregated"===t){var f=n.requestDataName(bo),d=a.field;return[{data:f,field:lr({field:d,aggregate:"min"})},{data:f,field:lr({field:d,aggregate:"max"})}]}if(!a.bin)return l?[{data:se(l)?n.requestDataName(bo):n.requestDataName(xo),field:n.vgField(r),sort:l}]:[{data:n.requestDataName(bo),field:n.vgField(r)}];if(bi(e)){var p=n.getName(Tt(a.bin)+"_"+a.field+"_bins");return[{signal:"sequence("+p+".start, "+p+".stop + "+p+".step, "+p+".step)"}]}return yi(e)?[{data:se(l)?n.requestDataName(bo):n.requestDataName(xo),field:n.vgField(r,Ia(a,r)?{binSuffix:"range"}:{}),sort:!0!==l&&Qo(l)?l:{field:n.vgField(r,{}),op:"min"}}]:"x"!==r&&"y"!==r?[{data:n.requestDataName(bo),field:n.vgField(r,{})}]:Ct(a.bin)&&a.bin.extent?[a.bin.extent]:[{data:f=n.requestDataName(bo),field:n.vgField(r,{})},{data:f,field:n.vgField(r,{binSuffix:"end"})}]}function Au(e,t){return e.aggregate?Oe[e.aggregate]?"quantitative"===e.type&&"log"===t?{valid:!1,reason:en.unaggregatedDomainWithLogScale(e)}:{valid:!0}:{valid:!1,reason:en.unaggregateDomainWithNonSharedDomainOp(e.aggregate)}:{valid:!1,reason:en.unaggregateDomainHasNoEffectForRawField(e)}}function Du(e){if(Ho(e)&&m(e.field))return e.field;if(!S(a=e)&&"fields"in a&&!("data"in a)){for(var t=void 0,n=0,r=e.fields;n<r.length;n++){var i=r[n];if(Ho(i)&&m(i.field))if(t){if(t!==i.field)return hn("Detected faceted independent scales that union domain of multiple fields from different data sources.  We will use the first field.  The result view size may be incorrect."),t}else t=i.field}return hn("Detected faceted independent scales that union domain of identical fields from different source detected.  We will assume that this is the same field from a different fork of the same data source.  However, if this is not case, the result view size maybe incorrect."),t}var o,a;return!S(o=e)&&"fields"in o&&"data"in o?(hn("Detected faceted independent scales that union domain of multiple fields from the same data source.  We will use the first field.  The result view size may be incorrect."),m(t=e.fields[0])?t:void 0):void 0}function Iu(t,e){return function(e){var t=te(e.map(function(e){return Ho(e)?(e.sort,z(e,["sort"])):e}),V),n=te(e.map(function(e){if(Ho(e)){var t=e.sort;return void 0===t||se(t)||("count"===t.op&&delete t.field,"ascending"===t.order&&delete t.order),t}}).filter(function(e){return void 0!==e}),V);if(1===t.length){if(Ho(a=e[0])&&0<n.length){var r=n[0];return 1<n.length&&(hn(en.MORE_THAN_ONE_SORT),r=!0),I({},a,{sort:r})}return a}var i=te(n.map(function(e){return!0===e?e:"count"===e.op?e:(hn(en.domainSortDropped(e)),!0)}),V),o=void 0;1===i.length?o=i[0]:1<i.length&&(hn(en.MORE_THAN_ONE_SORT),o=!0);var a,u=te(e.map(function(e){return Ho(e)?e.data:null}),function(e){return e});return 1===u.length&&null!==u[0]?a=I({data:u[0],fields:t.map(function(e){return e.field})},o?{sort:o}:{}):I({fields:t},o?{sort:o}:{})}(t.component.scales[e].domains.map(function(e){return Ho(e)&&(e.data=t.lookupDataSource(e.data)),e}))}function zu(c){return ie(c.component.scales).reduce(function(e,t){var n=c.component.scales[t];if(n.merged)return e;var r=n.combine(),i=r.domainRaw,o=r.range,a=r.name,u=r.type,s=(r.domainRaw,r.range,z(r,["name","type","domainRaw","range"]));return o=function(e,t,n,r){if("x"===r||"y"===r){if(Mo(e))return{step:{signal:t+"_step"}};if(S(e)&&2===e.length){var i=e[0],o=e[1];if(0===i&&Po(o))return[0,{signal:n.getSizeName(o.signal)}];if(Po(i)&&0===o)return[{signal:n.getSizeName(i.signal)},0]}}return e}(o,a,c,t),i&&0<=i.signal.indexOf(Es)&&(i=function(e,t){var n=JSON.parse(t.signal.replace(Es,"")),r=ce(n.selection),i=e.component.selection&&e.component.selection[r];{if(!i)return i=e.getSelectionComponent(r,n.selection),n.encoding||n.field||(n.field=i.project[0].field,1<i.project.length&&hn('A "field" or "encoding" must be specified when using a selection as a scale domain. Using "field": '+N(n.field)+".")),{signal:Os(i.type).scaleDomain+"("+N(r+xs)+", "+N(n.encoding||null)+", "+N(n.field||null)+("global"===i.resolve?")":", "+N(i.resolve)+")")};hn('Use "bind": "scales" to setup a binding for scales and selections within the same view.')}return{signal:"null"}}(c,i)),e.push(I({name:a,type:u,domain:Iu(c,t)},i?{domainRaw:i}:{},{range:o},s)),e},[])}var Ru=function(r){function e(e,t){var n=r.call(this,{},{name:e})||this;return n.merged=!1,n.domains=[],n.setWithExplicit("type",t),n}return h(e,r),e}(Xa),Lu=["range","rangeStep","scheme"];function Fu(e){var f,d;Bu(e)?(d=(f=e).component.scales,Et.forEach(function(e){var t=d[e];if(t){var n=f.getScaleComponent(e),r=f.specifiedScales[e],i=f.fieldDef(e),o="x"===e?"width":"y"===e?"height":void 0,a=o?!!f.component.layoutSize.get(o):void 0,u=n.get("type"),s=X(["point","band"],u)||!!r.rangeStep;o&&f.fit&&!a&&s&&(hn(en.CANNOT_FIX_RANGE_STEP_WITH_FIT),a=!0);var c=function(e){var t=[],n=e.getScaleComponent("x"),r=n&&n.get("range");r&&Mo(r)&&x(r.step)&&t.push(r.step);var i=e.getScaleComponent("y"),o=i&&i.get("range");return o&&Mo(o)&&x(o.step)&&t.push(o.step),t}(f),l=function(e,t,n,r,i,o,a,u,s,c){for(var l=u||null===r.rangeStep,f=0,d=Lu;f<d.length;f++){var p=d[f];if(void 0!==r[p]){var h=Ci(t,p),m=Ai(e,p);if(h)if(m)hn(m);else switch(p){case"range":return Qa(r[p]);case"scheme":return Qa(ju(r[p]));case"rangeStep":var g=r[p];if(null!==g){if(!u)return Qa({step:g});hn(en.rangeStepDropped(e))}}else hn(en.scalePropertyNotWorkWithScaleType(t,p,e))}}return Ka(function(e,t,n,r,i,o,a,u,s){switch(e){case Ue:case Pe:if(X(["point","band"],t)&&!s)if(e===Ue&&"text"===o){if(r.scale.textXRangeStep)return{step:r.scale.textXRangeStep}}else if(r.scale.rangeStep)return{step:r.scale.rangeStep};return e===Pe&&xi(t)?[{signal:a},0]:[0,{signal:a}];case Qe:var c=function(e,t,n){if(t)return 0;switch(e){case"bar":case"tick":return n.scale.minBandSize;case"line":case"trail":case"rule":return n.scale.minStrokeWidth;case"text":return n.scale.minFontSize;case"point":case"square":case"circle":return n.scale.minSize}throw new Error(en.incompatibleChannel("size",e))}(o,i,r),l=function(e,t,n){var r=n.scale;switch(e){case"bar":case"tick":return void 0!==n.scale.maxBandSize?n.scale.maxBandSize:Uu(t,n.scale)-1;case"line":case"trail":case"rule":return n.scale.maxStrokeWidth;case"text":return n.scale.maxFontSize;case"point":case"square":case"circle":if(n.scale.maxSize)return n.scale.maxSize;var i=Uu(t,r);return(i-2)*(i-2)}throw new Error(en.incompatibleChannel("size",e))}(o,u,r);return[c,l];case Xe:return"symbol";case Ke:case Je:case Ze:return"ordinal"===t?"nominal"===n?"category":"ordinal":"rect"===o||"geoshape"===o?"heatmap":"ramp";case rt:return[r.scale.minOpacity,r.scale.maxOpacity]}throw new Error("Scale range undefined for channel "+e)}(e,t,n,i,o,a,s,c,l))}(e,u,i.type,r,f.config,t.get("zero"),f.mark,a,f.getName(o),c);t.setWithExplicit("range",l)}})):Mu(e,"range")}function ju(e){if(wi(e)){var t={scheme:e.name};return e.count&&(t.count=e.count),e.extent&&(t.extent=e.extent),t}return{scheme:e}}function Uu(e,t){return 0<e.length?Math.min.apply(null,e):t.rangeStep?t.rangeStep:21}function Pu(e,t){var f,d,p;Bu(e)?(d=t,p=(f=e).component.scales,ie(p).forEach(function(e){var t=f.specifiedScales[e],n=p[e],r=f.getScaleComponent(e),i=f.fieldDef(e),o=f.config,a=t[d],u=r.get("type"),s=Ci(u,d),c=Ai(e,d);if(void 0!==a&&(s?c&&hn(c):hn(en.scalePropertyNotWorkWithScaleType(u,d,e))),s&&void 0===c)if(void 0!==a)n.copyKeyFromObject(d,t);else{var l=function(e,t,n,r,i,o,a,u,s){var c=s.scale;switch(e){case"nice":return function(e,t,n){if(!n.bin&&!X([Kr.TIME,Kr.UTC],e))return X([Ue,Pe],t)}(r,t,n);case"padding":return function(e,t,n,r,i,o){if(X([Ue,Pe],e)){if(Si(t)){if(void 0!==n.continuousPadding)return n.continuousPadding;var a=i.type,u=i.orient;if("bar"===a&&!r.bin&&("vertical"===u&&"x"===e||"horizontal"===u&&"y"===e))return o.continuousBandSize}if(t===Kr.POINT)return n.pointPadding}}(t,r,c,n,u,s.bar);case"paddingInner":return function(e,t,n){if(void 0===e)return X([Ue,Pe],t)?n.bandPaddingInner:void 0}(i,t,c);case"paddingOuter":return function(e,t,n,r,i){if(void 0===e)return X([Ue,Pe],t)&&n===Kr.BAND?void 0!==i.bandPaddingOuter?i.bandPaddingOuter:r/2:void 0}(i,t,r,o,c);case"reverse":return function(e,t){if(xi(e)&&"descending"===t)return!0}(r,n.sort);case"zero":return function(e,t,n,r){if(n&&"unaggregated"!==n)return!1;if("size"===e&&"quantitative"===t.type)return!0;if(!t.bin&&X([Ue,Pe],e)){var i=r.orient,o=r.type;return!X(["bar","area","line","trail"],o)||!("horizontal"===i&&"y"===e||"vertical"===i&&"x"===e)}return!1}(t,n,a,u)}return c[e]}(d,e,i,r.get("type"),r.get("padding"),r.get("paddingInner"),t.domain,f.markDef,o);void 0!==l&&n.set(d,l,!1)}})):Mu(e,t)}function Mu(o,a){for(var u=o.component.scales,e=0,t=o.children;e<t.length;e++){var n=t[e];"range"===a?Fu(n):Pu(n,a)}ie(u).forEach(function(e){for(var t,n=0,r=o.children;n<r.length;n++){var i=r[n].component.scales[e];if(i)t=$a(t,i.getWithExplicit(a),a,"scale",Ja(function(e,t){switch(a){case"range":return e.step&&t.step?e.step-t.step:0}return 0}))}u[e].setWithExplicit(a,t)})}function Hu(e,t,n,r,i){var o=function(e,t,n,r){switch(t.type){case"nominal":case"ordinal":if(ct(e)||"discrete"===Ot(e))return"shape"===e&&"ordinal"===t.type&&hn(en.discreteChannelCannotEncode(e,"ordinal")),"ordinal";if(X(["x","y"],e)){if(X(["rect","bar","rule"],n))return"band";if("bar"===n)return"band"}return"point";case"temporal":return ct(e)?"sequential":"discrete"===Ot(e)?(hn(en.discreteChannelCannotEncode(e,"temporal")),"ordinal"):"time";case"quantitative":return ct(e)?t.bin?"bin-ordinal":"sequential":"discrete"===Ot(e)?(hn(en.discreteChannelCannotEncode(e,"quantitative")),"ordinal"):t.bin&&"x"!==e&&"y"!==e?"bin-linear":"linear";case"latitude":case"longitude":case"geojson":return}throw new Error(en.invalidFieldType(t.type))}(t,n,r);return wt(t)?void 0!==e?Ii(t,e)?Di(e,n.type,n.bin)?e:(hn(en.scaleTypeNotWorkWithFieldDef(e,o)),o):(hn(en.scaleTypeNotWorkWithChannel(t,e,o)),o):o:null}function qu(e){var u,s,c,l;Bu(e)?e.component.scales=(s=(u=e).encoding,c=u.config,l=u.mark,Et.reduce(function(e,t){var n,r=void 0,i=s[t];if(ar(i)&&l===Wt&&t===Xe&&i.type===Jn)return e;if(ar(i)?r=(n=i).scale:ir(i)?(n=i.condition,r=i.condition.scale):t===Ue?n=Er(s.x2):t===Pe&&(n=Er(s.y2)),n&&null!==r&&!1!==r){var o=(r=r||{}).type,a=Hu(r.type,t,n,l,c.scale);e[t]=new Ru(u.scaleName(t+"",!0),{value:a,explicit:o===a})}return e},{})):e.component.scales=function(u){for(var s=u.component.scales={},c={},i=u.component.resolve,e=function(r){qu(r),ie(r.component.scales).forEach(function(e){if(i.scale[e]=i.scale[e]||function(e,t){if(Qu(t)||Yu(t))return"shared";if(Xu(t)||Vu(t))return X(yt,e)?"independent":"shared";throw new Error("invalid model type for resolve")}(e,u),"shared"===i.scale[e]){var t=c[e],n=r.component.scales[e].getWithExplicit("type");t?si(t.value,n.value)?c[e]=$a(t,n,"type","scale",Wu):(i.scale[e]="independent",delete c[e]):c[e]=n}})},t=0,n=u.children;t<n.length;t++){var r=n[t];e(r)}return ie(c).forEach(function(e){var t=u.scaleName(e,!0),n=c[e];s[e]=new Ru(t,n);for(var r=0,i=u.children;r<i.length;r++){var o=i[r],a=o.component.scales[e];a&&(o.renameScale(a.get("name"),t),a.merged=!0)}}),s}(e)}var Wu=Ja(function(e,t){return li(e)-li(t)});var Gu=function(){function e(){this.nameMap={}}return e.prototype.rename=function(e,t){this.nameMap[e]=t},e.prototype.has=function(e){return void 0!==this.nameMap[e]},e.prototype.get=function(e){for(;this.nameMap[e]&&e!==this.nameMap[e];)e=this.nameMap[e];return e},e}();function Bu(e){return e&&"unit"===e.type}function Yu(e){return e&&"facet"===e.type}function Vu(e){return e&&"repeat"===e.type}function Xu(e){return e&&"concat"===e.type}function Qu(e){return e&&"layer"===e.type}var Ku=function(){function e(e,t,n,r,i,o){var a,u,s,c,l,f,d,p,h=this;this.children=[],this.correctDataNames=function(e){return e.from&&e.from.data&&(e.from.data=h.lookupDataSource(e.from.data)),e.from&&e.from.facet&&e.from.facet.data&&(e.from.facet.data=h.lookupDataSource(e.from.facet.data)),e},this.parent=t,this.config=r,this.repeater=i,this.name=e.name||n,this.title=m(e.title)?{text:e.title}:e.title,this.scaleNameMap=t?t.scaleNameMap:new Gu,this.projectionNameMap=t?t.projectionNameMap:new Gu,this.layoutSizeNameMap=t?t.layoutSizeNameMap:new Gu,this.data=e.data,this.description=e.description,this.transforms=Zs(e.transform||[]),this.layout=$i(e)||eo(e)?void 0:(u=(a=e||{}).align,s=void 0===u?void 0:u,c=a.center,l=void 0===c?void 0:c,f=a.bounds,d=void 0===f?void 0:f,p=a.spacing,{align:s,bounds:d,center:l,spacing:void 0===p?void 0:p}),this.component={data:{sources:t?t.component.data.sources:{},outputNodes:t?t.component.data.outputNodes:{},outputNodeRefCounts:t?t.component.data.outputNodeRefCounts:{},isFaceted:Zi(e)||t&&t.component.data.isFaceted&&!e.data},layoutSize:new Xa,layoutHeaders:{row:{},column:{}},mark:null,resolve:I({scale:{},axis:{},legend:{}},o||{}),selection:null,scales:null,projection:null,axes:{},legends:{}}}return Object.defineProperty(e.prototype,"width",{get:function(){return this.getSizeSignalRef("width")},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"height",{get:function(){return this.getSizeSignalRef("height")},enumerable:!0,configurable:!0}),e.prototype.initSize=function(e){var t=e.width,n=e.height;t&&this.component.layoutSize.set("width",t,!0),n&&this.component.layoutSize.set("height",n,!0)},e.prototype.parse=function(){this.parseScale(),this.parseLayoutSize(),this.renameTopLevelLayoutSize(),this.parseSelection(),this.parseProjection(),this.parseData(),this.parseAxisAndHeader(),this.parseLegend(),this.parseMarkGroup()},e.prototype.parseScale=function(){!function(e){qu(e),Tu(e);for(var t=0,n=_i;t<n.length;t++)Pu(e,n[t]);Fu(e)}(this)},e.prototype.parseProjection=function(){du(this)},e.prototype.renameTopLevelLayoutSize=function(){"width"!==this.getName("width")&&this.renameLayoutSize(this.getName("width"),"width"),"height"!==this.getName("height")&&this.renameLayoutSize(this.getName("height"),"height")},e.prototype.parseLegend=function(){ou(this)},e.prototype.assembleGroupStyle=function(){if("unit"===this.type||"layer"===this.type)return"cell"},e.prototype.assembleLayoutSize=function(){if("unit"===this.type||"layer"===this.type)return{width:this.getSizeSignalRef("width"),height:this.getSizeSignalRef("height")}},e.prototype.assembleLayout=function(){if(this.layout){var e=this.layout,t=e.align,n=e.bounds,r=e.center,i=e.spacing,o=void 0===i?{}:i;return I({padding:x(o)?o:{row:o.row||10,column:o.column||10}},this.assembleDefaultLayout(),t?{align:t}:{},n?{bounds:n}:{},r?{center:r}:{})}},e.prototype.assembleDefaultLayout=function(){return{}},e.prototype.assembleHeaderMarks=function(){for(var e,t,n,r,i,o,a=this.component.layoutHeaders,u=[],s=0,c=Ua;s<c.length;s++){a[d=c[s]].title&&u.push((t=d,void 0,n=(e=this).component.layoutHeaders[t].title,r="row"===t?"left":void 0,i=e.config?e.config:void 0,o=e.component.layoutHeaders[t].facetFieldDef?e.component.layoutHeaders[t].facetFieldDef:void 0,{name:t+"-title",type:"group",role:t+"-title",title:I({text:n,offset:10,orient:r,style:"guide-title"},qa(i,o,Yo,Go))}))}for(var l=0,f=Ua;l<f.length;l++){var d=f[l];u=u.concat(Ma(this,d))}return u},e.prototype.assembleAxes=function(){return e=this.component.axes,t=this.config,n=e.x,r=void 0===n?[]:n,i=e.y,o=void 0===i?[]:i,r.map(function(e){return Wo(e,"main",t)}).concat(r.map(function(e){return Wo(e,"grid",t)}),o.map(function(e){return Wo(e,"main",t)}),o.map(function(e){return Wo(e,"grid",t)})).filter(function(e){return e});var e,t,n,r,i,o},e.prototype.assembleLegends=function(){return uu(this)},e.prototype.assembleProjections=function(){return su(this)},e.prototype.assembleTitle=function(){var e=I({},Fi(this.config.title).nonMark,this.title);if(e.text)return X(["unit","layer"],this.type)||(e.anchor&&"start"!==e.anchor&&hn(en.cannotSetTitleAnchor(this.type)),e.anchor="start"),0<ie(e).length?e:void 0},e.prototype.assembleGroup=function(e){void 0===e&&(e=[]);var t={};0<(e=e.concat(this.assembleSelectionSignals())).length&&(t.signals=e);var n=this.assembleLayout();n&&(t.layout=n),t.marks=[].concat(this.assembleHeaderMarks(),this.assembleMarks());var r=!this.parent||Yu(this.parent)?function n(e){return Qu(e)||Xu(e)||Vu(e)?e.children.reduce(function(e,t){return e.concat(n(t))},zu(e)):zu(e)}(this):[];0<r.length&&(t.scales=r);var i=this.assembleAxes();0<i.length&&(t.axes=i);var o=this.assembleLegends();return 0<o.length&&(t.legends=o),t},e.prototype.hasDescendantWithFieldOnChannel=function(e){for(var t=0,n=this.children;t<n.length;t++){var r=n[t];if(Bu(r)){if(r.channelHasField(e))return!0}else if(r.hasDescendantWithFieldOnChannel(e))return!0}return!1},e.prototype.getName=function(e){return ce((this.name?this.name+"_":"")+e)},e.prototype.requestDataName=function(e){var t=this.getName(e),n=this.component.data.outputNodeRefCounts;return n[t]=(n[t]||0)+1,t},e.prototype.getSizeSignalRef=function(e){if(Yu(this.parent)){var t="width"===e?"x":"y",n=this.component.scales[t];if(n&&!n.merged){var r=n.get("type"),i=n.get("range");if(yi(r)&&Mo(i)){var o=n.get("name"),a=Du(Iu(this,t));return a?{signal:Ya(o,n,lr({aggregate:"distinct",field:a},{expr:"datum"}))}:(hn("Unknown field for ${channel}.  Cannot calculate view size."),null)}}}return{signal:this.layoutSizeNameMap.get(this.getName(e))}},e.prototype.lookupDataSource=function(e){var t=this.component.data.outputNodes[e];return t?t.getSource():e},e.prototype.getSizeName=function(e){return this.layoutSizeNameMap.get(e)},e.prototype.renameLayoutSize=function(e,t){this.layoutSizeNameMap.rename(e,t)},e.prototype.renameScale=function(e,t){this.scaleNameMap.rename(e,t)},e.prototype.renameProjection=function(e,t){this.projectionNameMap.rename(e,t)},e.prototype.scaleName=function(e,t){return t?this.getName(e):pt(e)&&wt(e)&&this.component.scales[e]||this.scaleNameMap.has(this.getName(e))?this.scaleNameMap.get(this.getName(e)):void 0},e.prototype.projectionName=function(e){return e?this.getName("projection"):this.component.projection&&!this.component.projection.merged||this.projectionNameMap.has(this.getName("projection"))?this.projectionNameMap.get(this.getName("projection")):void 0},e.prototype.getScaleComponent=function(e){if(!this.component.scales)throw new Error("getScaleComponent cannot be called before parseScale().  Make sure you have called parseScale or use parseUnitModelWithScale().");var t=this.component.scales[e];return t&&!t.merged?t:this.parent?this.parent.getScaleComponent(e):void 0},e.prototype.getSelectionComponent=function(e,t){var n=this.component.selection[e];if(!n&&this.parent&&(n=this.parent.getSelectionComponent(e,t)),!n)throw new Error(en.selectionNotFound(t));return n},e}(),Ju=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return h(t,e),t.prototype.vgField=function(e,t){void 0===t&&(t={});var n=this.fieldDef(e);if(n)return lr(n,t)},t.prototype.reduceFieldDef=function(i,e,t){return Pr(this.getMapping(),function(e,t,n){var r=Er(t);return r?i(e,r,n):e},e,t)},t.prototype.forEachFieldDef=function(r,e){Ur(this.getMapping(),function(e,t){var n=Er(e);n&&r(n,t)},e)},t}(Ku),Zu={has:function(e){return"interval"===e.type&&"global"===e.resolve&&e.bind&&"scales"===e.bind},parse:function(i,e,o){var a=o.scales=[];o.project.forEach(function(e){var t=e.channel,n=i.getScaleComponent(t),r=n?n.get("type"):void 0;n&&xi(r)&&!bi(r)?(n.set("domainRaw",{signal:As(o,t,"data")},!0),a.push(t),i.repeater&&i.repeater.row===i.repeater.column&&i.getScaleComponent(t===Ue?Pe:Ue).set("domainRaw",{signal:As(o,t,"data")},!0)):hn(en.SCALE_BINDINGS_CONTINUOUS)})},topLevelSignals:function(e,n,r){if(!e.parent)return r;var t=n.scales.filter(function(t){return!r.filter(function(e){return e.name===As(n,t,"data")}).length});return r.concat(t.map(function(e){return{name:As(n,e,"data")}}))},signals:function(e,n,r){return e.parent&&n.scales.forEach(function(t){var e=r.filter(function(e){return e.name===As(n,t,"data")})[0];e.push="outer",delete e.value,delete e.update}),r}};function $u(e,t){return"domain("+N(e.scaleName(t))+")"}var es="_brush",ts="_scale_trigger",ns={predicate:"vlInterval",scaleDomain:"vlIntervalDomain",signals:function(b,x){var e=x.name,t=Zu.has(x),S=[],E=[],w=[],k=[];if(x.translate&&!t){var r="!event.item || event.item.mark.name !== "+N(e+es);rs(x,function(e,t){var n=t.between[0].filter||(t.between[0].filter=[]);n.indexOf(r)<0&&n.push(r)})}return x.project.forEach(function(e){var t=e.channel;if(t===Ue||t===Pe){var n,r,i,o,a,u,s,c,l,f,d,p,h=(n=b,o=As(r=x,i=t,"visual"),a=As(r,i,"data"),u=Zu.has(r),s=N(n.scaleName(i)),c=n.getScaleComponent(i),l=c?c.get("type"):void 0,f=n.getSizeSignalRef(i===Ue?"width":"height").signal,d=i+"(unit)",(p=rs(r,function(e,t){return e.concat({events:t.between[0],update:"["+d+", "+d+"]"},{events:t,update:"["+o+"[0], clamp("+d+", 0, "+f+")]"})})).push({events:{signal:r.name+ts},update:xi(l)&&!bi(l)?"[scale("+s+", "+a+"[0]), scale("+s+", "+a+"[1])]":"[0, 0]"}),u?[{name:a,on:[]}]:[{name:o,value:[],on:p},{name:a,on:[{events:{signal:o},update:o+"[0] === "+o+"[1] ? null : invert("+s+", "+o+")"}]}]),m=As(x,t,"data"),g=As(x,t,"visual"),v=N(b.scaleName(t)),y=xi(b.getScaleComponent(t).get("type"))?"+":"";S.push.apply(S,h),w.push(m),E.push("{encoding: "+N(t)+", field: "+N(e.field)+", extent: "+m+"}"),k.push({scaleName:b.scaleName(t),expr:"(!isArray("+m+") || ("+y+"invert("+v+", "+g+")[0] === "+y+m+"[0] && "+y+"invert("+v+", "+g+")[1] === "+y+m+"[1]))"})}else hn("Interval selections only support x and y encoding channels.")}),t||S.push({name:e+ts,update:k.map(function(e){return e.expr}).join(" && ")+" ? "+(e+ts)+" : {}"}),S.concat({name:e+Ss,on:[{events:w.map(function(e){return{signal:e}}),update:w.join(" && ")+" ? {unit: "+Ts(b)+", intervals: ["+E.join(", ")+"]} : null"}]})},modifyExpr:function(e,t){return t.name+Ss+", "+("global"===t.resolve?"true":"{unit: "+Ts(e)+"}")},marks:function(e,t,n){var r=t.name,i=Ds(t),o=i.xi,a=i.yi,u="data("+N(t.name+xs)+")";if(Zu.has(t))return n;var s={x:null!==o?{signal:r+"_x[0]"}:{value:0},y:null!==a?{signal:r+"_y[0]"}:{value:0},x2:null!==o?{signal:r+"_x[1]"}:{field:{group:"width"}},y2:null!==a?{signal:r+"_y[1]"}:{field:{group:"height"}}};if("global"===t.resolve)for(var c=0,l=ie(s);c<l.length;c++){var f=l[c];s[f]=[I({test:u+".length && "+u+"[0].unit === "+Ts(e)},s[f]),{value:0}]}var d=t.mark,p=d.fill,h=d.fillOpacity,m=z(d,["fill","fillOpacity"]),g=ie(m).reduce(function(e,t){return e[t]=[{test:[null!==o&&r+"_x[0] !== "+r+"_x[1]",null!=a&&r+"_y[0] !== "+r+"_y[1]"].filter(function(e){return e}).join(" && "),value:m[t]},{value:null}],e},{});return[{name:r+es+"_bg",type:"rect",clip:!0,encode:{enter:{fill:{value:p},fillOpacity:{value:h}},update:s}}].concat(n,{name:r+es,type:"rect",clip:!0,encode:{enter:{fill:{value:"transparent"}},update:I({},s,g)}})}};function rs(e,n){return e.events.reduce(function(e,t){return t.between?n(e,t):(hn(t+" is not an ordered event stream for interval selections"),e)},[])}var is="voronoi",os={has:function(e){return"interval"!==e.type&&e.nearest},marks:function(r,e,t){var n=Ds(e),i=n.x,o=n.y,a=r.mark;if(Vt(a))return hn(en.nearestNotSupportForContinuous(a)),t;var u={name:r.getName(is),type:"path",from:{data:r.getName("marks")},encode:{enter:{fill:{value:"transparent"},strokeWidth:{value:.35},stroke:{value:"transparent"},isVoronoi:{value:!0}}},transform:[{type:"voronoi",x:{expr:i||!i&&!o?"datum.datum.x || 0":"0"},y:{expr:o||!i&&!o?"datum.datum.y || 0":"0"},size:[r.getSizeSignalRef("width"),r.getSizeSignalRef("height")]}]},s=0,c=!1;return t.forEach(function(e,t){var n=e.name||"";n===r.component.mark[0].name?s=t:0<=n.indexOf(is)&&(c=!0)}),c||t.splice(s+1,0,u),t}};function as(r,e){var t=e.project,i=os.has(e)?"(item().isVoronoi ? datum.datum : datum)":"datum",o=[],n=t.map(function(e){return N(e.channel)}).filter(function(e){return e}).join(", "),a=t.map(function(e){return N(e.field)}).join(", "),u=t.map(function(e){var t=e.channel,n=r.fieldDef(t);return n&&n.bin?(o.push(e.field),"["+pe(r.vgField(t,{}),i)+", "+pe(r.vgField(t,{binSuffix:"end"}),i)+"]"):""+pe(e.field,i)}).join(", ");return[{name:e.name+Ss,value:{},on:[{events:e.events,update:"datum && item().mark.marktype !== 'group' ? {unit: "+Ts(r)+", encodings: ["+n+"], fields: ["+a+"], values: ["+u+"]"+(o.length?", "+o.map(function(e){return N("bin_"+e)+": 1"}).join(", "):"")+"} : null",force:!0}]}]}var us={predicate:"vlMulti",scaleDomain:"vlMultiDomain",signals:as,modifyExpr:function(e,t){return t.name+Ss+", "+("global"===t.resolve?"null":"{unit: "+Ts(e)+"}")}},ss={predicate:"vlSingle",scaleDomain:"vlSingleDomain",signals:as,topLevelSignals:function(e,t,n){var r=n.filter(function(e){return e.name===t.name}),i="data("+N(t.name+xs)+")",o=i+"[0].values";return r.length?n:n.concat({name:t.name,update:i+".length && {"+t.project.map(function(e,t){return e.field+": "+o+"["+t+"]"}).join(", ")+"}"})},modifyExpr:function(e,t){return t.name+Ss+", "+("global"===t.resolve?"true":"{unit: "+Ts(e)+"}")}},cs="_toggle",ls="_translate_anchor",fs="_translate_delta",ds={has:function(e){return"interval"===e.type&&e.translate},signals:function(e,t,n){var r=t.name,i=Zu.has(t),o=r+ls,a=Ds(t),u=a.x,s=a.y,c=Eo(t.translate,"scope");return i||(c=c.map(function(e){return e.between[0].markname=r+es,e})),n.push({name:o,value:{},on:[{events:c.map(function(e){return e.between[0]}),update:"{x: x(unit), y: y(unit)"+(null!==u?", extent_x: "+(i?$u(e,Ue):"slice("+As(t,"x","visual")+")"):"")+(null!==s?", extent_y: "+(i?$u(e,Pe):"slice("+As(t,"y","visual")+")"):"")+"}"}]},{name:r+fs,value:{},on:[{events:c,update:"{x: "+o+".x - x(unit), y: "+o+".y - y(unit)}"}]}),null!==u&&ps(e,t,Ue,"width",n),null!==s&&ps(e,t,Pe,"height",n),n}};function ps(e,t,n,r,i){var o=t.name,a=Zu.has(t),u=i.filter(function(e){return e.name===As(t,n,a?"data":"visual")})[0],s=o+ls,c=o+fs,l=e.getSizeSignalRef(r).signal,f=e.getScaleComponent(n),d=f.get("type"),p=s+".extent_"+n,h=(a?"log"===d?"panLog":"pow"===d?"panPow":"panLinear":"panLinear")+"("+p+", "+(""+(a&&n===Ue?"-":"")+c+"."+n+" / "+(a?""+l:"span("+p+")"))+(a&&"pow"===d?", "+(f.get("exponent")||1):"")+")";u.on.push({events:{signal:c},update:a?h:"clampRange("+h+", 0, "+l+")"})}var hs="_zoom_anchor",ms="_zoom_delta",gs={has:function(e){return"interval"===e.type&&e.zoom},signals:function(e,t,n){var r=t.name,i=Zu.has(t),o=r+ms,a=Ds(t),u=a.x,s=a.y,c=N(e.scaleName(Ue)),l=N(e.scaleName(Pe)),f=Eo(t.zoom,"scope");return i||(f=f.map(function(e){return e.markname=r+es,e})),n.push({name:r+hs,on:[{events:f,update:i?"{"+[c?"x: invert("+c+", x(unit))":"",l?"y: invert("+l+", y(unit))":""].filter(function(e){return!!e}).join(", ")+"}":"{x: x(unit), y: y(unit)}"}]},{name:o,on:[{events:f,force:!0,update:"pow(1.001, event.deltaY * pow(16, event.deltaMode))"}]}),null!==u&&vs(e,t,"x","width",n),null!==s&&vs(e,t,"y","height",n),n}};function vs(e,t,n,r,i){var o=t.name,a=Zu.has(t),u=i.filter(function(e){return e.name===As(t,n,a?"data":"visual")})[0],s=e.getSizeSignalRef(r).signal,c=e.getScaleComponent(n),l=c.get("type"),f=a?$u(e,n):u.name,d=o+ms,p=(a?"log"===l?"zoomLog":"pow"===l?"zoomPow":"zoomLinear":"zoomLinear")+"("+f+", "+(""+o+hs+"."+n)+", "+d+(a&&"pow"===l?", "+(c.get("exponent")||1):"")+")";u.on.push({events:{signal:d},update:a?p:"clampRange("+p+", 0, "+s+")"})}var ys={project:{has:function(e){var t=e;return void 0!==t.fields||void 0!==t.encodings},parse:function(r,e,t){var i={},o={};(e.fields||[]).forEach(function(e){return i[e]=null}),(e.encodings||[]).forEach(function(e){var t=r.fieldDef(e);if(t)if(t.timeUnit){var n=r.vgField(e);i[n]=e,o[n]={as:n,field:t.field,timeUnit:t.timeUnit}}else i[t.field]=e;else hn(en.cannotProjectOnChannelWithoutField(e))});var n=t.project||(t.project=[]);for(var a in i)i.hasOwnProperty(a)&&n.push({field:a,channel:i[a]});var u=t.fields||(t.fields={});n.filter(function(e){return e.channel}).forEach(function(e){return u[e.channel]=e.field}),ie(o).length&&(t.timeUnit=new yu(null,o))}},toggle:{has:function(e){return"multi"===e.type&&e.toggle},signals:function(e,t,n){return n.concat({name:t.name+cs,value:!1,on:[{events:t.events,update:t.toggle}]})},modifyExpr:function(e,t,n){var r=t.name+Ss,i=t.name+cs;return i+" ? null : "+r+", "+("global"===t.resolve?i+" ? null : true, ":i+" ? null : {unit: "+Ts(e)+"}, ")+i+" ? "+r+" : null"}},scales:Zu,translate:ds,zoom:gs,inputs:{has:function(e){return"single"===e.type&&"global"===e.resolve&&e.bind&&"scales"!==e.bind},topLevelSignals:function(e,n,r){var i=n.name,t=n.project,o=n.bind,a=os.has(n)?"(item().isVoronoi ? datum.datum : datum)":"datum";return t.forEach(function(e){var t=ce(i+"_"+e.field);r.filter(function(e){return e.name===t}).length||r.unshift({name:t,value:"",on:[{events:n.events,update:"datum && item().mark.marktype !== 'group' ? "+pe(e.field,a)+" : null"}],bind:o[e.field]||o[e.channel]||o})}),r},signals:function(e,t,n){var r=t.name,i=t.project,o=n.filter(function(e){return e.name===r+Ss})[0],a=i.map(function(e){return N(e.field)}).join(", "),u=i.map(function(e){return ce(r+"_"+e.field)});return u.length&&(o.update=u.join(" && ")+" ? {fields: ["+a+"], values: ["+u.join(", ")+"]} : null"),delete o.value,delete o.on,n}},nearest:os};function bs(e,t){for(var n in ys)ys[n].has(e)&&t(ys[n])}var xs="_store",Ss="_tuple",Es="_selection_domain_";function ws(n,r){return Ns(n,function(t,e){r=e.marks?e.marks(n,t,r):r,bs(t,function(e){e.marks&&(r=e.marks(n,t,r))})}),r}function ks(a,e,u){var s=[];var t=le(e,function(e){var t=ce(e),n=a.getSelectionComponent(t,e),r=N(t+xs);if(n.timeUnit){var i=u||a.component.data.raw,o=n.timeUnit.clone();i.parent?o.insertAsParentOf(i):i.parent=o}return"none"!==n.empty&&s.push(r),Os(n.type).predicate+"("+r+", datum"+("global"===n.resolve?")":", "+N(n.resolve)+")")});return(s.length?"!("+s.map(function(e){return"length(data("+e+"))"}).join(" || ")+") || ":"")+"("+t+")"}function Ns(e,t){var n=e.component.selection;for(var r in n)if(n.hasOwnProperty(r)){var i=n[r];t(i,Os(i.type))}}function Os(e){switch(e){case"single":return ss;case"multi":return us;case"interval":return ns}return null}function _s(e){for(var t=e.parent;t&&!Yu(t);)t=t.parent;return t}function Ts(e){var t=N(e.name),n=_s(e);return n&&(t+=(n.facet.row?" + '_' + ("+pe(n.vgField("row"),"facet")+")":"")+(n.facet.column?" + '_' + ("+pe(n.vgField("column"),"facet")+")":"")),t}function Cs(e){var t=!1;return Ns(e,function(e){t=t||e.project.some(function(e){return e.field===Li})}),t}function As(e,t,n){var r=e._signalNames||(e._signalNames={});if(r[t]&&r[t][n])return r[t][n];r[t]=r[t]||{};for(var i=ce(e.name+"_"+("visual"===n?t:e.fields[t])),o=i,a=1;r[o];)o=i+"_"+a++;return r[o]=r[t][n]=o}function Ds(e){var n=null,r=null,i=null,o=null;return e.project.forEach(function(e,t){e.channel===Ue?(n=e,r=t):e.channel===Pe&&(i=e,o=t)}),{x:n,xi:r,y:i,yi:o}}function Is(e){return e&&!!e.field&&void 0!==e.equal}function zs(e){return e&&!!e.field&&void 0!==e.lt}function Rs(e){return e&&!!e.field&&void 0!==e.lte}function Ls(e){return e&&!!e.field&&void 0!==e.gt}function Fs(e){return e&&!!e.field&&void 0!==e.gte}function js(e){return!!(e&&e.field&&S(e.range)&&2===e.range.length)}function Us(e){return e&&!!e.field&&(S(e.oneOf)||S(e.in))}function Ps(e){return Us(e)||Is(e)||js(e)||zs(e)||Ls(e)||Rs(e)||Fs(e)}function Ms(n,e,r){return le(e,function(e){return m(e)?e:(t=e)&&t.selection?ks(n,e.selection,r):qs(e);var t})}function Hs(e,t){return Ar(e,{timeUnit:t,time:!0})}function qs(e,t){void 0===t&&(t=!0);var n,r,i=e.field,o=e.timeUnit,a=o?"time("+Mn(o,i)+")":lr(e,{expr:"datum"});if(Is(e))return a+"==="+Hs(e.equal,o);if(zs(e))return a+"<"+Hs(c=e.lt,o);if(Ls(e))return a+">"+Hs(s=e.gt,o);if(Rs(e))return a+"<="+Hs(c=e.lte,o);if(Fs(e))return a+">="+Hs(s=e.gte,o);if(Us(e)){var u=e.oneOf;return u=u||e.in,"indexof(["+(n=u,r=o,n.map(function(e){return Hs(e,r)})).join(",")+"], "+a+") !== -1"}if(js(e)){var s=e.range[0],c=e.range[1];if(null!==s&&null!==c&&t)return"inrange("+a+", ["+Hs(s,o)+", "+Hs(c,o)+"])";var l=[];return null!==s&&l.push(a+" >= "+Hs(s,o)),null!==c&&l.push(a+" <= "+Hs(c,o)),0<l.length?l.join(" && "):"true"}throw new Error("Invalid field predicate: "+JSON.stringify(e))}function Ws(e){return Ps(e)&&e.timeUnit?I({},e,{timeUnit:qn(e.timeUnit)}):e}function Gs(e){return void 0!==e.filter}function Bs(e){return void 0!==e.lookup}function Ys(e){return void 0!==e.window}function Vs(e){return void 0!==e.calculate}function Xs(e){return!!e.bin}function Qs(e){return void 0!==e.timeUnit}function Ks(e){return void 0!==e.aggregate}function Js(e){return void 0!==e.stack}function Zs(e){return e.map(function(e){return Gs(e)?{filter:function t(e,n){return W(e)?{not:t(e.not,n)}:q(e)?{and:e.and.map(function(e){return t(e,n)})}:H(e)?{or:e.or.map(function(e){return t(e,n)})}:n(e)}(e.filter,Ws)}:e})}var $s=Object.freeze({isFilter:Gs,isLookup:Bs,isWindow:Ys,isCalculate:Vs,isBin:Xs,isTimeUnit:Qs,isAggregate:Ks,isStack:Js,normalizeTransform:Zs});function ec(e,t){var n;n="as"in e?m(e.as)?[e.as,e.as+"_end"]:[e.as[0],e.as[1]]:[lr(e,{}),lr(e,{binSuffix:"end"})];var r,i,o,a,u=Nr(e.bin,void 0)||{},s=(r=u,i=e.field,Tt(r)+"_"+i),c=(a=s,{signal:(o=t).getName(a+"_bins"),extentSignal:o.getName(a+"_extent")}),l=c.signal,f=c.extentSignal;return{key:s,binComponent:I({bin:u,field:e.field,as:n},l?{signal:l}:{},f?{extentSignal:f}:{})}}var tc=function(r){function u(e,t){var n=r.call(this,e)||this;return n.bins=t,n}return h(u,r),u.prototype.clone=function(){return new u(null,ue(this.bins))},u.makeFromEncoding=function(e,a){var t=a.reduceFieldDef(function(e,t,n){if(t.bin){var r=ec(t,a),i=r.key,o=r.binComponent;e[i]=I({},o,e[i],function(e,t,n,r){if(Ia(t,n)){var i=Bu(e)&&(e.axis(n)||e.legend(n))||{},o=lr(t,{expr:"datum"}),a=lr(t,{expr:"datum",binSuffix:"end"});return{formulaAs:lr(t,{binSuffix:"range"}),formula:Oa(o,a,i.format,r)}}return{}}(a,t,n,a.config))}return e},{});return 0===ie(t).length?null:new u(e,t)},u.makeFromTransform=function(e,t,n){var r,i=ec(t,n),o=i.key,a=i.binComponent;return new u(e,((r={})[o]=a,r))},u.prototype.merge=function(e){this.bins=I({},this.bins,e.bins),e.remove()},u.prototype.producedFields=function(){var t={};return oe(this.bins).forEach(function(e){e.as.forEach(function(e){return t[e]=!0})}),t},u.prototype.dependentFields=function(){var t={};return oe(this.bins).forEach(function(e){t[e.field]=!0}),t},u.prototype.assemble=function(){return Z(oe(this.bins).map(function(e){var t=[],n=I({type:"bin",field:e.field,as:e.as,signal:e.signal},e.bin);return!e.bin.extent&&e.extentSignal&&(t.push({type:"extent",field:e.field,signal:e.extentSignal}),n.extent={signal:e.extentSignal}),t.push(n),e.formula&&t.push({type:"formula",expr:e.formula,as:e.formulaAs}),t}))},u}(Ra),nc=function(i){function e(e,t,n){var r=i.call(this,e)||this;return r.model=t,r.filter=n,r.expr=Ms(r.model,r.filter,r),r}return h(e,i),e.prototype.clone=function(){return new e(null,this.model,ue(this.filter))},e.prototype.assemble=function(){return{type:"filter",expr:this.expr}},e}(Ra),rc=function(o){function a(e,t,n,r){var i=o.call(this,e)||this;return i.fields=t,i.geojson=n,i.signal=r,i}return h(a,o),a.prototype.clone=function(){return new a(null,ue(this.fields),this.geojson,this.signal)},a.parseAll=function(n,r){var i=0;if([[Ge,qe],[Be,We]].forEach(function(e){var t=e.map(function(e){return r.channelHasField(e)?r.fieldDef(e).field:void 0});(t[0]||t[1])&&(n=new a(n,t,null,r.getName("geojson_"+i++)))}),r.channelHasField(Xe)){var e=r.fieldDef(Xe);e.type===Jn&&(n=new a(n,null,e.field,r.getName("geojson_"+i++)))}return n},a.prototype.assemble=function(){return I({type:"geojson"},this.fields?{fields:this.fields}:{},this.geojson?{geojson:this.geojson}:{},{signal:this.signal})},a}(Ra),ic=function(o){function a(e,t,n,r){var i=o.call(this,e)||this;return i.projection=t,i.fields=n,i.as=r,i}return h(a,o),a.prototype.clone=function(){return new a(null,this.projection,ue(this.fields),ue(this.as))},a.parseAll=function(r,i){return i.projectionName()&&[[Ge,qe],[Be,We]].forEach(function(e){var t=e.map(function(e){return i.channelHasField(e)?i.fieldDef(e).field:void 0}),n=e[0]===Be?"2":"";(t[0]||t[1])&&(r=new a(r,i.projectionName(),t,[i.getName("x"+n),i.getName("y"+n)]))}),r},a.prototype.assemble=function(){return{type:"geopoint",projection:this.projection,fields:this.fields,as:this.as}},a}(Ra),oc=function(t){function e(e){return t.call(this,e)||this}return h(e,t),e.prototype.clone=function(){return new e(null)},e.prototype.producedFields=function(){var e;return(e={})[Li]=!0,e},e.prototype.assemble=function(){return{type:"identifier",as:Li}},e}(Ra),ac=function(i){function e(e,t,n){void 0===e&&(e={}),void 0===t&&(t={}),void 0===n&&(n=!1);var r=i.call(this,e,t)||this;return r.explicit=e,r.implicit=t,r.parseNothing=n,r}return h(e,i),e.prototype.clone=function(){var e=i.prototype.clone.call(this);return e.parseNothing=this.parseNothing,e},e}(Xa),uc=function(i){function c(e,t,n){var r=i.call(this,e)||this;return r.transform=t,r.secondary=n,r}return h(c,i),c.make=function(e,t,n,r){var i=t.component.data.sources,o=new vu(n.from.data),a=i[o.hash()];a||(a=i[o.hash()]=o);var u=t.getName("lookup_"+r),s=new La(a,u,"lookup",t.component.data.outputNodeRefCounts);return new c(e,n,(t.component.data.outputNodes[u]=s).getSource())},c.prototype.producedFields=function(){return f(this.transform.from.fields||(this.transform.as instanceof Array?this.transform.as:[this.transform.as]))},c.prototype.assemble=function(){var e;if(this.transform.from.fields)e=I({values:this.transform.from.fields},this.transform.as?{as:this.transform.as instanceof Array?this.transform.as:[this.transform.as]}:{});else{var t=this.transform.as;m(t)||(hn(en.NO_FIELDS_NEEDS_AS),t="_lookup"),e={as:[t]}}return I({type:"lookup",from:this.secondary,key:this.transform.from.key,fields:[this.transform.lookup]},e,this.transform.default?{default:this.transform.default}:{})},c}(Ra);function sc(i){var o=0;return function t(e,n){e instanceof vu&&(go(e.data)||(i.push(n),n={name:null,source:n.name,transform:[]}));if(e instanceof gu&&(e.parent instanceof vu&&!n.source?(n.format=I({},n.format||{},{parse:e.assembleFormatParse()}),n.transform=n.transform.concat(e.assembleTransforms(!0))):n.transform=n.transform.concat(e.assembleTransforms())),e instanceof hu)return n.name||(n.name="data_"+o++),!n.source||0<n.transform.length?(i.push(n),e.data=n.name):e.data=n.source,void e.assemble().forEach(function(e){return i.push(e)});(e instanceof nc||e instanceof Fa||e instanceof ic||e instanceof rc||e instanceof pu||e instanceof uc||e instanceof xc||e instanceof oc)&&n.transform.push(e.assemble()),(e instanceof mu||e instanceof tc||e instanceof yu||e instanceof wu)&&(n.transform=n.transform.concat(e.assemble())),e instanceof pu&&(n.name||(n.name="data_"+o++)),e instanceof La&&(n.source&&0===n.transform.length?e.setSource(n.source):e.parent instanceof La?e.setSource(n.name):(n.name||(n.name="data_"+o++),e.setSource(n.name),1===e.numChildren()&&(i.push(n),n={name:null,source:n.name,transform:[]})));switch(e.numChildren()){case 0:e instanceof La&&(!n.source||0<n.transform.length)&&i.push(n);break;case 1:t(e.children[0],n);break;default:n.name||(n.name="data_"+o++);var r=n.name;!n.source||0<n.transform.length?i.push(n):r=n.source,e.children.forEach(function(e){t(e,{name:null,source:r,transform:[]})})}}}function cc(e){fc(e);var t=e.component.layoutSize;t.setWithExplicit("width",dc(e,"width")),t.setWithExplicit("height",dc(e,"height"))}var lc=cc;function fc(e){for(var t=0,n=e.children;t<n.length;t++){n[t].parseLayoutSize()}}function dc(e,t){for(var n,r="width"===t?"x":"y",i=e.component.resolve,o=0,a=e.children;o<a.length;o++){var u=(f=a[o]).component.layoutSize.getWithExplicit(t),s=i.scale[r];if("independent"===s&&"range-step"===u.value){n=void 0;break}if(n){if("independent"===s&&n.value!==u.value){n=void 0;break}n=$a(n,u,t,"")}else n=u}if(n){for(var c=0,l=e.children;c<l.length;c++){var f=l[c];e.renameLayoutSize(f.getName(t),e.getName(t)),f.component.layoutSize.set(t,"merged",!1)}return n}return{explicit:!1,value:void 0}}function pc(e,t){var n="width"===t?"x":"y",r=e.config,i=e.getScaleComponent(n);if(i){var o=i.get("type"),a=i.get("range");return yi(o)&&Mo(a)?"range-step":r.view[t]}return e.hasProjection?r.view[t]:"width"===t&&"text"===e.mark?r.scale.textXRangeStep:r.scale.rangeStep||Ei.rangeStep}function hc(e,t){return tr(e.field)?e.field.repeat in t?I({},e,{field:t[e.field.repeat]}):void hn(en.noSuchRepeatedValue(e.field.repeat)):e}function mc(e,t){if(void 0!==(e=hc(e,t))){if(e.sort&&Qo(e.sort)){var n=hc(e.sort,t);e=I({},e,n?{sort:n}:{})}return e}}function gc(e,t){if(!ar(e)){if(ir(e)){if(n=mc(e.condition,t))return I({},e,{condition:n});e.condition;return z(e,["condition"])}return e}var n;return(n=mc(e,t))?n:rr(e)?{condition:e.condition}:void 0}function vc(e,t){var n={};for(var r in e)if(e.hasOwnProperty(r)){var i=e[r];if(S(i))n[r]=i.map(function(e){return gc(e,t)}).filter(function(e){return e});else{var o=gc(i,t);o&&(n[r]=o)}}return n}function yc(e,t,n){return lr(t,{expr:n,suffix:"by_"+lr(e)})}var bc=function(u){function l(e,t,n,r,i){var o=u.call(this,e,t,n,i,r,e.resolve)||this;o.type="facet",o.child=qc(e.spec,o,o.getName("child"),void 0,r,i,!1),o.children=[o.child];var a=vc(e.facet,r);return o.facet=o.initFacet(a),o}return h(l,u),l.prototype.initFacet=function(e){return Pr(e,function(e,t,n){return X([Ye,Ve],n)?void 0===t.field?hn(en.emptyFieldDef(t,n)):e[n]=wr(t,n):hn(en.incompatibleChannel(n,"facet")),e},{})},l.prototype.channelHasField=function(e){return!!this.facet[e]},l.prototype.fieldDef=function(e){return this.facet[e]},l.prototype.parseData=function(){this.component.data=Sc(this),this.child.parseData()},l.prototype.parseLayoutSize=function(){fc(this)},l.prototype.parseSelection=function(){this.child.parseSelection(),this.component.selection=this.child.component.selection},l.prototype.parseMarkGroup=function(){this.child.parseMarkGroup()},l.prototype.parseAxisAndHeader=function(){this.child.parseAxisAndHeader(),this.parseHeader("column"),this.parseHeader("row"),this.mergeChildAxis("x"),this.mergeChildAxis("y")},l.prototype.parseHeader=function(e){if(this.channelHasField(e)){var t=this.facet[e],n=t.header||{},r=void 0!==t.title?t.title:void 0!==n.title?n.title:xr(t,this.config);this.child.component.layoutHeaders[e].title&&(r+=" / "+this.child.component.layoutHeaders[e].title,this.child.component.layoutHeaders[e].title=null),this.component.layoutHeaders[e]={title:r,facetFieldDef:t,header:[this.makeHeaderComponent(e,!0)]}}},l.prototype.makeHeaderComponent=function(e,t){var n="row"===e?"height":"width";return{labels:t,sizeSignal:this.child.component.layoutSize.get(n)?this.child.getSizeSignalRef(n):void 0,axes:[]}},l.prototype.mergeChildAxis=function(e){var t,n=this.child;if(n.component.axes[e]){var r=this.component,i=r.layoutHeaders,o=r.resolve;if(o.axis[e]=Va(o,e),"shared"===o.axis[e])for(var a="x"===e?"column":"row",u=i[a],s=0,c=n.component.axes[e];s<c.length;s++){var l=c[s],f="top"===(t=l.get("orient"))||"left"===t?"header":"footer";u[f]=u[f]||[this.makeHeaderComponent(a,!1)];var d=Wo(l,"main",this.config,{header:!0});u[f][0].axes.push(d),l.mainExtracted=!0}}},l.prototype.assembleSelectionTopLevelSignals=function(e){return this.child.assembleSelectionTopLevelSignals(e)},l.prototype.assembleSelectionSignals=function(){return this.child.assembleSelectionSignals(),[]},l.prototype.assembleSelectionData=function(e){return this.child.assembleSelectionData(e)},l.prototype.getHeaderLayoutMixins=function(){var a=this,u={};return["row","column"].forEach(function(o){["header","footer"].forEach(function(e){var t=a.component.layoutHeaders[o],n=t[e];if(n&&n[0]){var r="row"===o?"height":"width",i="header"===e?"headerBand":"footerBand";a.child.component.layoutSize.get(r)||(u[i]=u[i]||{},u[i][o]=.5),t.title&&(u.offset=u.offset||{},u.offset["row"===o?"rowTitle":"columnTitle"]=10)}})}),u},l.prototype.assembleDefaultLayout=function(){var e=this.channelHasField("column")?this.columnDistinctSignal():1;return I({},this.getHeaderLayoutMixins(),{columns:e,bounds:"full",align:"all"})},l.prototype.assembleLayoutSignals=function(){return this.child.assembleLayoutSignals()},l.prototype.columnDistinctSignal=function(){if(!(this.parent&&this.parent instanceof l))return{signal:"length(data('"+this.getName("column_domain")+"'))"}},l.prototype.assembleGroup=function(e){return this.parent&&this.parent instanceof l?I({},this.channelHasField("column")?{encode:{update:{columns:{field:lr(this.facet.column,{prefix:"distinct"})}}}}:{},u.prototype.assembleGroup.call(this,e)):u.prototype.assembleGroup.call(this,e)},l.prototype.getCardinalityAggregateForChild=function(){var e=[],t=[],n=[];if(this.child instanceof l){if(this.child.channelHasField("column")){var r=lr(this.child.facet.column);e.push(r),t.push("distinct"),n.push("distinct_"+r)}}else for(var i=0,o=["x","y"];i<o.length;i++){var a=o[i],u=this.child.component.scales[a];if(u&&!u.merged){var s=u.get("type"),c=u.get("range");if(yi(s)&&Mo(c))(r=Du(Iu(this.child,a)))?(e.push(r),t.push("distinct"),n.push("distinct_"+r)):hn("Unknown field for ${channel}.  Cannot calculate view size.")}}return{fields:e,ops:t,as:n}},l.prototype.assembleFacet=function(){var a=this,e=this.component.data.facetRoot,t=e.name,n=e.data,r=this.facet,u=r.row,s=r.column,i=this.getCardinalityAggregateForChild(),c=i.fields,l=i.ops,f=i.as,d=[];["row","column"].forEach(function(e){var t=a.facet[e];if(t){d.push(lr(t));var n=t.sort;if(Qo(n)){var r=n.field,i=n.op,o=yc(t,n);u&&s?(c.push(o),l.push("max")):(c.push(r),l.push(i)),f.push(o)}else if(S(n)){o=ja(t,e);c.push(o),l.push("max"),f.push(o)}}});var o=!!u&&!!s;return I({name:t,data:n,groupby:d},o||c.length?{aggregate:I({},o?{cross:o}:{},c.length?{fields:c,ops:l,as:f}:{})}:{})},l.prototype.headerSortFields=function(e){var t=this.facet[e];return t?Qo(t.sort)?[yc(t,t.sort,"datum")]:S(t.sort)?[ja(t,e,"datum")]:[lr(t,{expr:"datum"})]:[]},l.prototype.headerSortOrder=function(e){var t=this.facet[e];if(t){var n=t.sort;return[(Qo(n)?n.order:!S(n)&&n)||"ascending"]}return[]},l.prototype.assembleMarks=function(){var t,e,n,r=this.child,i=this.component.data.facetRoot,o=(t=i,n=sc(e=[]),t.children.forEach(function(e){return n(e,{source:t.name,name:null,transform:[]})}),e),a=r.assembleLayoutSize(),u=r.assembleTitle(),s=r.assembleGroupStyle();return[I({name:this.getName("cell"),type:"group"},u?{title:u}:{},s?{style:s}:{},{from:{facet:this.assembleFacet()},sort:{field:this.headerSortFields("row").concat(this.headerSortFields("column")),order:this.headerSortOrder("row").concat(this.headerSortOrder("column"))}},0<o.length?{data:o}:{},a?{encode:{update:a}}:{},r.assembleGroup())]},l.prototype.getMapping=function(){return this.facet},l}(Ju),xc=function(r){function l(e,t){var n=r.call(this,e)||this;return n.transform=t,n}return h(l,r),l.makeFromFacet=function(e,t){var n=t.row,r=t.column;if(n&&r){for(var i=null,o=0,a=[n,r];o<a.length;o++){var u=a[o];if(Qo(u.sort)){var s=u.sort,c=s.field;e=i=new l(e,{window:[{op:s.op,field:c,as:yc(u,u.sort)}],groupby:[lr(u)],frame:[null,null]})}}return i}return null},l.prototype.clone=function(){return new l(this.parent,ue(this.transform))},l.prototype.producedFields=function(){var t=this,n={};return this.transform.window.forEach(function(e){n[t.getDefaultName(e)]=!0}),n},l.prototype.getDefaultName=function(e){return e.as||lr(e)},l.prototype.assemble=function(){for(var e=[],t=[],n=[],r=[],i=0,o=this.transform.window;i<o.length;i++){var a=o[i];t.push(a.op),n.push(this.getDefaultName(a)),r.push(void 0===a.param?null:a.param),e.push(void 0===a.field?null:a.field)}var u=this.transform.frame,s=this.transform.groupby,c=[],l=[];if(void 0!==this.transform.sort)for(var f=0,d=this.transform.sort;f<d.length;f++){var p=d[f];c.push(p.field),l.push(p.order||"ascending")}var h={field:c,order:l},m=this.transform.ignorePeers,g={type:"window",params:r,as:n,ops:t,fields:e,sort:h};return void 0!==m&&(g.ignorePeers=m),void 0!==s&&(g.groupby=s),void 0!==u&&(g.frame=u),g},l}(Ra);function Sc(e){var t=function(e,t){if(e.data||!e.parent){var n=new vu(e.data),r=n.hash();return r in t?t[r]:t[r]=n}return e.parent.component.data.facetRoot?e.parent.component.data.facetRoot:e.parent.component.data.main}(e,e.component.data.sources),n=e.component.data,r=n.outputNodes,i=n.outputNodeRefCounts,o=e.parent?e.parent.component.data.ancestorParse.clone():new ac;e.data&&e.data.format&&null===e.data.format.parse&&(o.parseNothing=!0),t=gu.makeExplicit(t,e,o)||t,Cs(e)&&(Bu(e)||Qu(e))&&(t=new oc(t));var v,y,b,x,a=e.parent&&Qu(e.parent);(Bu(e)||Yu(e))&&a&&(t=tc.makeFromEncoding(t,e)||t),0<e.transforms.length&&(v=t,b=o,x=0,(y=e).transforms.forEach(function(e){if(Vs(e))v=new Fa(v,e),b.set(e.as,"derived",!1);else if(Gs(e))v=gu.makeImplicitFromFilterTransform(v,e,b)||v,v=new nc(v,y,e.filter);else if(Xs(e))for(var t=v=tc.makeFromTransform(v,e,y),n=0,r=ie(t.producedFields());n<r.length;n++){var i=r[n];b.set(i,"number",!1)}else if(Qs(e))v=yu.makeFromTransform(v,e),b.set(e.as,"date",!1);else if(Ks(e)){var o=v=pu.makeFromTransform(v,e);Cs(y)&&(v=new oc(v));for(var a=0,u=ie(o.producedFields());a<u.length;a++)i=u[a],b.set(i,"derived",!1)}else if(Bs(e))for(var s=v=uc.make(v,y,e,x++),c=0,l=ie(s.producedFields());c<l.length;c++)i=l[c],b.set(i,"derived",!1);else if(Ys(e))for(var f=v=new xc(v,e),d=0,p=ie(f.producedFields());d<p.length;d++)i=p[d],b.set(i,"derived",!1);else{if(!Js(e))return void hn(en.invalidTransformIgnored(e));for(var h=v=wu.makeFromTransform(v,e),m=0,g=ie(h.producedFields());m<g.length;m++)i=g[m],b.set(i,"derived",!1)}}),t=v),t=gu.makeImplicitFromEncoding(t,e,o)||t,Bu(e)&&(t=rc.parseAll(t,e),t=ic.parseAll(t,e)),(Bu(e)||Yu(e))&&(a||(t=tc.makeFromEncoding(t,e)||t),t=yu.makeFromEncoding(t,e)||t,t=Fa.parseAllForSortIndex(t,e));var u=e.getName(xo),s=new La(t,u,xo,i);if(t=r[u]=s,Bu(e)){var c=pu.makeFromEncoding(t,e);c&&(t=c,Cs(e)&&(t=new oc(t))),t=wu.makeFromEncoding(t,e)||t}Bu(e)&&(t=mu.make(t,e)||t);var l=e.getName(bo),f=new La(t,l,bo,i);t=r[l]=f;var d=null;if(Yu(e)){var p=e.getName("facet");t=Fa.parseAllForSortIndex(t,e),t=xc.makeFromFacet(t,e.facet)||t,d=new hu(t,e,p,f.getSource()),t=r[p]=d}return I({},e.component.data,{outputNodes:r,outputNodeRefCounts:i,raw:s,main:f,facetRoot:d,ancestorParse:o})}var Ec=function(a){function e(e,t,n,r,i,o){return a.call(this,e,t,n,r,i,o)||this}return h(e,a),e.prototype.parseData=function(){this.component.data=Sc(this),this.children.forEach(function(e){e.parseData()})},e.prototype.parseSelection=function(){var n=this;this.component.selection={};for(var e=function(t){t.parseSelection(),ie(t.component.selection).forEach(function(e){n.component.selection[e]=t.component.selection[e]})},t=0,r=this.children;t<r.length;t++){e(r[t])}},e.prototype.parseMarkGroup=function(){for(var e=0,t=this.children;e<t.length;e++){t[e].parseMarkGroup()}},e.prototype.parseAxisAndHeader=function(){for(var e=0,t=this.children;e<t.length;e++){t[e].parseAxisAndHeader()}},e.prototype.assembleSelectionTopLevelSignals=function(e){return this.children.reduce(function(e,t){return t.assembleSelectionTopLevelSignals(e)},e)},e.prototype.assembleSelectionSignals=function(){return this.children.forEach(function(e){return e.assembleSelectionSignals()}),[]},e.prototype.assembleLayoutSignals=function(){return this.children.reduce(function(e,t){return e.concat(t.assembleLayoutSignals())},Wa(this))},e.prototype.assembleSelectionData=function(e){return this.children.reduce(function(e,t){return t.assembleSelectionData(e)},e)},e.prototype.assembleMarks=function(){return this.children.map(function(e){var t=e.assembleTitle(),n=e.assembleGroupStyle(),r=e.assembleLayoutSize();return I({type:"group",name:e.getName("group")},t?{title:t}:{},n?{style:n}:{},r?{encode:{update:r}}:{},e.assembleGroup())})},e}(Ku),wc=function(a){function e(e,t,n,r,i){var o=a.call(this,e,t,n,i,r,e.resolve)||this;return o.type="concat",e.resolve&&e.resolve.axis&&("shared"===e.resolve.axis.x||"shared"===e.resolve.axis.y)&&hn(en.CONCAT_CANNOT_SHARE_AXIS),o.isVConcat=ro(e),o.children=(ro(e)?e.vconcat:e.hconcat).map(function(e,t){return qc(e,o,o.getName("concat_"+t),void 0,r,i,!1)}),o}return h(e,a),e.prototype.parseLayoutSize=function(){!function(e){fc(e);var t=e.component.layoutSize,n=e.isVConcat?"width":"height";t.setWithExplicit(n,dc(e,n))}(this)},e.prototype.parseAxisGroup=function(){return null},e.prototype.assembleDefaultLayout=function(){return I({},this.isVConcat?{columns:1}:{},{bounds:"full",align:"each"})},e}(Ec);var kc=function(i){function e(e,t,n){void 0===e&&(e={}),void 0===t&&(t={}),void 0===n&&(n=!1);var r=i.call(this)||this;return r.explicit=e,r.implicit=t,r.mainExtracted=n,r}return h(e,i),e.prototype.clone=function(){return new e(ue(this.explicit),ue(this.implicit),this.mainExtracted)},e.prototype.hasAxisPart=function(e){return"axis"===e||("grid"===e||"title"===e?!!this.get(e):!(!1===(t=this.get(e))||null===t));var t},e}(Xa);function Nc(e,t,n,r,i){void 0===r&&(r="");for(var o=0,a=("band"===i?["axisBand"]:[]).concat(["x"===n?"axisX":"axisY","axis"+r.substr(0,1).toUpperCase()+r.substr(1),"axis"]);o<a.length;o++){var u=a[o];if(t[u]&&void 0!==t[u][e])return t[u][e]}}function Oc(e,t,n,r){var i=e.fieldDef(t)||("x"===t?e.fieldDef("x2"):"y"===t?e.fieldDef("y2"):void 0),o=e.axis(t),a=e.config,u={};if(Cr(i)){var s=e.getScaleComponent(t).get("type")===Kr.UTC,c=_a("datum.value",i.timeUnit,o.format,a.axis.shortTimeLabels,a.timeFormat,s);c&&(u.text={signal:c})}var l,f,d,p,h=Nc("labelAngle",e.config,t,r,e.getScaleComponent(t).get("type"));if(void 0===h&&(h=function(e,t,n){{if(void 0!==e.labelAngle)return(e.labelAngle%360+360)%360;if(t===Ue&&X([Kn,Xn],n.type))return 270}return}(o,t,i))&&(u.angle={value:h}),void 0!==h){var m=(d=((d=h)%360+360)%360,"top"===(p=r)||"bottom"===p?d%180==0?"center":0<d&&d<180?"top"===p?"right":"left":"top"===p?"left":"right":(d+90)%180==0?"center":90<=d&&d<270?"left"===p?"left":"right":"left"===p?"right":"left");m&&(u.align={value:m}),u.baseline=(l=h,"top"===(f=r)||"bottom"===f?l<=45||315<=l?{value:"top"===f?"bottom":"top"}:135<=l&&l<=225?{value:"top"===f?"top":"bottom"}:{value:"middle"}:l<=45||315<=l||135<=l&&l<=225?{value:"middle"}:45<=l&&l<=135?{value:"left"===f?"top":"bottom"}:{value:"left"===f?"bottom":"top"})}return u=I({},u,n),0===ie(u).length?void 0:u}function _c(n){return yt.reduce(function(e,t){return n.component.scales[t]&&n.axis(t)&&(e[t]=[function(i,o){var a=o.axis(i),u=new kc;Le.forEach(function(e){var t=function(e,t,n,r){var i=r.fieldDef(n);switch(e){case"scale":return r.scaleName(n);case"gridScale":return function(e,t){var n="x"===t?"y":"x";if(e.getScaleComponent(n))return e.scaleName(n)}(r,n);case"format":return wa(i,t.format,r.config);case"grid":var o=r.getScaleComponent(n).get("type");return Ea(t.grid,(y=i,!yi(o)&&!y.bin));case"labelFlush":return m=i,g=n,void 0!==(v=t).labelFlush?v.labelFlush:!("x"!==g||!X(["quantitative","temporal"],m.type))||void 0;case"labelOverlap":var o=r.getScaleComponent(n).get("type");return d=i,h=o,void 0!==(p=t).labelOverlap?p.labelOverlap:"nominal"!==d.type?"log"!==h||"greedy":void 0;case"orient":return Ea(t.orient,function(e){switch(e){case Ue:return"bottom";case Pe:return"left"}throw new Error(en.INVALID_CHANNEL_FOR_AXIS)}(n));case"tickCount":var o=r.getScaleComponent(n).get("type"),a="x"===n?"width":"y"===n?"height":void 0,u=a?r.getSizeSignalRef(a):void 0;return Ea(t.tickCount,function(e,t,n,r){if(!yi(n)&&"log"!==n&&!X(["month","hours","day","quarter"],t.timeUnit))return t.bin?{signal:"ceil("+r.signal+"/20)"}:{signal:"ceil("+r.signal+"/40)"}}(0,i,o,u));case"title":var s="x"===n?"x2":"y2",c=r.fieldDef(s),l=Dc(r,n),f=void 0!==l?l:void 0===t.title?void 0:t.title;return Ea(f,Ca([nr(i)],c?[nr(c)]:[]));case"values":return function(e,t,n,r){var i=e.values;if(i)return Dr(n,i);if(n.bin&&n.type===Vn){var o=t.scaleDomain(r);if(o&&"unaggregated"!==o&&!ki(o))return;var a=t.getName(Tt(n.bin)+"_"+n.field+"_bins");return{signal:"sequence("+a+".start, "+a+".stop + "+a+".step, "+a+".step)"}}}(t,r,i,n)}var d,p,h;var m,g,v;var y;return Ie(e)?t[e]:void 0}(e,a,i,o);if(void 0!==t){var n="values"===e?!!a.values:"encode"===e?!!a.encoding||!!a.labelAngle:"title"===e&&t===Dc(o,i)||t===a[e],r=Nc(e,o.config,i,u.get("orient"),o.getScaleComponent(i).get("type"));n||void 0===r?u.set(e,t,n):"grid"===e&&r&&u.set(e,r,!1)}});var s=a.encoding||{},e=Te.reduce(function(e,t){if(!u.hasAxisPart(t))return e;var n=za(s[t]||{},o),r="labels"===t?Oc(o,i,n,u.get("orient")):n;return void 0!==r&&0<ie(r).length&&(e[t]={update:r}),e},{});0<ie(e).length&&u.set("encode",e,!!a.encoding||void 0!==a.labelAngle);return u}(t,n)]),e},{})}var Tc={bottom:"top",top:"bottom",left:"right",right:"left"};function Cc(e,t){if(!e)return t.map(function(e){return e.clone()});if(e.length===t.length){for(var n=e.length,r=0;r<n;r++){var i=e[r],o=t[r];if(!!i!=!!o)return;if(i&&o){var a=i.getWithExplicit("orient"),u=o.getWithExplicit("orient");if(a.explicit&&u.explicit&&a.value!==u.value)return;e[r]=Ac(i,o)}}return e}}function Ac(t,r){for(var e=function(n){var e=$a(t.getWithExplicit(n),r.getWithExplicit(n),n,"axis",function(e,t){switch(n){case"title":return Da(e,t);case"gridScale":return{explicit:e.explicit,value:e.value||t.value}}return Za(e,t,n,"axis")});t.setWithExplicit(n,e)},n=0,i=Le;n<i.length;n++){e(i[n])}return t}function Dc(e,t){var n="x"===t?"x2":"y2",r=e.fieldDef(t),i=e.fieldDef(n),o=r?r.title:void 0,a=i?i.title:void 0;return o&&a?Aa(o,a):o||(a||(void 0!==o?o:void 0!==a?a:void 0))}function Ic(e,t,n){var r,i,o,a=Qt(e)?I({},e):{type:e},u=a.orient||xa("orient",a,n);return a.orient=function(e,t,n){switch(e){case jt:case Gt:case Bt:case Ut:case Ht:return}var r=t.y2,i=t.x2;switch(e){case Lt:if(r||i){if(n)return n;var o=t.x;if(!i&&ar(o)&&o.type===Vn&&!o.bin)return"horizontal";var a=t.y;if(!r&&ar(a)&&a.type===Vn&&!a.bin)return"vertical"}case qt:if(i&&r)return;case Rt:if(r)return"vertical";if(i)return"horizontal";if(e===qt){if(t.x&&!t.y)return"vertical";if(t.y&&!t.x)return"horizontal"}case Ft:case Pt:var u=ar(t.x)&&dr(t.x),s=ar(t.y)&&dr(t.y);if(u&&!s)return"tick"!==e?"horizontal":"vertical";if(!u&&s)return"tick"!==e?"vertical":"horizontal";if(u&&s){var o=t.x,a=t.y,c=o.type===Qn,l=a.type===Qn;return c&&!l?"tick"!==e?"vertical":"horizontal":!c&&l?"tick"!==e?"horizontal":"vertical":!o.aggregate&&a.aggregate?"tick"!==e?"vertical":"horizontal":o.aggregate&&!a.aggregate?"tick"!==e?"horizontal":"vertical":n||"vertical"}return n||void 0}return"vertical"}(a.type,t,u),void 0!==u&&u!==a.orient&&hn(en.orientOverridden(a.orient,u)),void 0===(void 0!==a.opacity?a.opacity:xa("opacity",a,n))&&(a.opacity=function(e,t){if(X([jt,Pt,Gt,Bt],e)&&!Rr(t))return.7;return}(a.type,t)),void 0===a.filled&&(a.filled=(i=xa("filled",r=a,n),o=r.type,void 0!==i?i:o!==jt&&o!==Ft&&o!==qt)),void 0===(a.cursor||xa("cursor",a,n))&&(a.cursor=function(e,t,n){if(t.href||e.href||xa("href",e,n))return"pointer";return e.cursor}(a,t,n)),a}function zc(e,t,n,r){if(void 0!==e.size)return{value:e.size};if(r.bar.discreteBandSize)return{value:r.bar.discreteBandSize};if(n){var i=n.get("type");if(i!==Kr.POINT)return i===Kr.BAND?ta(t):{value:r.bar.continuousBandSize};var o=n.get("range");if(Mo(o)&&x(o.step))return{value:o.step-1};hn(en.BAR_WITH_POINT_SCALE_AND_RANGESTEP_NULL)}else if(r.scale.rangeStep&&null!==r.scale.rangeStep)return{value:r.scale.rangeStep-1};return{value:20}}function Rc(e,t){var n=e.config,r=e.width,i=e.height;return I({},ua(e,{size:"include",orient:"ignore"}),va("x",e,ia(r)),va("y",e,ia(i)),la("size",e),function(e,t,n){if(n)return{shape:{value:n}};return la("shape",e,{defaultValue:xa("shape",e.markDef,t)})}(e,n,t))}var Lc={area:{vgMark:"area",encodeEntry:function(e){return I({},ua(e,{size:"ignore",orient:"include"}),va("x",e,"zeroOrMin"),va("y",e,"zeroOrMin"),ya(e,"zeroOrMin","horizontal"===e.markDef.orient?"x2":"y2"),ca(e))}},bar:{vgMark:"rect",encodeEntry:function(e){return I({},ua(e,{size:"ignore",orient:"ignore"}),function(e){var t=e.config,n=e.encoding,r=e.markDef,i=e.width,o=r.orient,a=n.size,u=n.x,s=n.x2,c=e.scaleName(Ue),l=e.getScaleComponent(Ue);{if("horizontal"===o||s)return I({},va("x",e,"zeroOrMin"),ya(e,"zeroOrMin","x2"));if(ar(u)){var f=l.get("type");if(u.bin&&!a&&!yi(f))return ga(u,"x",e.scaleName("x"),void 0===r.binSpacing?t.bar.binSpacing:r.binSpacing,l.get("reverse"));if(f===Kr.BAND)return ha(u,"x",e)}return ma("x",e,I({},ia(i)),zc(r,c,l,t))}}(e),function(e){var t=e.config,n=e.encoding,r=e.height,i=e.markDef,o=i.orient,a=n.size,u=n.y,s=n.y2,c=e.scaleName(Pe),l=e.getScaleComponent(Pe);{if("vertical"===o||s)return I({},va("y",e,"zeroOrMin"),ya(e,"zeroOrMin","y2"));if(ar(u)){var f=l.get("type");if(u.bin&&!a&&!yi(f))return ga(u,"y",e.scaleName("y"),void 0===i.binSpacing?t.bar.binSpacing:i.binSpacing,l.get("reverse"));if(f===Kr.BAND)return ha(u,"y",e)}return ma("y",e,ia(r),zc(i,c,l,t))}}(e))}},circle:{vgMark:"symbol",encodeEntry:function(e){return Rc(e,"circle")}},geoshape:{vgMark:"shape",encodeEntry:function(e){return I({},ua(e,{size:"ignore",orient:"ignore"}))},postEncodingTransform:function(e){var t=e.encoding.shape;return[I({type:"geoshape",projection:e.projectionName()},t&&ar(t)&&t.type===Jn?{field:lr(t,{expr:"datum"})}:{})]}},line:{vgMark:"line",encodeEntry:function(e){var t=e.width,n=e.height;return I({},ua(e,{size:"ignore",orient:"ignore"}),va("x",e,ia(t)),va("y",e,ia(n)),la("size",e,{vgChannel:"strokeWidth"}),ca(e))}},point:{vgMark:"symbol",encodeEntry:function(e){return Rc(e)}},rect:{vgMark:"rect",encodeEntry:function(e){return I({},ua(e,{size:"ignore",orient:"ignore"}),function(e){var t=e.encoding.x,n=e.encoding.x2,r=e.getScaleComponent(Ue),i=r?r.get("type"):void 0;{if(ar(t)&&t.bin&&!n)return ga(t,"x",e.scaleName("x"),0,r.get("reverse"));if(ar(t)&&r&&yi(i)){if(i===Kr.BAND)return ha(t,"x",e);throw new Error(en.scaleTypeNotWorkWithMark(Ht,i))}return I({},va("x",e,"zeroOrMax"),ya(e,"zeroOrMin","x2"))}}(e),function(e){var t=e.encoding.y,n=e.encoding.y2,r=e.getScaleComponent(Pe),i=r?r.get("type"):void 0;{if(ar(t)&&t.bin&&!n)return ga(t,"y",e.scaleName("y"),0,r.get("reverse"));if(ar(t)&&r&&yi(i)){if(i===Kr.BAND)return ha(t,"y",e);throw new Error(en.scaleTypeNotWorkWithMark(Ht,i))}return I({},va("y",e,"zeroOrMax"),ya(e,"zeroOrMin","y2"))}}(e))}},rule:{vgMark:"rule",encodeEntry:function(e){e.config;var t=e.markDef,n=e.width,r=e.height,i=t.orient;return e.encoding.x||e.encoding.y||e.encoding.latitude||e.encoding.longitude?I({},ua(e,{size:"ignore",orient:"ignore"}),va("x",e,"horizontal"===i?"zeroOrMin":ia(n)),va("y",e,"vertical"===i?"zeroOrMin":ia(r)),"vertical"!==i?ya(e,"zeroOrMax","x2"):{},"horizontal"!==i?ya(e,"zeroOrMax","y2"):{},la("size",e,{vgChannel:"strokeWidth",defaultValue:t.size})):{}}},square:{vgMark:"symbol",encodeEntry:function(e){return Rc(e,"square")}},text:{vgMark:"text",encodeEntry:function(e){var t=e.config,n=(e.encoding,e.width),r=e.height,i=e.markDef;return I({},ua(e,{size:"ignore",orient:"ignore"}),va("x",e,ia(n)),va("y",e,ia(r)),da(e),la("size",e,I({},i.size?{defaultValue:i.size}:{},{vgChannel:"fontSize"})),function(e,t){var n;if(void 0!==t)return(n={})[e]={value:t},n}("align",function(e,t,n){if(void 0===(e.align||xa("align",e,n)))return"center";return}(e.markDef,0,t)))}},tick:{vgMark:"rect",encodeEntry:function(e){var t,n=e.config,r=e.markDef,i=e.width,o=e.height,a=r.orient,u="horizontal"===a?"width":"height",s="horizontal"===a?"height":"width";return I({},ua(e,{size:"ignore",orient:"ignore"}),va("x",e,ia(i),"xc"),va("y",e,ia(o),"yc"),la("size",e,{defaultValue:function(e){var t=e.config,n=e.markDef,r=n.orient,i=e.getScaleComponent("horizontal"===r?"x":"y");{if(void 0!==n.size)return n.size;if(void 0!==t.tick.bandSize)return t.tick.bandSize;var o=i?i.get("range"):void 0,a=o&&Mo(o)?o.step:t.scale.rangeStep;if("number"!=typeof a)throw new Error("Function does not handle non-numeric rangeStep");return a/1.5}}(e),vgChannel:u}),((t={})[s]={value:r.thickness||n.tick.thickness},t))}},trail:{vgMark:"trail",encodeEntry:function(e){var t=e.width,n=e.height;return I({},ua(e,{size:"include",orient:"ignore"}),va("x",e,ia(t)),va("y",e,ia(n)),la("size",e),ca(e))}}};function Fc(e){return X([Ft,Rt,Mt],e.mark)?(i=(t=e).mark,o=t.encoding,n=ie(o).reduce(function(t,e){switch(e){case"x":case"y":case"order":case"tooltip":case"href":case"x2":case"y2":case"latitude":case"longitude":case"latitude2":case"longitude2":case"text":case"shape":return t;case"detail":case"key":var n=o[e];return n&&(S(n)?n:[n]).forEach(function(e){e.aggregate||t.push(lr(e,{}))}),t;case"size":if("trail"===i)return t;case"color":case"fill":case"stroke":case"opacity":var r=Er(o[e]);return r&&!r.aggregate&&t.push(lr(r,{})),t;default:throw new Error("Bug: Channel "+e+" unimplemented for line mark")}},[]),r=Uc(t,{fromPrefix:0<n.length?jc:""}),0<n.length?[{name:t.getName("pathgroup"),type:"group",from:{facet:{name:jc+t.requestDataName(bo),data:t.requestDataName(bo),groupby:n}},encode:{update:{width:{field:{group:"width"}},height:{field:{group:"height"}}}},marks:r}]:r):Uc(e);var t,n,r,i,o}var jc="faceted_path_";function Uc(e,t){void 0===t&&(t={fromPrefix:""});var n,r,i,o=e.mark,a=void 0!==e.markDef.clip?!!e.markDef.clip:(r=(n=e).getScaleComponent("x"),i=n.getScaleComponent("y"),!!(r&&r.get("domainRaw")||i&&i.get("domainRaw"))),u=ba(e.markDef),s=e.encoding.key,c=function(e){var t=e.encoding,n=e.stack,r=e.mark,i=e.markDef,o=t.order;if(S(o)||!sr(o)){if((S(o)||ar(o))&&!n)return Ta(o,{expr:"datum"});if(Vt(r)){var a=t["horizontal"===i.orient?"y":"x"];if(ar(a)){var u=a.sort;return{field:Qo(u)?lr({aggregate:Rr(e.encoding)?u.op:void 0,field:u.field},{expr:"datum"}):lr(a,{binSuffix:e.stack&&e.stack.impute?"mid":void 0,expr:"datum"}),order:"descending"}}}}}(e),l=Lc[o].postEncodingTransform?Lc[o].postEncodingTransform(e):null;return[I({name:e.getName("marks"),type:Lc[o].vgMark},a?{clip:!0}:{},u?{style:u}:{},s?{key:{field:s.field}}:{},c?{sort:c}:{},{from:{data:t.fromPrefix+e.requestDataName(bo)},encode:{update:Lc[o].encodeEntry(e)}},l?{transform:l}:{})]}var Pc=function(l){function e(e,t,n,r,i,o,a){void 0===r&&(r={});var u=l.call(this,e,t,n,o,i,void 0)||this;u.fit=a,u.type="unit",u.specifiedScales={},u.specifiedAxes={},u.specifiedLegends={},u.specifiedProjection={},u.selection={},u.children=[],u.initSize(I({},r,e.width?{width:e.width}:{},e.height?{height:e.height}:{}));var s=Qt(e.mark)?e.mark.type:e.mark,c=u.encoding=Lr(vc(e.encoding||{},i),s);return u.markDef=Ic(e.mark,c,o),u.stack=Ki(s,c,u.config.stack),u.specifiedScales=u.initScales(s,c),u.specifiedAxes=u.initAxes(c),u.specifiedLegends=u.initLegend(c),u.specifiedProjection=e.projection,u.selection=e.selection,u}return h(e,l),Object.defineProperty(e.prototype,"hasProjection",{get:function(){var t=this.encoding,e=this.mark===Wt,n=t&&ut.some(function(e){return ar(t[e])});return e||n},enumerable:!0,configurable:!0}),e.prototype.scaleDomain=function(e){var t=this.specifiedScales[e];return t?t.domain:void 0},e.prototype.axis=function(e){return this.specifiedAxes[e]},e.prototype.legend=function(e){return this.specifiedLegends[e]},e.prototype.initScales=function(e,o){return Et.reduce(function(e,t){var n,r,i=o[t];return ar(i)?r=(n=i).scale:ir(i)?(n=i.condition,r=i.condition.scale):"x"===t?n=Er(o.x2):"y"===t&&(n=Er(o.y2)),n&&(e[t]=r||{}),e},{})},e.prototype.initAxes=function(i){return[Ue,Pe].reduce(function(e,t){var n=i[t];if(ar(n)||t===Ue&&ar(i.x2)||t===Pe&&ar(i.y2)){var r=ar(n)?n.axis:null;null!==r&&!1!==r&&(e[t]=I({},r))}return e},{})},e.prototype.initLegend=function(i){return xt.reduce(function(e,t){var n=i[t];if(n){var r=ar(n)?n.legend:ir(n)?n.condition.legend:null;null!==r&&!1!==r&&(e[t]=I({},r))}return e},{})},e.prototype.parseData=function(){this.component.data=Sc(this)},e.prototype.parseLayoutSize=function(){!function(e){var t=e.component.layoutSize;if(!t.explicit.width){var n=pc(e,"width");t.set("width",n,!1)}if(!t.explicit.height){var r=pc(e,"height");t.set("height",r,!1)}}(this)},e.prototype.parseSelection=function(){this.component.selection=function(o,a){var u={},s=o.config.selection,e=function(e){if(!a.hasOwnProperty(e))return"continue";var t=a[e],n=s[t.type];for(var r in n)"encodings"===r&&t.fields||"fields"===r&&t.encodings||("mark"===r&&(t[r]=I({},n[r],t[r])),void 0!==t[r]&&!0!==t[r]||(t[r]=n[r]||t[r]));e=ce(e);var i=u[e]=I({},t,{name:e,events:m(t.on)?Eo(t.on,"scope"):t.on});bs(i,function(e){e.parse&&e.parse(o,t,i)})};for(var t in a)e(t);return u}(this,this.selection)},e.prototype.parseMarkGroup=function(){this.component.mark=Fc(this)},e.prototype.parseAxisAndHeader=function(){this.component.axes=_c(this)},e.prototype.assembleSelectionTopLevelSignals=function(e){return r=e,i=!1,Ns(n=this,function(t,e){e.topLevelSignals&&(r=e.topLevelSignals(n,t,r)),bs(t,function(e){e.topLevelSignals&&(r=e.topLevelSignals(n,t,r))}),i=!0}),i&&(r.filter(function(e){return"unit"===e.name}).length||r.unshift({name:"unit",value:{},on:[{events:"mousemove",update:"isTuple(group()) ? group() : unit"}]})),r;var n,r,i},e.prototype.assembleSelectionSignals=function(){return function(i,o){Ns(i,function(t,e){var n=t.name,r=e.modifyExpr(i,t);o.push.apply(o,e.signals(i,t)),bs(t,function(e){e.signals&&(o=e.signals(i,t,o)),e.modifyExpr&&(r=e.modifyExpr(i,t,r))}),o.push({name:n+"_modify",on:[{events:{signal:n+Ss},update:"modify("+N(t.name+xs)+", "+r+")"}]})});var e=_s(i);if(o.length&&e){var t=N(e.getName("cell"));o.unshift({name:"facet",value:{},on:[{events:Eo("mousemove","scope"),update:"isTuple(facet) ? facet : group("+t+").datum"}]})}return o}(this,[])},e.prototype.assembleSelectionData=function(e){return n=e,Ns(this,function(t){n.filter(function(e){return e.name===t.name+xs}).length||n.push({name:t.name+xs})}),n;var n},e.prototype.assembleLayout=function(){return null},e.prototype.assembleLayoutSignals=function(){return Wa(this)},e.prototype.assembleMarks=function(){var e=this.component.mark||[];return this.parent&&Qu(this.parent)||(e=ws(this,e)),e.map(this.correctDataNames)},e.prototype.assembleLayoutSize=function(){return{width:this.getSizeSignalRef("width"),height:this.getSizeSignalRef("height")}},e.prototype.getMapping=function(){return this.encoding},e.prototype.toSpec=function(e,t){var n,r=ue(this.encoding);return n={mark:this.markDef,encoding:r},e||(n.config=ue(this.config)),t||(n.data=ue(this.data)),n},Object.defineProperty(e.prototype,"mark",{get:function(){return this.markDef.type},enumerable:!0,configurable:!0}),e.prototype.channelHasField=function(e){return zr(this.encoding,e)},e.prototype.fieldDef=function(e){return Er(this.encoding[e])},e}(Ju),Mc=function(c){function l(e,t,n,r,i,o,a){var u=c.call(this,e,t,n,o,i,e.resolve)||this;u.type="layer";var s=I({},r,e.width?{width:e.width}:{},e.height?{height:e.height}:{});return u.initSize(s),u.children=e.layer.map(function(e,t){if(eo(e))return new l(e,u,u.getName("layer_"+t),s,i,o,a);if($i(e))return new Pc(e,u,u.getName("layer_"+t),s,i,o,a);throw new Error(en.INVALID_SPEC)}),u}return h(l,c),l.prototype.parseData=function(){this.component.data=Sc(this);for(var e=0,t=this.children;e<t.length;e++){t[e].parseData()}},l.prototype.parseLayoutSize=function(){cc(this)},l.prototype.parseSelection=function(){var n=this;this.component.selection={};for(var e=function(t){t.parseSelection(),ie(t.component.selection).forEach(function(e){n.component.selection[e]=t.component.selection[e]})},t=0,r=this.children;t<r.length;t++){e(r[t])}},l.prototype.parseMarkGroup=function(){for(var e=0,t=this.children;e<t.length;e++){t[e].parseMarkGroup()}},l.prototype.parseAxisAndHeader=function(){!function(e){for(var t=e.component,n=t.axes,r=t.resolve,i={top:0,bottom:0,right:0,left:0},o=0,a=e.children;o<a.length;o++){(h=a[o]).parseAxisAndHeader();for(var u=0,s=ie(h.component.axes);u<s.length;u++){var c=s[u];r.axis[c]=Va(e.component.resolve,c),"shared"===r.axis[c]&&(n[c]=Cc(n[c],h.component.axes[c]),n[c]||(r.axis[c]="independent",delete n[c]))}}for(var l=0,f=[Ue,Pe];l<f.length;l++){c=f[l];for(var d=0,p=e.children;d<p.length;d++){var h;if((h=p[d]).component.axes[c]){if("independent"===r.axis[c]){n[c]=(n[c]||[]).concat(h.component.axes[c]);for(var m=0,g=h.component.axes[c];m<g.length;m++){var v=g[m],y=v.getWithExplicit("orient"),b=y.value,x=y.explicit;if(0<i[b]&&!x){var S=Tc[b];i[b]>i[S]&&v.set("orient",S,!1)}i[b]++}}delete h.component.axes[c]}}}}(this)},l.prototype.assembleSelectionTopLevelSignals=function(e){return this.children.reduce(function(e,t){return t.assembleSelectionTopLevelSignals(e)},e)},l.prototype.assembleSelectionSignals=function(){return this.children.reduce(function(e,t){return e.concat(t.assembleSelectionSignals())},[])},l.prototype.assembleLayoutSignals=function(){return this.children.reduce(function(e,t){return e.concat(t.assembleLayoutSignals())},Wa(this))},l.prototype.assembleSelectionData=function(e){return this.children.reduce(function(e,t){return t.assembleSelectionData(e)},e)},l.prototype.assembleTitle=function(){var e=c.prototype.assembleTitle.call(this);if(e)return e;for(var t=0,n=this.children;t<n.length;t++){if(e=n[t].assembleTitle())return e}},l.prototype.assembleLayout=function(){return null},l.prototype.assembleMarks=function(){return t=Z((e=this).children.map(function(e){return e.assembleMarks()})),e.children.forEach(function(e){Bu(e)&&(t=ws(e,t))}),t;var e,t},l.prototype.assembleLegends=function(){return this.children.reduce(function(e,t){return e.concat(t.assembleLegends())},uu(this))},l}(Ku),Hc=function(a){function e(e,t,n,r,i){var o=a.call(this,e,t,n,i,r,e.resolve)||this;return o.type="repeat",e.resolve&&e.resolve.axis&&("shared"===e.resolve.axis.x||"shared"===e.resolve.axis.y)&&hn(en.REPEAT_CANNOT_SHARE_AXIS),o.repeat=e.repeat,o.children=o._initChildren(e,o.repeat,r,i),o}return h(e,a),e.prototype._initChildren=function(e,t,n,r){for(var i=[],o=t.row||[n?n.row:null],a=t.column||[n?n.column:null],u=0,s=o;u<s.length;u++)for(var c=s[u],l=0,f=a;l<f.length;l++){var d=f[l],p=(c?"_"+c:"")+(d?"_"+d:""),h={row:c,column:d};i.push(qc(e.spec,this,this.getName("child"+p),void 0,h,r,!1))}return i},e.prototype.parseLayoutSize=function(){lc(this)},e.prototype.assembleDefaultLayout=function(){return{columns:this.repeat&&this.repeat.column?this.repeat.column.length:1,bounds:"full",align:"all"}},e}(Ec);function qc(e,t,n,r,i,o,a){if(Zi(e))return new bc(e,t,n,i,o);if(eo(e))return new Mc(e,t,n,r,i,o,a);if($i(e))return new Pc(e,t,n,r,i,o,a);if(to(e))return new Hc(e,t,n,i,o);if(no(e))return new wc(e,t,n,i,o);throw new Error(en.INVALID_SPEC)}var Wc=Object.freeze({}),Gc={text:["text"],line:["x","y"],trail:["x","y"],area:["x","y"]},Bc={bar:f(["row","column","x","y","size","color","fill","stroke","detail"]),line:f(["row","column","x","y","color","fill","stroke","color","detail"]),trail:f(["row","column","x","y","color","fill","stroke","color","detail","size"]),area:f(["row","column","x","y","color","fill","stroke","detail"]),tick:f(["row","column","x","y","color","fill","stroke","detail"]),circle:f(["row","column","x","y","color","fill","stroke","size","detail"]),square:f(["row","column","x","y","color","fill","stroke","size","detail"]),point:f(["row","column","x","y","color","fill","stroke","size","detail","shape"]),geoshape:f(["row","column","color","fill","stroke","detail","shape"]),text:f(["row","column","size","color","fill","stroke","text"])};var Yc=Object.freeze({DEFAULT_REQUIRED_CHANNEL_MAP:Gc,DEFAULT_SUPPORTED_CHANNEL_TYPE:Bc,getEncodingMappingError:function(e,t,n){void 0===t&&(t=Gc),void 0===n&&(n=Bc);var r=Qt(e.mark)?e.mark.type:e.mark,i=e.encoding,o=t[r],a=n[r];for(var u in o)if(!(o[u]in i))return'Missing encoding channel "'+o[u]+'" for mark "'+r+'"';for(var s in i)if(!a[s])return'Encoding channel "'+s+'" is not supported by mark type "'+r+'"';return r!==Lt||i.x||i.y?null:"Missing both x and y for bar"}}),Vc="2.7.0";e.aggregate=_e,e.axis=je,e.bin=zt,e.channel=_t,e.compositeMark=Zr,e.config=Bi,e.data=So,e.datetime=kn,e.encoding=Mr,e.facet=Wc,e.fieldDef=Ir,e.header=Xo,e.legend=oi,e.mark=fn,e.scale=Ri,e.sort=Jo,e.spec=fo,e.stack=Ji,e.timeUnit=Bn,e.transform=$s,e.type=$n,e.util=ye,e.validate=Yc,e.version=Vc,e.compile=function(e,t){var n,r,i,o,a,u;void 0===t&&(t={}),t.logger&&(n=t.logger,pn=n),t.fieldTitle&&yr(t.fieldTitle);try{var s=Pi($({},t.config,e.config)),c=oo(e,s),l=function(e,t,n){void 0===n&&(n=!0);var r=I({type:"pad"},po(t),po(e));return"fit"===r.type&&(n||(hn(en.FIT_NON_SINGLE),r.type="pad")),r}(e.autosize,s.autosize,eo(c)||$i(c)),f=qc(c,null,"",void 0,void 0,s,"fit"===l.type);return f.parse(),a=f.component.data,(u=oe(a.sources)).forEach(Ou),_u(u=u.filter(function(e){return 0<e.numChildren()})).forEach(bu(Su)),_u(u=u.filter(function(e){return 0<e.numChildren()})).forEach(bu(xu)),_u(u).forEach(Eu),u.forEach(Nu),ie(a.sources).forEach(function(e){0===a.sources[e].numChildren()&&delete a.sources[e]}),function(e,t){var n=e.config?Wi(e.config):void 0,r=[].concat(e.assembleSelectionData([]),function(e,t){var n=oe(e.sources),r=[],i=sc(r),o=0;n.forEach(function(e){e.hasName()||(e.dataName="source_"+o++);var t=e.assemble();i(e,t)}),r.forEach(function(e){0===e.transform.length&&delete e.transform});for(var a=0,u=0;u<r.length;u++)0!==((m=r[u]).transform||[]).length||m.source||r.splice(a++,0,r.splice(u,1)[0]);for(var s=0,c=r;s<c.length;s++)for(var l=0,f=(m=c[s]).transform||[];l<f.length;l++){var d=f[l];"lookup"===d.type&&(d.from=e.outputNodes[d.from].getSource())}for(var p=0,h=r;p<h.length;p++){var m;(m=h[p]).name in t&&(m.values=t[m.name])}return r}(e.component.data,t.datasets||{}));delete t.datasets;var i=e.assembleProjections(),o=e.assembleTitle(),a=e.assembleGroupStyle(),u=e.assembleLayoutSignals();return u=u.filter(function(e){return"width"!==e.name&&"height"!==e.name||void 0===e.value||(t[e.name]=+e.value,!1)}),{spec:I({$schema:"https://vega.github.io/schema/vega/v4.json"},e.description?{description:e.description}:{},t,o?{title:o}:{},a?{style:a}:{},{data:r},0<i.length?{projections:i}:{},e.assembleGroup(u.concat(e.assembleSelectionTopLevelSignals([]))),n?{config:n}:{})}}(f,(r=e,i=s,I({autosize:1===ie(o=l).length&&o.type?o.type:o},mo(i),mo(r))))}finally{t.logger&&(pn=dn),t.fieldTitle&&br()}},Object.defineProperty(e,"__esModule",{value:!0})});
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.vl = {})));
+}(this, (function (exports) { 'use strict';
+
+  function accessor(fn, fields, name) {
+    fn.fields = fields || [];
+    fn.fname = name;
+    return fn;
+  }
+
+  function error(message) {
+    throw Error(message);
+  }
+
+  function splitAccessPath(p) {
+    var path = [],
+        q = null,
+        b = 0,
+        n = p.length,
+        s = '',
+        i, j, c;
+
+    p = p + '';
+
+    function push() {
+      path.push(s + p.substring(i, j));
+      s = '';
+      i = j + 1;
+    }
+
+    for (i=j=0; j<n; ++j) {
+      c = p[j];
+      if (c === '\\') {
+        s += p.substring(i, j);
+        i = ++j;
+      } else if (c === q) {
+        push();
+        q = null;
+        b = -1;
+      } else if (q) {
+        continue;
+      } else if (i === b && c === '"') {
+        i = j + 1;
+        q = c;
+      } else if (i === b && c === "'") {
+        i = j + 1;
+        q = c;
+      } else if (c === '.' && !b) {
+        if (j > i) {
+          push();
+        } else {
+          i = j + 1;
+        }
+      } else if (c === '[') {
+        if (j > i) push();
+        b = i = j + 1;
+      } else if (c === ']') {
+        if (!b) error('Access path missing open bracket: ' + p);
+        if (b > 0) push();
+        b = 0;
+        i = j + 1;
+      }
+    }
+
+    if (b) error('Access path missing closing bracket: ' + p);
+    if (q) error('Access path missing closing quote: ' + p);
+
+    if (j > i) {
+      j++;
+      push();
+    }
+
+    return path;
+  }
+
+  var isArray = Array.isArray;
+
+  function isObject(_) {
+    return _ === Object(_);
+  }
+
+  function isString(_) {
+    return typeof _ === 'string';
+  }
+
+  function $(x) {
+    return isArray(x) ? '[' + x.map($) + ']'
+      : isObject(x) || isString(x) ?
+        // Output valid JSON and JS source strings.
+        // See http://timelessrepo.com/json-isnt-a-javascript-subset
+        JSON.stringify(x).replace('\u2028','\\u2028').replace('\u2029', '\\u2029')
+      : x;
+  }
+
+  function field(field, name) {
+    var path = splitAccessPath(field),
+        code = 'return _[' + path.map($).join('][') + '];';
+
+    return accessor(
+      Function('_', code),
+      [(field = path.length===1 ? path[0] : field)],
+      name || field
+    );
+  }
+
+  var empty = [];
+
+  var id = field('id');
+
+  var identity = accessor(function(_) { return _; }, empty, 'identity');
+
+  var zero = accessor(function() { return 0; }, empty, 'zero');
+
+  var one = accessor(function() { return 1; }, empty, 'one');
+
+  var truthy = accessor(function() { return true; }, empty, 'true');
+
+  var falsy = accessor(function() { return false; }, empty, 'false');
+
+  function log(method, level, input) {
+    var args = [level].concat([].slice.call(input));
+    console[method].apply(console, args); // eslint-disable-line no-console
+  }
+
+  var None  = 0;
+  var Error$1 = 1;
+  var Warn  = 2;
+  var Info  = 3;
+  var Debug = 4;
+
+  function logger(_, method) {
+    var level = _ || None;
+    return {
+      level: function(_) {
+        if (arguments.length) {
+          level = +_;
+          return this;
+        } else {
+          return level;
+        }
+      },
+      error: function() {
+        if (level >= Error$1) log(method || 'error', 'ERROR', arguments);
+        return this;
+      },
+      warn: function() {
+        if (level >= Warn) log(method || 'warn', 'WARN', arguments);
+        return this;
+      },
+      info: function() {
+        if (level >= Info) log(method || 'log', 'INFO', arguments);
+        return this;
+      },
+      debug: function() {
+        if (level >= Debug) log(method || 'log', 'DEBUG', arguments);
+        return this;
+      }
+    }
+  }
+
+  /**
+   * Span-preserving range clamp. If the span of the input range is less
+   * than (max - min) and an endpoint exceeds either the min or max value,
+   * the range is translated such that the span is preserved and one
+   * endpoint touches the boundary of the min/max range.
+   * If the span exceeds (max - min), the range [min, max] is returned.
+   */
+
+  function isFunction(_) {
+    return typeof _ === 'function';
+  }
+
+  /**
+   * Return an array with minimum and maximum values, in the
+   * form [min, max]. Ignores null, undefined, and NaN values.
+   */
+
+  /**
+   * Predicate that returns true if the value lies within the span
+   * of the given range. The left and right flags control the use
+   * of inclusive (true) or exclusive (false) comparisons.
+   */
+
+  function isBoolean(_) {
+    return typeof _ === 'boolean';
+  }
+
+  function isNumber(_) {
+    return typeof _ === 'number';
+  }
+
+  function toSet(_) {
+    for (var s={}, i=0, n=_.length; i<n; ++i) s[_[i]] = true;
+    return s;
+  }
+
+  /*! *****************************************************************************
+  Copyright (c) Microsoft Corporation. All rights reserved.
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+  this file except in compliance with the License. You may obtain a copy of the
+  License at http://www.apache.org/licenses/LICENSE-2.0
+
+  THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+  WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+  MERCHANTABLITY OR NON-INFRINGEMENT.
+
+  See the Apache Version 2.0 License for specific language governing permissions
+  and limitations under the License.
+  ***************************************************************************** */
+  /* global Reflect, Promise */
+
+  var extendStatics = Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+      function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+
+  function __extends(d, b) {
+      extendStatics(d, b);
+      function __() { this.constructor = d; }
+      d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+
+  var __assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+      return t;
+  };
+
+  function __rest(s, e) {
+      var t = {};
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+          t[p] = s[p];
+      if (s != null && typeof Object.getOwnPropertySymbols === "function")
+          for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+              t[p[i]] = s[p[i]];
+      return t;
+  }
+
+  var at, // The index of the current character
+      ch, // The current character
+      escapee = {
+          '"':  '"',
+          '\\': '\\',
+          '/':  '/',
+          b:    '\b',
+          f:    '\f',
+          n:    '\n',
+          r:    '\r',
+          t:    '\t'
+      },
+      text,
+
+      error$1 = function (m) {
+          // Call error when something is wrong.
+          throw {
+              name:    'SyntaxError',
+              message: m,
+              at:      at,
+              text:    text
+          };
+      },
+      
+      next = function (c) {
+          // If a c parameter is provided, verify that it matches the current character.
+          if (c && c !== ch) {
+              error$1("Expected '" + c + "' instead of '" + ch + "'");
+          }
+          
+          // Get the next character. When there are no more characters,
+          // return the empty string.
+          
+          ch = text.charAt(at);
+          at += 1;
+          return ch;
+      },
+      
+      number = function () {
+          // Parse a number value.
+          var number,
+              string = '';
+          
+          if (ch === '-') {
+              string = '-';
+              next('-');
+          }
+          while (ch >= '0' && ch <= '9') {
+              string += ch;
+              next();
+          }
+          if (ch === '.') {
+              string += '.';
+              while (next() && ch >= '0' && ch <= '9') {
+                  string += ch;
+              }
+          }
+          if (ch === 'e' || ch === 'E') {
+              string += ch;
+              next();
+              if (ch === '-' || ch === '+') {
+                  string += ch;
+                  next();
+              }
+              while (ch >= '0' && ch <= '9') {
+                  string += ch;
+                  next();
+              }
+          }
+          number = +string;
+          if (!isFinite(number)) {
+              error$1("Bad number");
+          } else {
+              return number;
+          }
+      },
+      
+      string = function () {
+          // Parse a string value.
+          var hex,
+              i,
+              string = '',
+              uffff;
+          
+          // When parsing for string values, we must look for " and \ characters.
+          if (ch === '"') {
+              while (next()) {
+                  if (ch === '"') {
+                      next();
+                      return string;
+                  } else if (ch === '\\') {
+                      next();
+                      if (ch === 'u') {
+                          uffff = 0;
+                          for (i = 0; i < 4; i += 1) {
+                              hex = parseInt(next(), 16);
+                              if (!isFinite(hex)) {
+                                  break;
+                              }
+                              uffff = uffff * 16 + hex;
+                          }
+                          string += String.fromCharCode(uffff);
+                      } else if (typeof escapee[ch] === 'string') {
+                          string += escapee[ch];
+                      } else {
+                          break;
+                      }
+                  } else {
+                      string += ch;
+                  }
+              }
+          }
+          error$1("Bad string");
+      },
+
+      white = function () {
+
+  // Skip whitespace.
+
+          while (ch && ch <= ' ') {
+              next();
+          }
+      },
+
+      word = function () {
+
+  // true, false, or null.
+
+          switch (ch) {
+          case 't':
+              next('t');
+              next('r');
+              next('u');
+              next('e');
+              return true;
+          case 'f':
+              next('f');
+              next('a');
+              next('l');
+              next('s');
+              next('e');
+              return false;
+          case 'n':
+              next('n');
+              next('u');
+              next('l');
+              next('l');
+              return null;
+          }
+          error$1("Unexpected '" + ch + "'");
+      },
+
+      value,  // Place holder for the value function.
+
+      array$1 = function () {
+
+  // Parse an array value.
+
+          var array = [];
+
+          if (ch === '[') {
+              next('[');
+              white();
+              if (ch === ']') {
+                  next(']');
+                  return array;   // empty array
+              }
+              while (ch) {
+                  array.push(value());
+                  white();
+                  if (ch === ']') {
+                      next(']');
+                      return array;
+                  }
+                  next(',');
+                  white();
+              }
+          }
+          error$1("Bad array");
+      },
+
+      object = function () {
+
+  // Parse an object value.
+
+          var key,
+              object = {};
+
+          if (ch === '{') {
+              next('{');
+              white();
+              if (ch === '}') {
+                  next('}');
+                  return object;   // empty object
+              }
+              while (ch) {
+                  key = string();
+                  white();
+                  next(':');
+                  if (Object.hasOwnProperty.call(object, key)) {
+                      error$1('Duplicate key "' + key + '"');
+                  }
+                  object[key] = value();
+                  white();
+                  if (ch === '}') {
+                      next('}');
+                      return object;
+                  }
+                  next(',');
+                  white();
+              }
+          }
+          error$1("Bad object");
+      };
+
+  value = function () {
+
+  // Parse a JSON value. It could be an object, an array, a string, a number,
+  // or a word.
+
+      white();
+      switch (ch) {
+      case '{':
+          return object();
+      case '[':
+          return array$1();
+      case '"':
+          return string();
+      case '-':
+          return number();
+      default:
+          return ch >= '0' && ch <= '9' ? number() : word();
+      }
+  };
+
+  // Return the json_parse function. It will have access to all of the above
+  // functions and variables.
+
+  var parse = function (source, reviver) {
+      var result;
+      
+      text = source;
+      at = 0;
+      ch = ' ';
+      result = value();
+      white();
+      if (ch) {
+          error$1("Syntax error");
+      }
+
+      // If there is a reviver function, we recursively walk the new structure,
+      // passing each name/value pair to the reviver function for possible
+      // transformation, starting with a temporary root object that holds the result
+      // in an empty key. If there is not a reviver function, we simply return the
+      // result.
+
+      return typeof reviver === 'function' ? (function walk(holder, key) {
+          var k, v, value = holder[key];
+          if (value && typeof value === 'object') {
+              for (k in value) {
+                  if (Object.prototype.hasOwnProperty.call(value, k)) {
+                      v = walk(value, k);
+                      if (v !== undefined) {
+                          value[k] = v;
+                      } else {
+                          delete value[k];
+                      }
+                  }
+              }
+          }
+          return reviver.call(holder, key, value);
+      }({'': result}, '')) : result;
+  };
+
+  var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+      gap,
+      indent,
+      meta = {    // table of character substitutions
+          '\b': '\\b',
+          '\t': '\\t',
+          '\n': '\\n',
+          '\f': '\\f',
+          '\r': '\\r',
+          '"' : '\\"',
+          '\\': '\\\\'
+      },
+      rep;
+
+  function quote(string) {
+      // If the string contains no control characters, no quote characters, and no
+      // backslash characters, then we can safely slap some quotes around it.
+      // Otherwise we must also replace the offending characters with safe escape
+      // sequences.
+      
+      escapable.lastIndex = 0;
+      return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+          var c = meta[a];
+          return typeof c === 'string' ? c :
+              '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+      }) + '"' : '"' + string + '"';
+  }
+
+  function str(key, holder) {
+      // Produce a string from holder[key].
+      var i,          // The loop counter.
+          k,          // The member key.
+          v,          // The member value.
+          length,
+          mind = gap,
+          partial,
+          value = holder[key];
+      
+      // If the value has a toJSON method, call it to obtain a replacement value.
+      if (value && typeof value === 'object' &&
+              typeof value.toJSON === 'function') {
+          value = value.toJSON(key);
+      }
+      
+      // If we were called with a replacer function, then call the replacer to
+      // obtain a replacement value.
+      if (typeof rep === 'function') {
+          value = rep.call(holder, key, value);
+      }
+      
+      // What happens next depends on the value's type.
+      switch (typeof value) {
+          case 'string':
+              return quote(value);
+          
+          case 'number':
+              // JSON numbers must be finite. Encode non-finite numbers as null.
+              return isFinite(value) ? String(value) : 'null';
+          
+          case 'boolean':
+          case 'null':
+              // If the value is a boolean or null, convert it to a string. Note:
+              // typeof null does not produce 'null'. The case is included here in
+              // the remote chance that this gets fixed someday.
+              return String(value);
+              
+          case 'object':
+              if (!value) return 'null';
+              gap += indent;
+              partial = [];
+              
+              // Array.isArray
+              if (Object.prototype.toString.apply(value) === '[object Array]') {
+                  length = value.length;
+                  for (i = 0; i < length; i += 1) {
+                      partial[i] = str(i, value) || 'null';
+                  }
+                  
+                  // Join all of the elements together, separated with commas, and
+                  // wrap them in brackets.
+                  v = partial.length === 0 ? '[]' : gap ?
+                      '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
+                      '[' + partial.join(',') + ']';
+                  gap = mind;
+                  return v;
+              }
+              
+              // If the replacer is an array, use it to select the members to be
+              // stringified.
+              if (rep && typeof rep === 'object') {
+                  length = rep.length;
+                  for (i = 0; i < length; i += 1) {
+                      k = rep[i];
+                      if (typeof k === 'string') {
+                          v = str(k, value);
+                          if (v) {
+                              partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                          }
+                      }
+                  }
+              }
+              else {
+                  // Otherwise, iterate through all of the keys in the object.
+                  for (k in value) {
+                      if (Object.prototype.hasOwnProperty.call(value, k)) {
+                          v = str(k, value);
+                          if (v) {
+                              partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                          }
+                      }
+                  }
+              }
+              
+          // Join all of the member texts together, separated with commas,
+          // and wrap them in braces.
+
+          v = partial.length === 0 ? '{}' : gap ?
+              '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
+              '{' + partial.join(',') + '}';
+          gap = mind;
+          return v;
+      }
+  }
+
+  var stringify = function (value, replacer, space) {
+      var i;
+      gap = '';
+      indent = '';
+      
+      // If the space parameter is a number, make an indent string containing that
+      // many spaces.
+      if (typeof space === 'number') {
+          for (i = 0; i < space; i += 1) {
+              indent += ' ';
+          }
+      }
+      // If the space parameter is a string, it will be used as the indent string.
+      else if (typeof space === 'string') {
+          indent = space;
+      }
+
+      // If there is a replacer, it must be a function or an array.
+      // Otherwise, throw an error.
+      rep = replacer;
+      if (replacer && typeof replacer !== 'function'
+      && (typeof replacer !== 'object' || typeof replacer.length !== 'number')) {
+          throw new Error('JSON.stringify');
+      }
+      
+      // Make a fake root object containing our value under the key of ''.
+      // Return the result of stringifying the value.
+      return str('', {'': value});
+  };
+
+  var parse$1 = parse;
+  var stringify$1 = stringify;
+
+  var jsonify = {
+  	parse: parse$1,
+  	stringify: stringify$1
+  };
+
+  var json = typeof JSON !== 'undefined' ? JSON : jsonify;
+
+  var jsonStableStringify = function (obj, opts) {
+      if (!opts) opts = {};
+      if (typeof opts === 'function') opts = { cmp: opts };
+      var space = opts.space || '';
+      if (typeof space === 'number') space = Array(space+1).join(' ');
+      var cycles = (typeof opts.cycles === 'boolean') ? opts.cycles : false;
+      var replacer = opts.replacer || function(key, value) { return value; };
+
+      var cmp = opts.cmp && (function (f) {
+          return function (node) {
+              return function (a, b) {
+                  var aobj = { key: a, value: node[a] };
+                  var bobj = { key: b, value: node[b] };
+                  return f(aobj, bobj);
+              };
+          };
+      })(opts.cmp);
+
+      var seen = [];
+      return (function stringify (parent, key, node, level) {
+          var indent = space ? ('\n' + new Array(level + 1).join(space)) : '';
+          var colonSeparator = space ? ': ' : ':';
+
+          if (node && node.toJSON && typeof node.toJSON === 'function') {
+              node = node.toJSON();
+          }
+
+          node = replacer.call(parent, key, node);
+
+          if (node === undefined) {
+              return;
+          }
+          if (typeof node !== 'object' || node === null) {
+              return json.stringify(node);
+          }
+          if (isArray$1(node)) {
+              var out = [];
+              for (var i = 0; i < node.length; i++) {
+                  var item = stringify(node, i, node[i], level+1) || json.stringify(null);
+                  out.push(indent + space + item);
+              }
+              return '[' + out.join(',') + indent + ']';
+          }
+          else {
+              if (seen.indexOf(node) !== -1) {
+                  if (cycles) return json.stringify('__cycle__');
+                  throw new TypeError('Converting circular structure to JSON');
+              }
+              else seen.push(node);
+
+              var keys = objectKeys(node).sort(cmp && cmp(node));
+              var out = [];
+              for (var i = 0; i < keys.length; i++) {
+                  var key = keys[i];
+                  var value = stringify(node, key, node[key], level+1);
+
+                  if(!value) continue;
+
+                  var keyValue = json.stringify(key)
+                      + colonSeparator
+                      + value;
+                  out.push(indent + space + keyValue);
+              }
+              seen.splice(seen.indexOf(node), 1);
+              return '{' + out.join(',') + indent + '}';
+          }
+      })({ '': obj }, '', obj, 0);
+  };
+
+  var isArray$1 = Array.isArray || function (x) {
+      return {}.toString.call(x) === '[object Array]';
+  };
+
+  var objectKeys = Object.keys || function (obj) {
+      var has = Object.prototype.hasOwnProperty || function () { return true };
+      var keys = [];
+      for (var key in obj) {
+          if (has.call(obj, key)) keys.push(key);
+      }
+      return keys;
+  };
+
+  function isLogicalOr(op) {
+      return !!op.or;
+  }
+  function isLogicalAnd(op) {
+      return !!op.and;
+  }
+  function isLogicalNot(op) {
+      return !!op.not;
+  }
+  function forEachLeaf(op, fn) {
+      if (isLogicalNot(op)) {
+          forEachLeaf(op.not, fn);
+      }
+      else if (isLogicalAnd(op)) {
+          for (var _i = 0, _a = op.and; _i < _a.length; _i++) {
+              var subop = _a[_i];
+              forEachLeaf(subop, fn);
+          }
+      }
+      else if (isLogicalOr(op)) {
+          for (var _b = 0, _c = op.or; _b < _c.length; _b++) {
+              var subop = _c[_b];
+              forEachLeaf(subop, fn);
+          }
+      }
+      else {
+          fn(op);
+      }
+  }
+  function normalizeLogicalOperand(op, normalizer) {
+      if (isLogicalNot(op)) {
+          return { not: normalizeLogicalOperand(op.not, normalizer) };
+      }
+      else if (isLogicalAnd(op)) {
+          return { and: op.and.map(function (o) { return normalizeLogicalOperand(o, normalizer); }) };
+      }
+      else if (isLogicalOr(op)) {
+          return { or: op.or.map(function (o) { return normalizeLogicalOperand(o, normalizer); }) };
+      }
+      else {
+          return normalizer(op);
+      }
+  }
+
+  /**
+   * Creates an object composed of the picked object properties.
+   *
+   * Example:  (from lodash)
+   *
+   * var object = {'a': 1, 'b': '2', 'c': 3};
+   * pick(object, ['a', 'c']);
+   * // → {'a': 1, 'c': 3}
+   *
+   */
+  function pick(obj, props) {
+      var copy = {};
+      for (var _i = 0, props_1 = props; _i < props_1.length; _i++) {
+          var prop = props_1[_i];
+          if (obj.hasOwnProperty(prop)) {
+              copy[prop] = obj[prop];
+          }
+      }
+      return copy;
+  }
+  /**
+   * The opposite of _.pick; this method creates an object composed of the own
+   * and inherited enumerable string keyed properties of object that are not omitted.
+   */
+  function omit(obj, props) {
+      var copy = __assign({}, obj);
+      for (var _i = 0, props_2 = props; _i < props_2.length; _i++) {
+          var prop = props_2[_i];
+          delete copy[prop];
+      }
+      return copy;
+  }
+  /**
+   * Converts any object into a string representation that can be consumed by humans.
+   */
+  var stringify$2 = jsonStableStringify;
+  /**
+   * Converts any object into a string of limited size, or a number.
+   */
+  function hash(a) {
+      if (isNumber(a)) {
+          return a;
+      }
+      var str = isString(a) ? a : jsonStableStringify(a);
+      // short strings can be used as hash directly, longer strings are hashed to reduce memory usage
+      if (str.length < 100) {
+          return str;
+      }
+      // from http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+      var h = 0;
+      for (var i = 0; i < str.length; i++) {
+          var char = str.charCodeAt(i);
+          h = ((h << 5) - h) + char;
+          h = h & h; // Convert to 32bit integer
+      }
+      return h;
+  }
+  function contains(array$$1, item) {
+      return array$$1.indexOf(item) > -1;
+  }
+  /** Returns the array without the elements in item */
+  function without(array$$1, excludedItems) {
+      return array$$1.filter(function (item) { return !contains(excludedItems, item); });
+  }
+  function union(array$$1, other) {
+      return array$$1.concat(without(other, array$$1));
+  }
+  /**
+   * Returns true if any item returns true.
+   */
+  function some(arr, f) {
+      var i = 0;
+      for (var k = 0; k < arr.length; k++) {
+          if (f(arr[k], k, i++)) {
+              return true;
+          }
+      }
+      return false;
+  }
+  /**
+   * Returns true if all items return true.
+   */
+  function every(arr, f) {
+      var i = 0;
+      for (var k = 0; k < arr.length; k++) {
+          if (!f(arr[k], k, i++)) {
+              return false;
+          }
+      }
+      return true;
+  }
+  function flatten(arrays) {
+      return [].concat.apply([], arrays);
+  }
+  /**
+   * recursively merges src into dest
+   */
+  function mergeDeep(dest) {
+      var src = [];
+      for (var _i = 1; _i < arguments.length; _i++) {
+          src[_i - 1] = arguments[_i];
+      }
+      for (var _a = 0, src_1 = src; _a < src_1.length; _a++) {
+          var s = src_1[_a];
+          dest = deepMerge_(dest, s);
+      }
+      return dest;
+  }
+  // recursively merges src into dest
+  function deepMerge_(dest, src) {
+      if (typeof src !== 'object' || src === null) {
+          return dest;
+      }
+      for (var p in src) {
+          if (!src.hasOwnProperty(p)) {
+              continue;
+          }
+          if (src[p] === undefined) {
+              continue;
+          }
+          if (typeof src[p] !== 'object' || isArray(src[p]) || src[p] === null) {
+              dest[p] = src[p];
+          }
+          else if (typeof dest[p] !== 'object' || dest[p] === null) {
+              dest[p] = mergeDeep(isArray(src[p].constructor) ? [] : {}, src[p]);
+          }
+          else {
+              mergeDeep(dest[p], src[p]);
+          }
+      }
+      return dest;
+  }
+  function unique(values, f) {
+      var results = [];
+      var u = {};
+      var v;
+      for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
+          var val = values_1[_i];
+          v = f(val);
+          if (v in u) {
+              continue;
+          }
+          u[v] = 1;
+          results.push(val);
+      }
+      return results;
+  }
+  /**
+   * Returns true if the two dictionaries disagree. Applies only to defined values.
+   */
+  function differ(dict, other) {
+      for (var key$$1 in dict) {
+          if (dict.hasOwnProperty(key$$1)) {
+              if (other[key$$1] && dict[key$$1] && other[key$$1] !== dict[key$$1]) {
+                  return true;
+              }
+          }
+      }
+      return false;
+  }
+  function hasIntersection(a, b) {
+      for (var key$$1 in a) {
+          if (key$$1 in b) {
+              return true;
+          }
+      }
+      return false;
+  }
+  function isNumeric(num) {
+      return !isNaN(num);
+  }
+  function differArray(array$$1, other) {
+      if (array$$1.length !== other.length) {
+          return true;
+      }
+      array$$1.sort();
+      other.sort();
+      for (var i = 0; i < array$$1.length; i++) {
+          if (other[i] !== array$$1[i]) {
+              return true;
+          }
+      }
+      return false;
+  }
+  // This is a stricter version of Object.keys but with better types. See https://github.com/Microsoft/TypeScript/pull/12253#issuecomment-263132208
+  var keys = Object.keys;
+  function vals(x) {
+      var _vals = [];
+      for (var k in x) {
+          if (x.hasOwnProperty(k)) {
+              _vals.push(x[k]);
+          }
+      }
+      return _vals;
+  }
+  function flagKeys(f) {
+      return keys(f);
+  }
+  function duplicate(obj) {
+      return JSON.parse(JSON.stringify(obj));
+  }
+  function isBoolean$1(b) {
+      return b === true || b === false;
+  }
+  /**
+   * Convert a string into a valid variable name
+   */
+  function varName(s) {
+      // Replace non-alphanumeric characters (anything besides a-zA-Z0-9_) with _
+      var alphanumericS = s.replace(/\W/g, '_');
+      // Add _ if the string has leading numbers.
+      return (s.match(/^\d+/) ? '_' : '') + alphanumericS;
+  }
+  function logicalExpr(op, cb) {
+      if (isLogicalNot(op)) {
+          return '!(' + logicalExpr(op.not, cb) + ')';
+      }
+      else if (isLogicalAnd(op)) {
+          return '(' + op.and.map(function (and) { return logicalExpr(and, cb); }).join(') && (') + ')';
+      }
+      else if (isLogicalOr(op)) {
+          return '(' + op.or.map(function (or) { return logicalExpr(or, cb); }).join(') || (') + ')';
+      }
+      else {
+          return cb(op);
+      }
+  }
+  /**
+   * Delete nested property of an object, and delete the ancestors of the property if they become empty.
+   */
+  function deleteNestedProperty(obj, orderedProps) {
+      if (orderedProps.length === 0) {
+          return true;
+      }
+      var prop = orderedProps.shift();
+      if (deleteNestedProperty(obj[prop], orderedProps)) {
+          delete obj[prop];
+      }
+      return Object.keys(obj).length === 0;
+  }
+  function titlecase(s) {
+      return s.charAt(0).toUpperCase() + s.substr(1);
+  }
+  /**
+   * Converts a path to an access path with datum.
+   * @param path The field name.
+   * @param datum The string to use for `datum`.
+   */
+  function accessPathWithDatum(path, datum) {
+      if (datum === void 0) { datum = 'datum'; }
+      var pieces = splitAccessPath(path);
+      var prefixes = [];
+      for (var i = 1; i <= pieces.length; i++) {
+          var prefix = "[" + pieces.slice(0, i).map($).join('][') + "]";
+          prefixes.push("" + datum + prefix);
+      }
+      return prefixes.join(' && ');
+  }
+  /**
+   * Return access with datum to the falttened field.
+   * @param path The field name.
+   * @param datum The string to use for `datum`.
+   */
+  function flatAccessWithDatum(path, datum) {
+      if (datum === void 0) { datum = 'datum'; }
+      return datum + "[" + $(splitAccessPath(path).join('.')) + "]";
+  }
+  /**
+   * Replaces path accesses with access to non-nested field.
+   * For example, `foo["bar"].baz` becomes `foo\\.bar\\.baz`.
+   */
+  function replacePathInField(path) {
+      return "" + splitAccessPath(path).map(function (p) { return p.replace('.', '\\.'); }).join('\\.');
+  }
+  /**
+   * Remove path accesses with access from field.
+   * For example, `foo["bar"].baz` becomes `foo.bar.baz`.
+   */
+  function removePathFromField(path) {
+      return "" + splitAccessPath(path).join('.');
+  }
+  /**
+   * Count the depth of the path. Returns 1 for fields that are not nested.
+   */
+  function accessPathDepth(path) {
+      if (!path) {
+          return 0;
+      }
+      return splitAccessPath(path).length;
+  }
+
+  var util = /*#__PURE__*/Object.freeze({
+    pick: pick,
+    omit: omit,
+    stringify: stringify$2,
+    hash: hash,
+    contains: contains,
+    without: without,
+    union: union,
+    some: some,
+    every: every,
+    flatten: flatten,
+    mergeDeep: mergeDeep,
+    unique: unique,
+    differ: differ,
+    hasIntersection: hasIntersection,
+    isNumeric: isNumeric,
+    differArray: differArray,
+    keys: keys,
+    vals: vals,
+    flagKeys: flagKeys,
+    duplicate: duplicate,
+    isBoolean: isBoolean$1,
+    varName: varName,
+    logicalExpr: logicalExpr,
+    deleteNestedProperty: deleteNestedProperty,
+    titlecase: titlecase,
+    accessPathWithDatum: accessPathWithDatum,
+    flatAccessWithDatum: flatAccessWithDatum,
+    replacePathInField: replacePathInField,
+    removePathFromField: removePathFromField,
+    accessPathDepth: accessPathDepth
+  });
+
+  var AGGREGATE_OP_INDEX = {
+      argmax: 1,
+      argmin: 1,
+      average: 1,
+      count: 1,
+      distinct: 1,
+      max: 1,
+      mean: 1,
+      median: 1,
+      min: 1,
+      missing: 1,
+      q1: 1,
+      q3: 1,
+      ci0: 1,
+      ci1: 1,
+      stderr: 1,
+      stdev: 1,
+      stdevp: 1,
+      sum: 1,
+      valid: 1,
+      values: 1,
+      variance: 1,
+      variancep: 1,
+  };
+  var AGGREGATE_OPS = flagKeys(AGGREGATE_OP_INDEX);
+  function isAggregateOp(a) {
+      return !!AGGREGATE_OP_INDEX[a];
+  }
+  var COUNTING_OPS = ['count', 'valid', 'missing', 'distinct'];
+  function isCountingAggregateOp(aggregate) {
+      return aggregate && contains(COUNTING_OPS, aggregate);
+  }
+  /** Additive-based aggregation operations.  These can be applied to stack. */
+  var SUM_OPS = [
+      'count',
+      'sum',
+      'distinct',
+      'valid',
+      'missing'
+  ];
+  /**
+   * Aggregation operators that always produce values within the range [domainMin, domainMax].
+   */
+  var SHARED_DOMAIN_OPS = [
+      'mean',
+      'average',
+      'median',
+      'q1',
+      'q3',
+      'min',
+      'max',
+  ];
+  var SHARED_DOMAIN_OP_INDEX = toSet(SHARED_DOMAIN_OPS);
+
+  var aggregate = /*#__PURE__*/Object.freeze({
+    AGGREGATE_OPS: AGGREGATE_OPS,
+    isAggregateOp: isAggregateOp,
+    COUNTING_OPS: COUNTING_OPS,
+    isCountingAggregateOp: isCountingAggregateOp,
+    SUM_OPS: SUM_OPS,
+    SHARED_DOMAIN_OPS: SHARED_DOMAIN_OPS,
+    SHARED_DOMAIN_OP_INDEX: SHARED_DOMAIN_OP_INDEX
+  });
+
+  var AXIS_PARTS = ['domain', 'grid', 'labels', 'ticks', 'title'];
+  /**
+   * A dictionary listing whether a certain axis property is applicable for only main axes or only grid axes.
+   * (Properties not listed are applicable for both)
+   */
+  var AXIS_PROPERTY_TYPE = {
+      grid: 'grid',
+      gridScale: 'grid',
+      domain: 'main',
+      labels: 'main',
+      labelFlush: 'main',
+      labelOverlap: 'main',
+      minExtent: 'main',
+      maxExtent: 'main',
+      offset: 'main',
+      ticks: 'main',
+      title: 'main',
+      values: 'both',
+      scale: 'both',
+      zindex: 'both' // this is actually set afterward, so it doesn't matter
+  };
+  var COMMON_AXIS_PROPERTIES_INDEX = {
+      orient: 1,
+      domain: 1,
+      format: 1,
+      grid: 1,
+      labelBound: 1,
+      labelFlush: 1,
+      labelPadding: 1,
+      labels: 1,
+      labelOverlap: 1,
+      maxExtent: 1,
+      minExtent: 1,
+      offset: 1,
+      position: 1,
+      tickCount: 1,
+      ticks: 1,
+      tickSize: 1,
+      title: 1,
+      titlePadding: 1,
+      values: 1,
+      zindex: 1,
+  };
+  var AXIS_PROPERTIES_INDEX = __assign({}, COMMON_AXIS_PROPERTIES_INDEX, { encoding: 1, labelAngle: 1, titleMaxLength: 1 });
+  var VG_AXIS_PROPERTIES_INDEX = __assign({ scale: 1 }, COMMON_AXIS_PROPERTIES_INDEX, { gridScale: 1, encode: 1 });
+  function isAxisProperty(prop) {
+      return !!AXIS_PROPERTIES_INDEX[prop];
+  }
+  var VG_AXIS_PROPERTIES = flagKeys(VG_AXIS_PROPERTIES_INDEX);
+  // Export for dependent projects
+  var AXIS_PROPERTIES = flagKeys(AXIS_PROPERTIES_INDEX);
+
+  var axis = /*#__PURE__*/Object.freeze({
+    AXIS_PARTS: AXIS_PARTS,
+    AXIS_PROPERTY_TYPE: AXIS_PROPERTY_TYPE,
+    isAxisProperty: isAxisProperty,
+    VG_AXIS_PROPERTIES: VG_AXIS_PROPERTIES,
+    AXIS_PROPERTIES: AXIS_PROPERTIES
+  });
+
+  /*
+   * Constants and utilities for encoding channels (Visual variables)
+   * such as 'x', 'y', 'color'.
+   */
+  var Channel;
+  (function (Channel) {
+      // Facet
+      Channel.ROW = 'row';
+      Channel.COLUMN = 'column';
+      // Position
+      Channel.X = 'x';
+      Channel.Y = 'y';
+      Channel.X2 = 'x2';
+      Channel.Y2 = 'y2';
+      // Geo Position
+      Channel.LATITUDE = 'latitude';
+      Channel.LONGITUDE = 'longitude';
+      Channel.LATITUDE2 = 'latitude2';
+      Channel.LONGITUDE2 = 'longitude2';
+      // Mark property with scale
+      Channel.COLOR = 'color';
+      Channel.FILL = 'fill';
+      Channel.STROKE = 'stroke';
+      Channel.SHAPE = 'shape';
+      Channel.SIZE = 'size';
+      Channel.OPACITY = 'opacity';
+      // Non-scale channel
+      Channel.TEXT = 'text';
+      Channel.ORDER = 'order';
+      Channel.DETAIL = 'detail';
+      Channel.KEY = 'key';
+      Channel.TOOLTIP = 'tooltip';
+      Channel.HREF = 'href';
+  })(Channel || (Channel = {}));
+  var X = Channel.X;
+  var Y = Channel.Y;
+  var X2 = Channel.X2;
+  var Y2 = Channel.Y2;
+  var LATITUDE = Channel.LATITUDE;
+  var LATITUDE2 = Channel.LATITUDE2;
+  var LONGITUDE = Channel.LONGITUDE;
+  var LONGITUDE2 = Channel.LONGITUDE2;
+  var ROW = Channel.ROW;
+  var COLUMN = Channel.COLUMN;
+  var SHAPE = Channel.SHAPE;
+  var SIZE = Channel.SIZE;
+  var COLOR = Channel.COLOR;
+  var FILL = Channel.FILL;
+  var STROKE = Channel.STROKE;
+  var TEXT = Channel.TEXT;
+  var DETAIL = Channel.DETAIL;
+  var KEY = Channel.KEY;
+  var ORDER = Channel.ORDER;
+  var OPACITY = Channel.OPACITY;
+  var TOOLTIP = Channel.TOOLTIP;
+  var HREF = Channel.HREF;
+  var GEOPOSITION_CHANNEL_INDEX = {
+      longitude: 1,
+      longitude2: 1,
+      latitude: 1,
+      latitude2: 1,
+  };
+  var GEOPOSITION_CHANNELS = flagKeys(GEOPOSITION_CHANNEL_INDEX);
+  var UNIT_CHANNEL_INDEX = __assign({ 
+      // position
+      x: 1, y: 1, x2: 1, y2: 1 }, GEOPOSITION_CHANNEL_INDEX, { 
+      // color
+      color: 1, fill: 1, stroke: 1, 
+      // other non-position with scale
+      opacity: 1, size: 1, shape: 1, 
+      // channels without scales
+      order: 1, text: 1, detail: 1, key: 1, tooltip: 1, href: 1 });
+  function isColorChannel(channel) {
+      return channel === 'color' || channel === 'fill' || channel === 'stroke';
+  }
+  var FACET_CHANNEL_INDEX = {
+      row: 1,
+      column: 1
+  };
+  var CHANNEL_INDEX = __assign({}, UNIT_CHANNEL_INDEX, FACET_CHANNEL_INDEX);
+  var CHANNELS = flagKeys(CHANNEL_INDEX);
+  var _o = CHANNEL_INDEX.order, _d = CHANNEL_INDEX.detail, SINGLE_DEF_CHANNEL_INDEX = __rest(CHANNEL_INDEX, ["order", "detail"]);
+  /**
+   * Channels that cannot have an array of channelDef.
+   * model.fieldDef, getFieldDef only work for these channels.
+   *
+   * (The only two channels that can have an array of channelDefs are "detail" and "order".
+   * Since there can be multiple fieldDefs for detail and order, getFieldDef/model.fieldDef
+   * are not applicable for them.  Similarly, selection projection won't work with "detail" and "order".)
+   */
+  var SINGLE_DEF_CHANNELS = flagKeys(SINGLE_DEF_CHANNEL_INDEX);
+  function isChannel(str) {
+      return !!CHANNEL_INDEX[str];
+  }
+  // CHANNELS without COLUMN, ROW
+  var UNIT_CHANNELS = flagKeys(UNIT_CHANNEL_INDEX);
+  // NONPOSITION_CHANNELS = UNIT_CHANNELS without X, Y, X2, Y2;
+  var _x = UNIT_CHANNEL_INDEX.x, _y = UNIT_CHANNEL_INDEX.y, 
+  // x2 and y2 share the same scale as x and y
+  _x2 = UNIT_CHANNEL_INDEX.x2, _y2 = UNIT_CHANNEL_INDEX.y2, _latitude = UNIT_CHANNEL_INDEX.latitude, _longitude = UNIT_CHANNEL_INDEX.longitude, _latitude2 = UNIT_CHANNEL_INDEX.latitude2, _longitude2 = UNIT_CHANNEL_INDEX.longitude2, 
+  // The rest of unit channels then have scale
+  NONPOSITION_CHANNEL_INDEX = __rest(UNIT_CHANNEL_INDEX, ["x", "y", "x2", "y2", "latitude", "longitude", "latitude2", "longitude2"]);
+  var NONPOSITION_CHANNELS = flagKeys(NONPOSITION_CHANNEL_INDEX);
+  // POSITION_SCALE_CHANNELS = X and Y;
+  var POSITION_SCALE_CHANNEL_INDEX = { x: 1, y: 1 };
+  var POSITION_SCALE_CHANNELS = flagKeys(POSITION_SCALE_CHANNEL_INDEX);
+  // NON_POSITION_SCALE_CHANNEL = SCALE_CHANNELS without X, Y
+  var  
+  NONPOSITION_SCALE_CHANNEL_INDEX = __rest(NONPOSITION_CHANNEL_INDEX, ["text", "tooltip", "href", "detail", "key", "order"]);
+  var NONPOSITION_SCALE_CHANNELS = flagKeys(NONPOSITION_SCALE_CHANNEL_INDEX);
+  // Declare SCALE_CHANNEL_INDEX
+  var SCALE_CHANNEL_INDEX = __assign({}, POSITION_SCALE_CHANNEL_INDEX, NONPOSITION_SCALE_CHANNEL_INDEX);
+  /** List of channels with scales */
+  var SCALE_CHANNELS = flagKeys(SCALE_CHANNEL_INDEX);
+  function isScaleChannel(channel) {
+      return !!SCALE_CHANNEL_INDEX[channel];
+  }
+  /**
+   * Return whether a channel supports a particular mark type.
+   * @param channel  channel name
+   * @param mark the mark type
+   * @return whether the mark supports the channel
+   */
+  function supportMark(channel, mark) {
+      return mark in getSupportedMark(channel);
+  }
+  /**
+   * Return a dictionary showing whether a channel supports mark type.
+   * @param channel
+   * @return A dictionary mapping mark types to boolean values.
+   */
+  function getSupportedMark(channel) {
+      switch (channel) {
+          case COLOR:
+          case FILL:
+          case STROKE:
+          case DETAIL:
+          case KEY:
+          case TOOLTIP:
+          case HREF:
+          case ORDER: // TODO: revise (order might not support rect, which is not stackable?)
+          case OPACITY:
+          case ROW:
+          case COLUMN:
+              return {
+                  point: true, tick: true, rule: true, circle: true, square: true,
+                  bar: true, rect: true, line: true, trail: true, area: true, text: true, geoshape: true
+              };
+          case X:
+          case Y:
+          case LATITUDE:
+          case LONGITUDE:
+              return {
+                  point: true, tick: true, rule: true, circle: true, square: true,
+                  bar: true, rect: true, line: true, trail: true, area: true, text: true
+              };
+          case X2:
+          case Y2:
+          case LATITUDE2:
+          case LONGITUDE2:
+              return {
+                  rule: true, bar: true, rect: true, area: true
+              };
+          case SIZE:
+              return {
+                  point: true, tick: true, rule: true, circle: true, square: true,
+                  bar: true, text: true, line: true, trail: true
+              };
+          case SHAPE:
+              return { point: true, geoshape: true };
+          case TEXT:
+              return { text: true };
+      }
+  }
+  function rangeType(channel) {
+      switch (channel) {
+          case X:
+          case Y:
+          case SIZE:
+          case OPACITY:
+          // X2 and Y2 use X and Y scales, so they similarly have continuous range.
+          case X2:
+          case Y2:
+              return 'continuous';
+          case ROW:
+          case COLUMN:
+          case SHAPE:
+          // TEXT, TOOLTIP, and HREF have no scale but have discrete output
+          case TEXT:
+          case TOOLTIP:
+          case HREF:
+              return 'discrete';
+          // Color can be either continuous or discrete, depending on scale type.
+          case COLOR:
+          case FILL:
+          case STROKE:
+              return 'flexible';
+          // No scale, no range type.
+          case LATITUDE:
+          case LONGITUDE:
+          case LATITUDE2:
+          case LONGITUDE2:
+          case DETAIL:
+          case KEY:
+          case ORDER:
+              return undefined;
+      }
+      /* istanbul ignore next: should never reach here. */
+      throw new Error('rangeType not implemented for ' + channel);
+  }
+
+  var channel = /*#__PURE__*/Object.freeze({
+    get Channel () { return Channel; },
+    X: X,
+    Y: Y,
+    X2: X2,
+    Y2: Y2,
+    LATITUDE: LATITUDE,
+    LATITUDE2: LATITUDE2,
+    LONGITUDE: LONGITUDE,
+    LONGITUDE2: LONGITUDE2,
+    ROW: ROW,
+    COLUMN: COLUMN,
+    SHAPE: SHAPE,
+    SIZE: SIZE,
+    COLOR: COLOR,
+    FILL: FILL,
+    STROKE: STROKE,
+    TEXT: TEXT,
+    DETAIL: DETAIL,
+    KEY: KEY,
+    ORDER: ORDER,
+    OPACITY: OPACITY,
+    TOOLTIP: TOOLTIP,
+    HREF: HREF,
+    GEOPOSITION_CHANNEL_INDEX: GEOPOSITION_CHANNEL_INDEX,
+    GEOPOSITION_CHANNELS: GEOPOSITION_CHANNELS,
+    isColorChannel: isColorChannel,
+    CHANNELS: CHANNELS,
+    SINGLE_DEF_CHANNELS: SINGLE_DEF_CHANNELS,
+    isChannel: isChannel,
+    UNIT_CHANNELS: UNIT_CHANNELS,
+    NONPOSITION_CHANNELS: NONPOSITION_CHANNELS,
+    POSITION_SCALE_CHANNELS: POSITION_SCALE_CHANNELS,
+    NONPOSITION_SCALE_CHANNELS: NONPOSITION_SCALE_CHANNELS,
+    SCALE_CHANNELS: SCALE_CHANNELS,
+    isScaleChannel: isScaleChannel,
+    supportMark: supportMark,
+    getSupportedMark: getSupportedMark,
+    rangeType: rangeType
+  });
+
+  function binToString(bin) {
+      if (isBoolean(bin)) {
+          return 'bin';
+      }
+      return 'bin' + keys(bin).map(function (p) { return varName("_" + p + "_" + bin[p]); }).join('');
+  }
+  function isBinParams(bin) {
+      return bin && !isBoolean(bin);
+  }
+  function autoMaxBins(channel) {
+      switch (channel) {
+          case ROW:
+          case COLUMN:
+          case SIZE:
+          case COLOR:
+          case FILL:
+          case STROKE:
+          case OPACITY:
+          // Facets and Size shouldn't have too many bins
+          // We choose 6 like shape to simplify the rule
+          case SHAPE:
+              return 6; // Vega's "shape" has 6 distinct values
+          default:
+              return 10;
+      }
+  }
+
+  var bin = /*#__PURE__*/Object.freeze({
+    binToString: binToString,
+    isBinParams: isBinParams,
+    autoMaxBins: autoMaxBins
+  });
+
+  var Mark;
+  (function (Mark) {
+      Mark.AREA = 'area';
+      Mark.BAR = 'bar';
+      Mark.LINE = 'line';
+      Mark.POINT = 'point';
+      Mark.RECT = 'rect';
+      Mark.RULE = 'rule';
+      Mark.TEXT = 'text';
+      Mark.TICK = 'tick';
+      Mark.TRAIL = 'trail';
+      Mark.CIRCLE = 'circle';
+      Mark.SQUARE = 'square';
+      Mark.GEOSHAPE = 'geoshape';
+  })(Mark || (Mark = {}));
+  var AREA = Mark.AREA;
+  var BAR = Mark.BAR;
+  var LINE = Mark.LINE;
+  var POINT = Mark.POINT;
+  var TEXT$1 = Mark.TEXT;
+  var TICK = Mark.TICK;
+  var TRAIL = Mark.TRAIL;
+  var RECT = Mark.RECT;
+  var RULE = Mark.RULE;
+  var GEOSHAPE = Mark.GEOSHAPE;
+  var CIRCLE = Mark.CIRCLE;
+  var SQUARE = Mark.SQUARE;
+  // Using mapped type to declare index, ensuring we always have all marks when we add more.
+  var MARK_INDEX = {
+      area: 1,
+      bar: 1,
+      line: 1,
+      point: 1,
+      text: 1,
+      tick: 1,
+      trail: 1,
+      rect: 1,
+      geoshape: 1,
+      rule: 1,
+      circle: 1,
+      square: 1
+  };
+  function isMark(m) {
+      return !!MARK_INDEX[m];
+  }
+  function isPathMark(m) {
+      return contains(['line', 'area', 'trail'], m);
+  }
+  var PRIMITIVE_MARKS = flagKeys(MARK_INDEX);
+  function isMarkDef(mark) {
+      return mark['type'];
+  }
+  var PRIMITIVE_MARK_INDEX = toSet(PRIMITIVE_MARKS);
+  function isPrimitiveMark(mark) {
+      var markType = isMarkDef(mark) ? mark.type : mark;
+      return markType in PRIMITIVE_MARK_INDEX;
+  }
+  var STROKE_CONFIG = ['stroke', 'strokeWidth',
+      'strokeDash', 'strokeDashOffset', 'strokeOpacity', 'strokeJoin', 'strokeMiterLimit'];
+  var FILL_CONFIG = ['fill', 'fillOpacity'];
+  var FILL_STROKE_CONFIG = [].concat(STROKE_CONFIG, FILL_CONFIG);
+  var VL_ONLY_MARK_CONFIG_PROPERTIES = ['filled', 'color'];
+  var VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX = {
+      area: ['line', 'point'],
+      bar: ['binSpacing', 'continuousBandSize', 'discreteBandSize'],
+      line: ['point'],
+      text: ['shortTimeLabels'],
+      tick: ['bandSize', 'thickness']
+  };
+  var defaultMarkConfig = {
+      color: '#4c78a8',
+  };
+  var defaultBarConfig = {
+      binSpacing: 1,
+      continuousBandSize: 5
+  };
+  var defaultTickConfig = {
+      thickness: 1
+  };
+
+  var mark = /*#__PURE__*/Object.freeze({
+    get Mark () { return Mark; },
+    AREA: AREA,
+    BAR: BAR,
+    LINE: LINE,
+    POINT: POINT,
+    TEXT: TEXT$1,
+    TICK: TICK,
+    TRAIL: TRAIL,
+    RECT: RECT,
+    RULE: RULE,
+    GEOSHAPE: GEOSHAPE,
+    CIRCLE: CIRCLE,
+    SQUARE: SQUARE,
+    isMark: isMark,
+    isPathMark: isPathMark,
+    PRIMITIVE_MARKS: PRIMITIVE_MARKS,
+    isMarkDef: isMarkDef,
+    isPrimitiveMark: isPrimitiveMark,
+    STROKE_CONFIG: STROKE_CONFIG,
+    FILL_CONFIG: FILL_CONFIG,
+    FILL_STROKE_CONFIG: FILL_STROKE_CONFIG,
+    VL_ONLY_MARK_CONFIG_PROPERTIES: VL_ONLY_MARK_CONFIG_PROPERTIES,
+    VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX: VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX,
+    defaultMarkConfig: defaultMarkConfig,
+    defaultBarConfig: defaultBarConfig,
+    defaultTickConfig: defaultTickConfig
+  });
+
+  /**
+   * Vega-Lite's singleton logger utility.
+   */
+  /**
+   * Main (default) Vega Logger instance for Vega-Lite
+   */
+  var main = logger(Warn);
+  var current = main;
+  /**
+   * Set the singleton logger to be a custom logger
+   */
+  function set(newLogger) {
+      current = newLogger;
+      return current;
+  }
+  /**
+   * Reset the main logger to use the default Vega Logger
+   */
+  function reset() {
+      current = main;
+      return current;
+  }
+  function warn() {
+      var _ = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+          _[_i] = arguments[_i];
+      }
+      current.warn.apply(current, arguments);
+  }
+  function debug() {
+      var _ = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+          _[_i] = arguments[_i];
+      }
+      current.debug.apply(current, arguments);
+  }
+  /**
+   * Collection of all Vega-Lite Error Messages
+   */
+  var message;
+  (function (message) {
+      message.INVALID_SPEC = 'Invalid spec';
+      // FIT
+      message.FIT_NON_SINGLE = 'Autosize "fit" only works for single views and layered views.';
+      message.CANNOT_FIX_RANGE_STEP_WITH_FIT = 'Cannot use a fixed value of "rangeStep" when "autosize" is "fit".';
+      // SELECTION
+      function cannotProjectOnChannelWithoutField(channel) {
+          return "Cannot project a selection on encoding channel \"" + channel + "\", which has no field.";
+      }
+      message.cannotProjectOnChannelWithoutField = cannotProjectOnChannelWithoutField;
+      function nearestNotSupportForContinuous(mark) {
+          return "The \"nearest\" transform is not supported for " + mark + " marks.";
+      }
+      message.nearestNotSupportForContinuous = nearestNotSupportForContinuous;
+      function selectionNotFound(name) {
+          return "Cannot find a selection named \"" + name + "\"";
+      }
+      message.selectionNotFound = selectionNotFound;
+      message.SCALE_BINDINGS_CONTINUOUS = 'Scale bindings are currently only supported for scales with unbinned, continuous domains.';
+      // REPEAT
+      function noSuchRepeatedValue(field$$1) {
+          return "Unknown repeated value \"" + field$$1 + "\".";
+      }
+      message.noSuchRepeatedValue = noSuchRepeatedValue;
+      // CONCAT
+      message.CONCAT_CANNOT_SHARE_AXIS = 'Axes cannot be shared in concatenated views.';
+      // REPEAT
+      message.REPEAT_CANNOT_SHARE_AXIS = 'Axes cannot be shared in repeated views.';
+      // TITLE
+      function cannotSetTitleAnchor(type) {
+          return "Cannot set title \"anchor\" for a " + type + " spec";
+      }
+      message.cannotSetTitleAnchor = cannotSetTitleAnchor;
+      // DATA
+      function unrecognizedParse(p) {
+          return "Unrecognized parse \"" + p + "\".";
+      }
+      message.unrecognizedParse = unrecognizedParse;
+      function differentParse(field$$1, local, ancestor) {
+          return "An ancestor parsed field \"" + field$$1 + "\" as " + ancestor + " but a child wants to parse the field as " + local + ".";
+      }
+      message.differentParse = differentParse;
+      // TRANSFORMS
+      function invalidTransformIgnored(transform) {
+          return "Ignoring an invalid transform: " + stringify$2(transform) + ".";
+      }
+      message.invalidTransformIgnored = invalidTransformIgnored;
+      message.NO_FIELDS_NEEDS_AS = 'If "from.fields" is not specified, "as" has to be a string that specifies the key to be used for the data from the secondary source.';
+      // ENCODING & FACET
+      function encodingOverridden(channels) {
+          return "Layer's shared " + channels.join(',') + " channel " + (channels.length === 1 ? 'is' : 'are') + " overriden";
+      }
+      message.encodingOverridden = encodingOverridden;
+      function projectionOverridden(opt) {
+          var parentProjection = opt.parentProjection, projection = opt.projection;
+          return "Layer's shared projection " + stringify$2(parentProjection) + " is overridden by a child projection " + stringify$2(projection) + ".";
+      }
+      message.projectionOverridden = projectionOverridden;
+      function primitiveChannelDef(channel, type, value) {
+          return "Channel " + channel + " is a " + type + ". Converted to {value: " + stringify$2(value) + "}.";
+      }
+      message.primitiveChannelDef = primitiveChannelDef;
+      function invalidFieldType(type) {
+          return "Invalid field type \"" + type + "\"";
+      }
+      message.invalidFieldType = invalidFieldType;
+      function nonZeroScaleUsedWithLengthMark(mark, channel, opt) {
+          var scaleText = opt.scaleType ? opt.scaleType + " scale" :
+              opt.zeroFalse ? 'scale with zero=false' :
+                  'scale with custom domain that excludes zero';
+          return "A " + scaleText + " is used to encode " + mark + "'s " + channel + ". This can be misleading as the " + (channel === 'x' ? 'width' : 'height') + " of the " + mark + " can be arbitrary based on the scale domain. You may want to use point mark instead.";
+      }
+      message.nonZeroScaleUsedWithLengthMark = nonZeroScaleUsedWithLengthMark;
+      function invalidFieldTypeForCountAggregate(type, aggregate) {
+          return "Invalid field type \"" + type + "\" for aggregate: \"" + aggregate + "\", using \"quantitative\" instead.";
+      }
+      message.invalidFieldTypeForCountAggregate = invalidFieldTypeForCountAggregate;
+      function invalidAggregate(aggregate) {
+          return "Invalid aggregation operator \"" + aggregate + "\"";
+      }
+      message.invalidAggregate = invalidAggregate;
+      function emptyOrInvalidFieldType(type, channel, newType) {
+          return "Invalid field type \"" + type + "\" for channel \"" + channel + "\", using \"" + newType + "\" instead.";
+      }
+      message.emptyOrInvalidFieldType = emptyOrInvalidFieldType;
+      function droppingColor(type, opt) {
+          var fill = opt.fill, stroke = opt.stroke;
+          return "Dropping color " + type + " as the plot also has " + (fill && stroke ? 'fill and stroke' : fill ? 'fill' : 'stroke');
+      }
+      message.droppingColor = droppingColor;
+      function emptyFieldDef(fieldDef, channel) {
+          return "Dropping " + stringify$2(fieldDef) + " from channel \"" + channel + "\" since it does not contain data field or value.";
+      }
+      message.emptyFieldDef = emptyFieldDef;
+      function latLongDeprecated(channel, type, newChannel) {
+          return channel + "-encoding with type " + type + " is deprecated. Replacing with " + newChannel + "-encoding.";
+      }
+      message.latLongDeprecated = latLongDeprecated;
+      message.LINE_WITH_VARYING_SIZE = 'Line marks cannot encode size with a non-groupby field. You may want to use trail marks instead.';
+      function incompatibleChannel(channel, markOrFacet, when) {
+          return channel + " dropped as it is incompatible with \"" + markOrFacet + "\"" + (when ? " when " + when : '') + ".";
+      }
+      message.incompatibleChannel = incompatibleChannel;
+      function invalidEncodingChannel(channel) {
+          return channel + "-encoding is dropped as " + channel + " is not a valid encoding channel.";
+      }
+      message.invalidEncodingChannel = invalidEncodingChannel;
+      function facetChannelShouldBeDiscrete(channel) {
+          return channel + " encoding should be discrete (ordinal / nominal / binned).";
+      }
+      message.facetChannelShouldBeDiscrete = facetChannelShouldBeDiscrete;
+      function discreteChannelCannotEncode(channel, type) {
+          return "Using discrete channel \"" + channel + "\" to encode \"" + type + "\" field can be misleading as it does not encode " + (type === 'ordinal' ? 'order' : 'magnitude') + ".";
+      }
+      message.discreteChannelCannotEncode = discreteChannelCannotEncode;
+      // Mark
+      message.BAR_WITH_POINT_SCALE_AND_RANGESTEP_NULL = 'Bar mark should not be used with point scale when rangeStep is null. Please use band scale instead.';
+      function lineWithRange(hasX2, hasY2) {
+          var channels = hasX2 && hasY2 ? 'x2 and y2' : hasX2 ? 'x2' : 'y2';
+          return "Line mark is for continuous lines and thus cannot be used with " + channels + ". We will use the rule mark (line segments) instead.";
+      }
+      message.lineWithRange = lineWithRange;
+      function orientOverridden(original, actual) {
+          return "Specified orient \"" + original + "\" overridden with \"" + actual + "\"";
+      }
+      message.orientOverridden = orientOverridden;
+      // SCALE
+      message.CANNOT_UNION_CUSTOM_DOMAIN_WITH_FIELD_DOMAIN = 'custom domain scale cannot be unioned with default field-based domain';
+      function cannotUseScalePropertyWithNonColor(prop) {
+          return "Cannot use the scale property \"" + prop + "\" with non-color channel.";
+      }
+      message.cannotUseScalePropertyWithNonColor = cannotUseScalePropertyWithNonColor;
+      function unaggregateDomainHasNoEffectForRawField(fieldDef) {
+          return "Using unaggregated domain with raw field has no effect (" + stringify$2(fieldDef) + ").";
+      }
+      message.unaggregateDomainHasNoEffectForRawField = unaggregateDomainHasNoEffectForRawField;
+      function unaggregateDomainWithNonSharedDomainOp(aggregate) {
+          return "Unaggregated domain not applicable for \"" + aggregate + "\" since it produces values outside the origin domain of the source data.";
+      }
+      message.unaggregateDomainWithNonSharedDomainOp = unaggregateDomainWithNonSharedDomainOp;
+      function unaggregatedDomainWithLogScale(fieldDef) {
+          return "Unaggregated domain is currently unsupported for log scale (" + stringify$2(fieldDef) + ").";
+      }
+      message.unaggregatedDomainWithLogScale = unaggregatedDomainWithLogScale;
+      function cannotApplySizeToNonOrientedMark(mark) {
+          return "Cannot apply size to non-oriented mark \"" + mark + "\".";
+      }
+      message.cannotApplySizeToNonOrientedMark = cannotApplySizeToNonOrientedMark;
+      function rangeStepDropped(channel) {
+          return "rangeStep for \"" + channel + "\" is dropped as top-level " + (channel === 'x' ? 'width' : 'height') + " is provided.";
+      }
+      message.rangeStepDropped = rangeStepDropped;
+      function scaleTypeNotWorkWithChannel(channel, scaleType, defaultScaleType) {
+          return "Channel \"" + channel + "\" does not work with \"" + scaleType + "\" scale. We are using \"" + defaultScaleType + "\" scale instead.";
+      }
+      message.scaleTypeNotWorkWithChannel = scaleTypeNotWorkWithChannel;
+      function scaleTypeNotWorkWithFieldDef(scaleType, defaultScaleType) {
+          return "FieldDef does not work with \"" + scaleType + "\" scale. We are using \"" + defaultScaleType + "\" scale instead.";
+      }
+      message.scaleTypeNotWorkWithFieldDef = scaleTypeNotWorkWithFieldDef;
+      function scalePropertyNotWorkWithScaleType(scaleType, propName, channel) {
+          return channel + "-scale's \"" + propName + "\" is dropped as it does not work with " + scaleType + " scale.";
+      }
+      message.scalePropertyNotWorkWithScaleType = scalePropertyNotWorkWithScaleType;
+      function scaleTypeNotWorkWithMark(mark, scaleType) {
+          return "Scale type \"" + scaleType + "\" does not work with mark \"" + mark + "\".";
+      }
+      message.scaleTypeNotWorkWithMark = scaleTypeNotWorkWithMark;
+      function mergeConflictingProperty(property, propertyOf, v1, v2) {
+          return "Conflicting " + propertyOf.toString() + " property \"" + property.toString() + "\" (" + stringify$2(v1) + " and " + stringify$2(v2) + ").  Using " + stringify$2(v1) + ".";
+      }
+      message.mergeConflictingProperty = mergeConflictingProperty;
+      function independentScaleMeansIndependentGuide(channel) {
+          return "Setting the scale to be independent for \"" + channel + "\" means we also have to set the guide (axis or legend) to be independent.";
+      }
+      message.independentScaleMeansIndependentGuide = independentScaleMeansIndependentGuide;
+      function domainSortDropped(sort) {
+          return "Dropping sort property " + stringify$2(sort) + " as unioned domains only support boolean or op 'count'.";
+      }
+      message.domainSortDropped = domainSortDropped;
+      message.UNABLE_TO_MERGE_DOMAINS = 'Unable to merge domains';
+      message.MORE_THAN_ONE_SORT = 'Domains that should be unioned has conflicting sort properties. Sort will be set to true.';
+      // AXIS
+      message.INVALID_CHANNEL_FOR_AXIS = 'Invalid channel for axis.';
+      // STACK
+      function cannotStackRangedMark(channel) {
+          return "Cannot stack \"" + channel + "\" if there is already \"" + channel + "2\"";
+      }
+      message.cannotStackRangedMark = cannotStackRangedMark;
+      function cannotStackNonLinearScale(scaleType) {
+          return "Cannot stack non-linear scale (" + scaleType + ")";
+      }
+      message.cannotStackNonLinearScale = cannotStackNonLinearScale;
+      function stackNonSummativeAggregate(aggregate) {
+          return "Stacking is applied even though the aggregate function is non-summative (\"" + aggregate + "\")";
+      }
+      message.stackNonSummativeAggregate = stackNonSummativeAggregate;
+      // TIMEUNIT
+      function invalidTimeUnit(unitName, value) {
+          return "Invalid " + unitName + ": " + stringify$2(value);
+      }
+      message.invalidTimeUnit = invalidTimeUnit;
+      function dayReplacedWithDate(fullTimeUnit) {
+          return "Time unit \"" + fullTimeUnit + "\" is not supported. We are replacing it with " + fullTimeUnit.replace('day', 'date') + ".";
+      }
+      message.dayReplacedWithDate = dayReplacedWithDate;
+      function droppedDay(d) {
+          return "Dropping day from datetime " + stringify$2(d) + " as day cannot be combined with other units.";
+      }
+      message.droppedDay = droppedDay;
+  })(message || (message = {}));
+
+  // DateTime definition object
+  /*
+   * A designated year that starts on Sunday.
+   */
+  var SUNDAY_YEAR = 2006;
+  function isDateTime(o) {
+      return !!o && (!!o.year || !!o.quarter || !!o.month || !!o.date || !!o.day ||
+          !!o.hours || !!o.minutes || !!o.seconds || !!o.milliseconds);
+  }
+  var MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  var SHORT_MONTHS = MONTHS.map(function (m) { return m.substr(0, 3); });
+  var DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  var SHORT_DAYS = DAYS.map(function (d) { return d.substr(0, 3); });
+  function normalizeQuarter(q) {
+      if (isNumber(q)) {
+          if (q > 4) {
+              warn(message.invalidTimeUnit('quarter', q));
+          }
+          // We accept 1-based quarter, so need to readjust to 0-based quarter
+          return (q - 1) + '';
+      }
+      else {
+          // Invalid quarter
+          throw new Error(message.invalidTimeUnit('quarter', q));
+      }
+  }
+  function normalizeMonth(m) {
+      if (isNumber(m)) {
+          // We accept 1-based month, so need to readjust to 0-based month
+          return (m - 1) + '';
+      }
+      else {
+          var lowerM = m.toLowerCase();
+          var monthIndex = MONTHS.indexOf(lowerM);
+          if (monthIndex !== -1) {
+              return monthIndex + ''; // 0 for january, ...
+          }
+          var shortM = lowerM.substr(0, 3);
+          var shortMonthIndex = SHORT_MONTHS.indexOf(shortM);
+          if (shortMonthIndex !== -1) {
+              return shortMonthIndex + '';
+          }
+          // Invalid month
+          throw new Error(message.invalidTimeUnit('month', m));
+      }
+  }
+  function normalizeDay(d) {
+      if (isNumber(d)) {
+          // mod so that this can be both 0-based where 0 = sunday
+          // and 1-based where 7=sunday
+          return (d % 7) + '';
+      }
+      else {
+          var lowerD = d.toLowerCase();
+          var dayIndex = DAYS.indexOf(lowerD);
+          if (dayIndex !== -1) {
+              return dayIndex + ''; // 0 for january, ...
+          }
+          var shortD = lowerD.substr(0, 3);
+          var shortDayIndex = SHORT_DAYS.indexOf(shortD);
+          if (shortDayIndex !== -1) {
+              return shortDayIndex + '';
+          }
+          // Invalid day
+          throw new Error(message.invalidTimeUnit('day', d));
+      }
+  }
+  /**
+   * Return Vega Expression for a particular date time.
+   * @param d
+   * @param normalize whether to normalize quarter, month, day.
+   */
+  function dateTimeExpr(d, normalize) {
+      if (normalize === void 0) { normalize = false; }
+      var units = [];
+      if (normalize && d.day !== undefined) {
+          if (keys(d).length > 1) {
+              warn(message.droppedDay(d));
+              d = duplicate(d);
+              delete d.day;
+          }
+      }
+      if (d.year !== undefined) {
+          units.push(d.year);
+      }
+      else if (d.day !== undefined) {
+          // Set year to 2006 for working with day since January 1 2006 is a Sunday
+          units.push(SUNDAY_YEAR);
+      }
+      else {
+          units.push(0);
+      }
+      if (d.month !== undefined) {
+          var month = normalize ? normalizeMonth(d.month) : d.month;
+          units.push(month);
+      }
+      else if (d.quarter !== undefined) {
+          var quarter$$1 = normalize ? normalizeQuarter(d.quarter) : d.quarter;
+          units.push(quarter$$1 + '*3');
+      }
+      else {
+          units.push(0); // months start at zero in JS
+      }
+      if (d.date !== undefined) {
+          units.push(d.date);
+      }
+      else if (d.day !== undefined) {
+          // HACK: Day only works as a standalone unit
+          // This is only correct because we always set year to 2006 for day
+          var day = normalize ? normalizeDay(d.day) : d.day;
+          units.push(day + '+1');
+      }
+      else {
+          units.push(1); // Date starts at 1 in JS
+      }
+      // Note: can't use TimeUnit enum here as importing it will create
+      // circular dependency problem!
+      for (var _i = 0, _a = ['hours', 'minutes', 'seconds', 'milliseconds']; _i < _a.length; _i++) {
+          var timeUnit = _a[_i];
+          if (d[timeUnit] !== undefined) {
+              units.push(d[timeUnit]);
+          }
+          else {
+              units.push(0);
+          }
+      }
+      if (d.utc) {
+          return "utc(" + units.join(', ') + ")";
+      }
+      else {
+          return "datetime(" + units.join(', ') + ")";
+      }
+  }
+
+  var datetime = /*#__PURE__*/Object.freeze({
+    isDateTime: isDateTime,
+    MONTHS: MONTHS,
+    SHORT_MONTHS: SHORT_MONTHS,
+    DAYS: DAYS,
+    SHORT_DAYS: SHORT_DAYS,
+    dateTimeExpr: dateTimeExpr
+  });
+
+  var TimeUnit;
+  (function (TimeUnit) {
+      TimeUnit.YEAR = 'year';
+      TimeUnit.MONTH = 'month';
+      TimeUnit.DAY = 'day';
+      TimeUnit.DATE = 'date';
+      TimeUnit.HOURS = 'hours';
+      TimeUnit.MINUTES = 'minutes';
+      TimeUnit.SECONDS = 'seconds';
+      TimeUnit.MILLISECONDS = 'milliseconds';
+      TimeUnit.YEARMONTH = 'yearmonth';
+      TimeUnit.YEARMONTHDATE = 'yearmonthdate';
+      TimeUnit.YEARMONTHDATEHOURS = 'yearmonthdatehours';
+      TimeUnit.YEARMONTHDATEHOURSMINUTES = 'yearmonthdatehoursminutes';
+      TimeUnit.YEARMONTHDATEHOURSMINUTESSECONDS = 'yearmonthdatehoursminutesseconds';
+      // MONTHDATE always include 29 February since we use year 0th (which is a leap year);
+      TimeUnit.MONTHDATE = 'monthdate';
+      TimeUnit.HOURSMINUTES = 'hoursminutes';
+      TimeUnit.HOURSMINUTESSECONDS = 'hoursminutesseconds';
+      TimeUnit.MINUTESSECONDS = 'minutesseconds';
+      TimeUnit.SECONDSMILLISECONDS = 'secondsmilliseconds';
+      TimeUnit.QUARTER = 'quarter';
+      TimeUnit.YEARQUARTER = 'yearquarter';
+      TimeUnit.QUARTERMONTH = 'quartermonth';
+      TimeUnit.YEARQUARTERMONTH = 'yearquartermonth';
+      TimeUnit.UTCYEAR = 'utcyear';
+      TimeUnit.UTCMONTH = 'utcmonth';
+      TimeUnit.UTCDAY = 'utcday';
+      TimeUnit.UTCDATE = 'utcdate';
+      TimeUnit.UTCHOURS = 'utchours';
+      TimeUnit.UTCMINUTES = 'utcminutes';
+      TimeUnit.UTCSECONDS = 'utcseconds';
+      TimeUnit.UTCMILLISECONDS = 'utcmilliseconds';
+      TimeUnit.UTCYEARMONTH = 'utcyearmonth';
+      TimeUnit.UTCYEARMONTHDATE = 'utcyearmonthdate';
+      TimeUnit.UTCYEARMONTHDATEHOURS = 'utcyearmonthdatehours';
+      TimeUnit.UTCYEARMONTHDATEHOURSMINUTES = 'utcyearmonthdatehoursminutes';
+      TimeUnit.UTCYEARMONTHDATEHOURSMINUTESSECONDS = 'utcyearmonthdatehoursminutesseconds';
+      // MONTHDATE always include 29 February since we use year 0th (which is a leap year);
+      TimeUnit.UTCMONTHDATE = 'utcmonthdate';
+      TimeUnit.UTCHOURSMINUTES = 'utchoursminutes';
+      TimeUnit.UTCHOURSMINUTESSECONDS = 'utchoursminutesseconds';
+      TimeUnit.UTCMINUTESSECONDS = 'utcminutesseconds';
+      TimeUnit.UTCSECONDSMILLISECONDS = 'utcsecondsmilliseconds';
+      TimeUnit.UTCQUARTER = 'utcquarter';
+      TimeUnit.UTCYEARQUARTER = 'utcyearquarter';
+      TimeUnit.UTCQUARTERMONTH = 'utcquartermonth';
+      TimeUnit.UTCYEARQUARTERMONTH = 'utcyearquartermonth';
+  })(TimeUnit || (TimeUnit = {}));
+  /** Time Unit that only corresponds to only one part of Date objects. */
+  var LOCAL_SINGLE_TIMEUNIT_INDEX = {
+      year: 1,
+      quarter: 1,
+      month: 1,
+      day: 1,
+      date: 1,
+      hours: 1,
+      minutes: 1,
+      seconds: 1,
+      milliseconds: 1
+  };
+  var TIMEUNIT_PARTS = flagKeys(LOCAL_SINGLE_TIMEUNIT_INDEX);
+  function isLocalSingleTimeUnit(timeUnit) {
+      return !!LOCAL_SINGLE_TIMEUNIT_INDEX[timeUnit];
+  }
+  var UTC_SINGLE_TIMEUNIT_INDEX = {
+      utcyear: 1,
+      utcquarter: 1,
+      utcmonth: 1,
+      utcday: 1,
+      utcdate: 1,
+      utchours: 1,
+      utcminutes: 1,
+      utcseconds: 1,
+      utcmilliseconds: 1
+  };
+  function isUtcSingleTimeUnit(timeUnit) {
+      return !!UTC_SINGLE_TIMEUNIT_INDEX[timeUnit];
+  }
+  var LOCAL_MULTI_TIMEUNIT_INDEX = {
+      yearquarter: 1,
+      yearquartermonth: 1,
+      yearmonth: 1,
+      yearmonthdate: 1,
+      yearmonthdatehours: 1,
+      yearmonthdatehoursminutes: 1,
+      yearmonthdatehoursminutesseconds: 1,
+      quartermonth: 1,
+      monthdate: 1,
+      hoursminutes: 1,
+      hoursminutesseconds: 1,
+      minutesseconds: 1,
+      secondsmilliseconds: 1
+  };
+  var UTC_MULTI_TIMEUNIT_INDEX = {
+      utcyearquarter: 1,
+      utcyearquartermonth: 1,
+      utcyearmonth: 1,
+      utcyearmonthdate: 1,
+      utcyearmonthdatehours: 1,
+      utcyearmonthdatehoursminutes: 1,
+      utcyearmonthdatehoursminutesseconds: 1,
+      utcquartermonth: 1,
+      utcmonthdate: 1,
+      utchoursminutes: 1,
+      utchoursminutesseconds: 1,
+      utcminutesseconds: 1,
+      utcsecondsmilliseconds: 1
+  };
+  var UTC_TIMEUNIT_INDEX = __assign({}, UTC_SINGLE_TIMEUNIT_INDEX, UTC_MULTI_TIMEUNIT_INDEX);
+  function isUTCTimeUnit(t) {
+      return !!UTC_TIMEUNIT_INDEX[t];
+  }
+  function getLocalTimeUnit(t) {
+      return t.substr(3);
+  }
+  var TIMEUNIT_INDEX = __assign({}, LOCAL_SINGLE_TIMEUNIT_INDEX, UTC_SINGLE_TIMEUNIT_INDEX, LOCAL_MULTI_TIMEUNIT_INDEX, UTC_MULTI_TIMEUNIT_INDEX);
+  var TIMEUNITS = flagKeys(TIMEUNIT_INDEX);
+  function isTimeUnit(t) {
+      return !!TIMEUNIT_INDEX[t];
+  }
+  var SET_DATE_METHOD = {
+      year: 'setFullYear',
+      month: 'setMonth',
+      date: 'setDate',
+      hours: 'setHours',
+      minutes: 'setMinutes',
+      seconds: 'setSeconds',
+      milliseconds: 'setMilliseconds',
+      // Day and quarter have their own special cases
+      quarter: null,
+      day: null,
+  };
+  /**
+   * Converts a date to only have the measurements relevant to the specified unit
+   * i.e. ('yearmonth', '2000-12-04 07:58:14') -> '2000-12-01 00:00:00'
+   * Note: the base date is Jan 01 1900 00:00:00
+   */
+  function convert(unit, date) {
+      var isUTC = isUTCTimeUnit(unit);
+      var result = isUTC ?
+          // start with uniform date
+          new Date(Date.UTC(0, 0, 1, 0, 0, 0, 0)) :
+          new Date(0, 0, 1, 0, 0, 0, 0);
+      for (var _i = 0, TIMEUNIT_PARTS_1 = TIMEUNIT_PARTS; _i < TIMEUNIT_PARTS_1.length; _i++) {
+          var timeUnitPart = TIMEUNIT_PARTS_1[_i];
+          if (containsTimeUnit(unit, timeUnitPart)) {
+              switch (timeUnitPart) {
+                  case TimeUnit.DAY:
+                      throw new Error('Cannot convert to TimeUnits containing \'day\'');
+                  case TimeUnit.QUARTER: {
+                      var _a = dateMethods('month', isUTC), getDateMethod_1 = _a.getDateMethod, setDateMethod_1 = _a.setDateMethod;
+                      // indicate quarter by setting month to be the first of the quarter i.e. may (4) -> april (3)
+                      result[setDateMethod_1]((Math.floor(date[getDateMethod_1]() / 3)) * 3);
+                      break;
+                  }
+                  default:
+                      var _b = dateMethods(timeUnitPart, isUTC), getDateMethod = _b.getDateMethod, setDateMethod = _b.setDateMethod;
+                      result[setDateMethod](date[getDateMethod]());
+              }
+          }
+      }
+      return result;
+  }
+  function dateMethods(singleUnit, isUtc) {
+      var rawSetDateMethod = SET_DATE_METHOD[singleUnit];
+      var setDateMethod = isUtc ? 'setUTC' + rawSetDateMethod.substr(3) : rawSetDateMethod;
+      var getDateMethod = 'get' + (isUtc ? 'UTC' : '') + rawSetDateMethod.substr(3);
+      return { setDateMethod: setDateMethod, getDateMethod: getDateMethod };
+  }
+  function getTimeUnitParts(timeUnit) {
+      return TIMEUNIT_PARTS.reduce(function (parts, part) {
+          if (containsTimeUnit(timeUnit, part)) {
+              return parts.concat(part);
+          }
+          return parts;
+      }, []);
+  }
+  /** Returns true if fullTimeUnit contains the timeUnit, false otherwise. */
+  function containsTimeUnit(fullTimeUnit, timeUnit) {
+      var index = fullTimeUnit.indexOf(timeUnit);
+      return index > -1 &&
+          (timeUnit !== TimeUnit.SECONDS ||
+              index === 0 ||
+              fullTimeUnit.charAt(index - 1) !== 'i' // exclude milliseconds
+          );
+  }
+  /**
+   * Returns Vega expresssion for a given timeUnit and fieldRef
+   */
+  function fieldExpr(fullTimeUnit, field) {
+      var fieldRef = accessPathWithDatum(field);
+      var utc = isUTCTimeUnit(fullTimeUnit) ? 'utc' : '';
+      function func(timeUnit) {
+          if (timeUnit === TimeUnit.QUARTER) {
+              // quarter starting at 0 (0,3,6,9).
+              return "(" + utc + "quarter(" + fieldRef + ")-1)";
+          }
+          else {
+              return "" + utc + timeUnit + "(" + fieldRef + ")";
+          }
+      }
+      var d = TIMEUNIT_PARTS.reduce(function (dateExpr, tu) {
+          if (containsTimeUnit(fullTimeUnit, tu)) {
+              dateExpr[tu] = func(tu);
+          }
+          return dateExpr;
+      }, {});
+      return dateTimeExpr(d);
+  }
+  /**
+   * returns the signal expression used for axis labels for a time unit
+   */
+  function formatExpression(timeUnit, field, shortTimeLabels, isUTCScale) {
+      if (!timeUnit) {
+          return undefined;
+      }
+      var dateComponents = [];
+      var expression = '';
+      var hasYear = containsTimeUnit(timeUnit, TimeUnit.YEAR);
+      if (containsTimeUnit(timeUnit, TimeUnit.QUARTER)) {
+          // special expression for quarter as prefix
+          expression = "'Q' + quarter(" + field + ")";
+      }
+      if (containsTimeUnit(timeUnit, TimeUnit.MONTH)) {
+          // By default use short month name
+          dateComponents.push(shortTimeLabels !== false ? '%b' : '%B');
+      }
+      if (containsTimeUnit(timeUnit, TimeUnit.DAY)) {
+          dateComponents.push(shortTimeLabels ? '%a' : '%A');
+      }
+      else if (containsTimeUnit(timeUnit, TimeUnit.DATE)) {
+          dateComponents.push('%d' + (hasYear ? ',' : '')); // add comma if there is year
+      }
+      if (hasYear) {
+          dateComponents.push(shortTimeLabels ? '%y' : '%Y');
+      }
+      var timeComponents = [];
+      if (containsTimeUnit(timeUnit, TimeUnit.HOURS)) {
+          timeComponents.push('%H');
+      }
+      if (containsTimeUnit(timeUnit, TimeUnit.MINUTES)) {
+          timeComponents.push('%M');
+      }
+      if (containsTimeUnit(timeUnit, TimeUnit.SECONDS)) {
+          timeComponents.push('%S');
+      }
+      if (containsTimeUnit(timeUnit, TimeUnit.MILLISECONDS)) {
+          timeComponents.push('%L');
+      }
+      var dateTimeComponents = [];
+      if (dateComponents.length > 0) {
+          dateTimeComponents.push(dateComponents.join(' '));
+      }
+      if (timeComponents.length > 0) {
+          dateTimeComponents.push(timeComponents.join(':'));
+      }
+      if (dateTimeComponents.length > 0) {
+          if (expression) {
+              // Add space between quarter and main time format
+              expression += " + ' ' + ";
+          }
+          // We only use utcFormat for utc scale
+          // For utc time units, the data is already converted as a part of timeUnit transform.
+          // Thus, utc time units should use timeFormat to avoid shifting the time twice.
+          if (isUTCScale) {
+              expression += "utcFormat(" + field + ", '" + dateTimeComponents.join(' ') + "')";
+          }
+          else {
+              expression += "timeFormat(" + field + ", '" + dateTimeComponents.join(' ') + "')";
+          }
+      }
+      // If expression is still an empty string, return undefined instead.
+      return expression || undefined;
+  }
+  function normalizeTimeUnit(timeUnit) {
+      if (timeUnit !== 'day' && timeUnit.indexOf('day') >= 0) {
+          warn(message.dayReplacedWithDate(timeUnit));
+          return timeUnit.replace('day', 'date');
+      }
+      return timeUnit;
+  }
+
+  var timeunit = /*#__PURE__*/Object.freeze({
+    get TimeUnit () { return TimeUnit; },
+    TIMEUNIT_PARTS: TIMEUNIT_PARTS,
+    isLocalSingleTimeUnit: isLocalSingleTimeUnit,
+    isUtcSingleTimeUnit: isUtcSingleTimeUnit,
+    isUTCTimeUnit: isUTCTimeUnit,
+    getLocalTimeUnit: getLocalTimeUnit,
+    TIMEUNITS: TIMEUNITS,
+    isTimeUnit: isTimeUnit,
+    convert: convert,
+    getTimeUnitParts: getTimeUnitParts,
+    containsTimeUnit: containsTimeUnit,
+    fieldExpr: fieldExpr,
+    formatExpression: formatExpression,
+    normalizeTimeUnit: normalizeTimeUnit
+  });
+
+  /** Constants and utilities for data type */
+  /** Data type based on level of measurement */
+  var Type;
+  (function (Type) {
+      Type.QUANTITATIVE = 'quantitative';
+      Type.ORDINAL = 'ordinal';
+      Type.TEMPORAL = 'temporal';
+      Type.NOMINAL = 'nominal';
+      Type.LATITUDE = 'latitude';
+      Type.LONGITUDE = 'longitude';
+      Type.GEOJSON = 'geojson';
+  })(Type || (Type = {}));
+  var TYPE_INDEX = {
+      quantitative: 1,
+      ordinal: 1,
+      temporal: 1,
+      nominal: 1,
+      latitude: 1,
+      longitude: 1,
+      geojson: 1
+  };
+  function isType(t) {
+      return !!TYPE_INDEX[t];
+  }
+  var QUANTITATIVE = Type.QUANTITATIVE;
+  var ORDINAL = Type.ORDINAL;
+  var TEMPORAL = Type.TEMPORAL;
+  var NOMINAL = Type.NOMINAL;
+  var GEOJSON = Type.GEOJSON;
+  /**
+   * Get full, lowercase type name for a given type.
+   * @param  type
+   * @return Full type name.
+   */
+  function getFullName(type) {
+      if (type) {
+          type = type.toLowerCase();
+          switch (type) {
+              case 'q':
+              case QUANTITATIVE:
+                  return 'quantitative';
+              case 't':
+              case TEMPORAL:
+                  return 'temporal';
+              case 'o':
+              case ORDINAL:
+                  return 'ordinal';
+              case 'n':
+              case NOMINAL:
+                  return 'nominal';
+              case Type.LATITUDE:
+                  return 'latitude';
+              case Type.LONGITUDE:
+                  return 'longitude';
+              case GEOJSON:
+                  return 'geojson';
+          }
+      }
+      // If we get invalid input, return undefined type.
+      return undefined;
+  }
+
+  var type = /*#__PURE__*/Object.freeze({
+    get Type () { return Type; },
+    TYPE_INDEX: TYPE_INDEX,
+    isType: isType,
+    QUANTITATIVE: QUANTITATIVE,
+    ORDINAL: ORDINAL,
+    TEMPORAL: TEMPORAL,
+    NOMINAL: NOMINAL,
+    GEOJSON: GEOJSON,
+    getFullName: getFullName
+  });
+
+  function isConditionalSelection(c) {
+      return c['selection'];
+  }
+  function isRepeatRef(field$$1) {
+      return field$$1 && !isString(field$$1) && 'repeat' in field$$1;
+  }
+  function toFieldDefBase(fieldDef) {
+      var field$$1 = fieldDef.field, timeUnit = fieldDef.timeUnit, bin = fieldDef.bin, aggregate = fieldDef.aggregate;
+      return __assign({}, (timeUnit ? { timeUnit: timeUnit } : {}), (bin ? { bin: bin } : {}), (aggregate ? { aggregate: aggregate } : {}), { field: field$$1 });
+  }
+  function isConditionalDef(channelDef) {
+      return !!channelDef && !!channelDef.condition;
+  }
+  /**
+   * Return if a channelDef is a ConditionalValueDef with ConditionFieldDef
+   */
+  function hasConditionalFieldDef(channelDef) {
+      return !!channelDef && !!channelDef.condition && !isArray(channelDef.condition) && isFieldDef(channelDef.condition);
+  }
+  function hasConditionalValueDef(channelDef) {
+      return !!channelDef && !!channelDef.condition && (isArray(channelDef.condition) || isValueDef(channelDef.condition));
+  }
+  function isFieldDef(channelDef) {
+      return !!channelDef && (!!channelDef['field'] || channelDef['aggregate'] === 'count');
+  }
+  function isStringFieldDef(fieldDef) {
+      return isFieldDef(fieldDef) && isString(fieldDef.field);
+  }
+  function isValueDef(channelDef) {
+      return channelDef && 'value' in channelDef && channelDef['value'] !== undefined;
+  }
+  function isScaleFieldDef(channelDef) {
+      return !!channelDef && (!!channelDef['scale'] || !!channelDef['sort']);
+  }
+  function isOpFieldDef(fieldDef) {
+      return !!fieldDef['op'];
+  }
+  function vgField(fieldDef, opt) {
+      if (opt === void 0) { opt = {}; }
+      var field$$1 = fieldDef.field;
+      var prefix = opt.prefix;
+      var suffix = opt.suffix;
+      if (isCount(fieldDef)) {
+          field$$1 = 'count_*';
+      }
+      else {
+          var fn = undefined;
+          if (!opt.nofn) {
+              if (isOpFieldDef(fieldDef)) {
+                  fn = fieldDef.op;
+              }
+              else if (fieldDef.bin) {
+                  fn = binToString(fieldDef.bin);
+                  suffix = opt.binSuffix || '';
+              }
+              else if (fieldDef.aggregate) {
+                  fn = String(fieldDef.aggregate);
+              }
+              else if (fieldDef.timeUnit) {
+                  fn = String(fieldDef.timeUnit);
+              }
+          }
+          if (fn) {
+              field$$1 = field$$1 ? fn + "_" + field$$1 : fn;
+          }
+      }
+      if (suffix) {
+          field$$1 = field$$1 + "_" + suffix;
+      }
+      if (prefix) {
+          field$$1 = prefix + "_" + field$$1;
+      }
+      if (opt.expr) {
+          // Expression to access flattened field. No need to escape dots.
+          return flatAccessWithDatum(field$$1, opt.expr);
+      }
+      else {
+          // We flattened all fields so paths should have become dot.
+          return replacePathInField(field$$1);
+      }
+  }
+  function isDiscrete(fieldDef) {
+      switch (fieldDef.type) {
+          case 'nominal':
+          case 'ordinal':
+          case 'geojson':
+              return true;
+          case 'quantitative':
+              return !!fieldDef.bin;
+          case 'latitude':
+          case 'longitude':
+          case 'temporal':
+              return false;
+      }
+      throw new Error(message.invalidFieldType(fieldDef.type));
+  }
+  function isContinuous(fieldDef) {
+      return !isDiscrete(fieldDef);
+  }
+  function isCount(fieldDef) {
+      return fieldDef.aggregate === 'count';
+  }
+  function verbalTitleFormatter(fieldDef, config) {
+      var field$$1 = fieldDef.field, bin = fieldDef.bin, timeUnit = fieldDef.timeUnit, aggregate = fieldDef.aggregate;
+      if (aggregate === 'count') {
+          return config.countTitle;
+      }
+      else if (bin) {
+          return field$$1 + " (binned)";
+      }
+      else if (timeUnit) {
+          var units = getTimeUnitParts(timeUnit).join('-');
+          return field$$1 + " (" + units + ")";
+      }
+      else if (aggregate) {
+          return titlecase(aggregate) + " of " + field$$1;
+      }
+      return field$$1;
+  }
+  function functionalTitleFormatter(fieldDef, config) {
+      var fn = fieldDef.aggregate || fieldDef.timeUnit || (fieldDef.bin && 'bin');
+      if (fn) {
+          return fn.toUpperCase() + '(' + fieldDef.field + ')';
+      }
+      else {
+          return fieldDef.field;
+      }
+  }
+  var defaultTitleFormatter = function (fieldDef, config) {
+      switch (config.fieldTitle) {
+          case 'plain':
+              return fieldDef.field;
+          case 'functional':
+              return functionalTitleFormatter(fieldDef, config);
+          default:
+              return verbalTitleFormatter(fieldDef, config);
+      }
+  };
+  var titleFormatter = defaultTitleFormatter;
+  function setTitleFormatter(formatter) {
+      titleFormatter = formatter;
+  }
+  function resetTitleFormatter() {
+      setTitleFormatter(defaultTitleFormatter);
+  }
+  function title(fieldDef, config) {
+      return titleFormatter(fieldDef, config);
+  }
+  function defaultType(fieldDef, channel) {
+      if (fieldDef.timeUnit) {
+          return 'temporal';
+      }
+      if (fieldDef.bin) {
+          return 'quantitative';
+      }
+      switch (rangeType(channel)) {
+          case 'continuous':
+              return 'quantitative';
+          case 'discrete':
+              return 'nominal';
+          case 'flexible': // color
+              return 'nominal';
+          default:
+              return 'quantitative';
+      }
+  }
+  /**
+   * Returns the fieldDef -- either from the outer channelDef or from the condition of channelDef.
+   * @param channelDef
+   */
+  function getFieldDef(channelDef) {
+      if (isFieldDef(channelDef)) {
+          return channelDef;
+      }
+      else if (hasConditionalFieldDef(channelDef)) {
+          return channelDef.condition;
+      }
+      return undefined;
+  }
+  /**
+   * Convert type to full, lowercase type, or augment the fieldDef with a default type if missing.
+   */
+  function normalize(channelDef, channel) {
+      if (isString(channelDef) || isNumber(channelDef) || isBoolean(channelDef)) {
+          var primitiveType = isString(channelDef) ? 'string' :
+              isNumber(channelDef) ? 'number' : 'boolean';
+          warn(message.primitiveChannelDef(channel, primitiveType, channelDef));
+          return { value: channelDef };
+      }
+      // If a fieldDef contains a field, we need type.
+      if (isFieldDef(channelDef)) {
+          return normalizeFieldDef(channelDef, channel);
+      }
+      else if (hasConditionalFieldDef(channelDef)) {
+          return __assign({}, channelDef, { 
+              // Need to cast as normalizeFieldDef normally return FieldDef, but here we know that it is definitely Condition<FieldDef>
+              condition: normalizeFieldDef(channelDef.condition, channel) });
+      }
+      return channelDef;
+  }
+  function normalizeFieldDef(fieldDef, channel) {
+      // Drop invalid aggregate
+      if (fieldDef.aggregate && !isAggregateOp(fieldDef.aggregate)) {
+          var aggregate = fieldDef.aggregate, fieldDefWithoutAggregate = __rest(fieldDef, ["aggregate"]);
+          warn(message.invalidAggregate(fieldDef.aggregate));
+          fieldDef = fieldDefWithoutAggregate;
+      }
+      // Normalize Time Unit
+      if (fieldDef.timeUnit) {
+          fieldDef = __assign({}, fieldDef, { timeUnit: normalizeTimeUnit(fieldDef.timeUnit) });
+      }
+      // Normalize bin
+      if (fieldDef.bin) {
+          fieldDef = __assign({}, fieldDef, { bin: normalizeBin(fieldDef.bin, channel) });
+      }
+      // Normalize Type
+      if (fieldDef.type) {
+          var fullType = getFullName(fieldDef.type);
+          if (fieldDef.type !== fullType) {
+              // convert short type to full type
+              fieldDef = __assign({}, fieldDef, { type: fullType });
+          }
+          if (fieldDef.type !== 'quantitative') {
+              if (isCountingAggregateOp(fieldDef.aggregate)) {
+                  warn(message.invalidFieldTypeForCountAggregate(fieldDef.type, fieldDef.aggregate));
+                  fieldDef = __assign({}, fieldDef, { type: 'quantitative' });
+              }
+          }
+      }
+      else {
+          // If type is empty / invalid, then augment with default type
+          var newType = defaultType(fieldDef, channel);
+          warn(message.emptyOrInvalidFieldType(fieldDef.type, channel, newType));
+          fieldDef = __assign({}, fieldDef, { type: newType });
+      }
+      var _a = channelCompatibility(fieldDef, channel), compatible = _a.compatible, warning = _a.warning;
+      if (!compatible) {
+          warn(warning);
+      }
+      return fieldDef;
+  }
+  function normalizeBin(bin, channel) {
+      if (isBoolean(bin)) {
+          return { maxbins: autoMaxBins(channel) };
+      }
+      else if (!bin.maxbins && !bin.step) {
+          return __assign({}, bin, { maxbins: autoMaxBins(channel) });
+      }
+      else {
+          return bin;
+      }
+  }
+  var COMPATIBLE = { compatible: true };
+  function channelCompatibility(fieldDef, channel) {
+      var type = fieldDef.type;
+      switch (channel) {
+          case 'row':
+          case 'column':
+              if (isContinuous(fieldDef)) {
+                  return {
+                      compatible: false,
+                      warning: message.facetChannelShouldBeDiscrete(channel)
+                  };
+              }
+              return COMPATIBLE;
+          case 'x':
+          case 'y':
+          case 'color':
+          case 'fill':
+          case 'stroke':
+          case 'text':
+          case 'detail':
+          case 'key':
+          case 'tooltip':
+          case 'href':
+              return COMPATIBLE;
+          case 'longitude':
+          case 'longitude2':
+          case 'latitude':
+          case 'latitude2':
+              if (type !== QUANTITATIVE) {
+                  return {
+                      compatible: false,
+                      warning: "Channel " + channel + " should be used with a quantitative field only, not " + fieldDef.type + " field."
+                  };
+              }
+              return COMPATIBLE;
+          case 'opacity':
+          case 'size':
+          case 'x2':
+          case 'y2':
+              if ((type === 'nominal' && !fieldDef['sort']) || type === 'geojson') {
+                  return {
+                      compatible: false,
+                      warning: "Channel " + channel + " should not be used with an unsorted discrete field."
+                  };
+              }
+              return COMPATIBLE;
+          case 'shape':
+              if (fieldDef.type !== 'nominal' && fieldDef.type !== 'geojson') {
+                  return {
+                      compatible: false,
+                      warning: 'Shape channel should be used with only either nominal or geojson data'
+                  };
+              }
+              return COMPATIBLE;
+          case 'order':
+              if (fieldDef.type === 'nominal' && !('sort' in fieldDef)) {
+                  return {
+                      compatible: false,
+                      warning: "Channel order is inappropriate for nominal field, which has no inherent order."
+                  };
+              }
+              return COMPATIBLE;
+      }
+      throw new Error('channelCompatability not implemented for channel ' + channel);
+  }
+  function isNumberFieldDef(fieldDef) {
+      return fieldDef.type === 'quantitative' || !!fieldDef.bin;
+  }
+  function isTimeFieldDef(fieldDef) {
+      return fieldDef.type === 'temporal' || !!fieldDef.timeUnit;
+  }
+  /**
+   * Getting a value associated with a fielddef.
+   * Convert the value to Vega expression if applicable (for datetime object, or string if the field def is temporal or has timeUnit)
+   */
+  function valueExpr(v, _a) {
+      var timeUnit = _a.timeUnit, type = _a.type, time = _a.time, undefinedIfExprNotRequired = _a.undefinedIfExprNotRequired;
+      var _b;
+      var expr = undefined;
+      if (isDateTime(v)) {
+          expr = dateTimeExpr(v, true);
+      }
+      else if (isString(v) || isNumber(v)) {
+          if (timeUnit || type === 'temporal') {
+              if (isLocalSingleTimeUnit(timeUnit)) {
+                  expr = dateTimeExpr((_b = {}, _b[timeUnit] = v, _b), true);
+              }
+              else if (isUtcSingleTimeUnit(timeUnit)) {
+                  // FIXME is this really correct?
+                  expr = valueExpr(v, { timeUnit: getLocalTimeUnit(timeUnit) });
+              }
+              else {
+                  // just pass the string to date function (which will call JS Date.parse())
+                  expr = "datetime(" + JSON.stringify(v) + ")";
+              }
+          }
+      }
+      if (expr) {
+          return time ? "time(" + expr + ")" : expr;
+      }
+      // number or boolean or normal string
+      return undefinedIfExprNotRequired ? undefined : JSON.stringify(v);
+  }
+  /**
+   * Standardize value array -- convert each value to Vega expression if applicable
+   */
+  function valueArray(fieldDef, values) {
+      var timeUnit = fieldDef.timeUnit, type = fieldDef.type;
+      return values.map(function (v) {
+          var expr = valueExpr(v, { timeUnit: timeUnit, type: type, undefinedIfExprNotRequired: true });
+          // return signal for the expression if we need an expression
+          if (expr !== undefined) {
+              return { signal: expr };
+          }
+          // otherwise just return the original value
+          return v;
+      });
+  }
+
+  var fielddef = /*#__PURE__*/Object.freeze({
+    isConditionalSelection: isConditionalSelection,
+    isRepeatRef: isRepeatRef,
+    toFieldDefBase: toFieldDefBase,
+    isConditionalDef: isConditionalDef,
+    hasConditionalFieldDef: hasConditionalFieldDef,
+    hasConditionalValueDef: hasConditionalValueDef,
+    isFieldDef: isFieldDef,
+    isStringFieldDef: isStringFieldDef,
+    isValueDef: isValueDef,
+    isScaleFieldDef: isScaleFieldDef,
+    vgField: vgField,
+    isDiscrete: isDiscrete,
+    isContinuous: isContinuous,
+    isCount: isCount,
+    verbalTitleFormatter: verbalTitleFormatter,
+    functionalTitleFormatter: functionalTitleFormatter,
+    defaultTitleFormatter: defaultTitleFormatter,
+    setTitleFormatter: setTitleFormatter,
+    resetTitleFormatter: resetTitleFormatter,
+    title: title,
+    defaultType: defaultType,
+    getFieldDef: getFieldDef,
+    normalize: normalize,
+    normalizeFieldDef: normalizeFieldDef,
+    normalizeBin: normalizeBin,
+    channelCompatibility: channelCompatibility,
+    isNumberFieldDef: isNumberFieldDef,
+    isTimeFieldDef: isTimeFieldDef,
+    valueExpr: valueExpr,
+    valueArray: valueArray
+  });
+
+  function channelHasField(encoding, channel) {
+      var channelDef = encoding && encoding[channel];
+      if (channelDef) {
+          if (isArray(channelDef)) {
+              return some(channelDef, function (fieldDef) { return !!fieldDef.field; });
+          }
+          else {
+              return isFieldDef(channelDef) || hasConditionalFieldDef(channelDef);
+          }
+      }
+      return false;
+  }
+  function isAggregate(encoding) {
+      return some(CHANNELS, function (channel) {
+          if (channelHasField(encoding, channel)) {
+              var channelDef = encoding[channel];
+              if (isArray(channelDef)) {
+                  return some(channelDef, function (fieldDef) { return !!fieldDef.aggregate; });
+              }
+              else {
+                  var fieldDef = getFieldDef(channelDef);
+                  return fieldDef && !!fieldDef.aggregate;
+              }
+          }
+          return false;
+      });
+  }
+  function normalizeEncoding(encoding, mark) {
+      return keys(encoding).reduce(function (normalizedEncoding, channel) {
+          var _a;
+          if (!isChannel(channel)) {
+              // Drop invalid channel
+              warn(message.invalidEncodingChannel(channel));
+              return normalizedEncoding;
+          }
+          if (!supportMark(channel, mark)) {
+              // Drop unsupported channel
+              warn(message.incompatibleChannel(channel, mark));
+              return normalizedEncoding;
+          }
+          // Drop line's size if the field is aggregated.
+          if (channel === 'size' && mark === 'line') {
+              var fieldDef = getFieldDef(encoding[channel]);
+              if (fieldDef && fieldDef.aggregate) {
+                  warn(message.LINE_WITH_VARYING_SIZE);
+                  return normalizedEncoding;
+              }
+          }
+          // Drop color if either fill or stroke is specified
+          if (channel === 'color' && ('fill' in encoding || 'stroke' in encoding)) {
+              warn(message.droppingColor('encoding', { fill: 'fill' in encoding, stroke: 'stroke' in encoding }));
+              return normalizedEncoding;
+          }
+          var channelDef = encoding[channel];
+          if (channel === 'detail' ||
+              (channel === 'order' && !isArray(channelDef) && !isValueDef(channelDef)) ||
+              (channel === 'tooltip' && isArray(channelDef))) {
+              if (channelDef) {
+                  // Array of fieldDefs for detail channel (or production rule)
+                  normalizedEncoding[channel] = (isArray(channelDef) ? channelDef : [channelDef])
+                      .reduce(function (defs, fieldDef) {
+                      if (!isFieldDef(fieldDef)) {
+                          warn(message.emptyFieldDef(fieldDef, channel));
+                      }
+                      else {
+                          defs.push(normalizeFieldDef(fieldDef, channel));
+                      }
+                      return defs;
+                  }, []);
+              }
+          }
+          else {
+              var fieldDef = getFieldDef(encoding[channel]);
+              if (fieldDef && contains([Type.LATITUDE, Type.LONGITUDE], fieldDef.type)) {
+                  var _b = channel, _ = normalizedEncoding[_b], newEncoding = __rest(normalizedEncoding, [typeof _b === "symbol" ? _b : _b + ""]);
+                  var newChannel = channel === 'x' ? 'longitude' :
+                      channel === 'y' ? 'latitude' :
+                          channel === 'x2' ? 'longitude2' :
+                              channel === 'y2' ? 'latitude2' : undefined;
+                  warn(message.latLongDeprecated(channel, fieldDef.type, newChannel));
+                  return __assign({}, newEncoding, (_a = {}, _a[newChannel] = __assign({}, normalize(fieldDef, channel), { type: 'quantitative' }), _a));
+              }
+              if (!isFieldDef(channelDef) && !isValueDef(channelDef) && !isConditionalDef(channelDef)) {
+                  warn(message.emptyFieldDef(channelDef, channel));
+                  return normalizedEncoding;
+              }
+              normalizedEncoding[channel] = normalize(channelDef, channel);
+          }
+          return normalizedEncoding;
+      }, {});
+  }
+  function isRanged(encoding) {
+      return encoding && ((!!encoding.x && !!encoding.x2) || (!!encoding.y && !!encoding.y2));
+  }
+  function fieldDefs(encoding) {
+      var arr = [];
+      CHANNELS.forEach(function (channel) {
+          if (channelHasField(encoding, channel)) {
+              var channelDef = encoding[channel];
+              (isArray(channelDef) ? channelDef : [channelDef]).forEach(function (def) {
+                  if (isFieldDef(def)) {
+                      arr.push(def);
+                  }
+                  else if (hasConditionalFieldDef(def)) {
+                      arr.push(def.condition);
+                  }
+              });
+          }
+      });
+      return arr;
+  }
+  function forEach(mapping, f, thisArg) {
+      if (!mapping) {
+          return;
+      }
+      var _loop_1 = function (channel) {
+          if (isArray(mapping[channel])) {
+              mapping[channel].forEach(function (channelDef) {
+                  f.call(thisArg, channelDef, channel);
+              });
+          }
+          else {
+              f.call(thisArg, mapping[channel], channel);
+          }
+      };
+      for (var _i = 0, _a = keys(mapping); _i < _a.length; _i++) {
+          var channel = _a[_i];
+          _loop_1(channel);
+      }
+  }
+  function reduce(mapping, f, init, thisArg) {
+      if (!mapping) {
+          return init;
+      }
+      return keys(mapping).reduce(function (r, channel) {
+          var map = mapping[channel];
+          if (isArray(map)) {
+              return map.reduce(function (r1, channelDef) {
+                  return f.call(thisArg, r1, channelDef, channel);
+              }, r);
+          }
+          else {
+              return f.call(thisArg, r, map, channel);
+          }
+      }, init);
+  }
+
+  var encoding = /*#__PURE__*/Object.freeze({
+    channelHasField: channelHasField,
+    isAggregate: isAggregate,
+    normalizeEncoding: normalizeEncoding,
+    isRanged: isRanged,
+    fieldDefs: fieldDefs,
+    forEach: forEach,
+    reduce: reduce
+  });
+
+  function getMarkSpecificConfigMixins(markSpecificConfig, channel) {
+      var _a;
+      var value = markSpecificConfig[channel];
+      return value !== undefined ? (_a = {}, _a[channel] = { value: value }, _a) : {};
+  }
+
+  var BOXPLOT = 'box-plot';
+  function isBoxPlotDef(mark) {
+      return !!mark['type'];
+  }
+  var BOXPLOT_STYLES = ['boxWhisker', 'box', 'boxMid'];
+  var VL_ONLY_BOXPLOT_CONFIG_PROPERTY_INDEX = {
+      box: ['size', 'color', 'extent'],
+      boxWhisker: ['color'],
+      boxMid: ['color']
+  };
+  var supportedChannels = ['x', 'y', 'color', 'detail', 'opacity', 'size'];
+  function filterUnsupportedChannels(spec) {
+      return __assign({}, spec, { encoding: reduce(spec.encoding, function (newEncoding, fieldDef, channel) {
+              if (supportedChannels.indexOf(channel) > -1) {
+                  newEncoding[channel] = fieldDef;
+              }
+              else {
+                  warn(message.incompatibleChannel(channel, BOXPLOT));
+              }
+              return newEncoding;
+          }, {}) });
+  }
+  function normalizeBoxPlot(spec, config) {
+      var _a, _b, _c, _d;
+      spec = filterUnsupportedChannels(spec);
+      // TODO: use selection
+      var mark = spec.mark, encoding = spec.encoding, selection = spec.selection, _p = spec.projection, outerSpec = __rest(spec, ["mark", "encoding", "selection", "projection"]);
+      var kIQRScalar = undefined;
+      if (isNumber(config.box.extent)) {
+          kIQRScalar = config.box.extent;
+      }
+      if (isBoxPlotDef(mark)) {
+          if (mark.extent) {
+              if (mark.extent === 'min-max') {
+                  kIQRScalar = undefined;
+              }
+          }
+      }
+      var orient = boxOrient(spec);
+      var _e = boxParams(spec, orient, kIQRScalar), transform = _e.transform, continuousAxisChannelDef = _e.continuousAxisChannelDef, continuousAxis = _e.continuousAxis, encodingWithoutContinuousAxis = _e.encodingWithoutContinuousAxis;
+      var size = encodingWithoutContinuousAxis.size, encodingWithoutSizeColorAndContinuousAxis = __rest(encodingWithoutContinuousAxis, ["color", "size"]);
+      // Size encoding or the default config.box.size is applied to box and boxMid
+      var sizeMixins = size ? { size: size } : getMarkSpecificConfigMixins(config.box, 'size');
+      var continuousAxisScaleAndAxis = {};
+      if (continuousAxisChannelDef.scale) {
+          continuousAxisScaleAndAxis['scale'] = continuousAxisChannelDef.scale;
+      }
+      if (continuousAxisChannelDef.axis) {
+          continuousAxisScaleAndAxis['axis'] = continuousAxisChannelDef.axis;
+      }
+      return __assign({}, outerSpec, { transform: transform, layer: [
+              {
+                  mark: {
+                      type: 'rule',
+                      style: 'boxWhisker'
+                  },
+                  encoding: __assign((_a = {}, _a[continuousAxis] = __assign({ field: 'lower_whisker_' + continuousAxisChannelDef.field, type: continuousAxisChannelDef.type }, continuousAxisScaleAndAxis), _a[continuousAxis + '2'] = {
+                      field: 'lower_box_' + continuousAxisChannelDef.field,
+                      type: continuousAxisChannelDef.type
+                  }, _a), encodingWithoutSizeColorAndContinuousAxis, getMarkSpecificConfigMixins(config.boxWhisker, 'color'))
+              }, {
+                  mark: {
+                      type: 'rule',
+                      style: 'boxWhisker'
+                  },
+                  encoding: __assign((_b = {}, _b[continuousAxis] = {
+                      field: 'upper_box_' + continuousAxisChannelDef.field,
+                      type: continuousAxisChannelDef.type
+                  }, _b[continuousAxis + '2'] = {
+                      field: 'upper_whisker_' + continuousAxisChannelDef.field,
+                      type: continuousAxisChannelDef.type
+                  }, _b), encodingWithoutSizeColorAndContinuousAxis, getMarkSpecificConfigMixins(config.boxWhisker, 'color'))
+              },
+              __assign({}, (selection ? { selection: selection } : {}), { mark: {
+                      type: 'bar',
+                      style: 'box'
+                  }, encoding: __assign((_c = {}, _c[continuousAxis] = {
+                      field: 'lower_box_' + continuousAxisChannelDef.field,
+                      type: continuousAxisChannelDef.type
+                  }, _c[continuousAxis + '2'] = {
+                      field: 'upper_box_' + continuousAxisChannelDef.field,
+                      type: continuousAxisChannelDef.type
+                  }, _c), encodingWithoutContinuousAxis, (encodingWithoutContinuousAxis.color ? {} : getMarkSpecificConfigMixins(config.box, 'color')), sizeMixins) }),
+              {
+                  mark: {
+                      type: 'tick',
+                      style: 'boxMid'
+                  },
+                  encoding: __assign((_d = {}, _d[continuousAxis] = {
+                      field: 'mid_box_' + continuousAxisChannelDef.field,
+                      type: continuousAxisChannelDef.type
+                  }, _d), encodingWithoutSizeColorAndContinuousAxis, getMarkSpecificConfigMixins(config.boxMid, 'color'), sizeMixins)
+              }
+          ] });
+  }
+  function boxOrient(spec) {
+      var mark = spec.mark, encoding = spec.encoding, _p = spec.projection, _outerSpec = __rest(spec, ["mark", "encoding", "projection"]);
+      if (isFieldDef(encoding.x) && isContinuous(encoding.x)) {
+          // x is continuous
+          if (isFieldDef(encoding.y) && isContinuous(encoding.y)) {
+              // both x and y are continuous
+              if (encoding.x.aggregate === undefined && encoding.y.aggregate === BOXPLOT) {
+                  return 'vertical';
+              }
+              else if (encoding.y.aggregate === undefined && encoding.x.aggregate === BOXPLOT) {
+                  return 'horizontal';
+              }
+              else if (encoding.x.aggregate === BOXPLOT && encoding.y.aggregate === BOXPLOT) {
+                  throw new Error('Both x and y cannot have aggregate');
+              }
+              else {
+                  if (isBoxPlotDef(mark) && mark.orient) {
+                      return mark.orient;
+                  }
+                  // default orientation = vertical
+                  return 'vertical';
+              }
+          }
+          // x is continuous but y is not
+          return 'horizontal';
+      }
+      else if (isFieldDef(encoding.y) && isContinuous(encoding.y)) {
+          // y is continuous but x is not
+          return 'vertical';
+      }
+      else {
+          // Neither x nor y is continuous.
+          throw new Error('Need a valid continuous axis for boxplots');
+      }
+  }
+  function boxContinousAxis(spec, orient) {
+      var mark = spec.mark, encoding = spec.encoding, _p = spec.projection, _outerSpec = __rest(spec, ["mark", "encoding", "projection"]);
+      var continuousAxisChannelDef;
+      var continuousAxis;
+      if (orient === 'vertical') {
+          continuousAxis = 'y';
+          continuousAxisChannelDef = encoding.y; // Safe to cast because if y is not continuous fielddef, the orient would not be vertical.
+      }
+      else {
+          continuousAxis = 'x';
+          continuousAxisChannelDef = encoding.x; // Safe to cast because if x is not continuous fielddef, the orient would not be horizontal.
+      }
+      if (continuousAxisChannelDef && continuousAxisChannelDef.aggregate) {
+          var aggregate = continuousAxisChannelDef.aggregate, continuousAxisWithoutAggregate = __rest(continuousAxisChannelDef, ["aggregate"]);
+          if (aggregate !== BOXPLOT) {
+              warn("Continuous axis should not have customized aggregation function " + aggregate);
+          }
+          continuousAxisChannelDef = continuousAxisWithoutAggregate;
+      }
+      return {
+          continuousAxisChannelDef: continuousAxisChannelDef,
+          continuousAxis: continuousAxis
+      };
+  }
+  function boxParams(spec, orient, kIQRScalar) {
+      var _a = boxContinousAxis(spec, orient), continuousAxisChannelDef = _a.continuousAxisChannelDef, continuousAxis = _a.continuousAxis;
+      var encoding = spec.encoding;
+      var isMinMax = kIQRScalar === undefined;
+      var aggregate = [
+          {
+              op: 'q1',
+              field: continuousAxisChannelDef.field,
+              as: 'lower_box_' + continuousAxisChannelDef.field
+          },
+          {
+              op: 'q3',
+              field: continuousAxisChannelDef.field,
+              as: 'upper_box_' + continuousAxisChannelDef.field
+          },
+          {
+              op: 'median',
+              field: continuousAxisChannelDef.field,
+              as: 'mid_box_' + continuousAxisChannelDef.field
+          }
+      ];
+      var postAggregateCalculates = [];
+      aggregate.push({
+          op: 'min',
+          field: continuousAxisChannelDef.field,
+          as: (isMinMax ? 'lower_whisker_' : 'min_') + continuousAxisChannelDef.field
+      });
+      aggregate.push({
+          op: 'max',
+          field: continuousAxisChannelDef.field,
+          as: (isMinMax ? 'upper_whisker_' : 'max_') + continuousAxisChannelDef.field
+      });
+      if (!isMinMax) {
+          postAggregateCalculates = [
+              {
+                  calculate: "datum.upper_box_" + continuousAxisChannelDef.field + " - datum.lower_box_" + continuousAxisChannelDef.field,
+                  as: 'iqr_' + continuousAxisChannelDef.field
+              },
+              {
+                  calculate: "min(datum.upper_box_" + continuousAxisChannelDef.field + " + datum.iqr_" + continuousAxisChannelDef.field + " * " + kIQRScalar + ", datum.max_" + continuousAxisChannelDef.field + ")",
+                  as: 'upper_whisker_' + continuousAxisChannelDef.field
+              },
+              {
+                  calculate: "max(datum.lower_box_" + continuousAxisChannelDef.field + " - datum.iqr_" + continuousAxisChannelDef.field + " * " + kIQRScalar + ", datum.min_" + continuousAxisChannelDef.field + ")",
+                  as: 'lower_whisker_' + continuousAxisChannelDef.field
+              }
+          ];
+      }
+      var groupby = [];
+      var bins = [];
+      var timeUnits = [];
+      var encodingWithoutContinuousAxis = {};
+      forEach(encoding, function (channelDef, channel) {
+          if (channel === continuousAxis) {
+              // Skip continuous axis as we already handle it separately
+              return;
+          }
+          if (isFieldDef(channelDef)) {
+              if (channelDef.aggregate && channelDef.aggregate !== BOXPLOT) {
+                  aggregate.push({
+                      op: channelDef.aggregate,
+                      field: channelDef.field,
+                      as: vgField(channelDef)
+                  });
+              }
+              else if (channelDef.aggregate === undefined) {
+                  var transformedField = vgField(channelDef);
+                  // Add bin or timeUnit transform if applicable
+                  var bin = channelDef.bin;
+                  if (bin) {
+                      var field$$1 = channelDef.field;
+                      bins.push({ bin: bin, field: field$$1, as: transformedField });
+                  }
+                  else if (channelDef.timeUnit) {
+                      var timeUnit = channelDef.timeUnit, field$$1 = channelDef.field;
+                      timeUnits.push({ timeUnit: timeUnit, field: field$$1, as: transformedField });
+                  }
+                  groupby.push(transformedField);
+              }
+              // now the field should refer to post-transformed field instead
+              encodingWithoutContinuousAxis[channel] = {
+                  field: vgField(channelDef),
+                  type: channelDef.type
+              };
+          }
+          else {
+              // For value def, just copy
+              encodingWithoutContinuousAxis[channel] = encoding[channel];
+          }
+      });
+      return {
+          transform: [].concat(bins, timeUnits, [{ aggregate: aggregate, groupby: groupby }], postAggregateCalculates),
+          continuousAxisChannelDef: continuousAxisChannelDef,
+          continuousAxis: continuousAxis,
+          encodingWithoutContinuousAxis: encodingWithoutContinuousAxis
+      };
+  }
+
+  var ERRORBAR = 'error-bar';
+  function normalizeErrorBar(spec) {
+      // TODO: use selection
+      var _m = spec.mark, _sel = spec.selection, _p = spec.projection, encoding = spec.encoding, outerSpec = __rest(spec, ["mark", "selection", "projection", "encoding"]);
+      var _s = encoding.size, encodingWithoutSize = __rest(encoding, ["size"]);
+      var _x2 = encoding.x2, _y2 = encoding.y2, encodingWithoutX2Y2 = __rest(encoding, ["x2", "y2"]);
+      var encodingWithoutX_X2_Y_Y2 = __rest(encodingWithoutX2Y2, ["x", "y"]);
+      if (!encoding.x2 && !encoding.y2) {
+          throw new Error('Neither x2 or y2 provided');
+      }
+      return __assign({}, outerSpec, { layer: [
+              {
+                  mark: 'rule',
+                  encoding: encodingWithoutSize
+              }, {
+                  mark: 'tick',
+                  encoding: encodingWithoutX2Y2
+              }, {
+                  mark: 'tick',
+                  encoding: encoding.x2 ? __assign({ x: encoding.x2, y: encoding.y }, encodingWithoutX_X2_Y_Y2) : __assign({ x: encoding.x, y: encoding.y2 }, encodingWithoutX_X2_Y_Y2)
+              }
+          ] });
+  }
+
+  /**
+   * Registry index for all composite mark's normalizer
+   */
+  var normalizerRegistry = {};
+  function add(mark, normalizer) {
+      normalizerRegistry[mark] = normalizer;
+  }
+  function remove(mark) {
+      delete normalizerRegistry[mark];
+  }
+  var COMPOSITE_MARK_STYLES = BOXPLOT_STYLES;
+  var VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX = __assign({}, VL_ONLY_BOXPLOT_CONFIG_PROPERTY_INDEX);
+  add(BOXPLOT, normalizeBoxPlot);
+  add(ERRORBAR, normalizeErrorBar);
+  /**
+   * Transform a unit spec with composite mark into a normal layer spec.
+   */
+  function normalize$1(
+  // This GenericUnitSpec has any as Encoding because unit specs with composite mark can have additional encoding channels.
+  spec, config) {
+      var mark = isMarkDef(spec.mark) ? spec.mark.type : spec.mark;
+      var normalizer = normalizerRegistry[mark];
+      if (normalizer) {
+          return normalizer(spec, config);
+      }
+      throw new Error("Invalid mark type \"" + mark + "\"");
+  }
+
+  var index = /*#__PURE__*/Object.freeze({
+    add: add,
+    remove: remove,
+    COMPOSITE_MARK_STYLES: COMPOSITE_MARK_STYLES,
+    VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX: VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX,
+    normalize: normalize$1
+  });
+
+  var VL_ONLY_GUIDE_CONFIG = ['shortTimeLabels'];
+
+  var defaultLegendConfig = {};
+  var COMMON_LEGEND_PROPERTY_INDEX = {
+      entryPadding: 1,
+      format: 1,
+      offset: 1,
+      orient: 1,
+      padding: 1,
+      tickCount: 1,
+      title: 1,
+      type: 1,
+      values: 1,
+      zindex: 1
+  };
+  var VG_LEGEND_PROPERTY_INDEX = __assign({}, COMMON_LEGEND_PROPERTY_INDEX, { 
+      // channel scales
+      opacity: 1, shape: 1, stroke: 1, fill: 1, size: 1, 
+      // encode
+      encode: 1 });
+  var LEGEND_PROPERTIES = flagKeys(COMMON_LEGEND_PROPERTY_INDEX);
+  var VG_LEGEND_PROPERTIES = flagKeys(VG_LEGEND_PROPERTY_INDEX);
+
+  var legend = /*#__PURE__*/Object.freeze({
+    defaultLegendConfig: defaultLegendConfig,
+    LEGEND_PROPERTIES: LEGEND_PROPERTIES,
+    VG_LEGEND_PROPERTIES: VG_LEGEND_PROPERTIES
+  });
+
+  var ScaleType;
+  (function (ScaleType) {
+      // Continuous - Quantitative
+      ScaleType.LINEAR = 'linear';
+      ScaleType.BIN_LINEAR = 'bin-linear';
+      ScaleType.LOG = 'log';
+      ScaleType.POW = 'pow';
+      ScaleType.SQRT = 'sqrt';
+      // Continuous - Time
+      ScaleType.TIME = 'time';
+      ScaleType.UTC = 'utc';
+      // sequential
+      ScaleType.SEQUENTIAL = 'sequential';
+      // Quantile, Quantize, threshold
+      ScaleType.QUANTILE = 'quantile';
+      ScaleType.QUANTIZE = 'quantize';
+      ScaleType.THRESHOLD = 'threshold';
+      ScaleType.ORDINAL = 'ordinal';
+      ScaleType.BIN_ORDINAL = 'bin-ordinal';
+      ScaleType.POINT = 'point';
+      ScaleType.BAND = 'band';
+  })(ScaleType || (ScaleType = {}));
+  /**
+   * Index for scale categories -- only scale of the same categories can be merged together.
+   * Current implementation is trying to be conservative and avoid merging scale type that might not work together
+   */
+  var SCALE_CATEGORY_INDEX = {
+      linear: 'numeric',
+      log: 'numeric',
+      pow: 'numeric',
+      sqrt: 'numeric',
+      'bin-linear': 'bin-linear',
+      time: 'time',
+      utc: 'time',
+      sequential: 'sequential',
+      ordinal: 'ordinal',
+      'bin-ordinal': 'bin-ordinal',
+      point: 'ordinal-position',
+      band: 'ordinal-position'
+  };
+  var SCALE_TYPES = keys(SCALE_CATEGORY_INDEX);
+  /**
+   * Whether the two given scale types can be merged together.
+   */
+  function scaleCompatible(scaleType1, scaleType2) {
+      var scaleCategory1 = SCALE_CATEGORY_INDEX[scaleType1];
+      var scaleCategory2 = SCALE_CATEGORY_INDEX[scaleType2];
+      return scaleCategory1 === scaleCategory2 ||
+          (scaleCategory1 === 'ordinal-position' && scaleCategory2 === 'time') ||
+          (scaleCategory2 === 'ordinal-position' && scaleCategory1 === 'time');
+  }
+  /**
+   * Index for scale precedence -- high score = higher priority for merging.
+   */
+  var SCALE_PRECEDENCE_INDEX = {
+      // numeric
+      linear: 0,
+      log: 1,
+      pow: 1,
+      sqrt: 1,
+      // time
+      time: 0,
+      utc: 0,
+      // ordinal-position -- these have higher precedence than continuous scales as they support more types of data
+      point: 10,
+      band: 11,
+      // non grouped types
+      'bin-linear': 0,
+      sequential: 0,
+      ordinal: 0,
+      'bin-ordinal': 0,
+  };
+  /**
+   * Return scale categories -- only scale of the same categories can be merged together.
+   */
+  function scaleTypePrecedence(scaleType) {
+      return SCALE_PRECEDENCE_INDEX[scaleType];
+  }
+  var CONTINUOUS_TO_CONTINUOUS_SCALES = ['linear', 'bin-linear', 'log', 'pow', 'sqrt', 'time', 'utc'];
+  var CONTINUOUS_TO_CONTINUOUS_INDEX = toSet(CONTINUOUS_TO_CONTINUOUS_SCALES);
+  var CONTINUOUS_DOMAIN_SCALES = CONTINUOUS_TO_CONTINUOUS_SCALES.concat(['sequential' /* TODO add 'quantile', 'quantize', 'threshold'*/]);
+  var CONTINUOUS_DOMAIN_INDEX = toSet(CONTINUOUS_DOMAIN_SCALES);
+  var DISCRETE_DOMAIN_SCALES = ['ordinal', 'bin-ordinal', 'point', 'band'];
+  var DISCRETE_DOMAIN_INDEX = toSet(DISCRETE_DOMAIN_SCALES);
+  var BIN_SCALES_INDEX = toSet(['bin-linear', 'bin-ordinal']);
+  var TIME_SCALE_TYPES = ['time', 'utc'];
+  function hasDiscreteDomain(type) {
+      return type in DISCRETE_DOMAIN_INDEX;
+  }
+  function isBinScale(type) {
+      return type in BIN_SCALES_INDEX;
+  }
+  function hasContinuousDomain(type) {
+      return type in CONTINUOUS_DOMAIN_INDEX;
+  }
+  function isContinuousToContinuous(type) {
+      return type in CONTINUOUS_TO_CONTINUOUS_INDEX;
+  }
+  var defaultScaleConfig = {
+      textXRangeStep: 90,
+      rangeStep: 21,
+      pointPadding: 0.5,
+      bandPaddingInner: 0.1,
+      facetSpacing: 16,
+      minBandSize: 2,
+      minFontSize: 8,
+      maxFontSize: 40,
+      minOpacity: 0.3,
+      maxOpacity: 0.8,
+      // FIXME: revise if these *can* become ratios of rangeStep
+      minSize: 9,
+      minStrokeWidth: 1,
+      maxStrokeWidth: 4
+  };
+  function isExtendedScheme(scheme) {
+      return scheme && !!scheme['name'];
+  }
+  function isSelectionDomain(domain) {
+      return domain && domain['selection'];
+  }
+  var SCALE_PROPERTY_INDEX = {
+      type: 1,
+      domain: 1,
+      range: 1,
+      rangeStep: 1,
+      scheme: 1,
+      // Other properties
+      reverse: 1,
+      round: 1,
+      // quantitative / time
+      clamp: 1,
+      nice: 1,
+      // quantitative
+      base: 1,
+      exponent: 1,
+      interpolate: 1,
+      zero: 1,
+      // band/point
+      padding: 1,
+      paddingInner: 1,
+      paddingOuter: 1
+  };
+  var SCALE_PROPERTIES = flagKeys(SCALE_PROPERTY_INDEX);
+  var NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTY_INDEX = __rest(SCALE_PROPERTY_INDEX, ["type", "domain", "range", "rangeStep", "scheme"]);
+  var NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES = flagKeys(NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTY_INDEX);
+  var SCALE_TYPE_INDEX = generateScaleTypeIndex();
+  function scaleTypeSupportProperty(scaleType, propName) {
+      switch (propName) {
+          case 'type':
+          case 'domain':
+          case 'reverse':
+          case 'range':
+              return true;
+          case 'scheme':
+              return contains(['sequential', 'ordinal', 'bin-ordinal', 'quantile', 'quantize'], scaleType);
+          case 'interpolate':
+              // FIXME(https://github.com/vega/vega-lite/issues/2902) how about ordinal?
+              return contains(['linear', 'bin-linear', 'pow', 'log', 'sqrt', 'utc', 'time'], scaleType);
+          case 'round':
+              return isContinuousToContinuous(scaleType) || scaleType === 'band' || scaleType === 'point';
+          case 'padding':
+              return isContinuousToContinuous(scaleType) || contains(['point', 'band'], scaleType);
+          case 'paddingOuter':
+          case 'rangeStep':
+              return contains(['point', 'band'], scaleType);
+          case 'paddingInner':
+              return scaleType === 'band';
+          case 'clamp':
+              return isContinuousToContinuous(scaleType) || scaleType === 'sequential';
+          case 'nice':
+              return isContinuousToContinuous(scaleType) || scaleType === 'sequential' || scaleType === 'quantize';
+          case 'exponent':
+              return scaleType === 'pow';
+          case 'base':
+              return scaleType === 'log';
+          case 'zero':
+              return hasContinuousDomain(scaleType) && !contains([
+                  'log',
+                  'time', 'utc',
+                  'bin-linear',
+                  'threshold',
+                  'quantile' // quantile depends on distribution so zero does not matter
+              ], scaleType);
+      }
+      /* istanbul ignore next: should never reach here*/
+      throw new Error("Invalid scale property " + propName + ".");
+  }
+  /**
+   * Returns undefined if the input channel supports the input scale property name
+   */
+  function channelScalePropertyIncompatability(channel, propName) {
+      switch (propName) {
+          case 'interpolate':
+          case 'scheme':
+              if (!isColorChannel(channel)) {
+                  return message.cannotUseScalePropertyWithNonColor(channel);
+              }
+              return undefined;
+          case 'type':
+          case 'domain':
+          case 'range':
+          case 'base':
+          case 'exponent':
+          case 'nice':
+          case 'padding':
+          case 'paddingInner':
+          case 'paddingOuter':
+          case 'rangeStep':
+          case 'reverse':
+          case 'round':
+          case 'clamp':
+          case 'zero':
+              return undefined; // GOOD!
+      }
+      /* istanbul ignore next: it should never reach here */
+      throw new Error("Invalid scale property \"" + propName + "\".");
+  }
+  function scaleTypeSupportDataType(specifiedType, fieldDefType, bin) {
+      if (contains([Type.ORDINAL, Type.NOMINAL], fieldDefType)) {
+          return specifiedType === undefined || hasDiscreteDomain(specifiedType);
+      }
+      else if (fieldDefType === Type.TEMPORAL) {
+          return contains([ScaleType.TIME, ScaleType.UTC, ScaleType.SEQUENTIAL, undefined], specifiedType);
+      }
+      else if (fieldDefType === Type.QUANTITATIVE) {
+          if (bin) {
+              return contains([ScaleType.BIN_LINEAR, ScaleType.BIN_ORDINAL, ScaleType.LINEAR], specifiedType);
+          }
+          return contains([ScaleType.LOG, ScaleType.POW, ScaleType.SQRT, ScaleType.QUANTILE, ScaleType.QUANTIZE, ScaleType.LINEAR, ScaleType.SEQUENTIAL, undefined], specifiedType);
+      }
+      return true;
+  }
+  function channelSupportScaleType(channel, scaleType) {
+      switch (channel) {
+          case Channel.X:
+          case Channel.Y:
+          case Channel.SIZE: // TODO: size and opacity can support ordinal with more modification
+          case Channel.OPACITY:
+              // Although it generally doesn't make sense to use band with size and opacity,
+              // it can also work since we use band: 0.5 to get midpoint.
+              return isContinuousToContinuous(scaleType) || contains(['band', 'point'], scaleType);
+          case Channel.COLOR:
+          case Channel.FILL:
+          case Channel.STROKE:
+              return scaleType !== 'band'; // band does not make sense with color
+          case Channel.SHAPE:
+              return scaleType === 'ordinal'; // shape = lookup only
+      }
+      /* istanbul ignore next: it should never reach here */
+      return false;
+  }
+  function getSupportedScaleType(channel, fieldDefType, bin) {
+      return SCALE_TYPE_INDEX[generateScaleTypeIndexKey(channel, fieldDefType, bin)];
+  }
+  // generates ScaleTypeIndex where keys are encoding channels and values are list of valid ScaleTypes
+  function generateScaleTypeIndex() {
+      var index = {};
+      for (var _i = 0, CHANNELS_1 = CHANNELS; _i < CHANNELS_1.length; _i++) {
+          var channel = CHANNELS_1[_i];
+          for (var _a = 0, _b = keys(TYPE_INDEX); _a < _b.length; _a++) {
+              var fieldDefType = _b[_a];
+              for (var _c = 0, SCALE_TYPES_1 = SCALE_TYPES; _c < SCALE_TYPES_1.length; _c++) {
+                  var scaleType = SCALE_TYPES_1[_c];
+                  for (var _d = 0, _e = [false, true]; _d < _e.length; _d++) {
+                      var bin = _e[_d];
+                      var key$$1 = generateScaleTypeIndexKey(channel, fieldDefType, bin);
+                      if (channelSupportScaleType(channel, scaleType) && scaleTypeSupportDataType(scaleType, fieldDefType, bin)) {
+                          index[key$$1] = index[key$$1] || [];
+                          index[key$$1].push(scaleType);
+                      }
+                  }
+              }
+          }
+      }
+      return index;
+  }
+  function generateScaleTypeIndexKey(channel, fieldDefType, bin) {
+      var key$$1 = channel + '_' + fieldDefType;
+      return bin ? key$$1 + '_bin' : key$$1;
+  }
+
+  var scale = /*#__PURE__*/Object.freeze({
+    get ScaleType () { return ScaleType; },
+    SCALE_TYPES: SCALE_TYPES,
+    scaleCompatible: scaleCompatible,
+    scaleTypePrecedence: scaleTypePrecedence,
+    CONTINUOUS_TO_CONTINUOUS_SCALES: CONTINUOUS_TO_CONTINUOUS_SCALES,
+    CONTINUOUS_DOMAIN_SCALES: CONTINUOUS_DOMAIN_SCALES,
+    DISCRETE_DOMAIN_SCALES: DISCRETE_DOMAIN_SCALES,
+    TIME_SCALE_TYPES: TIME_SCALE_TYPES,
+    hasDiscreteDomain: hasDiscreteDomain,
+    isBinScale: isBinScale,
+    hasContinuousDomain: hasContinuousDomain,
+    isContinuousToContinuous: isContinuousToContinuous,
+    defaultScaleConfig: defaultScaleConfig,
+    isExtendedScheme: isExtendedScheme,
+    isSelectionDomain: isSelectionDomain,
+    SCALE_PROPERTIES: SCALE_PROPERTIES,
+    NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES: NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES,
+    SCALE_TYPE_INDEX: SCALE_TYPE_INDEX,
+    scaleTypeSupportProperty: scaleTypeSupportProperty,
+    channelScalePropertyIncompatability: channelScalePropertyIncompatability,
+    scaleTypeSupportDataType: scaleTypeSupportDataType,
+    channelSupportScaleType: channelSupportScaleType,
+    getSupportedScaleType: getSupportedScaleType
+  });
+
+  var SELECTION_ID = '_vgsid_';
+  var defaultConfig = {
+      single: {
+          on: 'click',
+          fields: [SELECTION_ID],
+          resolve: 'global',
+          empty: 'all'
+      },
+      multi: {
+          on: 'click',
+          fields: [SELECTION_ID],
+          toggle: 'event.shiftKey',
+          resolve: 'global',
+          empty: 'all'
+      },
+      interval: {
+          on: '[mousedown, window:mouseup] > window:mousemove!',
+          encodings: ['x', 'y'],
+          translate: '[mousedown, window:mouseup] > window:mousemove!',
+          zoom: 'wheel!',
+          mark: { fill: '#333', fillOpacity: 0.125, stroke: 'white' },
+          resolve: 'global'
+      }
+  };
+
+  function extractTitleConfig(titleConfig) {
+      var 
+      // These are non-mark title config that need to be hardcoded
+      anchor = titleConfig.anchor, offset = titleConfig.offset, orient = titleConfig.orient, 
+      // color needs to be redirect to fill
+      color = titleConfig.color, 
+      // The rest are mark config.
+      titleMarkConfig = __rest(titleConfig, ["anchor", "offset", "orient", "color"]);
+      var mark = __assign({}, titleMarkConfig, color ? { fill: color } : {});
+      var nonMark = __assign({}, anchor ? { anchor: anchor } : {}, offset ? { offset: offset } : {}, orient ? { orient: orient } : {});
+      return { mark: mark, nonMark: nonMark };
+  }
+
+  var defaultViewConfig = {
+      width: 200,
+      height: 200
+  };
+  var defaultConfig$1 = {
+      padding: 5,
+      timeFormat: '',
+      countTitle: 'Number of Records',
+      invalidValues: 'filter',
+      view: defaultViewConfig,
+      mark: defaultMarkConfig,
+      area: {},
+      bar: defaultBarConfig,
+      circle: {},
+      geoshape: {},
+      line: {},
+      point: {},
+      rect: {},
+      rule: { color: 'black' },
+      square: {},
+      text: { color: 'black' },
+      tick: defaultTickConfig,
+      trail: {},
+      box: { size: 14, extent: 1.5 },
+      boxWhisker: {},
+      boxMid: { color: 'white' },
+      scale: defaultScaleConfig,
+      projection: {},
+      axis: {},
+      axisX: {},
+      axisY: { minExtent: 30 },
+      axisLeft: {},
+      axisRight: {},
+      axisTop: {},
+      axisBottom: {},
+      axisBand: {},
+      legend: defaultLegendConfig,
+      selection: defaultConfig,
+      style: {},
+      title: {},
+  };
+  function initConfig(config) {
+      return mergeDeep(duplicate(defaultConfig$1), config);
+  }
+  var MARK_STYLES = ['view'].concat(PRIMITIVE_MARKS, COMPOSITE_MARK_STYLES);
+  var VL_ONLY_CONFIG_PROPERTIES = [
+      'padding', 'numberFormat', 'timeFormat', 'countTitle',
+      'stack', 'scale', 'selection', 'invalidValues',
+      'overlay' // FIXME: Redesign and unhide this
+  ];
+  var VL_ONLY_ALL_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX = __assign({ view: ['width', 'height'] }, VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX, VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX);
+  function stripAndRedirectConfig(config) {
+      config = duplicate(config);
+      for (var _i = 0, VL_ONLY_CONFIG_PROPERTIES_1 = VL_ONLY_CONFIG_PROPERTIES; _i < VL_ONLY_CONFIG_PROPERTIES_1.length; _i++) {
+          var prop = VL_ONLY_CONFIG_PROPERTIES_1[_i];
+          delete config[prop];
+      }
+      // Remove Vega-Lite only axis/legend config
+      if (config.axis) {
+          for (var _a = 0, VL_ONLY_GUIDE_CONFIG_1 = VL_ONLY_GUIDE_CONFIG; _a < VL_ONLY_GUIDE_CONFIG_1.length; _a++) {
+              var prop = VL_ONLY_GUIDE_CONFIG_1[_a];
+              delete config.axis[prop];
+          }
+      }
+      if (config.legend) {
+          for (var _b = 0, VL_ONLY_GUIDE_CONFIG_2 = VL_ONLY_GUIDE_CONFIG; _b < VL_ONLY_GUIDE_CONFIG_2.length; _b++) {
+              var prop = VL_ONLY_GUIDE_CONFIG_2[_b];
+              delete config.legend[prop];
+          }
+      }
+      // Remove Vega-Lite only generic mark config
+      if (config.mark) {
+          for (var _c = 0, VL_ONLY_MARK_CONFIG_PROPERTIES_1 = VL_ONLY_MARK_CONFIG_PROPERTIES; _c < VL_ONLY_MARK_CONFIG_PROPERTIES_1.length; _c++) {
+              var prop = VL_ONLY_MARK_CONFIG_PROPERTIES_1[_c];
+              delete config.mark[prop];
+          }
+      }
+      for (var _d = 0, MARK_STYLES_1 = MARK_STYLES; _d < MARK_STYLES_1.length; _d++) {
+          var markType = MARK_STYLES_1[_d];
+          // Remove Vega-Lite-only mark config
+          for (var _e = 0, VL_ONLY_MARK_CONFIG_PROPERTIES_2 = VL_ONLY_MARK_CONFIG_PROPERTIES; _e < VL_ONLY_MARK_CONFIG_PROPERTIES_2.length; _e++) {
+              var prop = VL_ONLY_MARK_CONFIG_PROPERTIES_2[_e];
+              delete config[markType][prop];
+          }
+          // Remove Vega-Lite only mark-specific config
+          var vlOnlyMarkSpecificConfigs = VL_ONLY_ALL_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX[markType];
+          if (vlOnlyMarkSpecificConfigs) {
+              for (var _f = 0, vlOnlyMarkSpecificConfigs_1 = vlOnlyMarkSpecificConfigs; _f < vlOnlyMarkSpecificConfigs_1.length; _f++) {
+                  var prop = vlOnlyMarkSpecificConfigs_1[_f];
+                  delete config[markType][prop];
+              }
+          }
+          // Redirect mark config to config.style so that mark config only affect its own mark type
+          // without affecting other marks that share the same underlying Vega marks.
+          // For example, config.rect should not affect bar marks.
+          redirectConfig(config, markType);
+      }
+      // Redirect config.title -- so that title config do not
+      // affect header labels, which also uses `title` directive to implement.
+      redirectConfig(config, 'title', 'group-title');
+      // Remove empty config objects
+      for (var prop in config) {
+          if (isObject(config[prop]) && keys(config[prop]).length === 0) {
+              delete config[prop];
+          }
+      }
+      return keys(config).length > 0 ? config : undefined;
+  }
+  function redirectConfig(config, prop, toProp) {
+      var propConfig = prop === 'title' ? extractTitleConfig(config.title).mark : config[prop];
+      if (prop === 'view') {
+          toProp = 'cell'; // View's default style is "cell"
+      }
+      var style = __assign({}, propConfig, config.style[prop]);
+      // set config.style if it is not an empty object
+      if (keys(style).length > 0) {
+          config.style[toProp || prop] = style;
+      }
+      delete config[prop];
+  }
+
+  var config = /*#__PURE__*/Object.freeze({
+    defaultViewConfig: defaultViewConfig,
+    defaultConfig: defaultConfig$1,
+    initConfig: initConfig,
+    stripAndRedirectConfig: stripAndRedirectConfig
+  });
+
+  var STACK_OFFSET_INDEX = {
+      zero: 1,
+      center: 1,
+      normalize: 1
+  };
+  function isStackOffset(s) {
+      return !!STACK_OFFSET_INDEX[s];
+  }
+  var STACKABLE_MARKS = [BAR, AREA, RULE, POINT, CIRCLE, SQUARE, LINE, TEXT$1, TICK];
+  var STACK_BY_DEFAULT_MARKS = [BAR, AREA];
+  function potentialStackedChannel(encoding) {
+      var xDef = encoding.x;
+      var yDef = encoding.y;
+      if (isFieldDef(xDef) && isFieldDef(yDef)) {
+          if (xDef.type === 'quantitative' && yDef.type === 'quantitative') {
+              if (xDef.stack) {
+                  return 'x';
+              }
+              else if (yDef.stack) {
+                  return 'y';
+              }
+              // if there is no explicit stacking, only apply stack if there is only one aggregate for x or y
+              if ((!!xDef.aggregate) !== (!!yDef.aggregate)) {
+                  return xDef.aggregate ? 'x' : 'y';
+              }
+          }
+          else if (xDef.type === 'quantitative') {
+              return 'x';
+          }
+          else if (yDef.type === 'quantitative') {
+              return 'y';
+          }
+      }
+      else if (isFieldDef(xDef) && xDef.type === 'quantitative') {
+          return 'x';
+      }
+      else if (isFieldDef(yDef) && yDef.type === 'quantitative') {
+          return 'y';
+      }
+      return undefined;
+  }
+  // Note: CompassQL uses this method and only pass in required properties of each argument object.
+  // If required properties change, make sure to update CompassQL.
+  function stack(m, encoding, stackConfig) {
+      var mark = isMarkDef(m) ? m.type : m;
+      // Should have stackable mark
+      if (!contains(STACKABLE_MARKS, mark)) {
+          return null;
+      }
+      var fieldChannel = potentialStackedChannel(encoding);
+      if (!fieldChannel) {
+          return null;
+      }
+      var stackedFieldDef = encoding[fieldChannel];
+      var stackedField = isStringFieldDef(stackedFieldDef) ? vgField(stackedFieldDef, {}) : undefined;
+      var dimensionChannel = fieldChannel === 'x' ? 'y' : 'x';
+      var dimensionDef = encoding[dimensionChannel];
+      var dimensionField = isStringFieldDef(dimensionDef) ? vgField(dimensionDef, {}) : undefined;
+      // Should have grouping level of detail that is different from the dimension field
+      var stackBy = NONPOSITION_CHANNELS.reduce(function (sc, channel) {
+          if (channelHasField(encoding, channel)) {
+              var channelDef = encoding[channel];
+              (isArray(channelDef) ? channelDef : [channelDef]).forEach(function (cDef) {
+                  var fieldDef = getFieldDef(cDef);
+                  if (fieldDef.aggregate) {
+                      return;
+                  }
+                  // Check whether the channel's field is identical to x/y's field or if the channel is a repeat
+                  var f = isStringFieldDef(fieldDef) ? vgField(fieldDef, {}) : undefined;
+                  if (
+                  // if fielddef is a repeat, just include it in the stack by
+                  !f ||
+                      // otherwise, the field must be different from x and y fields.
+                      (f !== dimensionField && f !== stackedField)) {
+                      sc.push({ channel: channel, fieldDef: fieldDef });
+                  }
+              });
+          }
+          return sc;
+      }, []);
+      if (stackBy.length === 0) {
+          return null;
+      }
+      // Automatically determine offset
+      var offset = undefined;
+      if (stackedFieldDef.stack !== undefined) {
+          offset = stackedFieldDef.stack;
+      }
+      else if (contains(STACK_BY_DEFAULT_MARKS, mark)) {
+          // Bar and Area with sum ops are automatically stacked by default
+          offset = stackConfig === undefined ? 'zero' : stackConfig;
+      }
+      else {
+          offset = stackConfig;
+      }
+      if (!offset || !isStackOffset(offset)) {
+          return null;
+      }
+      // warn when stacking non-linear
+      if (stackedFieldDef.scale && stackedFieldDef.scale.type && stackedFieldDef.scale.type !== ScaleType.LINEAR) {
+          warn(message.cannotStackNonLinearScale(stackedFieldDef.scale.type));
+      }
+      // Check if it is a ranged mark
+      if (channelHasField(encoding, fieldChannel === X ? X2 : Y2)) {
+          if (stackedFieldDef.stack !== undefined) {
+              warn(message.cannotStackRangedMark(fieldChannel));
+          }
+          return null;
+      }
+      // Warn if stacking summative aggregate
+      if (stackedFieldDef.aggregate && !contains(SUM_OPS, stackedFieldDef.aggregate)) {
+          warn(message.stackNonSummativeAggregate(stackedFieldDef.aggregate));
+      }
+      return {
+          groupbyChannel: dimensionDef ? dimensionChannel : undefined,
+          fieldChannel: fieldChannel,
+          impute: isPathMark(mark),
+          stackBy: stackBy,
+          offset: offset
+      };
+  }
+
+  var stack$1 = /*#__PURE__*/Object.freeze({
+    isStackOffset: isStackOffset,
+    STACKABLE_MARKS: STACKABLE_MARKS,
+    STACK_BY_DEFAULT_MARKS: STACK_BY_DEFAULT_MARKS,
+    stack: stack
+  });
+
+  /* Custom type guards */
+  function isFacetSpec(spec) {
+      return spec['facet'] !== undefined;
+  }
+  function isUnitSpec(spec) {
+      return !!spec['mark'];
+  }
+  function isLayerSpec(spec) {
+      return spec['layer'] !== undefined;
+  }
+  function isRepeatSpec(spec) {
+      return spec['repeat'] !== undefined;
+  }
+  function isConcatSpec(spec) {
+      return isVConcatSpec(spec) || isHConcatSpec(spec);
+  }
+  function isVConcatSpec(spec) {
+      return spec['vconcat'] !== undefined;
+  }
+  function isHConcatSpec(spec) {
+      return spec['hconcat'] !== undefined;
+  }
+  /**
+   * Decompose extended unit specs into composition of pure unit specs.
+   */
+  // TODO: consider moving this to another file.  Maybe vl.spec.normalize or vl.normalize
+  function normalize$2(spec, config) {
+      if (isFacetSpec(spec)) {
+          return normalizeFacet(spec, config);
+      }
+      if (isLayerSpec(spec)) {
+          return normalizeLayer(spec, config);
+      }
+      if (isRepeatSpec(spec)) {
+          return normalizeRepeat(spec, config);
+      }
+      if (isVConcatSpec(spec)) {
+          return normalizeVConcat(spec, config);
+      }
+      if (isHConcatSpec(spec)) {
+          return normalizeHConcat(spec, config);
+      }
+      if (isUnitSpec(spec)) {
+          var hasRow = channelHasField(spec.encoding, ROW);
+          var hasColumn = channelHasField(spec.encoding, COLUMN);
+          if (hasRow || hasColumn) {
+              return normalizeFacetedUnit(spec, config);
+          }
+          return normalizeNonFacetUnit(spec, config);
+      }
+      throw new Error(message.INVALID_SPEC);
+  }
+  function normalizeFacet(spec, config) {
+      var subspec = spec.spec, rest = __rest(spec, ["spec"]);
+      return __assign({}, rest, { 
+          // TODO: remove "any" once we support all facet listed in https://github.com/vega/vega-lite/issues/2760
+          spec: normalize$2(subspec, config) });
+  }
+  function mergeEncoding(opt) {
+      var parentEncoding = opt.parentEncoding, encoding = opt.encoding;
+      if (parentEncoding && encoding) {
+          var overriden = keys(parentEncoding).reduce(function (o, key$$1) {
+              if (encoding[key$$1]) {
+                  o.push(key$$1);
+              }
+              return o;
+          }, []);
+          if (overriden.length > 0) {
+              warn(message.encodingOverridden(overriden));
+          }
+      }
+      var merged = __assign({}, (parentEncoding || {}), (encoding || {}));
+      return keys(merged).length > 0 ? merged : undefined;
+  }
+  function mergeProjection(opt) {
+      var parentProjection = opt.parentProjection, projection = opt.projection;
+      if (parentProjection && projection) {
+          warn(message.projectionOverridden({ parentProjection: parentProjection, projection: projection }));
+      }
+      return projection || parentProjection;
+  }
+  function normalizeLayer(spec, config, parentEncoding, parentProjection) {
+      var layer = spec.layer, encoding = spec.encoding, projection = spec.projection, rest = __rest(spec, ["layer", "encoding", "projection"]);
+      var mergedEncoding = mergeEncoding({ parentEncoding: parentEncoding, encoding: encoding });
+      var mergedProjection = mergeProjection({ parentProjection: parentProjection, projection: projection });
+      return __assign({}, rest, { layer: layer.map(function (subspec) {
+              if (isLayerSpec(subspec)) {
+                  return normalizeLayer(subspec, config, mergedEncoding, mergedProjection);
+              }
+              return normalizeNonFacetUnit(subspec, config, mergedEncoding, mergedProjection);
+          }) });
+  }
+  function normalizeRepeat(spec, config) {
+      var subspec = spec.spec, rest = __rest(spec, ["spec"]);
+      return __assign({}, rest, { spec: normalize$2(subspec, config) });
+  }
+  function normalizeVConcat(spec, config) {
+      var vconcat = spec.vconcat, rest = __rest(spec, ["vconcat"]);
+      return __assign({}, rest, { vconcat: vconcat.map(function (subspec) { return normalize$2(subspec, config); }) });
+  }
+  function normalizeHConcat(spec, config) {
+      var hconcat = spec.hconcat, rest = __rest(spec, ["hconcat"]);
+      return __assign({}, rest, { hconcat: hconcat.map(function (subspec) { return normalize$2(subspec, config); }) });
+  }
+  function normalizeFacetedUnit(spec, config) {
+      // New encoding in the inside spec should not contain row / column
+      // as row/column should be moved to facet
+      var _a = spec.encoding, row = _a.row, column = _a.column, encoding = __rest(_a, ["row", "column"]);
+      // Mark and encoding should be moved into the inner spec
+      var mark = spec.mark, width = spec.width, projection = spec.projection, height = spec.height, selection = spec.selection, _ = spec.encoding, outerSpec = __rest(spec, ["mark", "width", "projection", "height", "selection", "encoding"]);
+      return __assign({}, outerSpec, { facet: __assign({}, (row ? { row: row } : {}), (column ? { column: column } : {})), spec: normalizeNonFacetUnit(__assign({}, (projection ? { projection: projection } : {}), { mark: mark }, (width ? { width: width } : {}), (height ? { height: height } : {}), { encoding: encoding }, (selection ? { selection: selection } : {})), config) });
+  }
+  function isNonFacetUnitSpecWithPrimitiveMark(spec) {
+      return isPrimitiveMark(spec.mark);
+  }
+  function getPointOverlay(markDef, markConfig, encoding) {
+      if (markDef.point === 'transparent') {
+          return { opacity: 0 };
+      }
+      else if (markDef.point) { // truthy : true or object
+          return isObject(markDef.point) ? markDef.point : {};
+      }
+      else if (markDef.point !== undefined) { // false or null
+          return null;
+      }
+      else { // undefined (not disabled)
+          if (markConfig.point || encoding.shape) {
+              // enable point overlay if config[mark].point is truthy or if encoding.shape is provided
+              return isObject(markConfig.point) ? markConfig.point : {};
+          }
+          // markDef.point is defined as falsy
+          return null;
+      }
+  }
+  function getLineOverlay(markDef, markConfig) {
+      if (markDef.line) { // true or object
+          return markDef.line === true ? {} : markDef.line;
+      }
+      else if (markDef.line !== undefined) { // false or null
+          return null;
+      }
+      else { // undefined (not disabled)
+          if (markConfig.line) {
+              // enable line overlay if config[mark].line is truthy
+              return markConfig.line === true ? {} : markConfig.line;
+          }
+          // markDef.point is defined as falsy
+          return null;
+      }
+  }
+  function normalizeNonFacetUnit(spec, config, parentEncoding, parentProjection) {
+      var encoding = spec.encoding, projection = spec.projection;
+      var mark = isMarkDef(spec.mark) ? spec.mark.type : spec.mark;
+      // merge parent encoding / projection first
+      if (parentEncoding || parentProjection) {
+          var mergedProjection = mergeProjection({ parentProjection: parentProjection, projection: projection });
+          var mergedEncoding = mergeEncoding({ parentEncoding: parentEncoding, encoding: encoding });
+          return normalizeNonFacetUnit(__assign({}, spec, (mergedProjection ? { projection: mergedProjection } : {}), (mergedEncoding ? { encoding: mergedEncoding } : {})), config);
+      }
+      if (isNonFacetUnitSpecWithPrimitiveMark(spec)) {
+          // TODO: thoroughly test
+          if (isRanged(encoding)) {
+              return normalizeRangedUnit(spec);
+          }
+          if (mark === 'line' && (encoding.x2 || encoding.y2)) {
+              warn(message.lineWithRange(!!encoding.x2, !!encoding.y2));
+              return normalizeNonFacetUnit(__assign({ mark: 'rule' }, spec), config, parentEncoding, parentProjection);
+          }
+          if (isPathMark(mark)) {
+              return normalizePathOverlay(spec, config);
+          }
+          return spec; // Nothing to normalize
+      }
+      else {
+          return normalize$1(spec, config);
+      }
+  }
+  function normalizeRangedUnit(spec) {
+      var hasX = channelHasField(spec.encoding, X);
+      var hasY = channelHasField(spec.encoding, Y);
+      var hasX2 = channelHasField(spec.encoding, X2);
+      var hasY2 = channelHasField(spec.encoding, Y2);
+      if ((hasX2 && !hasX) || (hasY2 && !hasY)) {
+          var normalizedSpec = duplicate(spec);
+          if (hasX2 && !hasX) {
+              normalizedSpec.encoding.x = normalizedSpec.encoding.x2;
+              delete normalizedSpec.encoding.x2;
+          }
+          if (hasY2 && !hasY) {
+              normalizedSpec.encoding.y = normalizedSpec.encoding.y2;
+              delete normalizedSpec.encoding.y2;
+          }
+          return normalizedSpec;
+      }
+      return spec;
+  }
+  function dropLineAndPoint(markDef) {
+      var _point = markDef.point, _line = markDef.line, mark = __rest(markDef, ["point", "line"]);
+      return keys(mark).length > 1 ? mark : mark.type;
+  }
+  function normalizePathOverlay(spec, config) {
+      if (config === void 0) { config = {}; }
+      var _a;
+      // _ is used to denote a dropped property of the unit spec
+      // which should not be carried over to the layer spec
+      var selection = spec.selection, projection = spec.projection, encoding = spec.encoding, mark = spec.mark, outerSpec = __rest(spec, ["selection", "projection", "encoding", "mark"]);
+      var markDef = isMarkDef(mark) ? mark : { type: mark };
+      var pointOverlay = getPointOverlay(markDef, config[markDef.type], encoding);
+      var lineOverlay = markDef.type === 'area' && getLineOverlay(markDef, config[markDef.type]);
+      if (!pointOverlay && !lineOverlay) {
+          return __assign({}, spec, { 
+              // Do not include point / line overlay in the normalize spec
+              mark: dropLineAndPoint(markDef) });
+      }
+      var layer = [__assign({}, (selection ? { selection: selection } : {}), { 
+              // Do not include point / line overlay in the normalize spec
+              mark: dropLineAndPoint(__assign({}, markDef, (markDef.type === 'area' ? { opacity: 0.7 } : {}))), 
+              // drop shape from encoding as this might be used to trigger point overlay
+              encoding: omit(encoding, ['shape']) })];
+      // FIXME: determine rules for applying selections.
+      // Need to copy stack config to overlayed layer
+      var stackProps = stack(markDef, encoding, config ? config.stack : undefined);
+      var overlayEncoding = encoding;
+      if (stackProps) {
+          var stackFieldChannel = stackProps.fieldChannel, offset = stackProps.offset;
+          overlayEncoding = __assign({}, encoding, (_a = {}, _a[stackFieldChannel] = __assign({}, encoding[stackFieldChannel], (offset ? { stack: offset } : {})), _a));
+      }
+      if (lineOverlay) {
+          layer.push(__assign({}, (projection ? { projection: projection } : {}), { mark: __assign({ type: 'line' }, pick(markDef, ['clip', 'interpolate']), lineOverlay), encoding: overlayEncoding }));
+      }
+      if (pointOverlay) {
+          layer.push(__assign({}, (projection ? { projection: projection } : {}), { mark: __assign({ type: 'point', opacity: 1, filled: true }, pick(markDef, ['clip']), pointOverlay), encoding: overlayEncoding }));
+      }
+      return __assign({}, outerSpec, { layer: layer });
+  }
+  // TODO: add vl.spec.validate & move stuff from vl.validate to here
+  /* Accumulate non-duplicate fieldDefs in a dictionary */
+  function accumulate(dict, defs) {
+      defs.forEach(function (fieldDef) {
+          // Consider only pure fieldDef properties (ignoring scale, axis, legend)
+          var pureFieldDef = ['field', 'type', 'value', 'timeUnit', 'bin', 'aggregate'].reduce(function (f, key$$1) {
+              if (fieldDef[key$$1] !== undefined) {
+                  f[key$$1] = fieldDef[key$$1];
+              }
+              return f;
+          }, {});
+          var key$$1 = hash(pureFieldDef);
+          dict[key$$1] = dict[key$$1] || fieldDef;
+      });
+      return dict;
+  }
+  /* Recursively get fieldDefs from a spec, returns a dictionary of fieldDefs */
+  function fieldDefIndex(spec, dict) {
+      if (dict === void 0) { dict = {}; }
+      // FIXME(https://github.com/vega/vega-lite/issues/2207): Support fieldDefIndex for repeat
+      if (isLayerSpec(spec)) {
+          spec.layer.forEach(function (layer) {
+              if (isUnitSpec(layer)) {
+                  accumulate(dict, fieldDefs(layer.encoding));
+              }
+              else {
+                  fieldDefIndex(layer, dict);
+              }
+          });
+      }
+      else if (isFacetSpec(spec)) {
+          accumulate(dict, fieldDefs(spec.facet));
+          fieldDefIndex(spec.spec, dict);
+      }
+      else if (isRepeatSpec(spec)) {
+          fieldDefIndex(spec.spec, dict);
+      }
+      else if (isConcatSpec(spec)) {
+          var childSpec = isVConcatSpec(spec) ? spec.vconcat : spec.hconcat;
+          childSpec.forEach(function (child) { return fieldDefIndex(child, dict); });
+      }
+      else { // Unit Spec
+          accumulate(dict, fieldDefs(spec.encoding));
+      }
+      return dict;
+  }
+  /* Returns all non-duplicate fieldDefs in a spec in a flat array */
+  function fieldDefs$1(spec) {
+      return vals(fieldDefIndex(spec));
+  }
+  function isStacked(spec, config) {
+      config = config || spec.config;
+      if (isPrimitiveMark(spec.mark)) {
+          return stack(spec.mark, spec.encoding, config ? config.stack : undefined) !== null;
+      }
+      return false;
+  }
+
+  var spec = /*#__PURE__*/Object.freeze({
+    isFacetSpec: isFacetSpec,
+    isUnitSpec: isUnitSpec,
+    isLayerSpec: isLayerSpec,
+    isRepeatSpec: isRepeatSpec,
+    isConcatSpec: isConcatSpec,
+    isVConcatSpec: isVConcatSpec,
+    isHConcatSpec: isHConcatSpec,
+    normalize: normalize$2,
+    fieldDefs: fieldDefs$1,
+    isStacked: isStacked
+  });
+
+  function extractCompositionLayout(layout) {
+      var _a = layout || {}, _b = _a.align, align = _b === void 0 ? undefined : _b, _c = _a.center, center = _c === void 0 ? undefined : _c, _d = _a.bounds, bounds = _d === void 0 ? undefined : _d, _e = _a.spacing, spacing = _e === void 0 ? undefined : _e;
+      return { align: align, bounds: bounds, center: center, spacing: spacing };
+  }
+  function _normalizeAutoSize(autosize) {
+      return isString(autosize) ? { type: autosize } : autosize || {};
+  }
+  function normalizeAutoSize(topLevelAutosize, configAutosize, isUnitOrLayer) {
+      if (isUnitOrLayer === void 0) { isUnitOrLayer = true; }
+      var autosize = __assign({ type: 'pad' }, _normalizeAutoSize(configAutosize), _normalizeAutoSize(topLevelAutosize));
+      if (autosize.type === 'fit') {
+          if (!isUnitOrLayer) {
+              warn(message.FIT_NON_SINGLE);
+              autosize.type = 'pad';
+          }
+      }
+      return autosize;
+  }
+  var TOP_LEVEL_PROPERTIES = [
+      'background', 'padding', 'datasets'
+      // We do not include "autosize" here as it is supported by only unit and layer specs and thus need to be normalized
+  ];
+  function extractTopLevelProperties(t) {
+      return TOP_LEVEL_PROPERTIES.reduce(function (o, p) {
+          if (t && t[p] !== undefined) {
+              o[p] = t[p];
+          }
+          return o;
+      }, {});
+  }
+
+  function isUrlData(data) {
+      return !!data['url'];
+  }
+  function isInlineData(data) {
+      return !!data['values'];
+  }
+  function isNamedData(data) {
+      return !!data['name'] && !isUrlData(data) && !isInlineData(data);
+  }
+  var MAIN = 'main';
+  var RAW = 'raw';
+
+  var data = /*#__PURE__*/Object.freeze({
+    isUrlData: isUrlData,
+    isInlineData: isInlineData,
+    isNamedData: isNamedData,
+    MAIN: MAIN,
+    RAW: RAW
+  });
+
+  /**
+   * Parse an event selector string.
+   * Returns an array of event stream definitions.
+   */
+  function parseSelector(selector, source, marks) {
+    DEFAULT_SOURCE = source || VIEW;
+    MARKS = marks || DEFAULT_MARKS;
+    return parseMerge(selector.trim()).map(parseSelector$1);
+  }
+
+  var VIEW    = 'view',
+      LBRACK  = '[',
+      RBRACK  = ']',
+      LBRACE  = '{',
+      RBRACE  = '}',
+      COLON   = ':',
+      COMMA   = ',',
+      NAME    = '@',
+      GT      = '>',
+      ILLEGAL = /[[\]{}]/,
+      DEFAULT_SOURCE,
+      MARKS,
+      DEFAULT_MARKS = {
+        '*': 1,
+        arc: 1,
+        area: 1,
+        group: 1,
+        image: 1,
+        line: 1,
+        path: 1,
+        rect: 1,
+        rule: 1,
+        shape: 1,
+        symbol: 1,
+        text: 1,
+        trail: 1
+      };
+
+  function isMarkType(type) {
+    return MARKS.hasOwnProperty(type);
+  }
+
+  function find(s, i, endChar, pushChar, popChar) {
+    var count = 0,
+        n = s.length,
+        c;
+    for (; i<n; ++i) {
+      c = s[i];
+      if (!count && c === endChar) return i;
+      else if (popChar && popChar.indexOf(c) >= 0) --count;
+      else if (pushChar && pushChar.indexOf(c) >= 0) ++count;
+    }
+    return i;
+  }
+
+  function parseMerge(s) {
+    var output = [],
+        start = 0,
+        n = s.length,
+        i = 0;
+
+    while (i < n) {
+      i = find(s, i, COMMA, LBRACK + LBRACE, RBRACK + RBRACE);
+      output.push(s.substring(start, i).trim());
+      start = ++i;
+    }
+
+    if (output.length === 0) {
+      throw 'Empty event selector: ' + s;
+    }
+    return output;
+  }
+
+  function parseSelector$1(s) {
+    return s[0] === '['
+      ? parseBetween(s)
+      : parseStream(s);
+  }
+
+  function parseBetween(s) {
+    var n = s.length,
+        i = 1,
+        b, stream;
+
+    i = find(s, i, RBRACK, LBRACK, RBRACK);
+    if (i === n) {
+      throw 'Empty between selector: ' + s;
+    }
+
+    b = parseMerge(s.substring(1, i));
+    if (b.length !== 2) {
+      throw 'Between selector must have two elements: ' + s;
+    }
+
+    s = s.slice(i + 1).trim();
+    if (s[0] !== GT) {
+      throw 'Expected \'>\' after between selector: ' + s;
+    }
+
+    b = b.map(parseSelector$1);
+
+    stream = parseSelector$1(s.slice(1).trim());
+    if (stream.between) {
+      return {
+        between: b,
+        stream: stream
+      };
+    } else {
+      stream.between = b;
+    }
+
+    return stream;
+  }
+
+  function parseStream(s) {
+    var stream = {source: DEFAULT_SOURCE},
+        source = [],
+        throttle = [0, 0],
+        markname = 0,
+        start = 0,
+        n = s.length,
+        i = 0, j,
+        filter;
+
+    // extract throttle from end
+    if (s[n-1] === RBRACE) {
+      i = s.lastIndexOf(LBRACE);
+      if (i >= 0) {
+        try {
+          throttle = parseThrottle(s.substring(i+1, n-1));
+        } catch (e) {
+          throw 'Invalid throttle specification: ' + s;
+        }
+        s = s.slice(0, i).trim();
+        n = s.length;
+      } else throw 'Unmatched right brace: ' + s;
+      i = 0;
+    }
+
+    if (!n) throw s;
+
+    // set name flag based on first char
+    if (s[0] === NAME) markname = ++i;
+
+    // extract first part of multi-part stream selector
+    j = find(s, i, COLON);
+    if (j < n) {
+      source.push(s.substring(start, j).trim());
+      start = i = ++j;
+    }
+
+    // extract remaining part of stream selector
+    i = find(s, i, LBRACK);
+    if (i === n) {
+      source.push(s.substring(start, n).trim());
+    } else {
+      source.push(s.substring(start, i).trim());
+      filter = [];
+      start = ++i;
+      if (start === n) throw 'Unmatched left bracket: ' + s;
+    }
+
+    // extract filters
+    while (i < n) {
+      i = find(s, i, RBRACK);
+      if (i === n) throw 'Unmatched left bracket: ' + s;
+      filter.push(s.substring(start, i).trim());
+      if (i < n-1 && s[++i] !== LBRACK) throw 'Expected left bracket: ' + s;
+      start = ++i;
+    }
+
+    // marshall event stream specification
+    if (!(n = source.length) || ILLEGAL.test(source[n-1])) {
+      throw 'Invalid event selector: ' + s;
+    }
+
+    if (n > 1) {
+      stream.type = source[1];
+      if (markname) {
+        stream.markname = source[0].slice(1);
+      } else if (isMarkType(source[0])) {
+        stream.marktype = source[0];
+      } else {
+        stream.source = source[0];
+      }
+    } else {
+      stream.type = source[0];
+    }
+    if (stream.type.slice(-1) === '!') {
+      stream.consume = true;
+      stream.type = stream.type.slice(0, -1);
+    }
+    if (filter != null) stream.filter = filter;
+    if (throttle[0]) stream.throttle = throttle[0];
+    if (throttle[1]) stream.debounce = throttle[1];
+
+    return stream;
+  }
+
+  function parseThrottle(s) {
+    var a = s.split(COMMA);
+    if (!s.length || a.length > 2) throw s;
+    return a.map(function(_) {
+      var x = +_;
+      if (x !== x) throw s;
+      return x;
+    });
+  }
+
+  function isVgSignalRef(o) {
+      return !!o['signal'];
+  }
+  function isVgRangeStep(range) {
+      return !!range['step'];
+  }
+  function isDataRefUnionedDomain(domain) {
+      if (!isArray(domain)) {
+          return 'fields' in domain && !('data' in domain);
+      }
+      return false;
+  }
+  function isFieldRefUnionDomain(domain) {
+      if (!isArray(domain)) {
+          return 'fields' in domain && 'data' in domain;
+      }
+      return false;
+  }
+  function isDataRefDomain(domain) {
+      if (!isArray(domain)) {
+          return 'field' in domain && 'data' in domain;
+      }
+      return false;
+  }
+  var VG_MARK_CONFIG_INDEX = {
+      opacity: 1,
+      fill: 1,
+      fillOpacity: 1,
+      stroke: 1,
+      strokeCap: 1,
+      strokeWidth: 1,
+      strokeOpacity: 1,
+      strokeDash: 1,
+      strokeDashOffset: 1,
+      strokeJoin: 1,
+      strokeMiterLimit: 1,
+      size: 1,
+      shape: 1,
+      interpolate: 1,
+      tension: 1,
+      orient: 1,
+      align: 1,
+      baseline: 1,
+      text: 1,
+      dir: 1,
+      dx: 1,
+      dy: 1,
+      ellipsis: 1,
+      limit: 1,
+      radius: 1,
+      theta: 1,
+      angle: 1,
+      font: 1,
+      fontSize: 1,
+      fontWeight: 1,
+      fontStyle: 1,
+      cursor: 1,
+      href: 1,
+      tooltip: 1,
+      cornerRadius: 1,
+  };
+  var VG_MARK_CONFIGS = flagKeys(VG_MARK_CONFIG_INDEX);
+
+  function assembleTitle(title$$1, config) {
+      if (isArray(title$$1)) {
+          return title$$1.map(function (fieldDef) { return title(fieldDef, config); }).join(', ');
+      }
+      return title$$1;
+  }
+  function assembleAxis(axisCmpt, kind, config, opt) {
+      if (opt === void 0) { opt = { header: false }; }
+      var _a = axisCmpt.combine(), orient = _a.orient, scale = _a.scale, title$$1 = _a.title, zindex = _a.zindex, axis = __rest(_a, ["orient", "scale", "title", "zindex"]);
+      // Remove properties that are not valid for this kind of axis
+      keys(axis).forEach(function (key$$1) {
+          var propType = AXIS_PROPERTY_TYPE[key$$1];
+          if (propType && propType !== kind && propType !== 'both') {
+              delete axis[key$$1];
+          }
+      });
+      if (kind === 'grid') {
+          if (!axis.grid) {
+              return undefined;
+          }
+          // Remove unnecessary encode block
+          if (axis.encode) {
+              // Only need to keep encode block for grid
+              var grid = axis.encode.grid;
+              axis.encode = __assign({}, (grid ? { grid: grid } : {}));
+              if (keys(axis.encode).length === 0) {
+                  delete axis.encode;
+              }
+          }
+          return __assign({ scale: scale,
+              orient: orient }, axis, { domain: false, labels: false, 
+              // Always set min/maxExtent to 0 to ensure that `config.axis*.minExtent` and `config.axis*.maxExtent`
+              // would not affect gridAxis
+              maxExtent: 0, minExtent: 0, ticks: false, zindex: zindex !== undefined ? zindex : 0 // put grid behind marks by default
+           });
+      }
+      else { // kind === 'main'
+          if (!opt.header && axisCmpt.mainExtracted) {
+              // if mainExtracted has been extracted to a separate facet
+              return undefined;
+          }
+          // Remove unnecessary encode block
+          if (axis.encode) {
+              for (var _i = 0, AXIS_PARTS_1 = AXIS_PARTS; _i < AXIS_PARTS_1.length; _i++) {
+                  var part = AXIS_PARTS_1[_i];
+                  if (!axisCmpt.hasAxisPart(part)) {
+                      delete axis.encode[part];
+                  }
+              }
+              if (keys(axis.encode).length === 0) {
+                  delete axis.encode;
+              }
+          }
+          var titleString = assembleTitle(title$$1, config);
+          return __assign({ scale: scale,
+              orient: orient, grid: false }, (titleString ? { title: titleString } : {}), axis, { zindex: zindex !== undefined ? zindex : 1 // put axis line above marks by default
+           });
+      }
+  }
+  function assembleAxes(axisComponents, config) {
+      var _a = axisComponents.x, x = _a === void 0 ? [] : _a, _b = axisComponents.y, y = _b === void 0 ? [] : _b;
+      return x.map(function (a) { return assembleAxis(a, 'main', config); }).concat(x.map(function (a) { return assembleAxis(a, 'grid', config); }), y.map(function (a) { return assembleAxis(a, 'main', config); }), y.map(function (a) { return assembleAxis(a, 'grid', config); })).filter(function (a) { return a; }); // filter undefined
+  }
+
+  var HEADER_TITLE_PROPERTIES_MAP = {
+      titleAnchor: 'anchor',
+      titleAngle: 'angle',
+      titleBaseline: 'baseline',
+      titleColor: 'color',
+      titleFont: 'font',
+      titleFontSize: 'fontSize',
+      titleFontWeight: 'fontWeight',
+      titleLimit: 'limit'
+  };
+  var HEADER_LABEL_PROPERTIES_MAP = {
+      labelAngle: 'angle',
+      labelColor: 'color',
+      labelFont: 'font',
+      labelFontSize: 'fontSize',
+      labelLimit: 'limit',
+  };
+  var HEADER_TITLE_PROPERTIES = Object.keys(HEADER_TITLE_PROPERTIES_MAP);
+  var HEADER_LABEL_PROPERTIES = Object.keys(HEADER_LABEL_PROPERTIES_MAP);
+
+  var header = /*#__PURE__*/Object.freeze({
+    HEADER_TITLE_PROPERTIES_MAP: HEADER_TITLE_PROPERTIES_MAP,
+    HEADER_LABEL_PROPERTIES_MAP: HEADER_LABEL_PROPERTIES_MAP,
+    HEADER_TITLE_PROPERTIES: HEADER_TITLE_PROPERTIES,
+    HEADER_LABEL_PROPERTIES: HEADER_LABEL_PROPERTIES
+  });
+
+  function isSortField(sort) {
+      return !!sort && (sort['op'] === 'count' || !!sort['field']) && !!sort['op'];
+  }
+  function isSortArray(sort) {
+      return !!sort && isArray(sort);
+  }
+
+  var sort = /*#__PURE__*/Object.freeze({
+    isSortField: isSortField,
+    isSortArray: isSortArray
+  });
+
+  // TODO: we need to find a way to refactor these so that scaleName is a part of scale
+  // but that's complicated.  For now, this is a huge step moving forward.
+  /**
+   * @return Vega ValueRef for normal x- or y-position without projection
+   */
+  function position(channel, channelDef, scaleName, scale, stack, defaultRef) {
+      if (isFieldDef(channelDef) && stack && channel === stack.fieldChannel) {
+          // x or y use stack_end so that stacked line's point mark use stack_end too.
+          return fieldRef(channelDef, scaleName, { suffix: 'end' });
+      }
+      return midPoint(channel, channelDef, scaleName, scale, stack, defaultRef);
+  }
+  /**
+   * @return Vega ValueRef for normal x2- or y2-position without projection
+   */
+  function position2(channel, aFieldDef, a2fieldDef, scaleName, scale, stack, defaultRef) {
+      if (isFieldDef(aFieldDef) && stack &&
+          // If fieldChannel is X and channel is X2 (or Y and Y2)
+          channel.charAt(0) === stack.fieldChannel.charAt(0)) {
+          return fieldRef(aFieldDef, scaleName, { suffix: 'start' });
+      }
+      return midPoint(channel, a2fieldDef, scaleName, scale, stack, defaultRef);
+  }
+  function getOffset(channel, markDef) {
+      var offsetChannel = channel + 'Offset';
+      // TODO: in the future read from encoding channel too
+      var markDefOffsetValue = markDef[offsetChannel];
+      if (markDefOffsetValue) {
+          return markDefOffsetValue;
+      }
+      return undefined;
+  }
+  /**
+   * Value Ref for binned fields
+   */
+  function bin$1(fieldDef, scaleName, side, offset) {
+      var binSuffix = side === 'start' ? undefined : 'end';
+      return fieldRef(fieldDef, scaleName, { binSuffix: binSuffix }, offset ? { offset: offset } : {});
+  }
+  function fieldRef(fieldDef, scaleName, opt, mixins) {
+      var ref = __assign({}, (scaleName ? { scale: scaleName } : {}), { field: vgField(fieldDef, opt) });
+      if (mixins) {
+          return __assign({}, ref, mixins);
+      }
+      return ref;
+  }
+  function bandRef(scaleName, band) {
+      if (band === void 0) { band = true; }
+      return {
+          scale: scaleName,
+          band: band
+      };
+  }
+  /**
+   * Signal that returns the middle of a bin. Should only be used with x and y.
+   */
+  function binMidSignal(fieldDef, scaleName) {
+      return {
+          signal: "(" +
+              ("scale(\"" + scaleName + "\", " + vgField(fieldDef, { expr: 'datum' }) + ")") +
+              " + " +
+              ("scale(\"" + scaleName + "\", " + vgField(fieldDef, { binSuffix: 'end', expr: 'datum' }) + ")") +
+              ")/2"
+      };
+  }
+  /**
+   * @returns {VgValueRef} Value Ref for xc / yc or mid point for other channels.
+   */
+  function midPoint(channel, channelDef, scaleName, scale, stack, defaultRef) {
+      // TODO: datum support
+      if (channelDef) {
+          /* istanbul ignore else */
+          if (isFieldDef(channelDef)) {
+              if (channelDef.bin) {
+                  // Use middle only for x an y to place marks in the center between start and end of the bin range.
+                  // We do not use the mid point for other channels (e.g. size) so that properties of legends and marks match.
+                  if (contains([X, Y], channel) && channelDef.type === QUANTITATIVE) {
+                      if (stack && stack.impute) {
+                          // For stack, we computed bin_mid so we can impute.
+                          return fieldRef(channelDef, scaleName, { binSuffix: 'mid' });
+                      }
+                      // For non-stack, we can just calculate bin mid on the fly using signal.
+                      return binMidSignal(channelDef, scaleName);
+                  }
+                  return fieldRef(channelDef, scaleName, binRequiresRange(channelDef, channel) ? { binSuffix: 'range' } : {});
+              }
+              if (scale) {
+                  var scaleType = scale.get('type');
+                  if (hasDiscreteDomain(scaleType)) {
+                      if (scaleType === 'band') {
+                          // For band, to get mid point, need to offset by half of the band
+                          return fieldRef(channelDef, scaleName, { binSuffix: 'range' }, { band: 0.5 });
+                      }
+                      return fieldRef(channelDef, scaleName, { binSuffix: 'range' });
+                  }
+              }
+              return fieldRef(channelDef, scaleName, {}); // no need for bin suffix
+          }
+          else if (isValueDef(channelDef)) {
+              var value = channelDef.value;
+              if (contains(['x', 'x2'], channel) && value === 'width') {
+                  return { field: { group: 'width' } };
+              }
+              else if (contains(['y', 'y2'], channel) && value === 'height') {
+                  return { field: { group: 'height' } };
+              }
+              return { value: value };
+          }
+          // If channelDef is neither field def or value def, it's a condition-only def.
+          // In such case, we will use default ref.
+      }
+      return isFunction(defaultRef) ? defaultRef() : defaultRef;
+  }
+  function text$1(textDef, config) {
+      // text
+      if (textDef) {
+          if (isFieldDef(textDef)) {
+              return formatSignalRef(textDef, textDef.format, 'datum', config);
+          }
+          else if (isValueDef(textDef)) {
+              return { value: textDef.value };
+          }
+      }
+      return undefined;
+  }
+  function mid(sizeRef) {
+      return __assign({}, sizeRef, { mult: 0.5 });
+  }
+  /**
+   * Whether the scale definitely includes zero in the domain
+   */
+  function domainDefinitelyIncludeZero(scale) {
+      if (scale.get('zero') !== false) {
+          return true;
+      }
+      var domains = scale.domains;
+      if (isArray(domains)) {
+          return some(domains, function (d) { return isArray(d) && d.length === 2 && d[0] <= 0 && d[1] >= 0; });
+      }
+      return false;
+  }
+  function getDefaultRef(defaultRef, channel, scaleName, scale, mark) {
+      return function () {
+          if (isString(defaultRef)) {
+              if (scaleName) {
+                  var scaleType = scale.get('type');
+                  if (contains([ScaleType.LOG, ScaleType.TIME, ScaleType.UTC], scaleType)) {
+                      // Log scales cannot have zero.
+                      // Zero in time scale is arbitrary, and does not affect ratio.
+                      // (Time is an interval level of measurement, not ratio).
+                      // See https://en.wikipedia.org/wiki/Level_of_measurement for more info.
+                      if (mark === 'bar' || mark === 'area') {
+                          warn(message.nonZeroScaleUsedWithLengthMark(mark, channel, { scaleType: scaleType }));
+                      }
+                  }
+                  else {
+                      if (domainDefinitelyIncludeZero(scale)) {
+                          return {
+                              scale: scaleName,
+                              value: 0
+                          };
+                      }
+                      if (mark === 'bar' || mark === 'area') {
+                          warn(message.nonZeroScaleUsedWithLengthMark(mark, channel, { zeroFalse: scale.explicit.zero === false }));
+                      }
+                  }
+              }
+              if (defaultRef === 'zeroOrMin') {
+                  return channel === 'x' ? { value: 0 } : { field: { group: 'height' } };
+              }
+              else { // zeroOrMax
+                  return channel === 'x' ? { field: { group: 'width' } } : { value: 0 };
+              }
+          }
+          return defaultRef;
+      };
+  }
+
+  function color(model, opt) {
+      if (opt === void 0) { opt = { valueOnly: false }; }
+      var _a, _b;
+      var markDef = model.markDef, encoding = model.encoding, config = model.config;
+      var filled = markDef.filled, markType = markDef.type;
+      var configValue = {
+          fill: getMarkConfig('fill', markDef, config),
+          stroke: getMarkConfig('stroke', markDef, config),
+          color: getMarkConfig('color', markDef, config)
+      };
+      var transparentIfNeeded = contains(['bar', 'point', 'circle', 'square', 'geoshape'], markType) ? 'transparent' : undefined;
+      var defaultValue = {
+          fill: markDef.fill || configValue.fill ||
+              // If there is no fill, always fill symbols, bar, geoshape
+              // with transparent fills https://github.com/vega/vega-lite/issues/1316
+              transparentIfNeeded,
+          stroke: markDef.stroke || configValue.stroke
+      };
+      var colorVgChannel = filled ? 'fill' : 'stroke';
+      var fillStrokeMarkDefAndConfig = __assign({}, (defaultValue.fill ? {
+          fill: { value: defaultValue.fill }
+      } : {}), (defaultValue.stroke ? {
+          stroke: { value: defaultValue.stroke }
+      } : {}));
+      if (encoding.fill || encoding.stroke) {
+          // ignore encoding.color, markDef.color, config.color
+          if (markDef.color) {
+              // warn for markDef.color  (no need to warn encoding.color as it will be dropped in normalized already)
+              warn(message.droppingColor('property', { fill: 'fill' in encoding, stroke: 'stroke' in encoding }));
+          }
+          return __assign({}, nonPosition('fill', model, { defaultValue: defaultValue.fill || transparentIfNeeded }), nonPosition('stroke', model, { defaultValue: defaultValue.stroke }));
+      }
+      else if (encoding.color) {
+          return __assign({}, fillStrokeMarkDefAndConfig, nonPosition('color', model, {
+              vgChannel: colorVgChannel,
+              // apply default fill/stroke first, then color config, then transparent if needed.
+              defaultValue: markDef[colorVgChannel] || markDef.color || configValue[colorVgChannel] || configValue.color || (filled ? transparentIfNeeded : undefined)
+          }));
+      }
+      else if (markDef.fill || markDef.stroke) {
+          // Ignore markDef.color, config.color
+          if (markDef.color) {
+              warn(message.droppingColor('property', { fill: 'fill' in markDef, stroke: 'stroke' in markDef }));
+          }
+          return fillStrokeMarkDefAndConfig;
+      }
+      else if (markDef.color) {
+          return __assign({}, fillStrokeMarkDefAndConfig, (_a = {}, _a[colorVgChannel] = { value: markDef.color }, _a));
+      }
+      else if (configValue.fill || configValue.stroke) {
+          // ignore config.color
+          return fillStrokeMarkDefAndConfig;
+      }
+      else if (configValue.color) {
+          return __assign({}, (transparentIfNeeded ? { fill: { value: 'transparent' } } : {}), (_b = {}, _b[colorVgChannel] = { value: configValue.color }, _b));
+      }
+      return {};
+  }
+  function baseEncodeEntry(model, ignore) {
+      return __assign({}, markDefProperties(model.markDef, ignore), color(model), nonPosition('opacity', model), tooltip(model), text$2(model, 'href'));
+  }
+  function markDefProperties(mark, ignore) {
+      return VG_MARK_CONFIGS.reduce(function (m, prop) {
+          if (mark[prop] !== undefined && ignore[prop] !== 'ignore') {
+              m[prop] = { value: mark[prop] };
+          }
+          return m;
+      }, {});
+  }
+  function valueIfDefined(prop, value) {
+      var _a;
+      if (value !== undefined) {
+          return _a = {}, _a[prop] = { value: value }, _a;
+      }
+      return undefined;
+  }
+  function validPredicate(vgRef) {
+      return vgRef + " !== null && !isNaN(" + vgRef + ")";
+  }
+  function defined(model) {
+      if (model.config.invalidValues === 'filter') {
+          var fields = ['x', 'y'].map(function (channel) {
+              var scaleComponent = model.getScaleComponent(channel);
+              if (scaleComponent) {
+                  var scaleType = scaleComponent.get('type');
+                  // Discrete domain scales can handle invalid values, but continuous scales can't.
+                  if (hasContinuousDomain(scaleType)) {
+                      return model.vgField(channel, { expr: 'datum' });
+                  }
+              }
+              return undefined;
+          })
+              .filter(function (field$$1) { return !!field$$1; })
+              .map(validPredicate);
+          if (fields.length > 0) {
+              return {
+                  defined: { signal: fields.join(' && ') }
+              };
+          }
+      }
+      return {};
+  }
+  /**
+   * Return mixins for non-positional channels with scales.  (Text doesn't have scale.)
+   */
+  function nonPosition(channel, model, opt) {
+      if (opt === void 0) { opt = {}; }
+      var defaultValue = opt.defaultValue, vgChannel = opt.vgChannel;
+      var defaultRef = opt.defaultRef || (defaultValue !== undefined ? { value: defaultValue } : undefined);
+      var channelDef = model.encoding[channel];
+      return wrapCondition(model, channelDef, vgChannel || channel, function (cDef) {
+          return midPoint(channel, cDef, model.scaleName(channel), model.getScaleComponent(channel), null, // No need to provide stack for non-position as it does not affect mid point
+          defaultRef);
+      });
+  }
+  /**
+   * Return a mixin that include a Vega production rule for a Vega-Lite conditional channel definition.
+   * or a simple mixin if channel def has no condition.
+   */
+  function wrapCondition(model, channelDef, vgChannel, refFn) {
+      var _a, _b;
+      var condition = channelDef && channelDef.condition;
+      var valueRef = refFn(channelDef);
+      if (condition) {
+          var conditions = isArray(condition) ? condition : [condition];
+          var vgConditions = conditions.map(function (c) {
+              var conditionValueRef = refFn(c);
+              var test = isConditionalSelection(c) ? selectionPredicate(model, c.selection) : expression(model, c.test);
+              return __assign({ test: test }, conditionValueRef);
+          });
+          return _a = {},
+              _a[vgChannel] = vgConditions.concat((valueRef !== undefined ? [valueRef] : [])),
+              _a;
+      }
+      else {
+          return valueRef !== undefined ? (_b = {}, _b[vgChannel] = valueRef, _b) : {};
+      }
+  }
+  function tooltip(model) {
+      var channel = 'tooltip';
+      var channelDef = model.encoding[channel];
+      if (isArray(channelDef)) {
+          var keyValues = channelDef.map(function (fieldDef) {
+              var key$$1 = fieldDef.title !== undefined ? fieldDef.title : vgField(fieldDef, { binSuffix: 'range' });
+              var value = text$1(fieldDef, model.config).signal;
+              return "\"" + key$$1 + "\": " + value;
+          });
+          return { tooltip: { signal: "{" + keyValues.join(', ') + "}" } };
+      }
+      else {
+          // if not an array, behave just like text
+          return textCommon(model, channel, channelDef);
+      }
+  }
+  function text$2(model, channel) {
+      if (channel === void 0) { channel = 'text'; }
+      var channelDef = model.encoding[channel];
+      return textCommon(model, channel, channelDef);
+  }
+  function textCommon(model, channel, channelDef) {
+      return wrapCondition(model, channelDef, channel, function (cDef) { return text$1(cDef, model.config); });
+  }
+  function bandPosition(fieldDef, channel, model) {
+      var _a, _b, _c;
+      var scaleName = model.scaleName(channel);
+      var sizeChannel = channel === 'x' ? 'width' : 'height';
+      if (model.encoding.size || model.markDef.size !== undefined) {
+          var orient = model.markDef.orient;
+          if (orient) {
+              var centeredBandPositionMixins = (_a = {},
+                  // Use xc/yc and place the mark at the middle of the band
+                  // This way we never have to deal with size's condition for x/y position.
+                  _a[channel + 'c'] = fieldRef(fieldDef, scaleName, {}, { band: 0.5 }),
+                  _a);
+              if (getFieldDef(model.encoding.size)) {
+                  return __assign({}, centeredBandPositionMixins, nonPosition('size', model, { vgChannel: sizeChannel }));
+              }
+              else if (isValueDef(model.encoding.size)) {
+                  return __assign({}, centeredBandPositionMixins, nonPosition('size', model, { vgChannel: sizeChannel }));
+              }
+              else if (model.markDef.size !== undefined) {
+                  return __assign({}, centeredBandPositionMixins, (_b = {}, _b[sizeChannel] = { value: model.markDef.size }, _b));
+              }
+          }
+          else {
+              warn(message.cannotApplySizeToNonOrientedMark(model.markDef.type));
+          }
+      }
+      return _c = {},
+          _c[channel] = fieldRef(fieldDef, scaleName, { binSuffix: 'range' }),
+          _c[sizeChannel] = bandRef(scaleName),
+          _c;
+  }
+  function centeredBandPosition(channel, model, defaultPosRef, defaultSizeRef) {
+      var centerChannel = channel === 'x' ? 'xc' : 'yc';
+      var sizeChannel = channel === 'x' ? 'width' : 'height';
+      return __assign({}, pointPosition(channel, model, defaultPosRef, centerChannel), nonPosition('size', model, { defaultRef: defaultSizeRef, vgChannel: sizeChannel }));
+  }
+  function binnedPosition(fieldDef, channel, scaleName, spacing, reverse) {
+      if (channel === 'x') {
+          return {
+              x2: bin$1(fieldDef, scaleName, 'start', reverse ? 0 : spacing),
+              x: bin$1(fieldDef, scaleName, 'end', reverse ? spacing : 0)
+          };
+      }
+      else {
+          return {
+              y2: bin$1(fieldDef, scaleName, 'start', reverse ? spacing : 0),
+              y: bin$1(fieldDef, scaleName, 'end', reverse ? 0 : spacing)
+          };
+      }
+  }
+  /**
+   * Return mixins for point (non-band) position channels.
+   */
+  function pointPosition(channel, model, defaultRef, vgChannel) {
+      // TODO: refactor how refer to scale as discussed in https://github.com/vega/vega-lite/pull/1613
+      var _a;
+      var encoding = model.encoding, mark = model.mark, stack = model.stack;
+      var channelDef = encoding[channel];
+      var scaleName = model.scaleName(channel);
+      var scale = model.getScaleComponent(channel);
+      var offset = getOffset(channel, model.markDef);
+      var valueRef = !channelDef && (encoding.latitude || encoding.longitude) ?
+          // use geopoint output if there are lat/long and there is no point position overriding lat/long.
+          { field: model.getName(channel) } : __assign({}, position(channel, encoding[channel], scaleName, scale, stack, getDefaultRef(defaultRef, channel, scaleName, scale, mark)), (offset ? { offset: offset } : {}));
+      return _a = {},
+          _a[vgChannel || channel] = valueRef,
+          _a;
+  }
+  /**
+   * Return mixins for x2, y2.
+   * If channel is not specified, return one channel based on orientation.
+   */
+  function pointPosition2(model, defaultRef, channel) {
+      var _a;
+      var encoding = model.encoding, mark = model.mark, stack = model.stack;
+      var baseChannel = channel === 'x2' ? 'x' : 'y';
+      var channelDef = encoding[baseChannel];
+      var scaleName = model.scaleName(baseChannel);
+      var scale = model.getScaleComponent(baseChannel);
+      var offset = getOffset(channel, model.markDef);
+      var valueRef = !channelDef && (encoding.latitude || encoding.longitude) ?
+          // use geopoint output if there are lat2/long2 and there is no point position2 overriding lat2/long2.
+          { field: model.getName(channel) } : __assign({}, position2(channel, channelDef, encoding[channel], scaleName, scale, stack, getDefaultRef(defaultRef, baseChannel, scaleName, scale, mark)), (offset ? { offset: offset } : {}));
+      return _a = {}, _a[channel] = valueRef, _a;
+  }
+
+  function applyMarkConfig(e, model, propsList) {
+      for (var _i = 0, propsList_2 = propsList; _i < propsList_2.length; _i++) {
+          var property = propsList_2[_i];
+          var value = getMarkConfig(property, model.markDef, model.config);
+          if (value !== undefined) {
+              e[property] = { value: value };
+          }
+      }
+      return e;
+  }
+  function getStyles(mark) {
+      return [].concat(mark.type, mark.style || []);
+  }
+  /**
+   * Return property value from style or mark specific config property if exists.
+   * Otherwise, return general mark specific config.
+   */
+  function getMarkConfig(prop, mark, config) {
+      // By default, read from mark config first!
+      var value = config.mark[prop];
+      // Then read mark specific config, which has higher precedence
+      var markSpecificConfig = config[mark.type];
+      if (markSpecificConfig[prop] !== undefined) {
+          value = markSpecificConfig[prop];
+      }
+      // Then read style config, which has even higher precedence.
+      var styles = getStyles(mark);
+      for (var _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
+          var style = styles_1[_i];
+          var styleConfig = config.style[style];
+          // MarkConfig extends VgMarkConfig so a prop may not be a valid property for style
+          // However here we also check if it is defined, so it is okay to cast here
+          var p = prop;
+          if (styleConfig && styleConfig[p] !== undefined) {
+              value = styleConfig[p];
+          }
+      }
+      return value;
+  }
+  function formatSignalRef(fieldDef, specifiedFormat, expr, config) {
+      var format = numberFormat(fieldDef, specifiedFormat, config);
+      if (fieldDef.bin) {
+          var startField = vgField(fieldDef, { expr: expr });
+          var endField = vgField(fieldDef, { expr: expr, binSuffix: 'end' });
+          return {
+              signal: binFormatExpression(startField, endField, format, config)
+          };
+      }
+      else if (fieldDef.type === 'quantitative') {
+          return {
+              signal: "" + formatExpr(vgField(fieldDef, { expr: expr, binSuffix: 'range' }), format)
+          };
+      }
+      else if (isTimeFieldDef(fieldDef)) {
+          var isUTCScale = isScaleFieldDef(fieldDef) && fieldDef['scale'] && fieldDef['scale'].type === ScaleType.UTC;
+          return {
+              signal: timeFormatExpression(vgField(fieldDef, { expr: expr }), fieldDef.timeUnit, specifiedFormat, config.text.shortTimeLabels, config.timeFormat, isUTCScale, true)
+          };
+      }
+      else {
+          return {
+              signal: "''+" + vgField(fieldDef, { expr: expr })
+          };
+      }
+  }
+  function getSpecifiedOrDefaultValue(specifiedValue, defaultValue) {
+      if (specifiedValue !== undefined) {
+          return specifiedValue;
+      }
+      return defaultValue;
+  }
+  /**
+   * Returns number format for a fieldDef
+   *
+   * @param format explicitly specified format
+   */
+  function numberFormat(fieldDef, specifiedFormat, config) {
+      if (fieldDef.type === QUANTITATIVE) {
+          // add number format for quantitative type only
+          // Specified format in axis/legend has higher precedence than fieldDef.format
+          if (specifiedFormat) {
+              return specifiedFormat;
+          }
+          // TODO: need to make this work correctly for numeric ordinal / nominal type
+          return config.numberFormat;
+      }
+      return undefined;
+  }
+  function formatExpr(field$$1, format) {
+      return "format(" + field$$1 + ", \"" + (format || '') + "\")";
+  }
+  function numberFormatExpr(field$$1, specifiedFormat, config) {
+      return formatExpr(field$$1, specifiedFormat || config.numberFormat);
+  }
+  function binFormatExpression(startField, endField, format, config) {
+      return startField + " === null || isNaN(" + startField + ") ? \"null\" : " + numberFormatExpr(startField, format, config) + " + \" - \" + " + numberFormatExpr(endField, format, config);
+  }
+  /**
+   * Returns the time expression used for axis/legend labels or text mark for a temporal field
+   */
+  function timeFormatExpression(field$$1, timeUnit, format, shortTimeLabels, timeFormatConfig, isUTCScale, alwaysReturn) {
+      if (alwaysReturn === void 0) { alwaysReturn = false; }
+      if (!timeUnit || format) {
+          // If there is not time unit, or if user explicitly specify format for axis/legend/text.
+          format = format || timeFormatConfig; // only use config.timeFormat if there is no timeUnit.
+          if (format || alwaysReturn) {
+              return (isUTCScale ? 'utc' : 'time') + "Format(" + field$$1 + ", '" + format + "')";
+          }
+          else {
+              return undefined;
+          }
+      }
+      else {
+          return formatExpression(timeUnit, field$$1, shortTimeLabels, isUTCScale);
+      }
+  }
+  /**
+   * Return Vega sort parameters (tuple of field and order).
+   */
+  function sortParams(orderDef, fieldRefOption) {
+      return (isArray(orderDef) ? orderDef : [orderDef]).reduce(function (s, orderChannelDef) {
+          s.field.push(vgField(orderChannelDef, fieldRefOption));
+          s.order.push(orderChannelDef.sort || 'ascending');
+          return s;
+      }, { field: [], order: [] });
+  }
+  function mergeTitleFieldDefs(f1, f2) {
+      var merged = f1.slice();
+      f2.forEach(function (fdToMerge) {
+          for (var _i = 0, merged_1 = merged; _i < merged_1.length; _i++) {
+              var fieldDef1 = merged_1[_i];
+              // If already exists, no need to append to merged array
+              if (stringify$2(fieldDef1) === stringify$2(fdToMerge)) {
+                  return;
+              }
+          }
+          merged.push(fdToMerge);
+      });
+      return merged;
+  }
+  function mergeTitle(title1, title2) {
+      return title1 === title2 ?
+          title1 : // if title is the same just use one of them
+          title1 + ', ' + title2; // join title with comma if different
+  }
+  function mergeTitleComponent(v1, v2) {
+      if (isArray(v1.value) && isArray(v2.value)) {
+          return {
+              explicit: v1.explicit,
+              value: mergeTitleFieldDefs(v1.value, v2.value)
+          };
+      }
+      else if (!isArray(v1.value) && !isArray(v2.value)) {
+          return {
+              explicit: v1.explicit,
+              value: mergeTitle(v1.value, v2.value)
+          };
+      }
+      /* istanbul ignore next: Condition should not happen -- only for warning in development. */
+      throw new Error('It should never reach here');
+  }
+  /**
+   * Checks whether a fieldDef for a particular channel requires a computed bin range.
+   */
+  function binRequiresRange(fieldDef, channel) {
+      if (!fieldDef.bin) {
+          console.warn('Only use this method with binned field defs');
+          return false;
+      }
+      // We need the range only when the user explicitly forces a binned field to be use discrete scale. In this case, bin range is used in axis and legend labels.
+      // We could check whether the axis or legend exists (not disabled) but that seems overkill.
+      return isScaleChannel(channel) && contains(['ordinal', 'nominal'], fieldDef.type);
+  }
+  function guideEncodeEntry(encoding, model) {
+      return keys(encoding).reduce(function (encode, channel) {
+          var valueDef = encoding[channel];
+          return __assign({}, encode, wrapCondition(model, valueDef, channel, function (x) { return ({ value: x.value }); }));
+      }, {});
+  }
+
+  /**
+   * A node in the dataflow tree.
+   */
+  var DataFlowNode = /** @class */ (function () {
+      function DataFlowNode(parent, debugName) {
+          this.debugName = debugName;
+          this._children = [];
+          this._parent = null;
+          if (parent) {
+              this.parent = parent;
+          }
+      }
+      /**
+       * Clone this node with a deep copy but don't clone links to children or parents.
+       */
+      DataFlowNode.prototype.clone = function () {
+          throw new Error('Cannot clone node');
+      };
+      /**
+       * Set of fields that are being created by this node.
+       */
+      DataFlowNode.prototype.producedFields = function () {
+          return {};
+      };
+      DataFlowNode.prototype.dependentFields = function () {
+          return {};
+      };
+      Object.defineProperty(DataFlowNode.prototype, "parent", {
+          get: function () {
+              return this._parent;
+          },
+          /**
+           * Set the parent of the node and also add this not to the parent's children.
+           */
+          set: function (parent) {
+              this._parent = parent;
+              parent.addChild(this);
+          },
+          enumerable: true,
+          configurable: true
+      });
+      Object.defineProperty(DataFlowNode.prototype, "children", {
+          get: function () {
+              return this._children;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      DataFlowNode.prototype.numChildren = function () {
+          return this._children.length;
+      };
+      DataFlowNode.prototype.addChild = function (child) {
+          this._children.push(child);
+      };
+      DataFlowNode.prototype.removeChild = function (oldChild) {
+          this._children.splice(this._children.indexOf(oldChild), 1);
+      };
+      /**
+       * Remove node from the dataflow.
+       */
+      DataFlowNode.prototype.remove = function () {
+          for (var _i = 0, _a = this._children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              child.parent = this._parent;
+          }
+          this._parent.removeChild(this);
+      };
+      /**
+       * Insert another node as a parent of this node.
+       */
+      DataFlowNode.prototype.insertAsParentOf = function (other) {
+          var parent = other.parent;
+          parent.removeChild(this);
+          this.parent = parent;
+          other.parent = this;
+      };
+      DataFlowNode.prototype.swapWithParent = function () {
+          var parent = this._parent;
+          var newParent = parent.parent;
+          // reconnect the children
+          for (var _i = 0, _a = this._children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              child.parent = parent;
+          }
+          // remove old links
+          this._children = []; // equivalent to removing every child link one by one
+          parent.removeChild(this);
+          parent.parent.removeChild(parent);
+          // swap two nodes
+          this.parent = newParent;
+          parent.parent = this;
+      };
+      return DataFlowNode;
+  }());
+  var OutputNode = /** @class */ (function (_super) {
+      __extends(OutputNode, _super);
+      /**
+       * @param source The name of the source. Will change in assemble.
+       * @param type The type of the output node.
+       * @param refCounts A global ref counter map.
+       */
+      function OutputNode(parent, source, type, refCounts) {
+          var _this = _super.call(this, parent, source) || this;
+          _this.type = type;
+          _this.refCounts = refCounts;
+          _this._source = _this._name = source;
+          if (_this.refCounts && !(_this._name in _this.refCounts)) {
+              _this.refCounts[_this._name] = 0;
+          }
+          return _this;
+      }
+      OutputNode.prototype.clone = function () {
+          var cloneObj = new this.constructor;
+          cloneObj.debugName = 'clone_' + this.debugName;
+          cloneObj._source = this._source;
+          cloneObj._name = 'clone_' + this._name;
+          cloneObj.type = this.type;
+          cloneObj.refCounts = this.refCounts;
+          cloneObj.refCounts[cloneObj._name] = 0;
+          return cloneObj;
+      };
+      /**
+       * Request the datasource name and increase the ref counter.
+       *
+       * During the parsing phase, this will return the simple name such as 'main' or 'raw'.
+       * It is crucial to request the name from an output node to mark it as a required node.
+       * If nobody ever requests the name, this datasource will not be instantiated in the assemble phase.
+       *
+       * In the assemble phase, this will return the correct name.
+       */
+      OutputNode.prototype.getSource = function () {
+          this.refCounts[this._name]++;
+          return this._source;
+      };
+      OutputNode.prototype.isRequired = function () {
+          return !!this.refCounts[this._name];
+      };
+      OutputNode.prototype.setSource = function (source) {
+          this._source = source;
+      };
+      return OutputNode;
+  }(DataFlowNode));
+
+  /**
+   * We don't know what a calculate node depends on so we should never move it beyond anything that produces fields.
+   */
+  var CalculateNode = /** @class */ (function (_super) {
+      __extends(CalculateNode, _super);
+      function CalculateNode(parent, transform) {
+          var _this = _super.call(this, parent) || this;
+          _this.transform = transform;
+          return _this;
+      }
+      CalculateNode.prototype.clone = function () {
+          return new CalculateNode(null, duplicate(this.transform));
+      };
+      CalculateNode.parseAllForSortIndex = function (parent, model) {
+          // get all the encoding with sort fields from model
+          model.forEachFieldDef(function (fieldDef, channel) {
+              if (!isScaleFieldDef(fieldDef)) {
+                  return;
+              }
+              if (isSortArray(fieldDef.sort)) {
+                  var field_1 = fieldDef.field, timeUnit_1 = fieldDef.timeUnit;
+                  var sort = fieldDef.sort;
+                  // generate `datum["a"] === val0 ? 0 : datum["a"] === val1 ? 1 : ... : n` via FieldEqualPredicate
+                  var calculate = sort.map(function (sortValue, i) {
+                      return fieldFilterExpression({ field: field_1, timeUnit: timeUnit_1, equal: sortValue }) + " ? " + i + " : ";
+                  }).join('') + sort.length;
+                  parent = new CalculateNode(parent, {
+                      calculate: calculate,
+                      as: sortArrayIndexField(fieldDef, channel)
+                  });
+              }
+          });
+          return parent;
+      };
+      CalculateNode.prototype.producedFields = function () {
+          var out = {};
+          out[this.transform.as] = true;
+          return out;
+      };
+      CalculateNode.prototype.assemble = function () {
+          return {
+              type: 'formula',
+              expr: this.transform.calculate,
+              as: this.transform.as
+          };
+      };
+      return CalculateNode;
+  }(DataFlowNode));
+  function sortArrayIndexField(fieldDef, channel, expr) {
+      return vgField(fieldDef, { prefix: channel, suffix: 'sort_index', expr: expr });
+  }
+
+  var HEADER_CHANNELS = ['row', 'column'];
+  var HEADER_TYPES = ['header', 'footer'];
+  function getHeaderType(orient) {
+      if (orient === 'top' || orient === 'left') {
+          return 'header';
+      }
+      return 'footer';
+  }
+  function getTitleGroup(model, channel) {
+      var title$$1 = model.component.layoutHeaders[channel].title;
+      var textOrient = channel === 'row' ? 'left' : undefined;
+      var config = model.config ? model.config : undefined;
+      var facetFieldDef = model.component.layoutHeaders[channel].facetFieldDef ? model.component.layoutHeaders[channel].facetFieldDef : undefined;
+      return {
+          name: channel + "-title",
+          type: 'group',
+          role: channel + "-title",
+          title: __assign({ text: title$$1, offset: 10, orient: textOrient, style: 'guide-title' }, getHeaderProperties(config, facetFieldDef, HEADER_TITLE_PROPERTIES, HEADER_TITLE_PROPERTIES_MAP))
+      };
+  }
+  function getHeaderGroups(model, channel) {
+      var layoutHeader = model.component.layoutHeaders[channel];
+      var groups = [];
+      for (var _i = 0, HEADER_TYPES_1 = HEADER_TYPES; _i < HEADER_TYPES_1.length; _i++) {
+          var headerType = HEADER_TYPES_1[_i];
+          if (layoutHeader[headerType]) {
+              for (var _a = 0, _b = layoutHeader[headerType]; _a < _b.length; _a++) {
+                  var headerCmpt = _b[_a];
+                  groups.push(getHeaderGroup(model, channel, headerType, layoutHeader, headerCmpt));
+              }
+          }
+      }
+      return groups;
+  }
+  // 0, (0,90), 90, (90, 180), 180, (180, 270), 270, (270, 0)
+  function labelAlign(angle) {
+      // to keep angle in [0, 360)
+      angle = ((angle % 360) + 360) % 360;
+      if ((angle + 90) % 180 === 0) { // for 90 and 270
+          return {}; // default center
+      }
+      else if (angle < 90 || 270 < angle) {
+          return { align: { value: 'right' } };
+      }
+      else if (135 <= angle && angle < 225) {
+          return { align: { value: 'left' } };
+      }
+      return {};
+  }
+  function getSort(facetFieldDef, channel) {
+      var sort = facetFieldDef.sort;
+      if (isSortField(sort)) {
+          return {
+              field: vgField(sort, { expr: 'datum' }),
+              order: sort.order || 'ascending'
+          };
+      }
+      else if (isArray(sort)) {
+          return {
+              field: sortArrayIndexField(facetFieldDef, channel, 'datum'),
+              order: 'ascending'
+          };
+      }
+      else {
+          return {
+              field: vgField(facetFieldDef, { expr: 'datum' }),
+              order: sort || 'ascending'
+          };
+      }
+  }
+  function getHeaderGroup(model, channel, headerType, layoutHeader, headerCmpt) {
+      var _a;
+      if (headerCmpt) {
+          var title$$1 = null;
+          var facetFieldDef = layoutHeader.facetFieldDef;
+          if (facetFieldDef && headerCmpt.labels) {
+              var _b = facetFieldDef.header, header = _b === void 0 ? {} : _b;
+              var format = header.format, labelAngle = header.labelAngle;
+              var config = model.config ? model.config : undefined;
+              var update = __assign({}, labelAlign(labelAngle));
+              title$$1 = __assign({ text: formatSignalRef(facetFieldDef, format, 'parent', model.config), offset: 10, orient: channel === 'row' ? 'left' : 'top', style: 'guide-label' }, getHeaderProperties(config, facetFieldDef, HEADER_LABEL_PROPERTIES, HEADER_LABEL_PROPERTIES_MAP), (keys(update).length > 0 ? { encode: { update: update } } : {}));
+          }
+          var axes = headerCmpt.axes;
+          var hasAxes = axes && axes.length > 0;
+          if (title$$1 || hasAxes) {
+              var sizeChannel = channel === 'row' ? 'height' : 'width';
+              return __assign({ name: model.getName(channel + "_" + headerType), type: 'group', role: channel + "-" + headerType }, (layoutHeader.facetFieldDef ? {
+                  from: { data: model.getName(channel + '_domain') },
+                  sort: getSort(facetFieldDef, channel)
+              } : {}), (title$$1 ? { title: title$$1 } : {}), (headerCmpt.sizeSignal ? {
+                  encode: {
+                      update: (_a = {},
+                          _a[sizeChannel] = headerCmpt.sizeSignal,
+                          _a)
+                  }
+              } : {}), (hasAxes ? { axes: axes } : {}));
+          }
+      }
+      return null;
+  }
+  function getHeaderProperties(config, facetFieldDef, properties, propertiesMap) {
+      var props = {};
+      for (var _i = 0, properties_1 = properties; _i < properties_1.length; _i++) {
+          var prop = properties_1[_i];
+          if (config && config.header) {
+              if (config.header[prop]) {
+                  props[propertiesMap[prop]] = config.header[prop];
+              }
+          }
+          if (facetFieldDef && facetFieldDef.header) {
+              if (facetFieldDef.header[prop]) {
+                  props[propertiesMap[prop]] = facetFieldDef.header[prop];
+              }
+          }
+      }
+      return props;
+  }
+
+  function assembleLayoutSignals(model) {
+      return [].concat(sizeSignals(model, 'width'), sizeSignals(model, 'height'));
+  }
+  function sizeSignals(model, sizeType) {
+      var channel = sizeType === 'width' ? 'x' : 'y';
+      var size = model.component.layoutSize.get(sizeType);
+      if (!size || size === 'merged') {
+          return [];
+      }
+      // Read size signal name from name map, just in case it is the top-level size signal that got renamed.
+      var name = model.getSizeSignalRef(sizeType).signal;
+      if (size === 'range-step') {
+          var scaleComponent = model.getScaleComponent(channel);
+          if (scaleComponent) {
+              var type = scaleComponent.get('type');
+              var range = scaleComponent.get('range');
+              if (hasDiscreteDomain(type) && isVgRangeStep(range)) {
+                  var scaleName = model.scaleName(channel);
+                  if (isFacetModel(model.parent)) {
+                      // If parent is facet and this is an independent scale, return only signal signal
+                      // as the width/height will be calculated using the cardinality from
+                      // facet's aggregate rather than reading from scale domain
+                      var parentResolve = model.parent.component.resolve;
+                      if (parentResolve.scale[channel] === 'independent') {
+                          return [stepSignal(scaleName, range)];
+                      }
+                  }
+                  return [
+                      stepSignal(scaleName, range),
+                      {
+                          name: name,
+                          update: sizeExpr(scaleName, scaleComponent, "domain('" + scaleName + "').length")
+                      }
+                  ];
+              }
+          }
+          /* istanbul ignore next: Condition should not happen -- only for warning in development. */
+          throw new Error('layout size is range step although there is no rangeStep.');
+      }
+      else {
+          return [{
+                  name: name,
+                  value: size
+              }];
+      }
+  }
+  function stepSignal(scaleName, range) {
+      return {
+          name: scaleName + '_step',
+          value: range.step,
+      };
+  }
+  function sizeExpr(scaleName, scaleComponent, cardinality) {
+      var type = scaleComponent.get('type');
+      var padding = scaleComponent.get('padding');
+      var paddingOuter = scaleComponent.get('paddingOuter');
+      paddingOuter = paddingOuter !== undefined ? paddingOuter : padding;
+      var paddingInner = scaleComponent.get('paddingInner');
+      paddingInner = type === 'band' ?
+          // only band has real paddingInner
+          (paddingInner !== undefined ? paddingInner : padding) :
+          // For point, as calculated in https://github.com/vega/vega-scale/blob/master/src/band.js#L128,
+          // it's equivalent to have paddingInner = 1 since there is only n-1 steps between n points.
+          1;
+      return "bandspace(" + cardinality + ", " + paddingInner + ", " + paddingOuter + ") * " + scaleName + "_step";
+  }
+
+  function defaultScaleResolve(channel, model) {
+      if (isLayerModel(model) || isFacetModel(model)) {
+          return 'shared';
+      }
+      else if (isConcatModel(model) || isRepeatModel(model)) {
+          return contains(POSITION_SCALE_CHANNELS, channel) ? 'independent' : 'shared';
+      }
+      /* istanbul ignore next: should never reach here. */
+      throw new Error('invalid model type for resolve');
+  }
+  function parseGuideResolve(resolve, channel) {
+      var channelScaleResolve = resolve.scale[channel];
+      var guide = contains(POSITION_SCALE_CHANNELS, channel) ? 'axis' : 'legend';
+      if (channelScaleResolve === 'independent') {
+          if (resolve[guide][channel] === 'shared') {
+              warn(message.independentScaleMeansIndependentGuide(channel));
+          }
+          return 'independent';
+      }
+      return resolve[guide][channel] || 'shared';
+  }
+
+  /**
+   * Generic class for storing properties that are explicitly specified
+   * and implicitly determined by the compiler.
+   * This is important for scale/axis/legend merging as
+   * we want to prioritize properties that users explicitly specified.
+   */
+  var Split = /** @class */ (function () {
+      function Split(explicit, implicit) {
+          if (explicit === void 0) { explicit = {}; }
+          if (implicit === void 0) { implicit = {}; }
+          this.explicit = explicit;
+          this.implicit = implicit;
+      }
+      Split.prototype.clone = function () {
+          return new Split(duplicate(this.explicit), duplicate(this.implicit));
+      };
+      Split.prototype.combine = function () {
+          // FIXME remove "as any".
+          // Add "as any" to avoid an error "Spread types may only be created from object types".
+          return __assign({}, this.explicit, this.implicit);
+      };
+      Split.prototype.get = function (key) {
+          // Explicit has higher precedence
+          return this.explicit[key] !== undefined ? this.explicit[key] : this.implicit[key];
+      };
+      Split.prototype.getWithExplicit = function (key) {
+          // Explicit has higher precedence
+          if (this.explicit[key] !== undefined) {
+              return { explicit: true, value: this.explicit[key] };
+          }
+          else if (this.implicit[key] !== undefined) {
+              return { explicit: false, value: this.implicit[key] };
+          }
+          return { explicit: false, value: undefined };
+      };
+      Split.prototype.setWithExplicit = function (key, value) {
+          if (value.value !== undefined) {
+              this.set(key, value.value, value.explicit);
+          }
+      };
+      Split.prototype.set = function (key, value, explicit) {
+          delete this[explicit ? 'implicit' : 'explicit'][key];
+          this[explicit ? 'explicit' : 'implicit'][key] = value;
+          return this;
+      };
+      Split.prototype.copyKeyFromSplit = function (key, s) {
+          // Explicit has higher precedence
+          if (s.explicit[key] !== undefined) {
+              this.set(key, s.explicit[key], true);
+          }
+          else if (s.implicit[key] !== undefined) {
+              this.set(key, s.implicit[key], false);
+          }
+      };
+      Split.prototype.copyKeyFromObject = function (key, s) {
+          // Explicit has higher precedence
+          if (s[key] !== undefined) {
+              this.set(key, s[key], true);
+          }
+      };
+      /**
+       * Merge split object into this split object. Properties from the other split
+       * overwrite properties from this split.
+       */
+      Split.prototype.copyAll = function (other) {
+          for (var _i = 0, _a = keys(other.combine()); _i < _a.length; _i++) {
+              var key = _a[_i];
+              var val = other.getWithExplicit(key);
+              this.setWithExplicit(key, val);
+          }
+      };
+      return Split;
+  }());
+  function makeExplicit(value) {
+      return {
+          explicit: true,
+          value: value
+      };
+  }
+  function makeImplicit(value) {
+      return {
+          explicit: false,
+          value: value
+      };
+  }
+  function tieBreakByComparing(compare) {
+      return function (v1, v2, property, propertyOf) {
+          var diff = compare(v1.value, v2.value);
+          if (diff > 0) {
+              return v1;
+          }
+          else if (diff < 0) {
+              return v2;
+          }
+          return defaultTieBreaker(v1, v2, property, propertyOf);
+      };
+  }
+  function defaultTieBreaker(v1, v2, property, propertyOf) {
+      if (v1.explicit && v2.explicit) {
+          warn(message.mergeConflictingProperty(property, propertyOf, v1.value, v2.value));
+      }
+      // If equal score, prefer v1.
+      return v1;
+  }
+  function mergeValuesWithExplicit(v1, v2, property, propertyOf, tieBreaker) {
+      if (tieBreaker === void 0) { tieBreaker = defaultTieBreaker; }
+      if (v1 === undefined || v1.value === undefined) {
+          // For first run
+          return v2;
+      }
+      if (v1.explicit && !v2.explicit) {
+          return v1;
+      }
+      else if (v2.explicit && !v1.explicit) {
+          return v2;
+      }
+      else if (stringify$2(v1.value) === stringify$2(v2.value)) {
+          return v1;
+      }
+      else {
+          return tieBreaker(v1, v2, property, propertyOf);
+      }
+  }
+
+  var LegendComponent = /** @class */ (function (_super) {
+      __extends(LegendComponent, _super);
+      function LegendComponent() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      return LegendComponent;
+  }(Split));
+
+  function symbols(fieldDef, symbolsSpec, model, channel, type) {
+      if (type === 'gradient') {
+          return undefined;
+      }
+      var out = __assign({}, applyMarkConfig({}, model, FILL_STROKE_CONFIG), color(model));
+      switch (model.mark) {
+          case BAR:
+          case TICK:
+          case TEXT$1:
+              out.shape = { value: 'square' };
+              break;
+          case CIRCLE:
+          case SQUARE:
+              out.shape = { value: model.mark };
+              break;
+          case POINT:
+          case LINE:
+          case GEOSHAPE:
+          case AREA:
+              // use default circle
+              break;
+      }
+      var markDef = model.markDef, encoding = model.encoding;
+      var filled = markDef.filled;
+      if (out.fill) {
+          // for fill legend, we don't want any fill in symbol
+          if (channel === 'fill' || (filled && channel === COLOR)) {
+              delete out.fill;
+          }
+          else {
+              if (out.fill['field']) {
+                  // For others, remove fill field
+                  delete out.fill;
+              }
+              else if (isArray(out.fill)) {
+                  var fill = getFirstConditionValue(encoding.fill || encoding.color) || markDef.fill || (filled && markDef.color);
+                  if (fill) {
+                      out.fill = { value: fill };
+                  }
+              }
+          }
+      }
+      if (out.stroke) {
+          if (channel === 'stroke' || (!filled && channel === COLOR)) {
+              delete out.stroke;
+          }
+          else {
+              if (out.stroke['field']) {
+                  // For others, remove stroke field
+                  delete out.stroke;
+              }
+              else if (isArray(out.stroke)) {
+                  var stroke = getFirstConditionValue(encoding.stroke || encoding.color) || markDef.stroke || (!filled && markDef.color);
+                  if (stroke) {
+                      out.stroke = { value: stroke };
+                  }
+              }
+          }
+      }
+      if (out.fill && out.fill['value'] !== 'transparent' && !out.stroke) {
+          // for non color channel's legend, we need to override symbol stroke config from Vega config
+          out.stroke = { value: 'transparent' };
+      }
+      if (channel !== SHAPE) {
+          var shape = getFirstConditionValue(encoding.shape) || markDef.shape;
+          if (shape) {
+              out.shape = { value: shape };
+          }
+      }
+      if (channel !== OPACITY) {
+          var opacity = getMaxValue(encoding.opacity) || markDef.opacity;
+          if (opacity) { // only apply opacity if it is neither zero or undefined
+              out.opacity = { value: opacity };
+          }
+      }
+      out = __assign({}, out, symbolsSpec);
+      return keys(out).length > 0 ? out : undefined;
+  }
+  function gradient(fieldDef, gradientSpec, model, channel, type) {
+      var out = {};
+      if (type === 'gradient') {
+          var opacity = getMaxValue(model.encoding.opacity) || model.markDef.opacity;
+          if (opacity) { // only apply opacity if it is neither zero or undefined
+              out.opacity = { value: opacity };
+          }
+      }
+      out = __assign({}, out, gradientSpec);
+      return keys(out).length > 0 ? out : undefined;
+  }
+  function labels(fieldDef, labelsSpec, model, channel, type) {
+      var legend = model.legend(channel);
+      var config = model.config;
+      var out = {};
+      if (isTimeFieldDef(fieldDef)) {
+          var isUTCScale = model.getScaleComponent(channel).get('type') === ScaleType.UTC;
+          var expr = timeFormatExpression('datum.value', fieldDef.timeUnit, legend.format, config.legend.shortTimeLabels, config.timeFormat, isUTCScale);
+          labelsSpec = __assign({}, (expr ? { text: { signal: expr } } : {}), labelsSpec);
+      }
+      out = __assign({}, out, labelsSpec);
+      return keys(out).length > 0 ? out : undefined;
+  }
+  function getMaxValue(channelDef) {
+      return getConditionValue(channelDef, function (v, conditionalDef) { return Math.max(v, conditionalDef.value); });
+  }
+  function getFirstConditionValue(channelDef) {
+      return getConditionValue(channelDef, function (v, conditionalDef) { return v !== undefined ? v : conditionalDef.value; });
+  }
+  function getConditionValue(channelDef, reducer) {
+      if (hasConditionalValueDef(channelDef)) {
+          return (isArray(channelDef.condition) ? channelDef.condition : [channelDef.condition])
+              .reduce(reducer, channelDef.value);
+      }
+      else if (isValueDef(channelDef)) {
+          return channelDef.value;
+      }
+      return undefined;
+  }
+
+  var encode = /*#__PURE__*/Object.freeze({
+    symbols: symbols,
+    gradient: gradient,
+    labels: labels
+  });
+
+  function values(legend, fieldDef) {
+      var vals$$1 = legend.values;
+      if (vals$$1) {
+          return valueArray(fieldDef, vals$$1);
+      }
+      return undefined;
+  }
+  function type$2(t, channel, scaleType) {
+      if (isColorChannel(channel) && ((t === 'quantitative' && !isBinScale(scaleType)) ||
+          (t === 'temporal' && contains(['time', 'utc'], scaleType)))) {
+          return 'gradient';
+      }
+      return undefined;
+  }
+
+  function parseLegend(model) {
+      if (isUnitModel(model)) {
+          model.component.legends = parseUnitLegend(model);
+      }
+      else {
+          model.component.legends = parseNonUnitLegend(model);
+      }
+  }
+  function parseUnitLegend(model) {
+      var encoding = model.encoding;
+      return [COLOR, FILL, STROKE, SIZE, SHAPE, OPACITY].reduce(function (legendComponent, channel) {
+          var def = encoding[channel];
+          if (model.legend(channel) && model.getScaleComponent(channel) && !(isFieldDef(def) && (channel === SHAPE && def.type === GEOJSON))) {
+              legendComponent[channel] = parseLegendForChannel(model, channel);
+          }
+          return legendComponent;
+      }, {});
+  }
+  function getLegendDefWithScale(model, channel) {
+      var _a;
+      // For binned field with continuous scale, use a special scale so we can overrride the mark props and labels
+      switch (channel) {
+          case COLOR:
+              var scale = model.scaleName(COLOR);
+              return model.markDef.filled ? { fill: scale } : { stroke: scale };
+          case FILL:
+          case STROKE:
+          case SIZE:
+          case SHAPE:
+          case OPACITY:
+              return _a = {}, _a[channel] = model.scaleName(channel), _a;
+      }
+  }
+  function parseLegendForChannel(model, channel) {
+      var fieldDef = model.fieldDef(channel);
+      var legend = model.legend(channel);
+      var legendCmpt = new LegendComponent({}, getLegendDefWithScale(model, channel));
+      LEGEND_PROPERTIES.forEach(function (property) {
+          var value = getProperty(property, legend, channel, model);
+          if (value !== undefined) {
+              var explicit = 
+              // specified legend.values is already respected, but may get transformed.
+              property === 'values' ? !!legend.values :
+                  // title can be explicit if fieldDef.title is set
+                  property === 'title' && value === model.fieldDef(channel).title ? true :
+                      // Otherwise, things are explicit if the returned value matches the specified property
+                      value === legend[property];
+              if (explicit || model.config.legend[property] === undefined) {
+                  legendCmpt.set(property, value, explicit);
+              }
+          }
+      });
+      // 2) Add mark property definition groups
+      var legendEncoding = legend.encoding || {};
+      var legendEncode = ['labels', 'legend', 'title', 'symbols', 'gradient'].reduce(function (e, part) {
+          var legendEncodingPart = guideEncodeEntry(legendEncoding[part] || {}, model);
+          var value = encode[part] ?
+              // TODO: replace legendCmpt with type is sufficient
+              encode[part](fieldDef, legendEncodingPart, model, channel, legendCmpt.get('type')) : // apply rule
+              legendEncodingPart; // no rule -- just default values
+          if (value !== undefined && keys(value).length > 0) {
+              e[part] = { update: value };
+          }
+          return e;
+      }, {});
+      if (keys(legendEncode).length > 0) {
+          legendCmpt.set('encode', legendEncode, !!legend.encoding);
+      }
+      return legendCmpt;
+  }
+  function getProperty(property, specifiedLegend, channel, model) {
+      var fieldDef = model.fieldDef(channel);
+      switch (property) {
+          case 'format':
+              // We don't include temporal field here as we apply format in encode block
+              return numberFormat(fieldDef, specifiedLegend.format, model.config);
+          case 'title':
+              // For falsy value, keep undefined so we use default,
+              // but use null for '', null, and false to hide the title
+              var specifiedTitle = fieldDef.title !== undefined ? fieldDef.title :
+                  specifiedLegend.title || (specifiedLegend.title === undefined ? undefined : null);
+              return getSpecifiedOrDefaultValue(specifiedTitle, title(fieldDef, model.config)) || undefined; // make falsy value undefined so output Vega spec is shorter
+          case 'values':
+              return values(specifiedLegend, fieldDef);
+          case 'type':
+              return getSpecifiedOrDefaultValue(specifiedLegend.type, type$2(fieldDef.type, channel, model.getScaleComponent(channel).get('type')));
+      }
+      // Otherwise, return specified property.
+      return specifiedLegend[property];
+  }
+  function parseNonUnitLegend(model) {
+      var _a = model.component, legends = _a.legends, resolve = _a.resolve;
+      var _loop_1 = function (child) {
+          parseLegend(child);
+          keys(child.component.legends).forEach(function (channel) {
+              resolve.legend[channel] = parseGuideResolve(model.component.resolve, channel);
+              if (resolve.legend[channel] === 'shared') {
+                  // If the resolve says shared (and has not been overridden)
+                  // We will try to merge and see if there is a conflict
+                  legends[channel] = mergeLegendComponent(legends[channel], child.component.legends[channel]);
+                  if (!legends[channel]) {
+                      // If merge returns nothing, there is a conflict so we cannot make the legend shared.
+                      // Thus, mark legend as independent and remove the legend component.
+                      resolve.legend[channel] = 'independent';
+                      delete legends[channel];
+                  }
+              }
+          });
+      };
+      for (var _i = 0, _b = model.children; _i < _b.length; _i++) {
+          var child = _b[_i];
+          _loop_1(child);
+      }
+      keys(legends).forEach(function (channel) {
+          for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              if (!child.component.legends[channel]) {
+                  // skip if the child does not have a particular legend
+                  continue;
+              }
+              if (resolve.legend[channel] === 'shared') {
+                  // After merging shared legend, make sure to remove legend from child
+                  delete child.component.legends[channel];
+              }
+          }
+      });
+      return legends;
+  }
+  function mergeLegendComponent(mergedLegend, childLegend) {
+      if (!mergedLegend) {
+          return childLegend.clone();
+      }
+      var mergedOrient = mergedLegend.getWithExplicit('orient');
+      var childOrient = childLegend.getWithExplicit('orient');
+      if (mergedOrient.explicit && childOrient.explicit && mergedOrient.value !== childOrient.value) {
+          // TODO: throw warning if resolve is explicit (We don't have info about explicit/implicit resolve yet.)
+          // Cannot merge due to inconsistent orient
+          return undefined;
+      }
+      var typeMerged = false;
+      var _loop_2 = function (prop) {
+          var mergedValueWithExplicit = mergeValuesWithExplicit(mergedLegend.getWithExplicit(prop), childLegend.getWithExplicit(prop), prop, 'legend', 
+          // Tie breaker function
+          function (v1, v2) {
+              switch (prop) {
+                  case 'title':
+                      return mergeTitleComponent(v1, v2);
+                  case 'type':
+                      // There are only two types. If we have different types, then prefer symbol over gradient.
+                      typeMerged = true;
+                      return makeImplicit('symbol');
+              }
+              return defaultTieBreaker(v1, v2, prop, 'legend');
+          });
+          mergedLegend.setWithExplicit(prop, mergedValueWithExplicit);
+      };
+      // Otherwise, let's merge
+      for (var _i = 0, VG_LEGEND_PROPERTIES_1 = VG_LEGEND_PROPERTIES; _i < VG_LEGEND_PROPERTIES_1.length; _i++) {
+          var prop = VG_LEGEND_PROPERTIES_1[_i];
+          _loop_2(prop);
+      }
+      if (typeMerged) {
+          if (((mergedLegend.implicit || {}).encode || {}).gradient) {
+              deleteNestedProperty(mergedLegend.implicit, ['encode', 'gradient']);
+          }
+          if (((mergedLegend.explicit || {}).encode || {}).gradient) {
+              deleteNestedProperty(mergedLegend.explicit, ['encode', 'gradient']);
+          }
+      }
+      return mergedLegend;
+  }
+
+  function assembleLegends(model) {
+      var legendComponentIndex = model.component.legends;
+      var legendByDomain = {};
+      for (var _i = 0, _a = keys(legendComponentIndex); _i < _a.length; _i++) {
+          var channel = _a[_i];
+          var scaleComponent = model.getScaleComponent(channel);
+          var domainHash = stringify$2(scaleComponent.domains);
+          if (legendByDomain[domainHash]) {
+              for (var _b = 0, _c = legendByDomain[domainHash]; _b < _c.length; _b++) {
+                  var mergedLegendComponent = _c[_b];
+                  var merged = mergeLegendComponent(mergedLegendComponent, legendComponentIndex[channel]);
+                  if (!merged) {
+                      // If cannot merge, need to add this legend separately
+                      legendByDomain[domainHash].push(legendComponentIndex[channel]);
+                  }
+              }
+          }
+          else {
+              legendByDomain[domainHash] = [legendComponentIndex[channel].clone()];
+          }
+      }
+      return flatten(vals(legendByDomain)).map(function (legendCmpt) { return legendCmpt.combine(); });
+  }
+
+  function assembleProjections(model) {
+      if (isLayerModel(model) || isConcatModel(model) || isRepeatModel(model)) {
+          return assembleProjectionsForModelAndChildren(model);
+      }
+      else {
+          return assembleProjectionForModel(model);
+      }
+  }
+  function assembleProjectionsForModelAndChildren(model) {
+      return model.children.reduce(function (projections, child) {
+          return projections.concat(child.assembleProjections());
+      }, assembleProjectionForModel(model));
+  }
+  function assembleProjectionForModel(model) {
+      var component = model.component.projection;
+      if (!component || component.merged) {
+          return [];
+      }
+      var projection = component.combine();
+      var name = projection.name, rest = __rest(projection, ["name"]); // we need to extract name so that it is always present in the output and pass TS type validation
+      var size = {
+          signal: "[" + component.size.map(function (ref) { return ref.signal; }).join(', ') + "]"
+      };
+      var fit = component.data.reduce(function (sources, data) {
+          var source = isVgSignalRef(data) ? data.signal : "data('" + model.lookupDataSource(data) + "')";
+          if (!contains(sources, source)) {
+              // build a unique list of sources
+              sources.push(source);
+          }
+          return sources;
+      }, []);
+      if (fit.length <= 0) {
+          throw new Error("Projection's fit didn't find any data sources");
+      }
+      return [__assign({ name: name,
+              size: size, fit: {
+                  signal: fit.length > 1 ? "[" + fit.join(', ') + "]" : fit[0]
+              } }, rest)];
+  }
+
+  var PROJECTION_PROPERTIES = [
+      'type',
+      'clipAngle',
+      'clipExtent',
+      'center',
+      'rotate',
+      'precision',
+      'coefficient',
+      'distance',
+      'fraction',
+      'lobes',
+      'parallel',
+      'radius',
+      'ratio',
+      'spacing',
+      'tilt'
+  ];
+
+  var ProjectionComponent = /** @class */ (function (_super) {
+      __extends(ProjectionComponent, _super);
+      function ProjectionComponent(name, specifiedProjection, size, data) {
+          var _this = _super.call(this, __assign({}, specifiedProjection), // all explicit properties of projection
+          { name: name } // name as initial implicit property
+          ) || this;
+          _this.specifiedProjection = specifiedProjection;
+          _this.size = size;
+          _this.data = data;
+          _this.merged = false;
+          return _this;
+      }
+      return ProjectionComponent;
+  }(Split));
+
+  function parseProjection(model) {
+      if (isUnitModel(model)) {
+          model.component.projection = parseUnitProjection(model);
+      }
+      else {
+          // because parse happens from leaves up (unit specs before layer spec),
+          // we can be sure that the above if statement has already occurred
+          // and therefore we have access to child.component.projection
+          // for each of model's children
+          model.component.projection = parseNonUnitProjections(model);
+      }
+  }
+  function parseUnitProjection(model) {
+      var specifiedProjection = model.specifiedProjection, config = model.config, hasProjection = model.hasProjection;
+      if (hasProjection) {
+          var data_1 = [];
+          [[LONGITUDE, LATITUDE], [LONGITUDE2, LATITUDE2]].forEach(function (posssiblePair) {
+              if (model.channelHasField(posssiblePair[0]) || model.channelHasField(posssiblePair[1])) {
+                  data_1.push({
+                      signal: model.getName("geojson_" + data_1.length)
+                  });
+              }
+          });
+          if (model.channelHasField(SHAPE) && model.fieldDef(SHAPE).type === GEOJSON) {
+              data_1.push({
+                  signal: model.getName("geojson_" + data_1.length)
+              });
+          }
+          if (data_1.length === 0) {
+              // main source is geojson, so we can just use that
+              data_1.push(model.requestDataName(MAIN));
+          }
+          return new ProjectionComponent(model.projectionName(true), __assign({}, (config.projection || {}), (specifiedProjection || {})), [model.getSizeSignalRef('width'), model.getSizeSignalRef('height')], data_1);
+      }
+      return undefined;
+  }
+  function mergeIfNoConflict(first, second) {
+      var allPropertiesShared = every(PROJECTION_PROPERTIES, function (prop) {
+          // neither has the poperty
+          if (!first.explicit.hasOwnProperty(prop) &&
+              !second.explicit.hasOwnProperty(prop)) {
+              return true;
+          }
+          // both have property and an equal value for property
+          if (first.explicit.hasOwnProperty(prop) &&
+              second.explicit.hasOwnProperty(prop) &&
+              // some properties might be signals or objects and require hashing for comparison
+              stringify$2(first.get(prop)) === stringify$2(second.get(prop))) {
+              return true;
+          }
+          return false;
+      });
+      var size = stringify$2(first.size) === stringify$2(second.size);
+      if (size) {
+          if (allPropertiesShared) {
+              return first;
+          }
+          else if (stringify$2(first.explicit) === stringify$2({})) {
+              return second;
+          }
+          else if (stringify$2(second.explicit) === stringify$2({})) {
+              return first;
+          }
+      }
+      // if all properties don't match, let each unit spec have its own projection
+      return null;
+  }
+  function parseNonUnitProjections(model) {
+      if (model.children.length === 0) {
+          return undefined;
+      }
+      var nonUnitProjection;
+      var mergable = every(model.children, function (child) {
+          parseProjection(child);
+          var projection = child.component.projection;
+          if (!projection) {
+              // child layer does not use a projection
+              return true;
+          }
+          else if (!nonUnitProjection) {
+              // cached 'projection' is null, cache this one
+              nonUnitProjection = projection;
+              return true;
+          }
+          else {
+              var merge = mergeIfNoConflict(nonUnitProjection, projection);
+              if (merge) {
+                  nonUnitProjection = merge;
+              }
+              return !!merge;
+          }
+      });
+      // it cached one and all other children share the same projection,
+      if (nonUnitProjection && mergable) {
+          // so we can elevate it to the layer level
+          var name_1 = model.projectionName(true);
+          var modelProjection_1 = new ProjectionComponent(name_1, nonUnitProjection.specifiedProjection, nonUnitProjection.size, duplicate(nonUnitProjection.data));
+          // rename and assign all others as merged
+          model.children.forEach(function (child) {
+              if (child.component.projection) {
+                  modelProjection_1.data = modelProjection_1.data.concat(child.component.projection.data);
+                  child.renameProjection(child.component.projection.get('name'), name_1);
+                  child.component.projection.merged = true;
+              }
+          });
+          return modelProjection_1;
+      }
+      return undefined;
+  }
+
+  function addDimension(dims, channel, fieldDef) {
+      if (fieldDef.bin) {
+          dims[vgField(fieldDef, {})] = true;
+          dims[vgField(fieldDef, { binSuffix: 'end' })] = true;
+          if (binRequiresRange(fieldDef, channel)) {
+              dims[vgField(fieldDef, { binSuffix: 'range' })] = true;
+          }
+      }
+      else {
+          dims[vgField(fieldDef)] = true;
+      }
+      return dims;
+  }
+  function mergeMeasures(parentMeasures, childMeasures) {
+      for (var f in childMeasures) {
+          if (childMeasures.hasOwnProperty(f)) {
+              // when we merge a measure, we either have to add an aggregation operator or even a new field
+              var ops = childMeasures[f];
+              for (var op in ops) {
+                  if (ops.hasOwnProperty(op)) {
+                      if (f in parentMeasures) {
+                          // add operator to existing measure field
+                          parentMeasures[f][op] = ops[op];
+                      }
+                      else {
+                          parentMeasures[f] = { op: ops[op] };
+                      }
+                  }
+              }
+          }
+      }
+  }
+  var AggregateNode = /** @class */ (function (_super) {
+      __extends(AggregateNode, _super);
+      /**
+       * @param dimensions string set for dimensions
+       * @param measures dictionary mapping field name => dict of aggregation functions and names to use
+       */
+      function AggregateNode(parent, dimensions, measures) {
+          var _this = _super.call(this, parent) || this;
+          _this.dimensions = dimensions;
+          _this.measures = measures;
+          return _this;
+      }
+      AggregateNode.prototype.clone = function () {
+          return new AggregateNode(null, __assign({}, this.dimensions), duplicate(this.measures));
+      };
+      AggregateNode.makeFromEncoding = function (parent, model) {
+          var isAggregate = false;
+          model.forEachFieldDef(function (fd) {
+              if (fd.aggregate) {
+                  isAggregate = true;
+              }
+          });
+          var meas = {};
+          var dims = {};
+          if (!isAggregate) {
+              // no need to create this node if the model has no aggregation
+              return null;
+          }
+          model.forEachFieldDef(function (fieldDef, channel) {
+              var aggregate = fieldDef.aggregate, field = fieldDef.field;
+              if (aggregate) {
+                  if (aggregate === 'count') {
+                      meas['*'] = meas['*'] || {};
+                      meas['*']['count'] = vgField(fieldDef);
+                  }
+                  else {
+                      meas[field] = meas[field] || {};
+                      meas[field][aggregate] = vgField(fieldDef);
+                      // For scale channel with domain === 'unaggregated', add min/max so we can use their union as unaggregated domain
+                      if (isScaleChannel(channel) && model.scaleDomain(channel) === 'unaggregated') {
+                          meas[field]['min'] = vgField({ field: field, aggregate: 'min' });
+                          meas[field]['max'] = vgField({ field: field, aggregate: 'max' });
+                      }
+                  }
+              }
+              else {
+                  addDimension(dims, channel, fieldDef);
+              }
+          });
+          if ((keys(dims).length + keys(meas).length) === 0) {
+              return null;
+          }
+          return new AggregateNode(parent, dims, meas);
+      };
+      AggregateNode.makeFromTransform = function (parent, t) {
+          var dims = {};
+          var meas = {};
+          for (var _i = 0, _a = t.aggregate; _i < _a.length; _i++) {
+              var s = _a[_i];
+              var op = s.op, field = s.field, as = s.as;
+              if (op) {
+                  if (op === 'count') {
+                      meas['*'] = meas['*'] || {};
+                      meas['*']['count'] = as || vgField(s);
+                  }
+                  else {
+                      meas[field] = meas[field] || {};
+                      meas[field][op] = as || vgField(s);
+                  }
+              }
+          }
+          for (var _b = 0, _c = t.groupby || []; _b < _c.length; _b++) {
+              var s = _c[_b];
+              dims[s] = true;
+          }
+          if ((keys(dims).length + keys(meas).length) === 0) {
+              return null;
+          }
+          return new AggregateNode(parent, dims, meas);
+      };
+      AggregateNode.prototype.merge = function (other) {
+          if (!differ(this.dimensions, other.dimensions)) {
+              mergeMeasures(this.measures, other.measures);
+              other.remove();
+          }
+          else {
+              debug('different dimensions, cannot merge');
+          }
+      };
+      AggregateNode.prototype.addDimensions = function (fields) {
+          var _this = this;
+          fields.forEach(function (f) { return _this.dimensions[f] = true; });
+      };
+      AggregateNode.prototype.dependentFields = function () {
+          var out = {};
+          keys(this.dimensions).forEach(function (f) { return out[f] = true; });
+          keys(this.measures).forEach(function (m) { return out[m] = true; });
+          return out;
+      };
+      AggregateNode.prototype.producedFields = function () {
+          var _this = this;
+          var out = {};
+          keys(this.measures).forEach(function (field) {
+              keys(_this.measures[field]).forEach(function (op) {
+                  out[op + "_" + field] = true;
+              });
+          });
+          return out;
+      };
+      AggregateNode.prototype.assemble = function () {
+          var ops = [];
+          var fields = [];
+          var as = [];
+          for (var _i = 0, _a = keys(this.measures); _i < _a.length; _i++) {
+              var field = _a[_i];
+              for (var _b = 0, _c = keys(this.measures[field]); _b < _c.length; _b++) {
+                  var op = _c[_b];
+                  as.push(this.measures[field][op]);
+                  ops.push(op);
+                  fields.push(field);
+              }
+          }
+          var result = {
+              type: 'aggregate',
+              groupby: keys(this.dimensions),
+              ops: ops,
+              fields: fields,
+              as: as
+          };
+          return result;
+      };
+      return AggregateNode;
+  }(DataFlowNode));
+
+  /**
+   * A node that helps us track what fields we are faceting by.
+   */
+  var FacetNode = /** @class */ (function (_super) {
+      __extends(FacetNode, _super);
+      /**
+       * @param model The facet model.
+       * @param name The name that this facet source will have.
+       * @param data The source data for this facet data.
+       */
+      function FacetNode(parent, model, name, data) {
+          var _this = _super.call(this, parent) || this;
+          _this.model = model;
+          _this.name = name;
+          _this.data = data;
+          for (var _i = 0, _a = [COLUMN, ROW]; _i < _a.length; _i++) {
+              var channel = _a[_i];
+              var fieldDef = model.facet[channel];
+              if (fieldDef) {
+                  var bin = fieldDef.bin, sort = fieldDef.sort;
+                  _this[channel] = __assign({ name: model.getName(channel + "_domain"), fields: [
+                          vgField(fieldDef)
+                      ].concat((bin ? [vgField(fieldDef, { binSuffix: 'end' })] : [])) }, (isSortField(sort) ? { sortField: sort } :
+                      isArray(sort) ? { sortIndexField: sortArrayIndexField(fieldDef, channel) } :
+                          {}));
+              }
+          }
+          _this.childModel = model.child;
+          return _this;
+      }
+      Object.defineProperty(FacetNode.prototype, "fields", {
+          get: function () {
+              return ((this.column && this.column.fields) || []).concat((this.row && this.row.fields) || []);
+          },
+          enumerable: true,
+          configurable: true
+      });
+      /**
+       * The name to reference this source is its name.
+       */
+      FacetNode.prototype.getSource = function () {
+          return this.name;
+      };
+      FacetNode.prototype.getChildIndependentFieldsWithStep = function () {
+          var childIndependentFieldsWithStep = {};
+          for (var _i = 0, _a = ['x', 'y']; _i < _a.length; _i++) {
+              var channel = _a[_i];
+              var childScaleComponent = this.childModel.component.scales[channel];
+              if (childScaleComponent && !childScaleComponent.merged) {
+                  var type = childScaleComponent.get('type');
+                  var range = childScaleComponent.get('range');
+                  if (hasDiscreteDomain(type) && isVgRangeStep(range)) {
+                      var domain = assembleDomain(this.childModel, channel);
+                      var field$$1 = getFieldFromDomain(domain);
+                      if (field$$1) {
+                          childIndependentFieldsWithStep[channel] = field$$1;
+                      }
+                      else {
+                          warn('Unknown field for ${channel}.  Cannot calculate view size.');
+                      }
+                  }
+              }
+          }
+          return childIndependentFieldsWithStep;
+      };
+      FacetNode.prototype.assembleRowColumnData = function (channel, crossedDataName, childIndependentFieldsWithStep) {
+          var childChannel = channel === 'row' ? 'y' : 'x';
+          var fields = [];
+          var ops = [];
+          var as = [];
+          if (childIndependentFieldsWithStep[childChannel]) {
+              if (crossedDataName) {
+                  // If there is a crossed data, calculate max
+                  fields.push("distinct_" + childIndependentFieldsWithStep[childChannel]);
+                  ops.push('max');
+              }
+              else {
+                  // If there is no crossed data, just calculate distinct
+                  fields.push(childIndependentFieldsWithStep[childChannel]);
+                  ops.push('distinct');
+              }
+              // Although it is technically a max, just name it distinct so it's easier to refer to it
+              as.push("distinct_" + childIndependentFieldsWithStep[childChannel]);
+          }
+          var _a = this[channel], sortField = _a.sortField, sortIndexField = _a.sortIndexField;
+          if (sortField) {
+              var op = sortField.op, field$$1 = sortField.field;
+              fields.push(field$$1);
+              ops.push(op);
+              as.push(vgField(sortField));
+          }
+          else if (sortIndexField) {
+              fields.push(sortIndexField);
+              ops.push('max');
+              as.push(sortIndexField);
+          }
+          return {
+              name: this[channel].name,
+              // Use data from the crossed one if it exist
+              source: crossedDataName || this.data,
+              transform: [__assign({ type: 'aggregate', groupby: this[channel].fields }, (fields.length ? {
+                      fields: fields, ops: ops, as: as
+                  } : {}))]
+          };
+      };
+      FacetNode.prototype.assemble = function () {
+          var data = [];
+          var crossedDataName = null;
+          var childIndependentFieldsWithStep = this.getChildIndependentFieldsWithStep();
+          if (this.column && this.row && (childIndependentFieldsWithStep.x || childIndependentFieldsWithStep.y)) {
+              // Need to create a cross dataset to correctly calculate cardinality
+              crossedDataName = "cross_" + this.column.name + "_" + this.row.name;
+              var fields = [].concat(childIndependentFieldsWithStep.x ? [childIndependentFieldsWithStep.x] : [], childIndependentFieldsWithStep.y ? [childIndependentFieldsWithStep.y] : []);
+              var ops = fields.map(function () { return 'distinct'; });
+              data.push({
+                  name: crossedDataName,
+                  source: this.data,
+                  transform: [{
+                          type: 'aggregate',
+                          groupby: this.column.fields.concat(this.row.fields),
+                          fields: fields,
+                          ops: ops
+                      }]
+              });
+          }
+          for (var _i = 0, _a = [COLUMN, ROW]; _i < _a.length; _i++) {
+              var channel = _a[_i];
+              if (this[channel]) {
+                  data.push(this.assembleRowColumnData(channel, crossedDataName, childIndependentFieldsWithStep));
+              }
+          }
+          return data;
+      };
+      return FacetNode;
+  }(DataFlowNode));
+
+  var FilterInvalidNode = /** @class */ (function (_super) {
+      __extends(FilterInvalidNode, _super);
+      function FilterInvalidNode(parent, fieldDefs) {
+          var _this = _super.call(this, parent) || this;
+          _this.fieldDefs = fieldDefs;
+          return _this;
+      }
+      FilterInvalidNode.prototype.clone = function () {
+          return new FilterInvalidNode(null, __assign({}, this.fieldDefs));
+      };
+      FilterInvalidNode.make = function (parent, model) {
+          var config = model.config, mark = model.mark;
+          if (config.invalidValues !== 'filter') {
+              return null;
+          }
+          var filter = model.reduceFieldDef(function (aggregator, fieldDef, channel) {
+              var scaleComponent = isScaleChannel(channel) && model.getScaleComponent(channel);
+              if (scaleComponent) {
+                  var scaleType = scaleComponent.get('type');
+                  // While discrete domain scales can handle invalid values, continuous scales can't.
+                  // Thus, for non-path marks, we have to filter null for scales with continuous domains.
+                  // (For path marks, we will use "defined" property and skip these values instead.)
+                  if (hasContinuousDomain(scaleType) && !fieldDef.aggregate && !isPathMark(mark)) {
+                      aggregator[fieldDef.field] = fieldDef;
+                  }
+              }
+              return aggregator;
+          }, {});
+          if (!keys(filter).length) {
+              return null;
+          }
+          return new FilterInvalidNode(parent, filter);
+      };
+      Object.defineProperty(FilterInvalidNode.prototype, "filter", {
+          get: function () {
+              return this.fieldDefs;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      // create the VgTransforms for each of the filtered fields
+      FilterInvalidNode.prototype.assemble = function () {
+          var _this = this;
+          var filters = keys(this.filter).reduce(function (vegaFilters, field) {
+              var fieldDef = _this.fieldDefs[field];
+              var ref = vgField(fieldDef, { expr: 'datum' });
+              if (fieldDef !== null) {
+                  vegaFilters.push(ref + " !== null");
+                  vegaFilters.push("!isNaN(" + ref + ")");
+              }
+              return vegaFilters;
+          }, []);
+          return filters.length > 0 ?
+              {
+                  type: 'filter',
+                  expr: filters.join(' && ')
+              } : null;
+      };
+      return FilterInvalidNode;
+  }(DataFlowNode));
+
+  /**
+   * @param field The field.
+   * @param parse What to parse the field as.
+   */
+  function parseExpression(field$$1, parse) {
+      var f = accessPathWithDatum(field$$1);
+      if (parse === 'number') {
+          return "toNumber(" + f + ")";
+      }
+      else if (parse === 'boolean') {
+          return "toBoolean(" + f + ")";
+      }
+      else if (parse === 'string') {
+          return "toString(" + f + ")";
+      }
+      else if (parse === 'date') {
+          return "toDate(" + f + ")";
+      }
+      else if (parse === 'flatten') {
+          return f;
+      }
+      else if (parse.indexOf('date:') === 0) {
+          var specifier = parse.slice(5, parse.length);
+          return "timeParse(" + f + "," + specifier + ")";
+      }
+      else if (parse.indexOf('utc:') === 0) {
+          var specifier = parse.slice(4, parse.length);
+          return "utcParse(" + f + "," + specifier + ")";
+      }
+      else {
+          warn(message.unrecognizedParse(parse));
+          return null;
+      }
+  }
+  var ParseNode = /** @class */ (function (_super) {
+      __extends(ParseNode, _super);
+      function ParseNode(parent, parse) {
+          var _this = _super.call(this, parent) || this;
+          _this._parse = parse;
+          return _this;
+      }
+      ParseNode.prototype.clone = function () {
+          return new ParseNode(null, duplicate(this._parse));
+      };
+      /**
+       * Creates a parse node from a data.format.parse and updates ancestorParse.
+       */
+      ParseNode.makeExplicit = function (parent, model, ancestorParse) {
+          // Custom parse
+          var explicit = {};
+          var data = model.data;
+          if (data && data.format && data.format.parse) {
+              explicit = data.format.parse;
+          }
+          return this.makeWithAncestors(parent, explicit, {}, ancestorParse);
+      };
+      ParseNode.makeImplicitFromFilterTransform = function (parent, transform, ancestorParse) {
+          var parse = {};
+          forEachLeaf(transform.filter, function (filter) {
+              if (isFieldPredicate(filter)) {
+                  // Automatically add a parse node for filters with filter objects
+                  var val = null;
+                  // For EqualFilter, just use the equal property.
+                  // For RangeFilter and OneOfFilter, all array members should have
+                  // the same type, so we only use the first one.
+                  if (isFieldEqualPredicate(filter)) {
+                      val = filter.equal;
+                  }
+                  else if (isFieldRangePredicate(filter)) {
+                      val = filter.range[0];
+                  }
+                  else if (isFieldOneOfPredicate(filter)) {
+                      val = (filter.oneOf || filter['in'])[0];
+                  } // else -- for filter expression, we can't infer anything
+                  if (val) {
+                      if (isDateTime(val)) {
+                          parse[filter.field] = 'date';
+                      }
+                      else if (isNumber(val)) {
+                          parse[filter.field] = 'number';
+                      }
+                      else if (isString(val)) {
+                          parse[filter.field] = 'string';
+                      }
+                  }
+                  if (filter.timeUnit) {
+                      parse[filter.field] = 'date';
+                  }
+              }
+          });
+          if (keys(parse).length === 0) {
+              return null;
+          }
+          return this.makeWithAncestors(parent, {}, parse, ancestorParse);
+      };
+      /**
+       * Creates a parse node for implicit parsing from a model and updates ancestorParse.
+       */
+      ParseNode.makeImplicitFromEncoding = function (parent, model, ancestorParse) {
+          var implicit = {};
+          if (isUnitModel(model) || isFacetModel(model)) {
+              // Parse encoded fields
+              model.forEachFieldDef(function (fieldDef) {
+                  if (isTimeFieldDef(fieldDef)) {
+                      implicit[fieldDef.field] = 'date';
+                  }
+                  else if (isNumberFieldDef(fieldDef)) {
+                      if (!isCountingAggregateOp(fieldDef.aggregate)) {
+                          implicit[fieldDef.field] = 'number';
+                      }
+                  }
+                  else if (accessPathDepth(fieldDef.field) > 1) {
+                      // For non-date/non-number (strings and booleans), derive a flattened field for a referenced nested field.
+                      // (Parsing numbers / dates already flattens numeric and temporal fields.)
+                      if (!(fieldDef.field in implicit)) {
+                          implicit[fieldDef.field] = 'flatten';
+                      }
+                  }
+                  else if (isScaleFieldDef(fieldDef) && isSortField(fieldDef.sort) && accessPathDepth(fieldDef.sort.field) > 1) {
+                      // Flatten fields that we sort by but that are not otherwise flattened.
+                      if (!(fieldDef.sort.field in implicit)) {
+                          implicit[fieldDef.sort.field] = 'flatten';
+                      }
+                  }
+              });
+          }
+          return this.makeWithAncestors(parent, {}, implicit, ancestorParse);
+      };
+      /**
+       * Creates a parse node from "explicit" parse and "implicit" parse and updates ancestorParse.
+       */
+      ParseNode.makeWithAncestors = function (parent, explicit, implicit, ancestorParse) {
+          // We should not parse what has already been parsed in a parent (explicitly or implicitly) or what has been derived (maked as "derived"). We also don't need to flatten a field that has already been parsed.
+          for (var _i = 0, _a = keys(implicit); _i < _a.length; _i++) {
+              var field$$1 = _a[_i];
+              var parsedAs = ancestorParse.getWithExplicit(field$$1);
+              if (parsedAs.value !== undefined) {
+                  // We always ignore derived fields even if they are implicitly defined because we expect users to create the right types.
+                  if (parsedAs.explicit || parsedAs.value === implicit[field$$1] || parsedAs.value === 'derived' || implicit[field$$1] === 'flatten') {
+                      delete implicit[field$$1];
+                  }
+                  else {
+                      warn(message.differentParse(field$$1, implicit[field$$1], parsedAs.value));
+                  }
+              }
+          }
+          for (var _b = 0, _c = keys(explicit); _b < _c.length; _b++) {
+              var field$$1 = _c[_b];
+              var parsedAs = ancestorParse.get(field$$1);
+              if (parsedAs !== undefined) {
+                  // Don't parse a field again if it has been parsed with the same type already.
+                  if (parsedAs === explicit[field$$1]) {
+                      delete explicit[field$$1];
+                  }
+                  else {
+                      warn(message.differentParse(field$$1, explicit[field$$1], parsedAs));
+                  }
+              }
+          }
+          var parse = new Split(explicit, implicit);
+          // add the format parse from this model so that children don't parse the same field again
+          ancestorParse.copyAll(parse);
+          // copy only non-null parses
+          var p = {};
+          for (var _d = 0, _e = keys(parse.combine()); _d < _e.length; _d++) {
+              var key$$1 = _e[_d];
+              var val = parse.get(key$$1);
+              if (val !== null) {
+                  p[key$$1] = val;
+              }
+          }
+          if (keys(p).length === 0 || ancestorParse.parseNothing) {
+              return null;
+          }
+          return new ParseNode(parent, p);
+      };
+      Object.defineProperty(ParseNode.prototype, "parse", {
+          get: function () {
+              return this._parse;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      ParseNode.prototype.merge = function (other) {
+          this._parse = __assign({}, this._parse, other.parse);
+          other.remove();
+      };
+      /**
+       * Assemble an object for Vega's format.parse property.
+       */
+      ParseNode.prototype.assembleFormatParse = function () {
+          var formatParse = {};
+          for (var _i = 0, _a = keys(this._parse); _i < _a.length; _i++) {
+              var field$$1 = _a[_i];
+              var p = this._parse[field$$1];
+              if (accessPathDepth(field$$1) === 1) {
+                  formatParse[field$$1] = p;
+              }
+          }
+          return formatParse;
+      };
+      // format parse depends and produces all fields in its parse
+      ParseNode.prototype.producedFields = function () {
+          return toSet(keys(this._parse));
+      };
+      ParseNode.prototype.dependentFields = function () {
+          return toSet(keys(this._parse));
+      };
+      ParseNode.prototype.assembleTransforms = function (onlyNested) {
+          var _this = this;
+          if (onlyNested === void 0) { onlyNested = false; }
+          return keys(this._parse)
+              .filter(function (field$$1) { return onlyNested ? accessPathDepth(field$$1) > 1 : true; })
+              .map(function (field$$1) {
+              var expr = parseExpression(field$$1, _this._parse[field$$1]);
+              if (!expr) {
+                  return null;
+              }
+              var formula = {
+                  type: 'formula',
+                  expr: expr,
+                  as: removePathFromField(field$$1) // Vega output is always flattened
+              };
+              return formula;
+          }).filter(function (t) { return t !== null; });
+      };
+      return ParseNode;
+  }(DataFlowNode));
+
+  var SourceNode = /** @class */ (function (_super) {
+      __extends(SourceNode, _super);
+      function SourceNode(data) {
+          var _this = _super.call(this, null) || this;
+          data = data || { name: 'source' };
+          if (isInlineData(data)) {
+              _this._data = { values: data.values };
+          }
+          else if (isUrlData(data)) {
+              _this._data = { url: data.url };
+              if (!data.format) {
+                  data.format = {};
+              }
+              if (!data.format || !data.format.type) {
+                  // Extract extension from URL using snippet from
+                  // http://stackoverflow.com/questions/680929/how-to-extract-extension-from-filename-string-in-javascript
+                  var defaultExtension = /(?:\.([^.]+))?$/.exec(data.url)[1];
+                  if (!contains(['json', 'csv', 'tsv', 'dsv', 'topojson'], defaultExtension)) {
+                      defaultExtension = 'json';
+                  }
+                  // defaultExtension has type string but we ensure that it is DataFormatType above
+                  data.format.type = defaultExtension;
+              }
+          }
+          else if (isNamedData(data)) {
+              _this._data = {};
+          }
+          // any dataset can be named
+          if (data.name) {
+              _this._name = data.name;
+          }
+          if (data.format) {
+              var _a = data.format, _b = _a.parse, format = __rest(_a, ["parse"]);
+              _this._data.format = format;
+          }
+          return _this;
+      }
+      Object.defineProperty(SourceNode.prototype, "data", {
+          get: function () {
+              return this._data;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      SourceNode.prototype.hasName = function () {
+          return !!this._name;
+      };
+      Object.defineProperty(SourceNode.prototype, "dataName", {
+          get: function () {
+              return this._name;
+          },
+          set: function (name) {
+              this._name = name;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      Object.defineProperty(SourceNode.prototype, "parent", {
+          set: function (parent) {
+              throw new Error('Source nodes have to be roots.');
+          },
+          enumerable: true,
+          configurable: true
+      });
+      SourceNode.prototype.remove = function () {
+          throw new Error('Source nodes are roots and cannot be removed.');
+      };
+      /**
+       * Return a unique identifier for this data source.
+       */
+      SourceNode.prototype.hash = function () {
+          if (isInlineData(this._data)) {
+              if (!this._hash) {
+                  // Hashing can be expensive for large inline datasets.
+                  this._hash = hash(this._data);
+              }
+              return this._hash;
+          }
+          else if (isUrlData(this._data)) {
+              return hash([this._data.url, this._data.format]);
+          }
+          else {
+              return this._name;
+          }
+      };
+      SourceNode.prototype.assemble = function () {
+          return __assign({ name: this._name }, this._data, { transform: [] });
+      };
+      return SourceNode;
+  }(DataFlowNode));
+
+  var TimeUnitNode = /** @class */ (function (_super) {
+      __extends(TimeUnitNode, _super);
+      function TimeUnitNode(parent, formula) {
+          var _this = _super.call(this, parent) || this;
+          _this.formula = formula;
+          return _this;
+      }
+      TimeUnitNode.prototype.clone = function () {
+          return new TimeUnitNode(null, duplicate(this.formula));
+      };
+      TimeUnitNode.makeFromEncoding = function (parent, model) {
+          var formula = model.reduceFieldDef(function (timeUnitComponent, fieldDef) {
+              if (fieldDef.timeUnit) {
+                  var f = vgField(fieldDef);
+                  timeUnitComponent[f] = {
+                      as: f,
+                      timeUnit: fieldDef.timeUnit,
+                      field: fieldDef.field
+                  };
+              }
+              return timeUnitComponent;
+          }, {});
+          if (keys(formula).length === 0) {
+              return null;
+          }
+          return new TimeUnitNode(parent, formula);
+      };
+      TimeUnitNode.makeFromTransform = function (parent, t) {
+          var _a;
+          return new TimeUnitNode(parent, (_a = {},
+              _a[t.field] = {
+                  as: t.as,
+                  timeUnit: t.timeUnit,
+                  field: t.field
+              },
+              _a));
+      };
+      TimeUnitNode.prototype.merge = function (other) {
+          this.formula = __assign({}, this.formula, other.formula);
+          other.remove();
+      };
+      TimeUnitNode.prototype.producedFields = function () {
+          var out = {};
+          vals(this.formula).forEach(function (f) {
+              out[f.as] = true;
+          });
+          return out;
+      };
+      TimeUnitNode.prototype.dependentFields = function () {
+          var out = {};
+          vals(this.formula).forEach(function (f) {
+              out[f.field] = true;
+          });
+          return out;
+      };
+      TimeUnitNode.prototype.assemble = function () {
+          return vals(this.formula).map(function (c) {
+              return {
+                  type: 'formula',
+                  as: c.as,
+                  expr: fieldExpr(c.timeUnit, c.field)
+              };
+          });
+      };
+      return TimeUnitNode;
+  }(DataFlowNode));
+
+  /**
+   * Start optimization path at the leaves. Useful for merging up or removing things.
+   *
+   * If the callback returns true, the recursion continues.
+   */
+  function iterateFromLeaves(f) {
+      function optimizeNextFromLeaves(node) {
+          if (node instanceof SourceNode) {
+              return;
+          }
+          var next = node.parent;
+          if (f(node)) {
+              optimizeNextFromLeaves(next);
+          }
+      }
+      return optimizeNextFromLeaves;
+  }
+  /**
+   * Move parse nodes up to forks.
+   */
+  function moveParseUp(node) {
+      var parent = node.parent;
+      // move parse up by merging or swapping
+      if (node instanceof ParseNode) {
+          if (parent instanceof SourceNode) {
+              return false;
+          }
+          if (parent.numChildren() > 1) {
+              // don't move parse further up but continue with parent.
+              return true;
+          }
+          if (parent instanceof ParseNode) {
+              parent.merge(node);
+          }
+          else {
+              // don't swap with nodes that produce something that the parse node depends on (e.g. lookup)
+              if (hasIntersection(parent.producedFields(), node.dependentFields())) {
+                  return true;
+              }
+              node.swapWithParent();
+          }
+      }
+      return true;
+  }
+  /**
+   * Repeatedly remove leaf nodes that are not output or facet nodes.
+   * The reason is that we don't need subtrees that don't have any output nodes.
+   * Facet nodes are needed for the row or column domains.
+   */
+  function removeUnusedSubtrees(node) {
+      if (node instanceof OutputNode || node.numChildren() > 0 || node instanceof FacetNode) {
+          // no need to continue with parent because it is output node or will have children (there was a fork)
+          return false;
+      }
+      else {
+          node.remove();
+      }
+      return true;
+  }
+  /**
+   * Removes duplicate time unit nodes (as determined by the name of the
+   * output field) that may be generated due to selections projected over
+   * time units.
+   */
+  function removeDuplicateTimeUnits(leaf) {
+      var fields = {};
+      return iterateFromLeaves(function (node) {
+          if (node instanceof TimeUnitNode) {
+              var pfields = node.producedFields();
+              var dupe = keys(pfields).every(function (k) { return !!fields[k]; });
+              if (dupe) {
+                  node.remove();
+              }
+              else {
+                  fields = __assign({}, fields, pfields);
+              }
+          }
+          return true;
+      })(leaf);
+  }
+
+  function getStackByFields(model) {
+      return model.stack.stackBy.reduce(function (fields, by) {
+          var fieldDef = by.fieldDef;
+          var _field = vgField(fieldDef);
+          if (_field) {
+              fields.push(_field);
+          }
+          return fields;
+      }, []);
+  }
+  function isValidAsArray(as) {
+      return isArray(as) && as.every(function (s) { return isString(s); }) && as.length > 1;
+  }
+  var StackNode = /** @class */ (function (_super) {
+      __extends(StackNode, _super);
+      function StackNode(parent, stack) {
+          var _this = _super.call(this, parent) || this;
+          _this._stack = stack;
+          return _this;
+      }
+      StackNode.prototype.clone = function () {
+          return new StackNode(null, duplicate(this._stack));
+      };
+      StackNode.makeFromTransform = function (parent, stackTransform) {
+          var stack = stackTransform.stack, groupby = stackTransform.groupby, as = stackTransform.as, _a = stackTransform.offset, offset = _a === void 0 ? 'zero' : _a;
+          var sortFields = [];
+          var sortOrder = [];
+          if (stackTransform.sort !== undefined) {
+              for (var _i = 0, _b = stackTransform.sort; _i < _b.length; _i++) {
+                  var sortField = _b[_i];
+                  sortFields.push(sortField.field);
+                  sortOrder.push(sortField.order === undefined ? 'ascending' : sortField.order);
+              }
+          }
+          var sort = {
+              field: sortFields,
+              order: sortOrder,
+          };
+          var normalizedAs;
+          if (isValidAsArray(as)) {
+              normalizedAs = as;
+          }
+          else if (isString(as)) {
+              normalizedAs = [as, as + '_end'];
+          }
+          else {
+              normalizedAs = [stackTransform.stack + '_start', stackTransform.stack + '_end'];
+          }
+          return new StackNode(parent, {
+              stackField: stack,
+              groupby: groupby,
+              offset: offset,
+              sort: sort,
+              facetby: [],
+              as: normalizedAs
+          });
+      };
+      StackNode.makeFromEncoding = function (parent, model) {
+          var stackProperties = model.stack;
+          if (!stackProperties) {
+              return null;
+          }
+          var dimensionFieldDef;
+          if (stackProperties.groupbyChannel) {
+              dimensionFieldDef = model.fieldDef(stackProperties.groupbyChannel);
+          }
+          var stackby = getStackByFields(model);
+          var orderDef = model.encoding.order;
+          var sort;
+          if (isArray(orderDef) || isFieldDef(orderDef)) {
+              sort = sortParams(orderDef);
+          }
+          else {
+              // default = descending by stackFields
+              // FIXME is the default here correct for binned fields?
+              sort = stackby.reduce(function (s, field$$1) {
+                  s.field.push(field$$1);
+                  s.order.push('descending');
+                  return s;
+              }, { field: [], order: [] });
+          }
+          // Refactored to add "as" in the make phase so that we can get producedFields
+          // from the as property
+          var field$$1 = model.vgField(stackProperties.fieldChannel);
+          return new StackNode(parent, {
+              dimensionFieldDef: dimensionFieldDef,
+              stackField: field$$1,
+              facetby: [],
+              stackby: stackby,
+              sort: sort,
+              offset: stackProperties.offset,
+              impute: stackProperties.impute,
+              as: [field$$1 + '_start', field$$1 + '_end']
+          });
+      };
+      Object.defineProperty(StackNode.prototype, "stack", {
+          get: function () {
+              return this._stack;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      StackNode.prototype.addDimensions = function (fields) {
+          this._stack.facetby = this._stack.facetby.concat(fields);
+      };
+      StackNode.prototype.dependentFields = function () {
+          var out = {};
+          out[this._stack.stackField] = true;
+          this.getGroupbyFields().forEach(function (f) { return out[f] = true; });
+          this._stack.facetby.forEach(function (f) { return out[f] = true; });
+          var field$$1 = this._stack.sort.field;
+          isArray(field$$1) ? field$$1.forEach(function (f) { return out[f] = true; }) : out[field$$1] = true;
+          return out;
+      };
+      StackNode.prototype.producedFields = function () {
+          return this._stack.as.reduce(function (result, item) {
+              result[item] = true;
+              return result;
+          }, {});
+      };
+      StackNode.prototype.getGroupbyFields = function () {
+          var _a = this._stack, dimensionFieldDef = _a.dimensionFieldDef, impute = _a.impute, groupby = _a.groupby;
+          if (dimensionFieldDef) {
+              if (dimensionFieldDef.bin) {
+                  if (impute) {
+                      // For binned group by field with impute, we calculate bin_mid
+                      // as we cannot impute two fields simultaneously
+                      return [vgField(dimensionFieldDef, { binSuffix: 'mid' })];
+                  }
+                  return [
+                      // For binned group by field without impute, we need both bin (start) and bin_end
+                      vgField(dimensionFieldDef, {}),
+                      vgField(dimensionFieldDef, { binSuffix: 'end' })
+                  ];
+              }
+              return [vgField(dimensionFieldDef)];
+          }
+          return groupby || [];
+      };
+      StackNode.prototype.assemble = function () {
+          var transform = [];
+          var _a = this._stack, facetby = _a.facetby, dimensionFieldDef = _a.dimensionFieldDef, field$$1 = _a.stackField, stackby = _a.stackby, sort = _a.sort, offset = _a.offset, impute = _a.impute, as = _a.as;
+          // Impute
+          if (impute && dimensionFieldDef) {
+              var dimensionField = dimensionFieldDef ? vgField(dimensionFieldDef, { binSuffix: 'mid' }) : undefined;
+              if (dimensionFieldDef.bin) {
+                  // As we can only impute one field at a time, we need to calculate
+                  // mid point for a binned field
+                  transform.push({
+                      type: 'formula',
+                      expr: '(' +
+                          vgField(dimensionFieldDef, { expr: 'datum' }) +
+                          '+' +
+                          vgField(dimensionFieldDef, { expr: 'datum', binSuffix: 'end' }) +
+                          ')/2',
+                      as: dimensionField
+                  });
+              }
+              transform.push({
+                  type: 'impute',
+                  field: field$$1,
+                  groupby: stackby,
+                  key: dimensionField,
+                  method: 'value',
+                  value: 0
+              });
+          }
+          // Stack
+          transform.push({
+              type: 'stack',
+              groupby: this.getGroupbyFields().concat(facetby),
+              field: field$$1,
+              sort: sort,
+              as: as,
+              offset: offset
+          });
+          return transform;
+      };
+      return StackNode;
+  }(DataFlowNode));
+
+  var FACET_SCALE_PREFIX = 'scale_';
+  /**
+   * Clones the subtree and ignores output nodes except for the leafs, which are renamed.
+   */
+  function cloneSubtree(facet) {
+      function clone(node) {
+          if (!(node instanceof FacetNode)) {
+              var copy_1 = node.clone();
+              if (copy_1 instanceof OutputNode) {
+                  var newName = FACET_SCALE_PREFIX + copy_1.getSource();
+                  copy_1.setSource(newName);
+                  facet.model.component.data.outputNodes[newName] = copy_1;
+              }
+              else if (copy_1 instanceof AggregateNode || copy_1 instanceof StackNode) {
+                  copy_1.addDimensions(facet.fields);
+              }
+              flatten(node.children.map(clone)).forEach(function (n) { return n.parent = copy_1; });
+              return [copy_1];
+          }
+          return flatten(node.children.map(clone));
+      }
+      return clone;
+  }
+  /**
+   * Move facet nodes down to the next fork or output node. Also pull the main output with the facet node.
+   * After moving down the facet node, make a copy of the subtree and make it a child of the main output.
+   */
+  function moveFacetDown(node) {
+      if (node instanceof FacetNode) {
+          if (node.numChildren() === 1 && !(node.children[0] instanceof OutputNode)) {
+              // move down until we hit a fork or output node
+              var child = node.children[0];
+              if (child instanceof AggregateNode || child instanceof StackNode) {
+                  child.addDimensions(node.fields);
+              }
+              child.swapWithParent();
+              moveFacetDown(node);
+          }
+          else {
+              // move main to facet
+              moveMainDownToFacet(node.model.component.data.main);
+              // replicate the subtree and place it before the facet's main node
+              var copy = flatten(node.children.map(cloneSubtree(node)));
+              copy.forEach(function (c) { return c.parent = node.model.component.data.main; });
+          }
+      }
+      else {
+          node.children.forEach(moveFacetDown);
+      }
+  }
+  function moveMainDownToFacet(node) {
+      if (node instanceof OutputNode && node.type === MAIN) {
+          if (node.numChildren() === 1) {
+              var child = node.children[0];
+              if (!(child instanceof FacetNode)) {
+                  child.swapWithParent();
+                  moveMainDownToFacet(node);
+              }
+          }
+      }
+  }
+  /**
+   * Remove nodes that are not required starting from a root.
+   */
+  function removeUnnecessaryNodes(node) {
+      // remove empty null filter nodes
+      if (node instanceof FilterInvalidNode && every(vals(node.filter), function (f) { return f === null; })) {
+          node.remove();
+      }
+      // remove output nodes that are not required
+      if (node instanceof OutputNode && !node.isRequired()) {
+          node.remove();
+      }
+      node.children.forEach(removeUnnecessaryNodes);
+  }
+  /**
+   * Return all leaf nodes.
+   */
+  function getLeaves(roots) {
+      var leaves = [];
+      function append(node) {
+          if (node.numChildren() === 0) {
+              leaves.push(node);
+          }
+          else {
+              node.children.forEach(append);
+          }
+      }
+      roots.forEach(append);
+      return leaves;
+  }
+  /**
+   * Optimizes the dataflow of the passed in data component.
+   */
+  function optimizeDataflow(dataComponent) {
+      var roots = vals(dataComponent.sources);
+      roots.forEach(removeUnnecessaryNodes);
+      // remove source nodes that don't have any children because they also don't have output nodes
+      roots = roots.filter(function (r) { return r.numChildren() > 0; });
+      getLeaves(roots).forEach(iterateFromLeaves(removeUnusedSubtrees));
+      roots = roots.filter(function (r) { return r.numChildren() > 0; });
+      getLeaves(roots).forEach(iterateFromLeaves(moveParseUp));
+      getLeaves(roots).forEach(removeDuplicateTimeUnits);
+      roots.forEach(moveFacetDown);
+      keys(dataComponent.sources).forEach(function (s) {
+          if (dataComponent.sources[s].numChildren() === 0) {
+              delete dataComponent.sources[s];
+          }
+      });
+  }
+
+  function parseScaleDomain(model) {
+      if (isUnitModel(model)) {
+          parseUnitScaleDomain(model);
+      }
+      else {
+          parseNonUnitScaleDomain(model);
+      }
+  }
+  function parseUnitScaleDomain(model) {
+      var scales = model.specifiedScales;
+      var localScaleComponents = model.component.scales;
+      keys(localScaleComponents).forEach(function (channel) {
+          var specifiedScale = scales[channel];
+          var specifiedDomain = specifiedScale ? specifiedScale.domain : undefined;
+          var domains = parseDomainForChannel(model, channel);
+          var localScaleCmpt = localScaleComponents[channel];
+          localScaleCmpt.domains = domains;
+          if (isSelectionDomain(specifiedDomain)) {
+              // As scale parsing occurs before selection parsing, we use a temporary
+              // signal here and append the scale.domain definition. This is replaced
+              // with the correct domainRaw signal during scale assembly.
+              // For more information, see isRawSelectionDomain in selection.ts.
+              // FIXME: replace this with a special property in the scaleComponent
+              localScaleCmpt.set('domainRaw', {
+                  signal: SELECTION_DOMAIN + hash(specifiedDomain)
+              }, true);
+          }
+          if (model.component.data.isFaceted) {
+              // get resolve from closest facet parent as this decides whether we need to refer to cloned subtree or not
+              var facetParent = model;
+              while (!isFacetModel(facetParent) && facetParent.parent) {
+                  facetParent = facetParent.parent;
+              }
+              var resolve = facetParent.component.resolve.scale[channel];
+              if (resolve === 'shared') {
+                  for (var _i = 0, domains_1 = domains; _i < domains_1.length; _i++) {
+                      var domain = domains_1[_i];
+                      // Replace the scale domain with data output from a cloned subtree after the facet.
+                      if (isDataRefDomain(domain)) {
+                          // use data from cloned subtree (which is the same as data but with a prefix added once)
+                          domain.data = FACET_SCALE_PREFIX + domain.data.replace(FACET_SCALE_PREFIX, '');
+                      }
+                  }
+              }
+          }
+      });
+  }
+  function parseNonUnitScaleDomain(model) {
+      for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+          var child = _a[_i];
+          parseScaleDomain(child);
+      }
+      var localScaleComponents = model.component.scales;
+      keys(localScaleComponents).forEach(function (channel) {
+          var domains;
+          var domainRaw = null;
+          for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              var childComponent = child.component.scales[channel];
+              if (childComponent) {
+                  if (domains === undefined) {
+                      domains = childComponent.domains;
+                  }
+                  else {
+                      domains = domains.concat(childComponent.domains);
+                  }
+                  var dr = childComponent.get('domainRaw');
+                  if (domainRaw && dr && domainRaw.signal !== dr.signal) {
+                      warn('The same selection must be used to override scale domains in a layered view.');
+                  }
+                  domainRaw = dr;
+              }
+          }
+          localScaleComponents[channel].domains = domains;
+          if (domainRaw) {
+              localScaleComponents[channel].set('domainRaw', domainRaw, true);
+          }
+      });
+  }
+  /**
+   * Remove unaggregated domain if it is not applicable
+   * Add unaggregated domain if domain is not specified and config.scale.useUnaggregatedDomain is true.
+   */
+  function normalizeUnaggregatedDomain(domain, fieldDef, scaleType, scaleConfig) {
+      if (domain === 'unaggregated') {
+          var _a = canUseUnaggregatedDomain(fieldDef, scaleType), valid = _a.valid, reason = _a.reason;
+          if (!valid) {
+              warn(reason);
+              return undefined;
+          }
+      }
+      else if (domain === undefined && scaleConfig.useUnaggregatedDomain) {
+          // Apply config if domain is not specified.
+          var valid = canUseUnaggregatedDomain(fieldDef, scaleType).valid;
+          if (valid) {
+              return 'unaggregated';
+          }
+      }
+      return domain;
+  }
+  function parseDomainForChannel(model, channel) {
+      var scaleType = model.getScaleComponent(channel).get('type');
+      var domain = normalizeUnaggregatedDomain(model.scaleDomain(channel), model.fieldDef(channel), scaleType, model.config.scale);
+      if (domain !== model.scaleDomain(channel)) {
+          model.specifiedScales[channel] = __assign({}, model.specifiedScales[channel], { domain: domain });
+      }
+      // If channel is either X or Y then union them with X2 & Y2 if they exist
+      if (channel === 'x' && model.channelHasField('x2')) {
+          if (model.channelHasField('x')) {
+              return parseSingleChannelDomain(scaleType, domain, model, 'x').concat(parseSingleChannelDomain(scaleType, domain, model, 'x2'));
+          }
+          else {
+              return parseSingleChannelDomain(scaleType, domain, model, 'x2');
+          }
+      }
+      else if (channel === 'y' && model.channelHasField('y2')) {
+          if (model.channelHasField('y')) {
+              return parseSingleChannelDomain(scaleType, domain, model, 'y').concat(parseSingleChannelDomain(scaleType, domain, model, 'y2'));
+          }
+          else {
+              return parseSingleChannelDomain(scaleType, domain, model, 'y2');
+          }
+      }
+      return parseSingleChannelDomain(scaleType, domain, model, channel);
+  }
+  function mapDomainToDataSignal(domain, type, timeUnit) {
+      return domain.map(function (v) {
+          var data = valueExpr(v, { timeUnit: timeUnit, type: type });
+          return { signal: "{data: " + data + "}" };
+      });
+  }
+  function parseSingleChannelDomain(scaleType, domain, model, channel) {
+      var fieldDef = model.fieldDef(channel);
+      if (domain && domain !== 'unaggregated' && !isSelectionDomain(domain)) { // explicit value
+          var type = fieldDef.type, timeUnit = fieldDef.timeUnit;
+          if (type === 'temporal' || timeUnit) {
+              return mapDomainToDataSignal(domain, type, timeUnit);
+          }
+          return [domain];
+      }
+      var stack = model.stack;
+      if (stack && channel === stack.fieldChannel) {
+          if (stack.offset === 'normalize') {
+              return [[0, 1]];
+          }
+          var data = model.requestDataName(MAIN);
+          return [{
+                  data: data,
+                  field: model.vgField(channel, { suffix: 'start' })
+              }, {
+                  data: data,
+                  field: model.vgField(channel, { suffix: 'end' })
+              }];
+      }
+      var sort = isScaleChannel(channel) ? domainSort(model, channel, scaleType) : undefined;
+      if (domain === 'unaggregated') {
+          var data = model.requestDataName(MAIN);
+          var field$$1 = fieldDef.field;
+          return [{
+                  data: data,
+                  field: vgField({ field: field$$1, aggregate: 'min' })
+              }, {
+                  data: data,
+                  field: vgField({ field: field$$1, aggregate: 'max' })
+              }];
+      }
+      else if (fieldDef.bin) { // bin
+          if (isBinScale(scaleType)) {
+              var signal = model.getName(binToString(fieldDef.bin) + "_" + fieldDef.field + "_bins");
+              return [{ signal: "sequence(" + signal + ".start, " + signal + ".stop + " + signal + ".step, " + signal + ".step)" }];
+          }
+          if (hasDiscreteDomain(scaleType)) {
+              // ordinal bin scale takes domain from bin_range, ordered by bin start
+              // This is useful for both axis-based scale (x/y) and legend-based scale (other channels).
+              return [{
+                      // If sort by aggregation of a specified sort field, we need to use RAW table,
+                      // so we can aggregate values for the scale independently from the main aggregation.
+                      data: isBoolean$1(sort) ? model.requestDataName(MAIN) : model.requestDataName(RAW),
+                      // Use range if we added it and the scale does not support computing a range as a signal.
+                      field: model.vgField(channel, binRequiresRange(fieldDef, channel) ? { binSuffix: 'range' } : {}),
+                      // we have to use a sort object if sort = true to make the sort correct by bin start
+                      sort: sort === true || !isSortField(sort) ? {
+                          field: model.vgField(channel, {}),
+                          op: 'min' // min or max doesn't matter since we sort by the start of the bin range
+                      } : sort
+                  }];
+          }
+          else { // continuous scales
+              if (channel === 'x' || channel === 'y') {
+                  if (isBinParams(fieldDef.bin) && fieldDef.bin.extent) {
+                      return [fieldDef.bin.extent];
+                  }
+                  // X/Y position have to include start and end for non-ordinal scale
+                  var data = model.requestDataName(MAIN);
+                  return [{
+                          data: data,
+                          field: model.vgField(channel, {})
+                      }, {
+                          data: data,
+                          field: model.vgField(channel, { binSuffix: 'end' })
+                      }];
+              }
+              else {
+                  // TODO: use bin_mid
+                  return [{
+                          data: model.requestDataName(MAIN),
+                          field: model.vgField(channel, {})
+                      }];
+              }
+          }
+      }
+      else if (sort) {
+          return [{
+                  // If sort by aggregation of a specified sort field, we need to use RAW table,
+                  // so we can aggregate values for the scale independently from the main aggregation.
+                  data: isBoolean$1(sort) ? model.requestDataName(MAIN) : model.requestDataName(RAW),
+                  field: model.vgField(channel),
+                  sort: sort
+              }];
+      }
+      else {
+          return [{
+                  data: model.requestDataName(MAIN),
+                  field: model.vgField(channel)
+              }];
+      }
+  }
+  function domainSort(model, channel, scaleType) {
+      if (!hasDiscreteDomain(scaleType)) {
+          return undefined;
+      }
+      var fieldDef = model.fieldDef(channel);
+      var sort = fieldDef.sort;
+      // if the sort is specified with array, use the derived sort index field
+      if (isSortArray(sort)) {
+          return {
+              op: 'min',
+              field: sortArrayIndexField(fieldDef, channel),
+              order: 'ascending'
+          };
+      }
+      // Sorted based on an aggregate calculation over a specified sort field (only for ordinal scale)
+      if (isSortField(sort)) {
+          // flatten nested fields
+          return __assign({}, sort, (sort.field ? { field: replacePathInField(sort.field) } : {}));
+      }
+      if (sort === 'descending') {
+          return {
+              op: 'min',
+              field: model.vgField(channel),
+              order: 'descending'
+          };
+      }
+      if (contains(['ascending', undefined /* default =ascending*/], sort)) {
+          return true;
+      }
+      // sort == null
+      return undefined;
+  }
+  /**
+   * Determine if a scale can use unaggregated domain.
+   * @return {Boolean} Returns true if all of the following conditons applies:
+   * 1. `scale.domain` is `unaggregated`
+   * 2. Aggregation function is not `count` or `sum`
+   * 3. The scale is quantitative or time scale.
+   */
+  function canUseUnaggregatedDomain(fieldDef, scaleType) {
+      if (!fieldDef.aggregate) {
+          return {
+              valid: false,
+              reason: message.unaggregateDomainHasNoEffectForRawField(fieldDef)
+          };
+      }
+      if (!SHARED_DOMAIN_OP_INDEX[fieldDef.aggregate]) {
+          return {
+              valid: false,
+              reason: message.unaggregateDomainWithNonSharedDomainOp(fieldDef.aggregate)
+          };
+      }
+      if (fieldDef.type === 'quantitative') {
+          if (scaleType === 'log') {
+              return {
+                  valid: false,
+                  reason: message.unaggregatedDomainWithLogScale(fieldDef)
+              };
+          }
+      }
+      return { valid: true };
+  }
+  /**
+   * Converts an array of domains to a single Vega scale domain.
+   */
+  function mergeDomains(domains) {
+      var uniqueDomains = unique(domains.map(function (domain) {
+          // ignore sort property when computing the unique domains
+          if (isDataRefDomain(domain)) {
+              var _s = domain.sort, domainWithoutSort = __rest(domain, ["sort"]);
+              return domainWithoutSort;
+          }
+          return domain;
+      }), hash);
+      var sorts = unique(domains.map(function (d) {
+          if (isDataRefDomain(d)) {
+              var s = d.sort;
+              if (s !== undefined && !isBoolean$1(s)) {
+                  if (s.op === 'count') {
+                      // let's make sure that if op is count, we don't use a field
+                      delete s.field;
+                  }
+                  if (s.order === 'ascending') {
+                      // drop order: ascending as it is the default
+                      delete s.order;
+                  }
+              }
+              return s;
+          }
+          return undefined;
+      }).filter(function (s) { return s !== undefined; }), hash);
+      if (uniqueDomains.length === 1) {
+          var domain = domains[0];
+          if (isDataRefDomain(domain) && sorts.length > 0) {
+              var sort_1 = sorts[0];
+              if (sorts.length > 1) {
+                  warn(message.MORE_THAN_ONE_SORT);
+                  sort_1 = true;
+              }
+              return __assign({}, domain, { sort: sort_1 });
+          }
+          return domain;
+      }
+      // only keep simple sort properties that work with unioned domains
+      var simpleSorts = unique(sorts.map(function (s) {
+          if (s === true) {
+              return s;
+          }
+          if (s.op === 'count') {
+              return s;
+          }
+          warn(message.domainSortDropped(s));
+          return true;
+      }), hash);
+      var sort = undefined;
+      if (simpleSorts.length === 1) {
+          sort = simpleSorts[0];
+      }
+      else if (simpleSorts.length > 1) {
+          warn(message.MORE_THAN_ONE_SORT);
+          sort = true;
+      }
+      var allData = unique(domains.map(function (d) {
+          if (isDataRefDomain(d)) {
+              return d.data;
+          }
+          return null;
+      }), function (x) { return x; });
+      if (allData.length === 1 && allData[0] !== null) {
+          // create a union domain of different fields with a single data source
+          var domain = __assign({ data: allData[0], fields: uniqueDomains.map(function (d) { return d.field; }) }, (sort ? { sort: sort } : {}));
+          return domain;
+      }
+      return __assign({ fields: uniqueDomains }, (sort ? { sort: sort } : {}));
+  }
+  /**
+   * Return a field if a scale single field.
+   * Return `undefined` otherwise.
+   *
+   */
+  function getFieldFromDomain(domain) {
+      if (isDataRefDomain(domain) && isString(domain.field)) {
+          return domain.field;
+      }
+      else if (isDataRefUnionedDomain(domain)) {
+          var field$$1 = void 0;
+          for (var _i = 0, _a = domain.fields; _i < _a.length; _i++) {
+              var nonUnionDomain = _a[_i];
+              if (isDataRefDomain(nonUnionDomain) && isString(nonUnionDomain.field)) {
+                  if (!field$$1) {
+                      field$$1 = nonUnionDomain.field;
+                  }
+                  else if (field$$1 !== nonUnionDomain.field) {
+                      warn('Detected faceted independent scales that union domain of multiple fields from different data sources.  We will use the first field.  The result view size may be incorrect.');
+                      return field$$1;
+                  }
+              }
+          }
+          warn('Detected faceted independent scales that union domain of identical fields from different source detected.  We will assume that this is the same field from a different fork of the same data source.  However, if this is not case, the result view size maybe incorrect.');
+          return field$$1;
+      }
+      else if (isFieldRefUnionDomain(domain)) {
+          warn('Detected faceted independent scales that union domain of multiple fields from the same data source.  We will use the first field.  The result view size may be incorrect.');
+          var field$$1 = domain.fields[0];
+          return isString(field$$1) ? field$$1 : undefined;
+      }
+      return undefined;
+  }
+  function assembleDomain(model, channel) {
+      var scaleComponent = model.component.scales[channel];
+      var domains = scaleComponent.domains.map(function (domain) {
+          // Correct references to data as the original domain's data was determined
+          // in parseScale, which happens before parseData. Thus the original data
+          // reference can be incorrect.
+          if (isDataRefDomain(domain)) {
+              domain.data = model.lookupDataSource(domain.data);
+          }
+          return domain;
+      });
+      // domains is an array that has to be merged into a single vega domain
+      return mergeDomains(domains);
+  }
+
+  function assembleScales(model) {
+      if (isLayerModel(model) || isConcatModel(model) || isRepeatModel(model)) {
+          // For concat / layer / repeat, include scales of children too
+          return model.children.reduce(function (scales, child) {
+              return scales.concat(assembleScales(child));
+          }, assembleScalesForModel(model));
+      }
+      else {
+          // For facet, child scales would not be included in the parent's scope.
+          // For unit, there is no child.
+          return assembleScalesForModel(model);
+      }
+  }
+  function assembleScalesForModel(model) {
+      return keys(model.component.scales).reduce(function (scales, channel) {
+          var scaleComponent = model.component.scales[channel];
+          if (scaleComponent.merged) {
+              // Skipped merged scales
+              return scales;
+          }
+          var scale = scaleComponent.combine();
+          // need to separate const and non const object destruction
+          var domainRaw = scale.domainRaw, range = scale.range;
+          var name = scale.name, type = scale.type, _d = scale.domainRaw, _r = scale.range, otherScaleProps = __rest(scale, ["name", "type", "domainRaw", "range"]);
+          range = assembleScaleRange(range, name, model, channel);
+          // As scale parsing occurs before selection parsing, a temporary signal
+          // is used for domainRaw. Here, we detect if this temporary signal
+          // is set, and replace it with the correct domainRaw signal.
+          // For more information, see isRawSelectionDomain in selection.ts.
+          if (domainRaw && isRawSelectionDomain(domainRaw)) {
+              domainRaw = selectionScaleDomain(model, domainRaw);
+          }
+          scales.push(__assign({ name: name,
+              type: type, domain: assembleDomain(model, channel) }, (domainRaw ? { domainRaw: domainRaw } : {}), { range: range }, otherScaleProps));
+          return scales;
+      }, []);
+  }
+  function assembleScaleRange(scaleRange, scaleName, model, channel) {
+      // add signals to x/y range
+      if (channel === 'x' || channel === 'y') {
+          if (isVgRangeStep(scaleRange)) {
+              // For x/y range step, use a signal created in layout assemble instead of a constant range step.
+              return {
+                  step: { signal: scaleName + '_step' }
+              };
+          }
+          else if (isArray(scaleRange) && scaleRange.length === 2) {
+              var r0 = scaleRange[0];
+              var r1 = scaleRange[1];
+              if (r0 === 0 && isVgSignalRef(r1)) {
+                  // Replace width signal just in case it is renamed.
+                  return [0, { signal: model.getSizeName(r1.signal) }];
+              }
+              else if (isVgSignalRef(r0) && r1 === 0) {
+                  // Replace height signal just in case it is renamed.
+                  return [{ signal: model.getSizeName(r0.signal) }, 0];
+              }
+          }
+      }
+      return scaleRange;
+  }
+
+  var ScaleComponent = /** @class */ (function (_super) {
+      __extends(ScaleComponent, _super);
+      function ScaleComponent(name, typeWithExplicit) {
+          var _this = _super.call(this, {}, // no initial explicit property
+          { name: name } // name as initial implicit property
+          ) || this;
+          _this.merged = false;
+          _this.domains = [];
+          _this.setWithExplicit('type', typeWithExplicit);
+          return _this;
+      }
+      return ScaleComponent;
+  }(Split));
+
+  var RANGE_PROPERTIES = ['range', 'rangeStep', 'scheme'];
+  function parseScaleRange(model) {
+      if (isUnitModel(model)) {
+          parseUnitScaleRange(model);
+      }
+      else {
+          parseNonUnitScaleProperty(model, 'range');
+      }
+  }
+  function parseUnitScaleRange(model) {
+      var localScaleComponents = model.component.scales;
+      // use SCALE_CHANNELS instead of scales[channel] to ensure that x, y come first!
+      SCALE_CHANNELS.forEach(function (channel) {
+          var localScaleCmpt = localScaleComponents[channel];
+          if (!localScaleCmpt) {
+              return;
+          }
+          var mergedScaleCmpt = model.getScaleComponent(channel);
+          var specifiedScale = model.specifiedScales[channel];
+          var fieldDef = model.fieldDef(channel);
+          // Read if there is a specified width/height
+          var sizeType = channel === 'x' ? 'width' : channel === 'y' ? 'height' : undefined;
+          var sizeSpecified = sizeType ? !!model.component.layoutSize.get(sizeType) : undefined;
+          var scaleType = mergedScaleCmpt.get('type');
+          // if autosize is fit, size cannot be data driven
+          var rangeStep = contains(['point', 'band'], scaleType) || !!specifiedScale.rangeStep;
+          if (sizeType && model.fit && !sizeSpecified && rangeStep) {
+              warn(message.CANNOT_FIX_RANGE_STEP_WITH_FIT);
+              sizeSpecified = true;
+          }
+          var xyRangeSteps = getXYRangeStep(model);
+          var rangeWithExplicit = parseRangeForChannel(channel, scaleType, fieldDef.type, specifiedScale, model.config, localScaleCmpt.get('zero'), model.mark, sizeSpecified, model.getName(sizeType), xyRangeSteps);
+          localScaleCmpt.setWithExplicit('range', rangeWithExplicit);
+      });
+  }
+  function getXYRangeStep(model) {
+      var xyRangeSteps = [];
+      var xScale = model.getScaleComponent('x');
+      var xRange = xScale && xScale.get('range');
+      if (xRange && isVgRangeStep(xRange) && isNumber(xRange.step)) {
+          xyRangeSteps.push(xRange.step);
+      }
+      var yScale = model.getScaleComponent('y');
+      var yRange = yScale && yScale.get('range');
+      if (yRange && isVgRangeStep(yRange) && isNumber(yRange.step)) {
+          xyRangeSteps.push(yRange.step);
+      }
+      return xyRangeSteps;
+  }
+  /**
+   * Return mixins that includes one of the range properties (range, rangeStep, scheme).
+   */
+  function parseRangeForChannel(channel, scaleType, type, specifiedScale, config, zero$$1, mark, sizeSpecified, sizeSignal, xyRangeSteps) {
+      var noRangeStep = sizeSpecified || specifiedScale.rangeStep === null;
+      // Check if any of the range properties is specified.
+      // If so, check if it is compatible and make sure that we only output one of the properties
+      for (var _i = 0, RANGE_PROPERTIES_1 = RANGE_PROPERTIES; _i < RANGE_PROPERTIES_1.length; _i++) {
+          var property = RANGE_PROPERTIES_1[_i];
+          if (specifiedScale[property] !== undefined) {
+              var supportedByScaleType = scaleTypeSupportProperty(scaleType, property);
+              var channelIncompatability = channelScalePropertyIncompatability(channel, property);
+              if (!supportedByScaleType) {
+                  warn(message.scalePropertyNotWorkWithScaleType(scaleType, property, channel));
+              }
+              else if (channelIncompatability) { // channel
+                  warn(channelIncompatability);
+              }
+              else {
+                  switch (property) {
+                      case 'range':
+                          return makeExplicit(specifiedScale[property]);
+                      case 'scheme':
+                          return makeExplicit(parseScheme(specifiedScale[property]));
+                      case 'rangeStep':
+                          var rangeStep = specifiedScale[property];
+                          if (rangeStep !== null) {
+                              if (!sizeSpecified) {
+                                  return makeExplicit({ step: rangeStep });
+                              }
+                              else {
+                                  // If top-level size is specified, we ignore specified rangeStep.
+                                  warn(message.rangeStepDropped(channel));
+                              }
+                          }
+                  }
+              }
+          }
+      }
+      return makeImplicit(defaultRange(channel, scaleType, type, config, zero$$1, mark, sizeSignal, xyRangeSteps, noRangeStep));
+  }
+  function parseScheme(scheme) {
+      if (isExtendedScheme(scheme)) {
+          var r = { scheme: scheme.name };
+          if (scheme.count) {
+              r.count = scheme.count;
+          }
+          if (scheme.extent) {
+              r.extent = scheme.extent;
+          }
+          return r;
+      }
+      return { scheme: scheme };
+  }
+  function defaultRange(channel, scaleType, type, config, zero$$1, mark, sizeSignal, xyRangeSteps, noRangeStep) {
+      switch (channel) {
+          case X:
+          case Y:
+              if (contains(['point', 'band'], scaleType) && !noRangeStep) {
+                  if (channel === X && mark === 'text') {
+                      if (config.scale.textXRangeStep) {
+                          return { step: config.scale.textXRangeStep };
+                      }
+                  }
+                  else {
+                      if (config.scale.rangeStep) {
+                          return { step: config.scale.rangeStep };
+                      }
+                  }
+              }
+              // If range step is null, use zero to width or height.
+              // Note that these range signals are temporary
+              // as they can be merged and renamed.
+              // (We do not have the right size signal here since parseLayoutSize() happens after parseScale().)
+              // We will later replace these temporary names with
+              // the final name in assembleScaleRange()
+              if (channel === Y && hasContinuousDomain(scaleType)) {
+                  // For y continuous scale, we have to start from the height as the bottom part has the max value.
+                  return [{ signal: sizeSignal }, 0];
+              }
+              else {
+                  return [0, { signal: sizeSignal }];
+              }
+          case SIZE:
+              // TODO: support custom rangeMin, rangeMax
+              var rangeMin = sizeRangeMin(mark, zero$$1, config);
+              var rangeMax = sizeRangeMax(mark, xyRangeSteps, config);
+              return [rangeMin, rangeMax];
+          case SHAPE:
+              return 'symbol';
+          case COLOR:
+          case FILL:
+          case STROKE:
+              if (scaleType === 'ordinal') {
+                  // Only nominal data uses ordinal scale by default
+                  return type === 'nominal' ? 'category' : 'ordinal';
+              }
+              return mark === 'rect' || mark === 'geoshape' ? 'heatmap' : 'ramp';
+          case OPACITY:
+              // TODO: support custom rangeMin, rangeMax
+              return [config.scale.minOpacity, config.scale.maxOpacity];
+      }
+      /* istanbul ignore next: should never reach here */
+      throw new Error("Scale range undefined for channel " + channel);
+  }
+  function sizeRangeMin(mark, zero$$1, config) {
+      if (zero$$1) {
+          return 0;
+      }
+      switch (mark) {
+          case 'bar':
+          case 'tick':
+              return config.scale.minBandSize;
+          case 'line':
+          case 'trail':
+          case 'rule':
+              return config.scale.minStrokeWidth;
+          case 'text':
+              return config.scale.minFontSize;
+          case 'point':
+          case 'square':
+          case 'circle':
+              return config.scale.minSize;
+      }
+      /* istanbul ignore next: should never reach here */
+      // sizeRangeMin not implemented for the mark
+      throw new Error(message.incompatibleChannel('size', mark));
+  }
+  function sizeRangeMax(mark, xyRangeSteps, config) {
+      var scaleConfig = config.scale;
+      switch (mark) {
+          case 'bar':
+          case 'tick':
+              if (config.scale.maxBandSize !== undefined) {
+                  return config.scale.maxBandSize;
+              }
+              return minXYRangeStep(xyRangeSteps, config.scale) - 1;
+          case 'line':
+          case 'trail':
+          case 'rule':
+              return config.scale.maxStrokeWidth;
+          case 'text':
+              return config.scale.maxFontSize;
+          case 'point':
+          case 'square':
+          case 'circle':
+              if (config.scale.maxSize) {
+                  return config.scale.maxSize;
+              }
+              // FIXME this case totally should be refactored
+              var pointStep = minXYRangeStep(xyRangeSteps, scaleConfig);
+              return (pointStep - 2) * (pointStep - 2);
+      }
+      /* istanbul ignore next: should never reach here */
+      // sizeRangeMax not implemented for the mark
+      throw new Error(message.incompatibleChannel('size', mark));
+  }
+  /**
+   * @returns {number} Range step of x or y or minimum between the two if both are ordinal scale.
+   */
+  function minXYRangeStep(xyRangeSteps, scaleConfig) {
+      if (xyRangeSteps.length > 0) {
+          return Math.min.apply(null, xyRangeSteps);
+      }
+      if (scaleConfig.rangeStep) {
+          return scaleConfig.rangeStep;
+      }
+      return 21; // FIXME: re-evaluate the default value here.
+  }
+
+  function parseScaleProperty(model, property) {
+      if (isUnitModel(model)) {
+          parseUnitScaleProperty(model, property);
+      }
+      else {
+          parseNonUnitScaleProperty(model, property);
+      }
+  }
+  function parseUnitScaleProperty(model, property) {
+      var localScaleComponents = model.component.scales;
+      keys(localScaleComponents).forEach(function (channel) {
+          var specifiedScale = model.specifiedScales[channel];
+          var localScaleCmpt = localScaleComponents[channel];
+          var mergedScaleCmpt = model.getScaleComponent(channel);
+          var fieldDef = model.fieldDef(channel);
+          var config = model.config;
+          var specifiedValue = specifiedScale[property];
+          var sType = mergedScaleCmpt.get('type');
+          var supportedByScaleType = scaleTypeSupportProperty(sType, property);
+          var channelIncompatability = channelScalePropertyIncompatability(channel, property);
+          if (specifiedValue !== undefined) {
+              // If there is a specified value, check if it is compatible with scale type and channel
+              if (!supportedByScaleType) {
+                  warn(message.scalePropertyNotWorkWithScaleType(sType, property, channel));
+              }
+              else if (channelIncompatability) { // channel
+                  warn(channelIncompatability);
+              }
+          }
+          if (supportedByScaleType && channelIncompatability === undefined) {
+              if (specifiedValue !== undefined) {
+                  // copyKeyFromObject ensure type safety
+                  localScaleCmpt.copyKeyFromObject(property, specifiedScale);
+              }
+              else {
+                  var value = getDefaultValue(property, channel, fieldDef, mergedScaleCmpt.get('type'), mergedScaleCmpt.get('padding'), mergedScaleCmpt.get('paddingInner'), specifiedScale.domain, model.markDef, config);
+                  if (value !== undefined) {
+                      localScaleCmpt.set(property, value, false);
+                  }
+              }
+          }
+      });
+  }
+  // Note: This method is used in Voyager.
+  function getDefaultValue(property, channel, fieldDef, scaleType, scalePadding, scalePaddingInner, specifiedDomain, markDef, config) {
+      var scaleConfig = config.scale;
+      // If we have default rule-base, determine default value first
+      switch (property) {
+          case 'nice':
+              return nice(scaleType, channel, fieldDef);
+          case 'padding':
+              return padding(channel, scaleType, scaleConfig, fieldDef, markDef, config.bar);
+          case 'paddingInner':
+              return paddingInner(scalePadding, channel, scaleConfig);
+          case 'paddingOuter':
+              return paddingOuter(scalePadding, channel, scaleType, scalePaddingInner, scaleConfig);
+          case 'reverse':
+              return reverse(scaleType, fieldDef.sort);
+          case 'zero':
+              return zero$1(channel, fieldDef, specifiedDomain, markDef);
+      }
+      // Otherwise, use scale config
+      return scaleConfig[property];
+  }
+  function parseNonUnitScaleProperty(model, property) {
+      var localScaleComponents = model.component.scales;
+      for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+          var child = _a[_i];
+          if (property === 'range') {
+              parseScaleRange(child);
+          }
+          else {
+              parseScaleProperty(child, property);
+          }
+      }
+      keys(localScaleComponents).forEach(function (channel) {
+          var valueWithExplicit;
+          for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              var childComponent = child.component.scales[channel];
+              if (childComponent) {
+                  var childValueWithExplicit = childComponent.getWithExplicit(property);
+                  valueWithExplicit = mergeValuesWithExplicit(valueWithExplicit, childValueWithExplicit, property, 'scale', tieBreakByComparing(function (v1, v2) {
+                      switch (property) {
+                          case 'range':
+                              // For range step, prefer larger step
+                              if (v1.step && v2.step) {
+                                  return v1.step - v2.step;
+                              }
+                              return 0;
+                          // TODO: precedence rule for other properties
+                      }
+                      return 0;
+                  }));
+              }
+          }
+          localScaleComponents[channel].setWithExplicit(property, valueWithExplicit);
+      });
+  }
+  function nice(scaleType, channel, fieldDef) {
+      if (fieldDef.bin || contains([ScaleType.TIME, ScaleType.UTC], scaleType)) {
+          return undefined;
+      }
+      return contains([X, Y], channel); // return true for quantitative X/Y unless binned
+  }
+  function padding(channel, scaleType, scaleConfig, fieldDef, markDef, barConfig) {
+      if (contains([X, Y], channel)) {
+          if (isContinuousToContinuous(scaleType)) {
+              if (scaleConfig.continuousPadding !== undefined) {
+                  return scaleConfig.continuousPadding;
+              }
+              var type = markDef.type, orient = markDef.orient;
+              if (type === 'bar' && !fieldDef.bin) {
+                  if ((orient === 'vertical' && channel === 'x') ||
+                      (orient === 'horizontal' && channel === 'y')) {
+                      return barConfig.continuousBandSize;
+                  }
+              }
+          }
+          if (scaleType === ScaleType.POINT) {
+              return scaleConfig.pointPadding;
+          }
+      }
+      return undefined;
+  }
+  function paddingInner(paddingValue, channel, scaleConfig) {
+      if (paddingValue !== undefined) {
+          // If user has already manually specified "padding", no need to add default paddingInner.
+          return undefined;
+      }
+      if (contains([X, Y], channel)) {
+          // Padding is only set for X and Y by default.
+          // Basically it doesn't make sense to add padding for color and size.
+          // paddingOuter would only be called if it's a band scale, just return the default for bandScale.
+          return scaleConfig.bandPaddingInner;
+      }
+      return undefined;
+  }
+  function paddingOuter(paddingValue, channel, scaleType, paddingInnerValue, scaleConfig) {
+      if (paddingValue !== undefined) {
+          // If user has already manually specified "padding", no need to add default paddingOuter.
+          return undefined;
+      }
+      if (contains([X, Y], channel)) {
+          // Padding is only set for X and Y by default.
+          // Basically it doesn't make sense to add padding for color and size.
+          if (scaleType === ScaleType.BAND) {
+              if (scaleConfig.bandPaddingOuter !== undefined) {
+                  return scaleConfig.bandPaddingOuter;
+              }
+              /* By default, paddingOuter is paddingInner / 2. The reason is that
+                  size (width/height) = step * (cardinality - paddingInner + 2 * paddingOuter).
+                  and we want the width/height to be integer by default.
+                  Note that step (by default) and cardinality are integers.) */
+              return paddingInnerValue / 2;
+          }
+      }
+      return undefined;
+  }
+  function reverse(scaleType, sort) {
+      if (hasContinuousDomain(scaleType) && sort === 'descending') {
+          // For continuous domain scales, Vega does not support domain sort.
+          // Thus, we reverse range instead if sort is descending
+          return true;
+      }
+      return undefined;
+  }
+  function zero$1(channel, fieldDef, specifiedScale, markDef) {
+      // If users explicitly provide a domain range, we should not augment zero as that will be unexpected.
+      var hasCustomDomain = !!specifiedScale && specifiedScale !== 'unaggregated';
+      if (hasCustomDomain) {
+          return false;
+      }
+      // If there is no custom domain, return true only for the following cases:
+      // 1) using quantitative field with size
+      // While this can be either ratio or interval fields, our assumption is that
+      // ratio are more common.
+      if (channel === 'size' && fieldDef.type === 'quantitative') {
+          return true;
+      }
+      // 2) non-binned, quantitative x-scale or y-scale
+      // (For binning, we should not include zero by default because binning are calculated without zero.)
+      if (!fieldDef.bin && contains([X, Y], channel)) {
+          var orient = markDef.orient, type = markDef.type;
+          if (contains(['bar', 'area', 'line', 'trail'], type)) {
+              if ((orient === 'horizontal' && channel === 'y') ||
+                  (orient === 'vertical' && channel === 'x')) {
+                  return false;
+              }
+          }
+          return true;
+      }
+      return false;
+  }
+
+  /**
+   * Determine if there is a specified scale type and if it is appropriate,
+   * or determine default type if type is unspecified or inappropriate.
+   */
+  // NOTE: CompassQL uses this method.
+  function scaleType(specifiedType, channel, fieldDef, mark, scaleConfig) {
+      var defaultScaleType = defaultType$1(channel, fieldDef, mark, scaleConfig);
+      if (!isScaleChannel(channel)) {
+          // There is no scale for these channels
+          return null;
+      }
+      if (specifiedType !== undefined) {
+          // Check if explicitly specified scale type is supported by the channel
+          if (!channelSupportScaleType(channel, specifiedType)) {
+              warn(message.scaleTypeNotWorkWithChannel(channel, specifiedType, defaultScaleType));
+              return defaultScaleType;
+          }
+          // Check if explicitly specified scale type is supported by the data type
+          if (!scaleTypeSupportDataType(specifiedType, fieldDef.type, fieldDef.bin)) {
+              warn(message.scaleTypeNotWorkWithFieldDef(specifiedType, defaultScaleType));
+              return defaultScaleType;
+          }
+          return specifiedType;
+      }
+      return defaultScaleType;
+  }
+  /**
+   * Determine appropriate default scale type.
+   */
+  // NOTE: Voyager uses this method.
+  function defaultType$1(channel, fieldDef, mark, scaleConfig) {
+      switch (fieldDef.type) {
+          case 'nominal':
+          case 'ordinal':
+              if (isColorChannel(channel) || rangeType(channel) === 'discrete') {
+                  if (channel === 'shape' && fieldDef.type === 'ordinal') {
+                      warn(message.discreteChannelCannotEncode(channel, 'ordinal'));
+                  }
+                  return 'ordinal';
+              }
+              if (contains(['x', 'y'], channel)) {
+                  if (contains(['rect', 'bar', 'rule'], mark)) {
+                      // The rect/bar mark should fit into a band.
+                      // For rule, using band scale to make rule align with axis ticks better https://github.com/vega/vega-lite/issues/3429
+                      return 'band';
+                  }
+                  if (mark === 'bar') {
+                      return 'band';
+                  }
+              }
+              // Otherwise, use ordinal point scale so we can easily get center positions of the marks.
+              return 'point';
+          case 'temporal':
+              if (isColorChannel(channel)) {
+                  return 'sequential';
+              }
+              else if (rangeType(channel) === 'discrete') {
+                  warn(message.discreteChannelCannotEncode(channel, 'temporal'));
+                  // TODO: consider using quantize (equivalent to binning) once we have it
+                  return 'ordinal';
+              }
+              return 'time';
+          case 'quantitative':
+              if (isColorChannel(channel)) {
+                  if (fieldDef.bin) {
+                      return 'bin-ordinal';
+                  }
+                  // Use `sequential` as the default color scale for continuous data
+                  // since it supports both array range and scheme range.
+                  return 'sequential';
+              }
+              else if (rangeType(channel) === 'discrete') {
+                  warn(message.discreteChannelCannotEncode(channel, 'quantitative'));
+                  // TODO: consider using quantize (equivalent to binning) once we have it
+                  return 'ordinal';
+              }
+              // x and y use a linear scale because selections don't work with bin scales.
+              // Binned scales apply discretization but pan/zoom apply transformations to a [min, max] extent domain.
+              if (fieldDef.bin && channel !== 'x' && channel !== 'y') {
+                  return 'bin-linear';
+              }
+              return 'linear';
+          case 'latitude':
+          case 'longitude':
+          case 'geojson':
+              return undefined;
+      }
+      /* istanbul ignore next: should never reach this */
+      throw new Error(message.invalidFieldType(fieldDef.type));
+  }
+
+  function parseScale(model) {
+      parseScaleCore(model);
+      parseScaleDomain(model);
+      for (var _i = 0, NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES_1 = NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES; _i < NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES_1.length; _i++) {
+          var prop = NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES_1[_i];
+          parseScaleProperty(model, prop);
+      }
+      // range depends on zero
+      parseScaleRange(model);
+  }
+  function parseScaleCore(model) {
+      if (isUnitModel(model)) {
+          model.component.scales = parseUnitScaleCore(model);
+      }
+      else {
+          model.component.scales = parseNonUnitScaleCore(model);
+      }
+  }
+  /**
+   * Parse scales for all channels of a model.
+   */
+  function parseUnitScaleCore(model) {
+      var encoding = model.encoding, config = model.config, mark = model.mark;
+      return SCALE_CHANNELS.reduce(function (scaleComponents, channel) {
+          var fieldDef;
+          var specifiedScale = undefined;
+          var channelDef = encoding[channel];
+          // Don't generate scale for shape of geoshape
+          if (isFieldDef(channelDef) && mark === GEOSHAPE &&
+              channel === SHAPE && channelDef.type === GEOJSON) {
+              return scaleComponents;
+          }
+          if (isFieldDef(channelDef)) {
+              fieldDef = channelDef;
+              specifiedScale = channelDef.scale;
+          }
+          else if (hasConditionalFieldDef(channelDef)) {
+              fieldDef = channelDef.condition;
+              specifiedScale = channelDef.condition['scale']; // We use ['scale'] since we know that channel here has scale for sure
+          }
+          else if (channel === X) {
+              fieldDef = getFieldDef(encoding.x2);
+          }
+          else if (channel === Y) {
+              fieldDef = getFieldDef(encoding.y2);
+          }
+          if (fieldDef && specifiedScale !== null && specifiedScale !== false) {
+              specifiedScale = specifiedScale || {};
+              var specifiedScaleType = specifiedScale.type;
+              var sType = scaleType(specifiedScale.type, channel, fieldDef, mark, config.scale);
+              scaleComponents[channel] = new ScaleComponent(model.scaleName(channel + '', true), { value: sType, explicit: specifiedScaleType === sType });
+          }
+          return scaleComponents;
+      }, {});
+  }
+  var scaleTypeTieBreaker = tieBreakByComparing(function (st1, st2) { return (scaleTypePrecedence(st1) - scaleTypePrecedence(st2)); });
+  function parseNonUnitScaleCore(model) {
+      var scaleComponents = model.component.scales = {};
+      var scaleTypeWithExplicitIndex = {};
+      var resolve = model.component.resolve;
+      var _loop_1 = function (child) {
+          parseScaleCore(child);
+          // Instead of always merging right away -- check if it is compatible to merge first!
+          keys(child.component.scales).forEach(function (channel) {
+              // if resolve is undefined, set default first
+              resolve.scale[channel] = resolve.scale[channel] || defaultScaleResolve(channel, model);
+              if (resolve.scale[channel] === 'shared') {
+                  var explicitScaleType = scaleTypeWithExplicitIndex[channel];
+                  var childScaleType = child.component.scales[channel].getWithExplicit('type');
+                  if (explicitScaleType) {
+                      if (scaleCompatible(explicitScaleType.value, childScaleType.value)) {
+                          // merge scale component if type are compatible
+                          scaleTypeWithExplicitIndex[channel] = mergeValuesWithExplicit(explicitScaleType, childScaleType, 'type', 'scale', scaleTypeTieBreaker);
+                      }
+                      else {
+                          // Otherwise, update conflicting channel to be independent
+                          resolve.scale[channel] = 'independent';
+                          // Remove from the index so they don't get merged
+                          delete scaleTypeWithExplicitIndex[channel];
+                      }
+                  }
+                  else {
+                      scaleTypeWithExplicitIndex[channel] = childScaleType;
+                  }
+              }
+          });
+      };
+      // Parse each child scale and determine if a particular channel can be merged.
+      for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+          var child = _a[_i];
+          _loop_1(child);
+      }
+      // Merge each channel listed in the index
+      keys(scaleTypeWithExplicitIndex).forEach(function (channel) {
+          // Create new merged scale component
+          var name = model.scaleName(channel, true);
+          var typeWithExplicit = scaleTypeWithExplicitIndex[channel];
+          scaleComponents[channel] = new ScaleComponent(name, typeWithExplicit);
+          // rename each child and mark them as merged
+          for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              var childScale = child.component.scales[channel];
+              if (childScale) {
+                  child.renameScale(childScale.get('name'), name);
+                  childScale.merged = true;
+              }
+          }
+      });
+      return scaleComponents;
+  }
+
+  var NameMap = /** @class */ (function () {
+      function NameMap() {
+          this.nameMap = {};
+      }
+      NameMap.prototype.rename = function (oldName, newName) {
+          this.nameMap[oldName] = newName;
+      };
+      NameMap.prototype.has = function (name) {
+          return this.nameMap[name] !== undefined;
+      };
+      NameMap.prototype.get = function (name) {
+          // If the name appears in the _nameMap, we need to read its new name.
+          // We have to loop over the dict just in case the new name also gets renamed.
+          while (this.nameMap[name] && name !== this.nameMap[name]) {
+              name = this.nameMap[name];
+          }
+          return name;
+      };
+      return NameMap;
+  }());
+  /*
+    We use type guards instead of `instanceof` as `instanceof` makes
+    different parts of the compiler depend on the actual implementation of
+    the model classes, which in turn depend on different parts of the compiler.
+    Thus, `instanceof` leads to circular dependency problems.
+
+    On the other hand, type guards only make different parts of the compiler
+    depend on the type of the model classes, but not the actual implementation.
+  */
+  function isUnitModel(model) {
+      return model && model.type === 'unit';
+  }
+  function isFacetModel(model) {
+      return model && model.type === 'facet';
+  }
+  function isRepeatModel(model) {
+      return model && model.type === 'repeat';
+  }
+  function isConcatModel(model) {
+      return model && model.type === 'concat';
+  }
+  function isLayerModel(model) {
+      return model && model.type === 'layer';
+  }
+  var Model = /** @class */ (function () {
+      function Model(spec, parent, parentGivenName, config, repeater, resolve) {
+          var _this = this;
+          this.children = [];
+          /**
+           * Corrects the data references in marks after assemble.
+           */
+          this.correctDataNames = function (mark) {
+              // TODO: make this correct
+              // for normal data references
+              if (mark.from && mark.from.data) {
+                  mark.from.data = _this.lookupDataSource(mark.from.data);
+              }
+              // for access to facet data
+              if (mark.from && mark.from.facet && mark.from.facet.data) {
+                  mark.from.facet.data = _this.lookupDataSource(mark.from.facet.data);
+              }
+              return mark;
+          };
+          this.parent = parent;
+          this.config = config;
+          this.repeater = repeater;
+          // If name is not provided, always use parent's givenName to avoid name conflicts.
+          this.name = spec.name || parentGivenName;
+          this.title = isString(spec.title) ? { text: spec.title } : spec.title;
+          // Shared name maps
+          this.scaleNameMap = parent ? parent.scaleNameMap : new NameMap();
+          this.projectionNameMap = parent ? parent.projectionNameMap : new NameMap();
+          this.layoutSizeNameMap = parent ? parent.layoutSizeNameMap : new NameMap();
+          this.data = spec.data;
+          this.description = spec.description;
+          this.transforms = normalizeTransform(spec.transform || []);
+          this.layout = isUnitSpec(spec) || isLayerSpec(spec) ? undefined : extractCompositionLayout(spec);
+          this.component = {
+              data: {
+                  sources: parent ? parent.component.data.sources : {},
+                  outputNodes: parent ? parent.component.data.outputNodes : {},
+                  outputNodeRefCounts: parent ? parent.component.data.outputNodeRefCounts : {},
+                  // data is faceted if the spec is a facet spec or the parent has faceted data and no data is defined
+                  isFaceted: isFacetSpec(spec) || (parent && parent.component.data.isFaceted && !spec.data)
+              },
+              layoutSize: new Split(),
+              layoutHeaders: { row: {}, column: {} },
+              mark: null,
+              resolve: __assign({ scale: {}, axis: {}, legend: {} }, (resolve || {})),
+              selection: null,
+              scales: null,
+              projection: null,
+              axes: {},
+              legends: {},
+          };
+      }
+      Object.defineProperty(Model.prototype, "width", {
+          get: function () {
+              return this.getSizeSignalRef('width');
+          },
+          enumerable: true,
+          configurable: true
+      });
+      Object.defineProperty(Model.prototype, "height", {
+          get: function () {
+              return this.getSizeSignalRef('height');
+          },
+          enumerable: true,
+          configurable: true
+      });
+      Model.prototype.initSize = function (size) {
+          var width = size.width, height = size.height;
+          if (width) {
+              this.component.layoutSize.set('width', width, true);
+          }
+          if (height) {
+              this.component.layoutSize.set('height', height, true);
+          }
+      };
+      Model.prototype.parse = function () {
+          this.parseScale();
+          this.parseLayoutSize(); // depends on scale
+          this.renameTopLevelLayoutSize();
+          this.parseSelection();
+          this.parseProjection();
+          this.parseData(); // (pathorder) depends on markDef; selection filters depend on parsed selections; depends on projection because some transforms require the finalized projection name.
+          this.parseAxisAndHeader(); // depends on scale and layout size
+          this.parseLegend(); // depends on scale, markDef
+          this.parseMarkGroup(); // depends on data name, scale, layout size, axisGroup, and children's scale, axis, legend and mark.
+      };
+      Model.prototype.parseScale = function () {
+          parseScale(this);
+      };
+      Model.prototype.parseProjection = function () {
+          parseProjection(this);
+      };
+      /**
+       * Rename top-level spec's size to be just width / height, ignoring model name.
+       * This essentially merges the top-level spec's width/height signals with the width/height signals
+       * to help us reduce redundant signals declaration.
+       */
+      Model.prototype.renameTopLevelLayoutSize = function () {
+          if (this.getName('width') !== 'width') {
+              this.renameLayoutSize(this.getName('width'), 'width');
+          }
+          if (this.getName('height') !== 'height') {
+              this.renameLayoutSize(this.getName('height'), 'height');
+          }
+      };
+      Model.prototype.parseLegend = function () {
+          parseLegend(this);
+      };
+      Model.prototype.assembleGroupStyle = function () {
+          if (this.type === 'unit' || this.type === 'layer') {
+              return 'cell';
+          }
+          return undefined;
+      };
+      Model.prototype.assembleLayoutSize = function () {
+          if (this.type === 'unit' || this.type === 'layer') {
+              return {
+                  width: this.getSizeSignalRef('width'),
+                  height: this.getSizeSignalRef('height')
+              };
+          }
+          return undefined;
+      };
+      Model.prototype.assembleLayout = function () {
+          if (!this.layout) {
+              return undefined;
+          }
+          var _a = this.layout, align = _a.align, bounds = _a.bounds, center = _a.center, _b = _a.spacing, spacing = _b === void 0 ? {} : _b;
+          return __assign({ padding: isNumber(spacing) ? spacing : {
+                  row: spacing.row || 10,
+                  column: spacing.column || 10
+              } }, this.assembleDefaultLayout(), (align ? { align: align } : {}), (bounds ? { bounds: bounds } : {}), (center ? { center: center } : {}));
+      };
+      Model.prototype.assembleDefaultLayout = function () {
+          return {};
+      };
+      Model.prototype.assembleHeaderMarks = function () {
+          var layoutHeaders = this.component.layoutHeaders;
+          var headerMarks = [];
+          for (var _i = 0, HEADER_CHANNELS_1 = HEADER_CHANNELS; _i < HEADER_CHANNELS_1.length; _i++) {
+              var channel = HEADER_CHANNELS_1[_i];
+              if (layoutHeaders[channel].title) {
+                  headerMarks.push(getTitleGroup(this, channel));
+              }
+          }
+          for (var _a = 0, HEADER_CHANNELS_2 = HEADER_CHANNELS; _a < HEADER_CHANNELS_2.length; _a++) {
+              var channel = HEADER_CHANNELS_2[_a];
+              headerMarks = headerMarks.concat(getHeaderGroups(this, channel));
+          }
+          return headerMarks;
+      };
+      Model.prototype.assembleAxes = function () {
+          return assembleAxes(this.component.axes, this.config);
+      };
+      Model.prototype.assembleLegends = function () {
+          return assembleLegends(this);
+      };
+      Model.prototype.assembleProjections = function () {
+          return assembleProjections(this);
+      };
+      Model.prototype.assembleTitle = function () {
+          var title$$1 = __assign({}, extractTitleConfig(this.config.title).nonMark, this.title);
+          if (title$$1.text) {
+              if (!contains(['unit', 'layer'], this.type)) {
+                  // As described in https://github.com/vega/vega-lite/issues/2875:
+                  // Due to vega/vega#960 (comment), we only support title's anchor for unit and layered spec for now.
+                  if (title$$1.anchor && title$$1.anchor !== 'start') {
+                      warn(message.cannotSetTitleAnchor(this.type));
+                  }
+                  title$$1.anchor = 'start';
+              }
+              return keys(title$$1).length > 0 ? title$$1 : undefined;
+          }
+          return undefined;
+      };
+      /**
+       * Assemble the mark group for this model.  We accept optional `signals` so that we can include concat top-level signals with the top-level model's local signals.
+       */
+      Model.prototype.assembleGroup = function (signals) {
+          if (signals === void 0) { signals = []; }
+          var group = {};
+          signals = signals.concat(this.assembleSelectionSignals());
+          if (signals.length > 0) {
+              group.signals = signals;
+          }
+          var layout = this.assembleLayout();
+          if (layout) {
+              group.layout = layout;
+          }
+          group.marks = [].concat(this.assembleHeaderMarks(), this.assembleMarks());
+          // Only include scales if this spec is top-level or if parent is facet.
+          // (Otherwise, it will be merged with upper-level's scope.)
+          var scales = (!this.parent || isFacetModel(this.parent)) ? assembleScales(this) : [];
+          if (scales.length > 0) {
+              group.scales = scales;
+          }
+          var axes = this.assembleAxes();
+          if (axes.length > 0) {
+              group.axes = axes;
+          }
+          var legends = this.assembleLegends();
+          if (legends.length > 0) {
+              group.legends = legends;
+          }
+          return group;
+      };
+      Model.prototype.hasDescendantWithFieldOnChannel = function (channel) {
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              if (isUnitModel(child)) {
+                  if (child.channelHasField(channel)) {
+                      return true;
+                  }
+              }
+              else {
+                  if (child.hasDescendantWithFieldOnChannel(channel)) {
+                      return true;
+                  }
+              }
+          }
+          return false;
+      };
+      Model.prototype.getName = function (text) {
+          return varName((this.name ? this.name + '_' : '') + text);
+      };
+      /**
+       * Request a data source name for the given data source type and mark that data source as required. This method should be called in parse, so that all used data source can be correctly instantiated in assembleData().
+       */
+      Model.prototype.requestDataName = function (name) {
+          var fullName = this.getName(name);
+          // Increase ref count. This is critical because otherwise we won't create a data source.
+          // We also increase the ref counts on OutputNode.getSource() calls.
+          var refCounts = this.component.data.outputNodeRefCounts;
+          refCounts[fullName] = (refCounts[fullName] || 0) + 1;
+          return fullName;
+      };
+      Model.prototype.getSizeSignalRef = function (sizeType) {
+          if (isFacetModel(this.parent)) {
+              var channel = sizeType === 'width' ? 'x' : 'y';
+              var scaleComponent = this.component.scales[channel];
+              if (scaleComponent && !scaleComponent.merged) { // independent scale
+                  var type = scaleComponent.get('type');
+                  var range = scaleComponent.get('range');
+                  if (hasDiscreteDomain(type) && isVgRangeStep(range)) {
+                      var scaleName = scaleComponent.get('name');
+                      var domain = assembleDomain(this, channel);
+                      var field$$1 = getFieldFromDomain(domain);
+                      if (field$$1) {
+                          var fieldRef = vgField({ aggregate: 'distinct', field: field$$1 }, { expr: 'datum' });
+                          return {
+                              signal: sizeExpr(scaleName, scaleComponent, fieldRef)
+                          };
+                      }
+                      else {
+                          warn('Unknown field for ${channel}.  Cannot calculate view size.');
+                          return null;
+                      }
+                  }
+              }
+          }
+          return {
+              signal: this.layoutSizeNameMap.get(this.getName(sizeType))
+          };
+      };
+      /**
+       * Lookup the name of the datasource for an output node. You probably want to call this in assemble.
+       */
+      Model.prototype.lookupDataSource = function (name) {
+          var node = this.component.data.outputNodes[name];
+          if (!node) {
+              // Name not found in map so let's just return what we got.
+              // This can happen if we already have the correct name.
+              return name;
+          }
+          return node.getSource();
+      };
+      Model.prototype.getSizeName = function (oldSizeName) {
+          return this.layoutSizeNameMap.get(oldSizeName);
+      };
+      Model.prototype.renameLayoutSize = function (oldName, newName) {
+          this.layoutSizeNameMap.rename(oldName, newName);
+      };
+      Model.prototype.renameScale = function (oldName, newName) {
+          this.scaleNameMap.rename(oldName, newName);
+      };
+      Model.prototype.renameProjection = function (oldName, newName) {
+          this.projectionNameMap.rename(oldName, newName);
+      };
+      /**
+       * @return scale name for a given channel after the scale has been parsed and named.
+       */
+      Model.prototype.scaleName = function (originalScaleName, parse) {
+          if (parse) {
+              // During the parse phase always return a value
+              // No need to refer to rename map because a scale can't be renamed
+              // before it has the original name.
+              return this.getName(originalScaleName);
+          }
+          // If there is a scale for the channel, it should either
+          // be in the scale component or exist in the name map
+          if (
+          // If there is a scale for the channel, there should be a local scale component for it
+          (isChannel(originalScaleName) && isScaleChannel(originalScaleName) && this.component.scales[originalScaleName]) ||
+              // in the scale name map (the scale get merged by its parent)
+              this.scaleNameMap.has(this.getName(originalScaleName))) {
+              return this.scaleNameMap.get(this.getName(originalScaleName));
+          }
+          return undefined;
+      };
+      /**
+       * @return projection name after the projection has been parsed and named.
+       */
+      Model.prototype.projectionName = function (parse) {
+          if (parse) {
+              // During the parse phase always return a value
+              // No need to refer to rename map because a projection can't be renamed
+              // before it has the original name.
+              return this.getName('projection');
+          }
+          if ((this.component.projection && !this.component.projection.merged) || this.projectionNameMap.has(this.getName('projection'))) {
+              return this.projectionNameMap.get(this.getName('projection'));
+          }
+          return undefined;
+      };
+      /**
+       * Traverse a model's hierarchy to get the scale component for a particular channel.
+       */
+      Model.prototype.getScaleComponent = function (channel) {
+          /* istanbul ignore next: This is warning for debugging test */
+          if (!this.component.scales) {
+              throw new Error('getScaleComponent cannot be called before parseScale().  Make sure you have called parseScale or use parseUnitModelWithScale().');
+          }
+          var localScaleComponent = this.component.scales[channel];
+          if (localScaleComponent && !localScaleComponent.merged) {
+              return localScaleComponent;
+          }
+          return (this.parent ? this.parent.getScaleComponent(channel) : undefined);
+      };
+      /**
+       * Traverse a model's hierarchy to get a particular selection component.
+       */
+      Model.prototype.getSelectionComponent = function (variableName, origName) {
+          var sel = this.component.selection[variableName];
+          if (!sel && this.parent) {
+              sel = this.parent.getSelectionComponent(variableName, origName);
+          }
+          if (!sel) {
+              throw new Error(message.selectionNotFound(origName));
+          }
+          return sel;
+      };
+      return Model;
+  }());
+  /** Abstract class for UnitModel and FacetModel.  Both of which can contain fieldDefs as a part of its own specification. */
+  var ModelWithField = /** @class */ (function (_super) {
+      __extends(ModelWithField, _super);
+      function ModelWithField() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      /** Get "field" reference for vega */
+      ModelWithField.prototype.vgField = function (channel, opt) {
+          if (opt === void 0) { opt = {}; }
+          var fieldDef = this.fieldDef(channel);
+          if (!fieldDef) {
+              return undefined;
+          }
+          return vgField(fieldDef, opt);
+      };
+      ModelWithField.prototype.reduceFieldDef = function (f, init, t) {
+          return reduce(this.getMapping(), function (acc, cd, c) {
+              var fieldDef = getFieldDef(cd);
+              if (fieldDef) {
+                  return f(acc, fieldDef, c);
+              }
+              return acc;
+          }, init, t);
+      };
+      ModelWithField.prototype.forEachFieldDef = function (f, t) {
+          forEach(this.getMapping(), function (cd, c) {
+              var fieldDef = getFieldDef(cd);
+              if (fieldDef) {
+                  f(fieldDef, c);
+              }
+          }, t);
+      };
+      return ModelWithField;
+  }(Model));
+
+  var scaleBindings = {
+      has: function (selCmpt) {
+          return selCmpt.type === 'interval' && selCmpt.resolve === 'global' &&
+              selCmpt.bind && selCmpt.bind === 'scales';
+      },
+      parse: function (model, selDef, selCmpt) {
+          var bound = selCmpt.scales = [];
+          selCmpt.project.forEach(function (p) {
+              var channel = p.channel;
+              var scale = model.getScaleComponent(channel);
+              var scaleType = scale ? scale.get('type') : undefined;
+              if (!scale || !hasContinuousDomain(scaleType) || isBinScale(scaleType)) {
+                  warn(message.SCALE_BINDINGS_CONTINUOUS);
+                  return;
+              }
+              scale.set('domainRaw', { signal: channelSignalName(selCmpt, channel, 'data') }, true);
+              bound.push(channel);
+              // Bind both x/y for diag plot of repeated views.
+              if (model.repeater && model.repeater.row === model.repeater.column) {
+                  var scale2 = model.getScaleComponent(channel === X ? Y : X);
+                  scale2.set('domainRaw', { signal: channelSignalName(selCmpt, channel, 'data') }, true);
+              }
+          });
+      },
+      topLevelSignals: function (model, selCmpt, signals) {
+          // Top-level signals are only needed when coordinating composed views.
+          if (!model.parent) {
+              return signals;
+          }
+          var channels = selCmpt.scales.filter(function (channel) {
+              return !(signals.filter(function (s) { return s.name === channelSignalName(selCmpt, channel, 'data'); }).length);
+          });
+          return signals.concat(channels.map(function (channel) {
+              return { name: channelSignalName(selCmpt, channel, 'data') };
+          }));
+      },
+      signals: function (model, selCmpt, signals) {
+          // Nested signals need only push to top-level signals when within composed views.
+          if (model.parent) {
+              selCmpt.scales.forEach(function (channel) {
+                  var signal = signals.filter(function (s) { return s.name === channelSignalName(selCmpt, channel, 'data'); })[0];
+                  signal.push = 'outer';
+                  delete signal.value;
+                  delete signal.update;
+              });
+          }
+          return signals;
+      }
+  };
+  function domain$1(model, channel) {
+      var scale = $(model.scaleName(channel));
+      return "domain(" + scale + ")";
+  }
+
+  var BRUSH = '_brush';
+  var SCALE_TRIGGER = '_scale_trigger';
+  var interval = {
+      predicate: 'vlInterval',
+      scaleDomain: 'vlIntervalDomain',
+      signals: function (model, selCmpt) {
+          var name = selCmpt.name;
+          var hasScales = scaleBindings.has(selCmpt);
+          var signals = [];
+          var intervals = [];
+          var tupleTriggers = [];
+          var scaleTriggers = [];
+          if (selCmpt.translate && !hasScales) {
+              var filterExpr_1 = "!event.item || event.item.mark.name !== " + $(name + BRUSH);
+              events(selCmpt, function (_, evt) {
+                  var filters = evt.between[0].filter || (evt.between[0].filter = []);
+                  if (filters.indexOf(filterExpr_1) < 0) {
+                      filters.push(filterExpr_1);
+                  }
+              });
+          }
+          selCmpt.project.forEach(function (p) {
+              var channel = p.channel;
+              if (channel !== X && channel !== Y) {
+                  warn('Interval selections only support x and y encoding channels.');
+                  return;
+              }
+              var cs = channelSignals(model, selCmpt, channel);
+              var dname = channelSignalName(selCmpt, channel, 'data');
+              var vname = channelSignalName(selCmpt, channel, 'visual');
+              var scaleStr = $(model.scaleName(channel));
+              var scaleType = model.getScaleComponent(channel).get('type');
+              var toNum = hasContinuousDomain(scaleType) ? '+' : '';
+              signals.push.apply(signals, cs);
+              tupleTriggers.push(dname);
+              intervals.push("{encoding: " + $(channel) + ", " +
+                  ("field: " + $(p.field) + ", extent: " + dname + "}"));
+              scaleTriggers.push({
+                  scaleName: model.scaleName(channel),
+                  expr: "(!isArray(" + dname + ") || " +
+                      ("(" + toNum + "invert(" + scaleStr + ", " + vname + ")[0] === " + toNum + dname + "[0] && ") +
+                      (toNum + "invert(" + scaleStr + ", " + vname + ")[1] === " + toNum + dname + "[1]))")
+              });
+          });
+          // Proxy scale reactions to ensure that an infinite loop doesn't occur
+          // when an interval selection filter touches the scale.
+          if (!hasScales) {
+              signals.push({
+                  name: name + SCALE_TRIGGER,
+                  update: scaleTriggers.map(function (t) { return t.expr; }).join(' && ') +
+                      (" ? " + (name + SCALE_TRIGGER) + " : {}")
+              });
+          }
+          // Only add an interval to the store if it has valid data extents. Data extents
+          // are set to null if pixel extents are equal to account for intervals over
+          // ordinal/nominal domains which, when inverted, will still produce a valid datum.
+          return signals.concat({
+              name: name + TUPLE,
+              on: [{
+                      events: tupleTriggers.map(function (t) { return ({ signal: t }); }),
+                      update: tupleTriggers.join(' && ') +
+                          (" ? {unit: " + unitName(model) + ", intervals: [" + intervals.join(', ') + "]} : null")
+                  }]
+          });
+      },
+      modifyExpr: function (model, selCmpt) {
+          var tpl = selCmpt.name + TUPLE;
+          return tpl + ', ' +
+              (selCmpt.resolve === 'global' ? 'true' : "{unit: " + unitName(model) + "}");
+      },
+      marks: function (model, selCmpt, marks) {
+          var name = selCmpt.name;
+          var _a = positionalProjections(selCmpt), xi = _a.xi, yi = _a.yi;
+          var store = "data(" + $(selCmpt.name + STORE) + ")";
+          // Do not add a brush if we're binding to scales.
+          if (scaleBindings.has(selCmpt)) {
+              return marks;
+          }
+          var update = {
+              x: xi !== null ? { signal: name + "_x[0]" } : { value: 0 },
+              y: yi !== null ? { signal: name + "_y[0]" } : { value: 0 },
+              x2: xi !== null ? { signal: name + "_x[1]" } : { field: { group: 'width' } },
+              y2: yi !== null ? { signal: name + "_y[1]" } : { field: { group: 'height' } }
+          };
+          // If the selection is resolved to global, only a single interval is in
+          // the store. Wrap brush mark's encodings with a production rule to test
+          // this based on the `unit` property. Hide the brush mark if it corresponds
+          // to a unit different from the one in the store.
+          if (selCmpt.resolve === 'global') {
+              for (var _i = 0, _b = keys(update); _i < _b.length; _i++) {
+                  var key$$1 = _b[_i];
+                  update[key$$1] = [__assign({ test: store + ".length && " + store + "[0].unit === " + unitName(model) }, update[key$$1]), { value: 0 }];
+              }
+          }
+          // Two brush marks ensure that fill colors and other aesthetic choices do
+          // not interefere with the core marks, but that the brushed region can still
+          // be interacted with (e.g., dragging it around).
+          var _c = selCmpt.mark, fill = _c.fill, fillOpacity = _c.fillOpacity, stroke = __rest(_c, ["fill", "fillOpacity"]);
+          var vgStroke = keys(stroke).reduce(function (def, k) {
+              def[k] = [{
+                      test: [
+                          xi !== null && name + "_x[0] !== " + name + "_x[1]",
+                          yi != null && name + "_y[0] !== " + name + "_y[1]",
+                      ].filter(function (x) { return x; }).join(' && '),
+                      value: stroke[k]
+                  }, { value: null }];
+              return def;
+          }, {});
+          return [{
+                  name: name + BRUSH + '_bg',
+                  type: 'rect',
+                  clip: true,
+                  encode: {
+                      enter: {
+                          fill: { value: fill },
+                          fillOpacity: { value: fillOpacity }
+                      },
+                      update: update
+                  }
+              }].concat(marks, {
+              name: name + BRUSH,
+              type: 'rect',
+              clip: true,
+              encode: {
+                  enter: {
+                      fill: { value: 'transparent' }
+                  },
+                  update: __assign({}, update, vgStroke)
+              }
+          });
+      }
+  };
+  /**
+   * Returns the visual and data signals for an interval selection.
+   */
+  function channelSignals(model, selCmpt, channel) {
+      var vname = channelSignalName(selCmpt, channel, 'visual');
+      var dname = channelSignalName(selCmpt, channel, 'data');
+      var hasScales = scaleBindings.has(selCmpt);
+      var scaleName = model.scaleName(channel);
+      var scaleStr = $(scaleName);
+      var scale = model.getScaleComponent(channel);
+      var scaleType = scale ? scale.get('type') : undefined;
+      var size = model.getSizeSignalRef(channel === X ? 'width' : 'height').signal;
+      var coord = channel + "(unit)";
+      var on = events(selCmpt, function (def, evt) {
+          return def.concat({ events: evt.between[0], update: "[" + coord + ", " + coord + "]" }, // Brush Start
+          { events: evt, update: "[" + vname + "[0], clamp(" + coord + ", 0, " + size + ")]" } // Brush End
+          );
+      });
+      // React to pan/zooms of continuous scales. Non-continuous scales
+      // (bin-linear, band, point) cannot be pan/zoomed and any other changes
+      // to their domains (e.g., filtering) should clear the brushes.
+      on.push({
+          events: { signal: selCmpt.name + SCALE_TRIGGER },
+          update: hasContinuousDomain(scaleType) && !isBinScale(scaleType) ?
+              "[scale(" + scaleStr + ", " + dname + "[0]), scale(" + scaleStr + ", " + dname + "[1])]" : "[0, 0]"
+      });
+      return hasScales ? [{ name: dname, on: [] }] : [{
+              name: vname, value: [], on: on
+          }, {
+              name: dname,
+              on: [{ events: { signal: vname }, update: vname + "[0] === " + vname + "[1] ? null : invert(" + scaleStr + ", " + vname + ")" }]
+          }];
+  }
+  function events(selCmpt, cb) {
+      return selCmpt.events.reduce(function (on, evt) {
+          if (!evt.between) {
+              warn(evt + " is not an ordered event stream for interval selections");
+              return on;
+          }
+          return cb(on, evt);
+      }, []);
+  }
+
+  var VORONOI = 'voronoi';
+  var nearest = {
+      has: function (selCmpt) {
+          return selCmpt.type !== 'interval' && selCmpt.nearest;
+      },
+      marks: function (model, selCmpt, marks) {
+          var _a = positionalProjections(selCmpt), x = _a.x, y = _a.y;
+          var markType = model.mark;
+          if (isPathMark(markType)) {
+              warn(message.nearestNotSupportForContinuous(markType));
+              return marks;
+          }
+          var cellDef = {
+              name: model.getName(VORONOI),
+              type: 'path',
+              from: { data: model.getName('marks') },
+              encode: {
+                  enter: {
+                      fill: { value: 'transparent' },
+                      strokeWidth: { value: 0.35 },
+                      stroke: { value: 'transparent' },
+                      isVoronoi: { value: true }
+                  }
+              },
+              transform: [{
+                      type: 'voronoi',
+                      x: { expr: (x || (!x && !y)) ? 'datum.datum.x || 0' : '0' },
+                      y: { expr: (y || (!x && !y)) ? 'datum.datum.y || 0' : '0' },
+                      size: [model.getSizeSignalRef('width'), model.getSizeSignalRef('height')]
+                  }]
+          };
+          var index = 0;
+          var exists = false;
+          marks.forEach(function (mark, i) {
+              var name = mark.name || '';
+              if (name === model.component.mark[0].name) {
+                  index = i;
+              }
+              else if (name.indexOf(VORONOI) >= 0) {
+                  exists = true;
+              }
+          });
+          if (!exists) {
+              marks.splice(index + 1, 0, cellDef);
+          }
+          return marks;
+      }
+  };
+
+  function signals(model, selCmpt) {
+      var proj = selCmpt.project;
+      var datum = nearest.has(selCmpt) ?
+          '(item().isVoronoi ? datum.datum : datum)' : 'datum';
+      var bins = [];
+      var encodings = proj.map(function (p) { return $(p.channel); }).filter(function (e) { return e; }).join(', ');
+      var fields = proj.map(function (p) { return $(p.field); }).join(', ');
+      var values = proj.map(function (p) {
+          var channel = p.channel;
+          var fieldDef = model.fieldDef(channel);
+          // Binned fields should capture extents, for a range test against the raw field.
+          return (fieldDef && fieldDef.bin) ? (bins.push(p.field),
+              "[" + accessPathWithDatum(model.vgField(channel, {}), datum) + ", " +
+                  (accessPathWithDatum(model.vgField(channel, { binSuffix: 'end' }), datum) + "]")) :
+              "" + accessPathWithDatum(p.field, datum);
+      }).join(', ');
+      // Only add a discrete selection to the store if a datum is present _and_
+      // the interaction isn't occurring on a group mark. This guards against
+      // polluting interactive state with invalid values in faceted displays
+      // as the group marks are also data-driven. We force the update to account
+      // for constant null states but varying toggles (e.g., shift-click in
+      // whitespace followed by a click in whitespace; the store should only
+      // be cleared on the second click).
+      return [{
+              name: selCmpt.name + TUPLE,
+              value: {},
+              on: [{
+                      events: selCmpt.events,
+                      update: "datum && item().mark.marktype !== 'group' ? " +
+                          ("{unit: " + unitName(model) + ", encodings: [" + encodings + "], ") +
+                          ("fields: [" + fields + "], values: [" + values + "]") +
+                          (bins.length ? ', ' + bins.map(function (b) { return $('bin_' + b) + ": 1"; }).join(', ') : '') +
+                          '} : null',
+                      force: true
+                  }]
+          }];
+  }
+  var multi = {
+      predicate: 'vlMulti',
+      scaleDomain: 'vlMultiDomain',
+      signals: signals,
+      modifyExpr: function (model, selCmpt) {
+          var tpl = selCmpt.name + TUPLE;
+          return tpl + ', ' +
+              (selCmpt.resolve === 'global' ? 'null' : "{unit: " + unitName(model) + "}");
+      }
+  };
+
+  var single = {
+      predicate: 'vlSingle',
+      scaleDomain: 'vlSingleDomain',
+      signals: signals,
+      topLevelSignals: function (model, selCmpt, signals$$1) {
+          var hasSignal = signals$$1.filter(function (s) { return s.name === selCmpt.name; });
+          var data = "data(" + $(selCmpt.name + STORE) + ")";
+          var values = data + "[0].values";
+          return hasSignal.length ? signals$$1 : signals$$1.concat({
+              name: selCmpt.name,
+              update: data + ".length && {" +
+                  selCmpt.project.map(function (p, i) { return p.field + ": " + values + "[" + i + "]"; }).join(', ') + '}'
+          });
+      },
+      modifyExpr: function (model, selCmpt) {
+          var tpl = selCmpt.name + TUPLE;
+          return tpl + ', ' +
+              (selCmpt.resolve === 'global' ? 'true' : "{unit: " + unitName(model) + "}");
+      }
+  };
+
+  var inputBindings = {
+      has: function (selCmpt) {
+          return selCmpt.type === 'single' && selCmpt.resolve === 'global' &&
+              selCmpt.bind && selCmpt.bind !== 'scales';
+      },
+      topLevelSignals: function (model, selCmpt, signals) {
+          var name = selCmpt.name;
+          var proj = selCmpt.project;
+          var bind = selCmpt.bind;
+          var datum = nearest.has(selCmpt) ?
+              '(item().isVoronoi ? datum.datum : datum)' : 'datum';
+          proj.forEach(function (p) {
+              var sgname = varName(name + "_" + p.field);
+              var hasSignal = signals.filter(function (s) { return s.name === sgname; });
+              if (!hasSignal.length) {
+                  signals.unshift({
+                      name: sgname,
+                      value: '',
+                      on: [{
+                              events: selCmpt.events,
+                              update: "datum && item().mark.marktype !== 'group' ? " + accessPathWithDatum(p.field, datum) + " : null"
+                          }],
+                      bind: bind[p.field] || bind[p.channel] || bind
+                  });
+              }
+          });
+          return signals;
+      },
+      signals: function (model, selCmpt, signals) {
+          var name = selCmpt.name;
+          var proj = selCmpt.project;
+          var signal = signals.filter(function (s) { return s.name === name + TUPLE; })[0];
+          var fields = proj.map(function (p) { return $(p.field); }).join(', ');
+          var values = proj.map(function (p) { return varName(name + "_" + p.field); });
+          if (values.length) {
+              signal.update = values.join(' && ') + " ? {fields: [" + fields + "], values: [" + values.join(', ') + "]} : null";
+          }
+          delete signal.value;
+          delete signal.on;
+          return signals;
+      }
+  };
+
+  var project = {
+      has: function (selDef) {
+          var def = selDef;
+          return def.fields !== undefined || def.encodings !== undefined;
+      },
+      parse: function (model, selDef, selCmpt) {
+          var channels = {};
+          var timeUnits = {};
+          // TODO: find a possible channel mapping for these fields.
+          (selDef.fields || []).forEach(function (field) { return channels[field] = null; });
+          (selDef.encodings || []).forEach(function (channel) {
+              var fieldDef = model.fieldDef(channel);
+              if (fieldDef) {
+                  if (fieldDef.timeUnit) {
+                      var tuField = model.vgField(channel);
+                      channels[tuField] = channel;
+                      // Construct TimeUnitComponents which will be combined into a
+                      // TimeUnitNode. This node may need to be inserted into the
+                      // dataflow if the selection is used across views that do not
+                      // have these time units defined.
+                      timeUnits[tuField] = {
+                          as: tuField,
+                          field: fieldDef.field,
+                          timeUnit: fieldDef.timeUnit
+                      };
+                  }
+                  else {
+                      channels[fieldDef.field] = channel;
+                  }
+              }
+              else {
+                  warn(message.cannotProjectOnChannelWithoutField(channel));
+              }
+          });
+          var projection = selCmpt.project || (selCmpt.project = []);
+          for (var field in channels) {
+              if (channels.hasOwnProperty(field)) {
+                  projection.push({ field: field, channel: channels[field] });
+              }
+          }
+          var fields = selCmpt.fields || (selCmpt.fields = {});
+          projection.filter(function (p) { return p.channel; }).forEach(function (p) { return fields[p.channel] = p.field; });
+          if (keys(timeUnits).length) {
+              selCmpt.timeUnit = new TimeUnitNode(null, timeUnits);
+          }
+      }
+  };
+
+  var TOGGLE = '_toggle';
+  var toggle = {
+      has: function (selCmpt) {
+          return selCmpt.type === 'multi' && selCmpt.toggle;
+      },
+      signals: function (model, selCmpt, signals) {
+          return signals.concat({
+              name: selCmpt.name + TOGGLE,
+              value: false,
+              on: [{ events: selCmpt.events, update: selCmpt.toggle }]
+          });
+      },
+      modifyExpr: function (model, selCmpt, expr) {
+          var tpl = selCmpt.name + TUPLE;
+          var signal = selCmpt.name + TOGGLE;
+          return signal + " ? null : " + tpl + ", " +
+              (selCmpt.resolve === 'global' ?
+                  signal + " ? null : true, " :
+                  signal + " ? null : {unit: " + unitName(model) + "}, ") +
+              (signal + " ? " + tpl + " : null");
+      }
+  };
+
+  var ANCHOR = '_translate_anchor';
+  var DELTA = '_translate_delta';
+  var translate = {
+      has: function (selCmpt) {
+          return selCmpt.type === 'interval' && selCmpt.translate;
+      },
+      signals: function (model, selCmpt, signals) {
+          var name = selCmpt.name;
+          var hasScales = scaleBindings.has(selCmpt);
+          var anchor = name + ANCHOR;
+          var _a = positionalProjections(selCmpt), x = _a.x, y = _a.y;
+          var events = parseSelector(selCmpt.translate, 'scope');
+          if (!hasScales) {
+              events = events.map(function (e) { return (e.between[0].markname = name + BRUSH, e); });
+          }
+          signals.push({
+              name: anchor,
+              value: {},
+              on: [{
+                      events: events.map(function (e) { return e.between[0]; }),
+                      update: '{x: x(unit), y: y(unit)' +
+                          (x !== null ? ', extent_x: ' + (hasScales ? domain$1(model, X) :
+                              "slice(" + channelSignalName(selCmpt, 'x', 'visual') + ")") : '') +
+                          (y !== null ? ', extent_y: ' + (hasScales ? domain$1(model, Y) :
+                              "slice(" + channelSignalName(selCmpt, 'y', 'visual') + ")") : '') + '}'
+                  }]
+          }, {
+              name: name + DELTA,
+              value: {},
+              on: [{
+                      events: events,
+                      update: "{x: " + anchor + ".x - x(unit), y: " + anchor + ".y - y(unit)}"
+                  }]
+          });
+          if (x !== null) {
+              onDelta(model, selCmpt, X, 'width', signals);
+          }
+          if (y !== null) {
+              onDelta(model, selCmpt, Y, 'height', signals);
+          }
+          return signals;
+      }
+  };
+  function onDelta(model, selCmpt, channel, size, signals) {
+      var name = selCmpt.name;
+      var hasScales = scaleBindings.has(selCmpt);
+      var signal = signals.filter(function (s) {
+          return s.name === channelSignalName(selCmpt, channel, hasScales ? 'data' : 'visual');
+      })[0];
+      var anchor = name + ANCHOR;
+      var delta = name + DELTA;
+      var sizeSg = model.getSizeSignalRef(size).signal;
+      var scaleCmpt = model.getScaleComponent(channel);
+      var scaleType = scaleCmpt.get('type');
+      var sign = hasScales && channel === X ? '-' : ''; // Invert delta when panning x-scales.
+      var extent = anchor + ".extent_" + channel;
+      var offset = "" + sign + delta + "." + channel + " / " + (hasScales ? "" + sizeSg : "span(" + extent + ")");
+      var panFn = !hasScales ? 'panLinear' :
+          scaleType === 'log' ? 'panLog' :
+              scaleType === 'pow' ? 'panPow' : 'panLinear';
+      var update = panFn + "(" + extent + ", " + offset +
+          (hasScales && scaleType === 'pow' ? ", " + (scaleCmpt.get('exponent') || 1) : '') + ')';
+      signal.on.push({
+          events: { signal: delta },
+          update: hasScales ? update : "clampRange(" + update + ", 0, " + sizeSg + ")"
+      });
+  }
+
+  var ANCHOR$1 = '_zoom_anchor';
+  var DELTA$1 = '_zoom_delta';
+  var zoom$1 = {
+      has: function (selCmpt) {
+          return selCmpt.type === 'interval' && selCmpt.zoom;
+      },
+      signals: function (model, selCmpt, signals) {
+          var name = selCmpt.name;
+          var hasScales = scaleBindings.has(selCmpt);
+          var delta = name + DELTA$1;
+          var _a = positionalProjections(selCmpt), x = _a.x, y = _a.y;
+          var sx = $(model.scaleName(X));
+          var sy = $(model.scaleName(Y));
+          var events = parseSelector(selCmpt.zoom, 'scope');
+          if (!hasScales) {
+              events = events.map(function (e) { return (e.markname = name + BRUSH, e); });
+          }
+          signals.push({
+              name: name + ANCHOR$1,
+              on: [{
+                      events: events,
+                      update: !hasScales ? "{x: x(unit), y: y(unit)}" :
+                          '{' + [
+                              (sx ? "x: invert(" + sx + ", x(unit))" : ''),
+                              (sy ? "y: invert(" + sy + ", y(unit))" : '')
+                          ].filter(function (expr) { return !!expr; }).join(', ') + '}'
+                  }]
+          }, {
+              name: delta,
+              on: [{
+                      events: events,
+                      force: true,
+                      update: 'pow(1.001, event.deltaY * pow(16, event.deltaMode))'
+                  }]
+          });
+          if (x !== null) {
+              onDelta$1(model, selCmpt, 'x', 'width', signals);
+          }
+          if (y !== null) {
+              onDelta$1(model, selCmpt, 'y', 'height', signals);
+          }
+          return signals;
+      }
+  };
+  function onDelta$1(model, selCmpt, channel, size, signals) {
+      var name = selCmpt.name;
+      var hasScales = scaleBindings.has(selCmpt);
+      var signal = signals.filter(function (s) {
+          return s.name === channelSignalName(selCmpt, channel, hasScales ? 'data' : 'visual');
+      })[0];
+      var sizeSg = model.getSizeSignalRef(size).signal;
+      var scaleCmpt = model.getScaleComponent(channel);
+      var scaleType = scaleCmpt.get('type');
+      var base = hasScales ? domain$1(model, channel) : signal.name;
+      var delta = name + DELTA$1;
+      var anchor = "" + name + ANCHOR$1 + "." + channel;
+      var zoomFn = !hasScales ? 'zoomLinear' :
+          scaleType === 'log' ? 'zoomLog' :
+              scaleType === 'pow' ? 'zoomPow' : 'zoomLinear';
+      var update = zoomFn + "(" + base + ", " + anchor + ", " + delta +
+          (hasScales && scaleType === 'pow' ? ", " + (scaleCmpt.get('exponent') || 1) : '') + ')';
+      signal.on.push({
+          events: { signal: delta },
+          update: hasScales ? update : "clampRange(" + update + ", 0, " + sizeSg + ")"
+      });
+  }
+
+  var compilers = { project: project, toggle: toggle, scales: scaleBindings,
+      translate: translate, zoom: zoom$1, inputs: inputBindings, nearest: nearest };
+  function forEachTransform(selCmpt, cb) {
+      for (var t in compilers) {
+          if (compilers[t].has(selCmpt)) {
+              cb(compilers[t]);
+          }
+      }
+  }
+
+  var STORE = '_store';
+  var TUPLE = '_tuple';
+  var MODIFY = '_modify';
+  var SELECTION_DOMAIN = '_selection_domain_';
+  function parseUnitSelection(model, selDefs) {
+      var selCmpts = {};
+      var selectionConfig = model.config.selection;
+      var _loop_1 = function (name_1) {
+          if (!selDefs.hasOwnProperty(name_1)) {
+              return "continue";
+          }
+          var selDef = selDefs[name_1];
+          var cfg = selectionConfig[selDef.type];
+          // Set default values from config if a property hasn't been specified,
+          // or if it is true. E.g., "translate": true should use the default
+          // event handlers for translate. However, true may be a valid value for
+          // a property (e.g., "nearest": true).
+          for (var key$$1 in cfg) {
+              // A selection should contain either `encodings` or `fields`, only use
+              // default values for these two values if neither of them is specified.
+              if ((key$$1 === 'encodings' && selDef.fields) || (key$$1 === 'fields' && selDef.encodings)) {
+                  continue;
+              }
+              if (key$$1 === 'mark') {
+                  selDef[key$$1] = __assign({}, cfg[key$$1], selDef[key$$1]);
+              }
+              if (selDef[key$$1] === undefined || selDef[key$$1] === true) {
+                  selDef[key$$1] = cfg[key$$1] || selDef[key$$1];
+              }
+          }
+          name_1 = varName(name_1);
+          var selCmpt = selCmpts[name_1] = __assign({}, selDef, { name: name_1, events: isString(selDef.on) ? parseSelector(selDef.on, 'scope') : selDef.on });
+          forEachTransform(selCmpt, function (txCompiler) {
+              if (txCompiler.parse) {
+                  txCompiler.parse(model, selDef, selCmpt);
+              }
+          });
+      };
+      for (var name_1 in selDefs) {
+          _loop_1(name_1);
+      }
+      return selCmpts;
+  }
+  function assembleUnitSelectionSignals(model, signals$$1) {
+      forEachSelection(model, function (selCmpt, selCompiler) {
+          var name = selCmpt.name;
+          var modifyExpr = selCompiler.modifyExpr(model, selCmpt);
+          signals$$1.push.apply(signals$$1, selCompiler.signals(model, selCmpt));
+          forEachTransform(selCmpt, function (txCompiler) {
+              if (txCompiler.signals) {
+                  signals$$1 = txCompiler.signals(model, selCmpt, signals$$1);
+              }
+              if (txCompiler.modifyExpr) {
+                  modifyExpr = txCompiler.modifyExpr(model, selCmpt, modifyExpr);
+              }
+          });
+          signals$$1.push({
+              name: name + MODIFY,
+              on: [{
+                      events: { signal: name + TUPLE },
+                      update: "modify(" + $(selCmpt.name + STORE) + ", " + modifyExpr + ")"
+                  }]
+          });
+      });
+      var facetModel = getFacetModel(model);
+      if (signals$$1.length && facetModel) {
+          var name_2 = $(facetModel.getName('cell'));
+          signals$$1.unshift({
+              name: 'facet',
+              value: {},
+              on: [{
+                      events: parseSelector('mousemove', 'scope'),
+                      update: "isTuple(facet) ? facet : group(" + name_2 + ").datum"
+                  }]
+          });
+      }
+      return signals$$1;
+  }
+  function assembleTopLevelSignals(model, signals$$1) {
+      var needsUnit = false;
+      forEachSelection(model, function (selCmpt, selCompiler) {
+          if (selCompiler.topLevelSignals) {
+              signals$$1 = selCompiler.topLevelSignals(model, selCmpt, signals$$1);
+          }
+          forEachTransform(selCmpt, function (txCompiler) {
+              if (txCompiler.topLevelSignals) {
+                  signals$$1 = txCompiler.topLevelSignals(model, selCmpt, signals$$1);
+              }
+          });
+          needsUnit = true;
+      });
+      if (needsUnit) {
+          var hasUnit = signals$$1.filter(function (s) { return s.name === 'unit'; });
+          if (!(hasUnit.length)) {
+              signals$$1.unshift({
+                  name: 'unit',
+                  value: {},
+                  on: [{ events: 'mousemove', update: 'isTuple(group()) ? group() : unit' }]
+              });
+          }
+      }
+      return signals$$1;
+  }
+  function assembleUnitSelectionData(model, data) {
+      forEachSelection(model, function (selCmpt) {
+          var contains$$1 = data.filter(function (d) { return d.name === selCmpt.name + STORE; });
+          if (!contains$$1.length) {
+              data.push({ name: selCmpt.name + STORE });
+          }
+      });
+      return data;
+  }
+  function assembleUnitSelectionMarks(model, marks) {
+      forEachSelection(model, function (selCmpt, selCompiler) {
+          marks = selCompiler.marks ? selCompiler.marks(model, selCmpt, marks) : marks;
+          forEachTransform(selCmpt, function (txCompiler) {
+              if (txCompiler.marks) {
+                  marks = txCompiler.marks(model, selCmpt, marks);
+              }
+          });
+      });
+      return marks;
+  }
+  function assembleLayerSelectionMarks(model, marks) {
+      model.children.forEach(function (child) {
+          if (isUnitModel(child)) {
+              marks = assembleUnitSelectionMarks(child, marks);
+          }
+      });
+      return marks;
+  }
+  function selectionPredicate(model, selections, dfnode) {
+      var stores = [];
+      function expr(name) {
+          var vname = varName(name);
+          var selCmpt = model.getSelectionComponent(vname, name);
+          var store = $(vname + STORE);
+          if (selCmpt.timeUnit) {
+              var child = dfnode || model.component.data.raw;
+              var tunode = selCmpt.timeUnit.clone();
+              if (child.parent) {
+                  tunode.insertAsParentOf(child);
+              }
+              else {
+                  child.parent = tunode;
+              }
+          }
+          if (selCmpt.empty !== 'none') {
+              stores.push(store);
+          }
+          return compiler(selCmpt.type).predicate + ("(" + store + ", datum") +
+              (selCmpt.resolve === 'global' ? ')' : ", " + $(selCmpt.resolve) + ")");
+      }
+      var predicateStr = logicalExpr(selections, expr);
+      return (stores.length
+          ? '!(' + stores.map(function (s) { return "length(data(" + s + "))"; }).join(' || ') + ') || '
+          : '') + ("(" + predicateStr + ")");
+  }
+  // Selections are parsed _after_ scales. If a scale domain is set to
+  // use a selection, the SELECTION_DOMAIN constant is used as the
+  // domainRaw.signal during scale.parse and then replaced with the necessary
+  // selection expression function during scale.assemble. To not pollute the
+  // type signatures to account for this setup, the selection domain definition
+  // is coerced to a string and appended to SELECTION_DOMAIN.
+  function isRawSelectionDomain(domainRaw) {
+      return domainRaw.signal.indexOf(SELECTION_DOMAIN) >= 0;
+  }
+  function selectionScaleDomain(model, domainRaw) {
+      var selDomain = JSON.parse(domainRaw.signal.replace(SELECTION_DOMAIN, ''));
+      var name = varName(selDomain.selection);
+      var selCmpt = model.component.selection && model.component.selection[name];
+      if (selCmpt) {
+          warn('Use "bind": "scales" to setup a binding for scales and selections within the same view.');
+      }
+      else {
+          selCmpt = model.getSelectionComponent(name, selDomain.selection);
+          if (!selDomain.encoding && !selDomain.field) {
+              selDomain.field = selCmpt.project[0].field;
+              if (selCmpt.project.length > 1) {
+                  warn('A "field" or "encoding" must be specified when using a selection as a scale domain. ' +
+                      ("Using \"field\": " + $(selDomain.field) + "."));
+              }
+          }
+          return {
+              signal: compiler(selCmpt.type).scaleDomain +
+                  ("(" + $(name + STORE) + ", " + $(selDomain.encoding || null) + ", ") +
+                  $(selDomain.field || null) +
+                  (selCmpt.resolve === 'global' ? ')' : ", " + $(selCmpt.resolve) + ")")
+          };
+      }
+      return { signal: 'null' };
+  }
+  // Utility functions
+  function forEachSelection(model, cb) {
+      var selections = model.component.selection;
+      for (var name_3 in selections) {
+          if (selections.hasOwnProperty(name_3)) {
+              var sel = selections[name_3];
+              cb(sel, compiler(sel.type));
+          }
+      }
+  }
+  function compiler(type) {
+      switch (type) {
+          case 'single':
+              return single;
+          case 'multi':
+              return multi;
+          case 'interval':
+              return interval;
+      }
+      return null;
+  }
+  function getFacetModel(model) {
+      var parent = model.parent;
+      while (parent) {
+          if (isFacetModel(parent)) {
+              break;
+          }
+          parent = parent.parent;
+      }
+      return parent;
+  }
+  function unitName(model) {
+      var name = $(model.name);
+      var facet = getFacetModel(model);
+      if (facet) {
+          name += (facet.facet.row ? " + '_' + (" + accessPathWithDatum(facet.vgField('row'), 'facet') + ")" : '')
+              + (facet.facet.column ? " + '_' + (" + accessPathWithDatum(facet.vgField('column'), 'facet') + ")" : '');
+      }
+      return name;
+  }
+  function requiresSelectionId(model) {
+      var identifier = false;
+      forEachSelection(model, function (selCmpt) {
+          identifier = identifier || selCmpt.project.some(function (proj) { return proj.field === SELECTION_ID; });
+      });
+      return identifier;
+  }
+  function channelSignalName(selCmpt, channel, range) {
+      var sgNames = selCmpt._signalNames || (selCmpt._signalNames = {});
+      if (sgNames[channel] && sgNames[channel][range]) {
+          return sgNames[channel][range];
+      }
+      sgNames[channel] = sgNames[channel] || {};
+      var basename = varName(selCmpt.name + '_' + (range === 'visual' ? channel : selCmpt.fields[channel]));
+      var name = basename;
+      var counter = 1;
+      while (sgNames[name]) {
+          name = basename + "_" + counter++;
+      }
+      return (sgNames[name] = sgNames[channel][range] = name);
+  }
+  function positionalProjections(selCmpt) {
+      var x = null;
+      var xi = null;
+      var y = null;
+      var yi = null;
+      selCmpt.project.forEach(function (p, i) {
+          if (p.channel === X) {
+              x = p;
+              xi = i;
+          }
+          else if (p.channel === Y) {
+              y = p;
+              yi = i;
+          }
+      });
+      return { x: x, xi: xi, y: y, yi: yi };
+  }
+
+  function isSelectionPredicate(predicate) {
+      return predicate && predicate['selection'];
+  }
+  function isFieldEqualPredicate(predicate) {
+      return predicate && !!predicate.field && predicate.equal !== undefined;
+  }
+  function isFieldLTPredicate(predicate) {
+      return predicate && !!predicate.field && predicate.lt !== undefined;
+  }
+  function isFieldLTEPredicate(predicate) {
+      return predicate && !!predicate.field && predicate.lte !== undefined;
+  }
+  function isFieldGTPredicate(predicate) {
+      return predicate && !!predicate.field && predicate.gt !== undefined;
+  }
+  function isFieldGTEPredicate(predicate) {
+      return predicate && !!predicate.field && predicate.gte !== undefined;
+  }
+  function isFieldRangePredicate(predicate) {
+      if (predicate && predicate.field) {
+          if (isArray(predicate.range) && predicate.range.length === 2) {
+              return true;
+          }
+      }
+      return false;
+  }
+  function isFieldOneOfPredicate(predicate) {
+      return predicate && !!predicate.field && (isArray(predicate.oneOf) ||
+          isArray(predicate.in) // backward compatibility
+      );
+  }
+  function isFieldPredicate(predicate) {
+      return isFieldOneOfPredicate(predicate) || isFieldEqualPredicate(predicate) || isFieldRangePredicate(predicate) || isFieldLTPredicate(predicate) || isFieldGTPredicate(predicate) || isFieldLTEPredicate(predicate) || isFieldGTEPredicate(predicate);
+  }
+  /**
+   * Converts a predicate into an expression.
+   */
+  // model is only used for selection filters.
+  function expression(model, filterOp, node) {
+      return logicalExpr(filterOp, function (predicate) {
+          if (isString(predicate)) {
+              return predicate;
+          }
+          else if (isSelectionPredicate(predicate)) {
+              return selectionPredicate(model, predicate.selection, node);
+          }
+          else { // Filter Object
+              return fieldFilterExpression(predicate);
+          }
+      });
+  }
+  function predicateValueExpr(v, timeUnit) {
+      return valueExpr(v, { timeUnit: timeUnit, time: true });
+  }
+  function predicateValuesExpr(vals$$1, timeUnit) {
+      return vals$$1.map(function (v) { return predicateValueExpr(v, timeUnit); });
+  }
+  // This method is used by Voyager.  Do not change its behavior without changing Voyager.
+  function fieldFilterExpression(predicate, useInRange) {
+      if (useInRange === void 0) { useInRange = true; }
+      var field$$1 = predicate.field, timeUnit = predicate.timeUnit;
+      var fieldExpr$$1 = timeUnit ?
+          // For timeUnit, cast into integer with time() so we can use ===, inrange, indexOf to compare values directly.
+          // TODO: We calculate timeUnit on the fly here. Consider if we would like to consolidate this with timeUnit pipeline
+          // TODO: support utc
+          ('time(' + fieldExpr(timeUnit, field$$1) + ')') :
+          vgField(predicate, { expr: 'datum' });
+      if (isFieldEqualPredicate(predicate)) {
+          return fieldExpr$$1 + '===' + predicateValueExpr(predicate.equal, timeUnit);
+      }
+      else if (isFieldLTPredicate(predicate)) {
+          var upper = predicate.lt;
+          return fieldExpr$$1 + "<" + predicateValueExpr(upper, timeUnit);
+      }
+      else if (isFieldGTPredicate(predicate)) {
+          var lower = predicate.gt;
+          return fieldExpr$$1 + ">" + predicateValueExpr(lower, timeUnit);
+      }
+      else if (isFieldLTEPredicate(predicate)) {
+          var upper = predicate.lte;
+          return fieldExpr$$1 + "<=" + predicateValueExpr(upper, timeUnit);
+      }
+      else if (isFieldGTEPredicate(predicate)) {
+          var lower = predicate.gte;
+          return fieldExpr$$1 + ">=" + predicateValueExpr(lower, timeUnit);
+      }
+      else if (isFieldOneOfPredicate(predicate)) {
+          // "oneOf" was formerly "in" -- so we need to add backward compatibility
+          var oneOf = predicate.oneOf;
+          oneOf = oneOf || predicate['in'];
+          return 'indexof([' +
+              predicateValuesExpr(oneOf, timeUnit).join(',') +
+              '], ' + fieldExpr$$1 + ') !== -1';
+      }
+      else if (isFieldRangePredicate(predicate)) {
+          var lower = predicate.range[0];
+          var upper = predicate.range[1];
+          if (lower !== null && upper !== null && useInRange) {
+              return 'inrange(' + fieldExpr$$1 + ', [' +
+                  predicateValueExpr(lower, timeUnit) + ', ' +
+                  predicateValueExpr(upper, timeUnit) + '])';
+          }
+          var exprs = [];
+          if (lower !== null) {
+              exprs.push(fieldExpr$$1 + " >= " + predicateValueExpr(lower, timeUnit));
+          }
+          if (upper !== null) {
+              exprs.push(fieldExpr$$1 + " <= " + predicateValueExpr(upper, timeUnit));
+          }
+          return exprs.length > 0 ? exprs.join(' && ') : 'true';
+      }
+      /* istanbul ignore next: it should never reach here */
+      throw new Error("Invalid field predicate: " + JSON.stringify(predicate));
+  }
+  function normalizePredicate(f) {
+      if (isFieldPredicate(f) && f.timeUnit) {
+          return __assign({}, f, { timeUnit: normalizeTimeUnit(f.timeUnit) });
+      }
+      return f;
+  }
+
+  function isFilter(t) {
+      return t['filter'] !== undefined;
+  }
+  function isLookup(t) {
+      return t['lookup'] !== undefined;
+  }
+  function isWindow(t) {
+      return t['window'] !== undefined;
+  }
+  function isCalculate(t) {
+      return t['calculate'] !== undefined;
+  }
+  function isBin(t) {
+      return !!t['bin'];
+  }
+  function isTimeUnit$1(t) {
+      return t['timeUnit'] !== undefined;
+  }
+  function isAggregate$1(t) {
+      return t['aggregate'] !== undefined;
+  }
+  function isStack(t) {
+      return t['stack'] !== undefined;
+  }
+  function normalizeTransform(transform) {
+      return transform.map(function (t) {
+          if (isFilter(t)) {
+              return {
+                  filter: normalizeLogicalOperand(t.filter, normalizePredicate)
+              };
+          }
+          return t;
+      });
+  }
+
+  var transform = /*#__PURE__*/Object.freeze({
+    isFilter: isFilter,
+    isLookup: isLookup,
+    isWindow: isWindow,
+    isCalculate: isCalculate,
+    isBin: isBin,
+    isTimeUnit: isTimeUnit$1,
+    isAggregate: isAggregate$1,
+    isStack: isStack,
+    normalizeTransform: normalizeTransform
+  });
+
+  function rangeFormula(model, fieldDef, channel, config) {
+      if (binRequiresRange(fieldDef, channel)) {
+          // read format from axis or legend, if there is no format then use config.numberFormat
+          var guide = isUnitModel(model) ? (model.axis(channel) || model.legend(channel) || {}) : {};
+          var startField = vgField(fieldDef, { expr: 'datum', });
+          var endField = vgField(fieldDef, { expr: 'datum', binSuffix: 'end' });
+          return {
+              formulaAs: vgField(fieldDef, { binSuffix: 'range' }),
+              formula: binFormatExpression(startField, endField, guide.format, config)
+          };
+      }
+      return {};
+  }
+  function binKey(bin, field$$1) {
+      return binToString(bin) + "_" + field$$1;
+  }
+  function getSignalsFromModel(model, key$$1) {
+      return {
+          signal: model.getName(key$$1 + "_bins"),
+          extentSignal: model.getName(key$$1 + "_extent")
+      };
+  }
+  function isBinTransform(t) {
+      return 'as' in t;
+  }
+  function createBinComponent(t, model) {
+      var as;
+      if (isBinTransform(t)) {
+          as = isString(t.as) ? [t.as, t.as + "_end"] : [t.as[0], t.as[1]];
+      }
+      else {
+          as = [vgField(t, {}), vgField(t, { binSuffix: 'end' })];
+      }
+      var bin = normalizeBin(t.bin, undefined) || {};
+      var key$$1 = binKey(bin, t.field);
+      var _a = getSignalsFromModel(model, key$$1), signal = _a.signal, extentSignal = _a.extentSignal;
+      var binComponent = __assign({ bin: bin, field: t.field, as: as }, signal ? { signal: signal } : {}, extentSignal ? { extentSignal: extentSignal } : {});
+      return { key: key$$1, binComponent: binComponent };
+  }
+  var BinNode = /** @class */ (function (_super) {
+      __extends(BinNode, _super);
+      function BinNode(parent, bins) {
+          var _this = _super.call(this, parent) || this;
+          _this.bins = bins;
+          return _this;
+      }
+      BinNode.prototype.clone = function () {
+          return new BinNode(null, duplicate(this.bins));
+      };
+      BinNode.makeFromEncoding = function (parent, model) {
+          var bins = model.reduceFieldDef(function (binComponentIndex, fieldDef, channel) {
+              if (fieldDef.bin) {
+                  var _a = createBinComponent(fieldDef, model), key$$1 = _a.key, binComponent = _a.binComponent;
+                  binComponentIndex[key$$1] = __assign({}, binComponent, binComponentIndex[key$$1], rangeFormula(model, fieldDef, channel, model.config));
+              }
+              return binComponentIndex;
+          }, {});
+          if (keys(bins).length === 0) {
+              return null;
+          }
+          return new BinNode(parent, bins);
+      };
+      /**
+       * Creates a bin node from BinTransform.
+       * The optional parameter should provide
+       */
+      BinNode.makeFromTransform = function (parent, t, model) {
+          var _a;
+          var _b = createBinComponent(t, model), key$$1 = _b.key, binComponent = _b.binComponent;
+          return new BinNode(parent, (_a = {},
+              _a[key$$1] = binComponent,
+              _a));
+      };
+      BinNode.prototype.merge = function (other) {
+          this.bins = __assign({}, this.bins, other.bins);
+          other.remove();
+      };
+      BinNode.prototype.producedFields = function () {
+          var out = {};
+          vals(this.bins).forEach(function (c) {
+              c.as.forEach(function (f) { return out[f] = true; });
+          });
+          return out;
+      };
+      BinNode.prototype.dependentFields = function () {
+          var out = {};
+          vals(this.bins).forEach(function (c) {
+              out[c.field] = true;
+          });
+          return out;
+      };
+      BinNode.prototype.assemble = function () {
+          return flatten(vals(this.bins).map(function (bin) {
+              var transform = [];
+              var binTrans = __assign({ type: 'bin', field: bin.field, as: bin.as, signal: bin.signal }, bin.bin);
+              if (!bin.bin.extent && bin.extentSignal) {
+                  transform.push({
+                      type: 'extent',
+                      field: bin.field,
+                      signal: bin.extentSignal
+                  });
+                  binTrans.extent = { signal: bin.extentSignal };
+              }
+              transform.push(binTrans);
+              if (bin.formula) {
+                  transform.push({
+                      type: 'formula',
+                      expr: bin.formula,
+                      as: bin.formulaAs
+                  });
+              }
+              return transform;
+          }));
+      };
+      return BinNode;
+  }(DataFlowNode));
+
+  var FilterNode = /** @class */ (function (_super) {
+      __extends(FilterNode, _super);
+      function FilterNode(parent, model, filter) {
+          var _this = _super.call(this, parent) || this;
+          _this.model = model;
+          _this.filter = filter;
+          _this.expr = expression(_this.model, _this.filter, _this);
+          return _this;
+      }
+      FilterNode.prototype.clone = function () {
+          return new FilterNode(null, this.model, duplicate(this.filter));
+      };
+      FilterNode.prototype.assemble = function () {
+          return {
+              type: 'filter',
+              expr: this.expr
+          };
+      };
+      return FilterNode;
+  }(DataFlowNode));
+
+  var GeoJSONNode = /** @class */ (function (_super) {
+      __extends(GeoJSONNode, _super);
+      function GeoJSONNode(parent, fields, geojson, signal) {
+          var _this = _super.call(this, parent) || this;
+          _this.fields = fields;
+          _this.geojson = geojson;
+          _this.signal = signal;
+          return _this;
+      }
+      GeoJSONNode.prototype.clone = function () {
+          return new GeoJSONNode(null, duplicate(this.fields), this.geojson, this.signal);
+      };
+      GeoJSONNode.parseAll = function (parent, model) {
+          var geoJsonCounter = 0;
+          [[LONGITUDE, LATITUDE], [LONGITUDE2, LATITUDE2]].forEach(function (coordinates) {
+              var pair = coordinates.map(function (channel) { return model.channelHasField(channel) ? model.fieldDef(channel).field : undefined; });
+              if (pair[0] || pair[1]) {
+                  parent = new GeoJSONNode(parent, pair, null, model.getName("geojson_" + geoJsonCounter++));
+              }
+          });
+          if (model.channelHasField(SHAPE)) {
+              var fieldDef = model.fieldDef(SHAPE);
+              if (fieldDef.type === GEOJSON) {
+                  parent = new GeoJSONNode(parent, null, fieldDef.field, model.getName("geojson_" + geoJsonCounter++));
+              }
+          }
+          return parent;
+      };
+      GeoJSONNode.prototype.assemble = function () {
+          return __assign({ type: 'geojson' }, (this.fields ? { fields: this.fields } : {}), (this.geojson ? { geojson: this.geojson } : {}), { signal: this.signal });
+      };
+      return GeoJSONNode;
+  }(DataFlowNode));
+
+  var GeoPointNode = /** @class */ (function (_super) {
+      __extends(GeoPointNode, _super);
+      function GeoPointNode(parent, projection, fields, as) {
+          var _this = _super.call(this, parent) || this;
+          _this.projection = projection;
+          _this.fields = fields;
+          _this.as = as;
+          return _this;
+      }
+      GeoPointNode.prototype.clone = function () {
+          return new GeoPointNode(null, this.projection, duplicate(this.fields), duplicate(this.as));
+      };
+      GeoPointNode.parseAll = function (parent, model) {
+          if (!model.projectionName()) {
+              return parent;
+          }
+          [[LONGITUDE, LATITUDE], [LONGITUDE2, LATITUDE2]].forEach(function (coordinates) {
+              var pair = coordinates.map(function (channel) { return model.channelHasField(channel) ? model.fieldDef(channel).field : undefined; });
+              var suffix = coordinates[0] === LONGITUDE2 ? '2' : '';
+              if (pair[0] || pair[1]) {
+                  parent = new GeoPointNode(parent, model.projectionName(), pair, [model.getName('x' + suffix), model.getName('y' + suffix)]);
+              }
+          });
+          return parent;
+      };
+      GeoPointNode.prototype.assemble = function () {
+          return {
+              type: 'geopoint',
+              projection: this.projection,
+              fields: this.fields,
+              as: this.as
+          };
+      };
+      return GeoPointNode;
+  }(DataFlowNode));
+
+  var IdentifierNode = /** @class */ (function (_super) {
+      __extends(IdentifierNode, _super);
+      function IdentifierNode(parent) {
+          return _super.call(this, parent) || this;
+      }
+      IdentifierNode.prototype.clone = function () {
+          return new IdentifierNode(null);
+      };
+      IdentifierNode.prototype.producedFields = function () {
+          var _a;
+          return _a = {}, _a[SELECTION_ID] = true, _a;
+      };
+      IdentifierNode.prototype.assemble = function () {
+          return { type: 'identifier', as: SELECTION_ID };
+      };
+      return IdentifierNode;
+  }(DataFlowNode));
+
+  /**
+   * Class to track interesting properties (see https://15721.courses.cs.cmu.edu/spring2016/papers/graefe-ieee1995.pdf)
+   * about how fields have been parsed or whether they have been derived in a transforms. We use this to not parse the
+   * same field again (or differently).
+   */
+  var AncestorParse = /** @class */ (function (_super) {
+      __extends(AncestorParse, _super);
+      function AncestorParse(explicit, implicit, parseNothing) {
+          if (explicit === void 0) { explicit = {}; }
+          if (implicit === void 0) { implicit = {}; }
+          if (parseNothing === void 0) { parseNothing = false; }
+          var _this = _super.call(this, explicit, implicit) || this;
+          _this.explicit = explicit;
+          _this.implicit = implicit;
+          _this.parseNothing = parseNothing;
+          return _this;
+      }
+      AncestorParse.prototype.clone = function () {
+          var clone = _super.prototype.clone.call(this);
+          clone.parseNothing = this.parseNothing;
+          return clone;
+      };
+      return AncestorParse;
+  }(Split));
+
+  var LookupNode = /** @class */ (function (_super) {
+      __extends(LookupNode, _super);
+      function LookupNode(parent, transform, secondary) {
+          var _this = _super.call(this, parent) || this;
+          _this.transform = transform;
+          _this.secondary = secondary;
+          return _this;
+      }
+      LookupNode.make = function (parent, model, transform, counter) {
+          var sources = model.component.data.sources;
+          var s = new SourceNode(transform.from.data);
+          var fromSource = sources[s.hash()];
+          if (!fromSource) {
+              sources[s.hash()] = s;
+              fromSource = s;
+          }
+          var fromOutputName = model.getName("lookup_" + counter);
+          var fromOutputNode = new OutputNode(fromSource, fromOutputName, 'lookup', model.component.data.outputNodeRefCounts);
+          model.component.data.outputNodes[fromOutputName] = fromOutputNode;
+          return new LookupNode(parent, transform, fromOutputNode.getSource());
+      };
+      LookupNode.prototype.producedFields = function () {
+          return toSet(this.transform.from.fields || ((this.transform.as instanceof Array) ? this.transform.as : [this.transform.as]));
+      };
+      LookupNode.prototype.assemble = function () {
+          var foreign;
+          if (this.transform.from.fields) {
+              // lookup a few fields and add create a flat output
+              foreign = __assign({ values: this.transform.from.fields }, this.transform.as ? { as: ((this.transform.as instanceof Array) ? this.transform.as : [this.transform.as]) } : {});
+          }
+          else {
+              // lookup full record and nest it
+              var asName = this.transform.as;
+              if (!isString(asName)) {
+                  warn(message.NO_FIELDS_NEEDS_AS);
+                  asName = '_lookup';
+              }
+              foreign = {
+                  as: [asName]
+              };
+          }
+          return __assign({ type: 'lookup', from: this.secondary, key: this.transform.from.key, fields: [this.transform.lookup] }, foreign, (this.transform.default ? { default: this.transform.default } : {}));
+      };
+      return LookupNode;
+  }(DataFlowNode));
+
+  function makeWalkTree(data) {
+      // to name datasources
+      var datasetIndex = 0;
+      /**
+       * Recursively walk down the tree.
+       */
+      function walkTree(node, dataSource) {
+          if (node instanceof SourceNode) {
+              // If the source is a named data source or a data source with values, we need
+              // to put it in a different data source. Otherwise, Vega may override the data.
+              if (!isUrlData(node.data)) {
+                  data.push(dataSource);
+                  var newData = {
+                      name: null,
+                      source: dataSource.name,
+                      transform: []
+                  };
+                  dataSource = newData;
+              }
+          }
+          if (node instanceof ParseNode) {
+              if (node.parent instanceof SourceNode && !dataSource.source) {
+                  // If node's parent is a root source and the data source does not refer to another data source, use normal format parse
+                  dataSource.format = __assign({}, dataSource.format || {}, { parse: node.assembleFormatParse() });
+                  // add calculates for all nested fields
+                  dataSource.transform = dataSource.transform.concat(node.assembleTransforms(true));
+              }
+              else {
+                  // Otherwise use Vega expression to parse
+                  dataSource.transform = dataSource.transform.concat(node.assembleTransforms());
+              }
+          }
+          if (node instanceof FacetNode) {
+              if (!dataSource.name) {
+                  dataSource.name = "data_" + datasetIndex++;
+              }
+              if (!dataSource.source || dataSource.transform.length > 0) {
+                  data.push(dataSource);
+                  node.data = dataSource.name;
+              }
+              else {
+                  node.data = dataSource.source;
+              }
+              node.assemble().forEach(function (d) { return data.push(d); });
+              // break here because the rest of the tree has to be taken care of by the facet.
+              return;
+          }
+          if (node instanceof FilterNode ||
+              node instanceof CalculateNode ||
+              node instanceof GeoPointNode ||
+              node instanceof GeoJSONNode ||
+              node instanceof AggregateNode ||
+              node instanceof LookupNode ||
+              node instanceof WindowTransformNode ||
+              node instanceof IdentifierNode) {
+              dataSource.transform.push(node.assemble());
+          }
+          if (node instanceof FilterInvalidNode ||
+              node instanceof BinNode ||
+              node instanceof TimeUnitNode ||
+              node instanceof StackNode) {
+              dataSource.transform = dataSource.transform.concat(node.assemble());
+          }
+          if (node instanceof AggregateNode) {
+              if (!dataSource.name) {
+                  dataSource.name = "data_" + datasetIndex++;
+              }
+          }
+          if (node instanceof OutputNode) {
+              if (dataSource.source && dataSource.transform.length === 0) {
+                  node.setSource(dataSource.source);
+              }
+              else if (node.parent instanceof OutputNode) {
+                  // Note that an output node may be required but we still do not assemble a
+                  // separate data source for it.
+                  node.setSource(dataSource.name);
+              }
+              else {
+                  if (!dataSource.name) {
+                      dataSource.name = "data_" + datasetIndex++;
+                  }
+                  // Here we set the name of the datasource we generated. From now on
+                  // other assemblers can use it.
+                  node.setSource(dataSource.name);
+                  // if this node has more than one child, we will add a datasource automatically
+                  if (node.numChildren() === 1) {
+                      data.push(dataSource);
+                      var newData = {
+                          name: null,
+                          source: dataSource.name,
+                          transform: []
+                      };
+                      dataSource = newData;
+                  }
+              }
+          }
+          switch (node.numChildren()) {
+              case 0:
+                  // done
+                  if (node instanceof OutputNode && (!dataSource.source || dataSource.transform.length > 0)) {
+                      // do not push empty datasources that are simply references
+                      data.push(dataSource);
+                  }
+                  break;
+              case 1:
+                  walkTree(node.children[0], dataSource);
+                  break;
+              default:
+                  if (!dataSource.name) {
+                      dataSource.name = "data_" + datasetIndex++;
+                  }
+                  var source_1 = dataSource.name;
+                  if (!dataSource.source || dataSource.transform.length > 0) {
+                      data.push(dataSource);
+                  }
+                  else {
+                      source_1 = dataSource.source;
+                  }
+                  node.children.forEach(function (child) {
+                      var newData = {
+                          name: null,
+                          source: source_1,
+                          transform: []
+                      };
+                      walkTree(child, newData);
+                  });
+                  break;
+          }
+      }
+      return walkTree;
+  }
+  /**
+   * Assemble data sources that are derived from faceted data.
+   */
+  function assembleFacetData(root) {
+      var data = [];
+      var walkTree = makeWalkTree(data);
+      root.children.forEach(function (child) { return walkTree(child, {
+          source: root.name,
+          name: null,
+          transform: []
+      }); });
+      return data;
+  }
+  /**
+   * Create Vega Data array from a given compiled model and append all of them to the given array
+   *
+   * @param  model
+   * @param  data array
+   * @return modified data array
+   */
+  function assembleRootData(dataComponent, datasets) {
+      var roots = vals(dataComponent.sources);
+      var data = [];
+      // roots.forEach(debug);
+      var walkTree = makeWalkTree(data);
+      var sourceIndex = 0;
+      roots.forEach(function (root) {
+          // assign a name if the source does not have a name yet
+          if (!root.hasName()) {
+              root.dataName = "source_" + sourceIndex++;
+          }
+          var newData = root.assemble();
+          walkTree(root, newData);
+      });
+      // remove empty transform arrays for cleaner output
+      data.forEach(function (d) {
+          if (d.transform.length === 0) {
+              delete d.transform;
+          }
+      });
+      // move sources without transforms (the ones that are potentially used in lookups) to the beginning
+      var whereTo = 0;
+      for (var i = 0; i < data.length; i++) {
+          var d = data[i];
+          if ((d.transform || []).length === 0 && !d.source) {
+              data.splice(whereTo++, 0, data.splice(i, 1)[0]);
+          }
+      }
+      // now fix the from references in lookup transforms
+      for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
+          var d = data_1[_i];
+          for (var _a = 0, _b = d.transform || []; _a < _b.length; _a++) {
+              var t = _b[_a];
+              if (t.type === 'lookup') {
+                  t.from = dataComponent.outputNodes[t.from].getSource();
+              }
+          }
+      }
+      // inline values for datasets that are in the datastore
+      for (var _c = 0, data_2 = data; _c < data_2.length; _c++) {
+          var d = data_2[_c];
+          if (d.name in datasets) {
+              d.values = datasets[d.name];
+          }
+      }
+      return data;
+  }
+
+  function parseLayerLayoutSize(model) {
+      parseChildrenLayoutSize(model);
+      var layoutSizeCmpt = model.component.layoutSize;
+      layoutSizeCmpt.setWithExplicit('width', parseNonUnitLayoutSizeForChannel(model, 'width'));
+      layoutSizeCmpt.setWithExplicit('height', parseNonUnitLayoutSizeForChannel(model, 'height'));
+  }
+  var parseRepeatLayoutSize = parseLayerLayoutSize;
+  function parseConcatLayoutSize(model) {
+      parseChildrenLayoutSize(model);
+      var layoutSizeCmpt = model.component.layoutSize;
+      var sizeTypeToMerge = model.isVConcat ? 'width' : 'height';
+      layoutSizeCmpt.setWithExplicit(sizeTypeToMerge, parseNonUnitLayoutSizeForChannel(model, sizeTypeToMerge));
+  }
+  function parseChildrenLayoutSize(model) {
+      for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+          var child = _a[_i];
+          child.parseLayoutSize();
+      }
+  }
+  function parseNonUnitLayoutSizeForChannel(model, sizeType) {
+      var channel = sizeType === 'width' ? 'x' : 'y';
+      var resolve = model.component.resolve;
+      var mergedSize;
+      // Try to merge layout size
+      for (var _i = 0, _a = model.children; _i < _a.length; _i++) {
+          var child = _a[_i];
+          var childSize = child.component.layoutSize.getWithExplicit(sizeType);
+          var scaleResolve = resolve.scale[channel];
+          if (scaleResolve === 'independent' && childSize.value === 'range-step') {
+              // Do not merge independent scales with range-step as their size depends
+              // on the scale domains, which can be different between scales.
+              mergedSize = undefined;
+              break;
+          }
+          if (mergedSize) {
+              if (scaleResolve === 'independent' && mergedSize.value !== childSize.value) {
+                  // For independent scale, only merge if all the sizes are the same.
+                  // If the values are different, abandon the merge!
+                  mergedSize = undefined;
+                  break;
+              }
+              mergedSize = mergeValuesWithExplicit(mergedSize, childSize, sizeType, '');
+          }
+          else {
+              mergedSize = childSize;
+          }
+      }
+      if (mergedSize) {
+          // If merged, rename size and set size of all children.
+          for (var _b = 0, _c = model.children; _b < _c.length; _b++) {
+              var child = _c[_b];
+              model.renameLayoutSize(child.getName(sizeType), model.getName(sizeType));
+              child.component.layoutSize.set(sizeType, 'merged', false);
+          }
+          return mergedSize;
+      }
+      else {
+          // Otherwise, there is no merged size.
+          return {
+              explicit: false,
+              value: undefined
+          };
+      }
+  }
+  function parseUnitLayoutSize(model) {
+      var layoutSizeComponent = model.component.layoutSize;
+      if (!layoutSizeComponent.explicit.width) {
+          var width = defaultUnitSize(model, 'width');
+          layoutSizeComponent.set('width', width, false);
+      }
+      if (!layoutSizeComponent.explicit.height) {
+          var height = defaultUnitSize(model, 'height');
+          layoutSizeComponent.set('height', height, false);
+      }
+  }
+  function defaultUnitSize(model, sizeType) {
+      var channel = sizeType === 'width' ? 'x' : 'y';
+      var config = model.config;
+      var scaleComponent = model.getScaleComponent(channel);
+      if (scaleComponent) {
+          var scaleType = scaleComponent.get('type');
+          var range = scaleComponent.get('range');
+          if (hasDiscreteDomain(scaleType) && isVgRangeStep(range)) {
+              // For discrete domain with range.step, use dynamic width/height
+              return 'range-step';
+          }
+          else {
+              return config.view[sizeType];
+          }
+      }
+      else if (model.hasProjection) {
+          return config.view[sizeType];
+      }
+      else {
+          // No scale - set default size
+          if (sizeType === 'width' && model.mark === 'text') {
+              // width for text mark without x-field is a bit wider than typical range step
+              return config.scale.textXRangeStep;
+          }
+          // Set width/height equal to rangeStep config or if rangeStep is null, use value from default scale config.
+          return config.scale.rangeStep || defaultScaleConfig.rangeStep;
+      }
+  }
+
+  function replaceRepeaterInFacet(facet, repeater) {
+      return replaceRepeater(facet, repeater);
+  }
+  function replaceRepeaterInEncoding(encoding, repeater) {
+      return replaceRepeater(encoding, repeater);
+  }
+  /**
+   * Replaces repeated value and returns if the repeated value is valid.
+   */
+  function replaceRepeat(o, repeater) {
+      if (isRepeatRef(o.field)) {
+          if (o.field.repeat in repeater) {
+              // any needed to calm down ts compiler
+              return __assign({}, o, { field: repeater[o.field.repeat] });
+          }
+          else {
+              warn(message.noSuchRepeatedValue(o.field.repeat));
+              return undefined;
+          }
+      }
+      return o;
+  }
+  /**
+   * Replace repeater values in a field def with the concrete field name.
+   */
+  function replaceRepeaterInFieldDef(fieldDef, repeater) {
+      fieldDef = replaceRepeat(fieldDef, repeater);
+      if (fieldDef === undefined) {
+          // the field def should be ignored
+          return undefined;
+      }
+      if (fieldDef.sort && isSortField(fieldDef.sort)) {
+          var sort = replaceRepeat(fieldDef.sort, repeater);
+          fieldDef = __assign({}, fieldDef, (sort ? { sort: sort } : {}));
+      }
+      return fieldDef;
+  }
+  function replaceRepeaterInChannelDef(channelDef, repeater) {
+      if (isFieldDef(channelDef)) {
+          var fd = replaceRepeaterInFieldDef(channelDef, repeater);
+          if (fd) {
+              return fd;
+          }
+          else if (isConditionalDef(channelDef)) {
+              return { condition: channelDef.condition };
+          }
+      }
+      else {
+          if (hasConditionalFieldDef(channelDef)) {
+              var fd = replaceRepeaterInFieldDef(channelDef.condition, repeater);
+              if (fd) {
+                  return __assign({}, channelDef, { condition: fd });
+              }
+              else {
+                  var condition = channelDef.condition, channelDefWithoutCondition = __rest(channelDef, ["condition"]);
+                  return channelDefWithoutCondition;
+              }
+          }
+          return channelDef;
+      }
+      return undefined;
+  }
+  function replaceRepeater(mapping, repeater) {
+      var out = {};
+      for (var channel in mapping) {
+          if (mapping.hasOwnProperty(channel)) {
+              var channelDef = mapping[channel];
+              if (isArray(channelDef)) {
+                  // array cannot have condition
+                  out[channel] = channelDef.map(function (cd) { return replaceRepeaterInChannelDef(cd, repeater); })
+                      .filter(function (cd) { return cd; });
+              }
+              else {
+                  var cd = replaceRepeaterInChannelDef(channelDef, repeater);
+                  if (cd) {
+                      out[channel] = cd;
+                  }
+              }
+          }
+      }
+      return out;
+  }
+
+  function facetSortFieldName(fieldDef, sort, expr) {
+      return vgField(sort, { expr: expr, suffix: "by_" + vgField(fieldDef) });
+  }
+  var FacetModel = /** @class */ (function (_super) {
+      __extends(FacetModel, _super);
+      function FacetModel(spec, parent, parentGivenName, repeater, config) {
+          var _this = _super.call(this, spec, parent, parentGivenName, config, repeater, spec.resolve) || this;
+          _this.type = 'facet';
+          _this.child = buildModel(spec.spec, _this, _this.getName('child'), undefined, repeater, config, false);
+          _this.children = [_this.child];
+          var facet = replaceRepeaterInFacet(spec.facet, repeater);
+          _this.facet = _this.initFacet(facet);
+          return _this;
+      }
+      FacetModel.prototype.initFacet = function (facet) {
+          // clone to prevent side effect to the original spec
+          return reduce(facet, function (normalizedFacet, fieldDef, channel) {
+              if (!contains([ROW, COLUMN], channel)) {
+                  // Drop unsupported channel
+                  warn(message.incompatibleChannel(channel, 'facet'));
+                  return normalizedFacet;
+              }
+              if (fieldDef.field === undefined) {
+                  warn(message.emptyFieldDef(fieldDef, channel));
+                  return normalizedFacet;
+              }
+              // Convert type to full, lowercase type, or augment the fieldDef with a default type if missing.
+              normalizedFacet[channel] = normalize(fieldDef, channel);
+              return normalizedFacet;
+          }, {});
+      };
+      FacetModel.prototype.channelHasField = function (channel) {
+          return !!this.facet[channel];
+      };
+      FacetModel.prototype.fieldDef = function (channel) {
+          return this.facet[channel];
+      };
+      FacetModel.prototype.parseData = function () {
+          this.component.data = parseData(this);
+          this.child.parseData();
+      };
+      FacetModel.prototype.parseLayoutSize = function () {
+          parseChildrenLayoutSize(this);
+      };
+      FacetModel.prototype.parseSelection = function () {
+          // As a facet has a single child, the selection components are the same.
+          // The child maintains its selections to assemble signals, which remain
+          // within its unit.
+          this.child.parseSelection();
+          this.component.selection = this.child.component.selection;
+      };
+      FacetModel.prototype.parseMarkGroup = function () {
+          this.child.parseMarkGroup();
+      };
+      FacetModel.prototype.parseAxisAndHeader = function () {
+          this.child.parseAxisAndHeader();
+          this.parseHeader('column');
+          this.parseHeader('row');
+          this.mergeChildAxis('x');
+          this.mergeChildAxis('y');
+      };
+      FacetModel.prototype.parseHeader = function (channel) {
+          if (this.channelHasField(channel)) {
+              var fieldDef = this.facet[channel];
+              var header = fieldDef.header || {};
+              var title$$1 = fieldDef.title !== undefined ? fieldDef.title :
+                  header.title !== undefined ? header.title : title(fieldDef, this.config);
+              if (this.child.component.layoutHeaders[channel].title) {
+                  // merge title with child to produce "Title / Subtitle / Sub-subtitle"
+                  title$$1 += ' / ' + this.child.component.layoutHeaders[channel].title;
+                  this.child.component.layoutHeaders[channel].title = null;
+              }
+              this.component.layoutHeaders[channel] = {
+                  title: title$$1,
+                  facetFieldDef: fieldDef,
+                  // TODO: support adding label to footer as well
+                  header: [this.makeHeaderComponent(channel, true)]
+              };
+          }
+      };
+      FacetModel.prototype.makeHeaderComponent = function (channel, labels) {
+          var sizeType = channel === 'row' ? 'height' : 'width';
+          return {
+              labels: labels,
+              sizeSignal: this.child.component.layoutSize.get(sizeType) ? this.child.getSizeSignalRef(sizeType) : undefined,
+              axes: []
+          };
+      };
+      FacetModel.prototype.mergeChildAxis = function (channel) {
+          var child = this.child;
+          if (child.component.axes[channel]) {
+              var _a = this.component, layoutHeaders = _a.layoutHeaders, resolve = _a.resolve;
+              resolve.axis[channel] = parseGuideResolve(resolve, channel);
+              if (resolve.axis[channel] === 'shared') {
+                  // For shared axis, move the axes to facet's header or footer
+                  var headerChannel = channel === 'x' ? 'column' : 'row';
+                  var layoutHeader = layoutHeaders[headerChannel];
+                  for (var _i = 0, _b = child.component.axes[channel]; _i < _b.length; _i++) {
+                      var axisComponent = _b[_i];
+                      var headerType = getHeaderType(axisComponent.get('orient'));
+                      layoutHeader[headerType] = layoutHeader[headerType] ||
+                          [this.makeHeaderComponent(headerChannel, false)];
+                      var mainAxis = assembleAxis(axisComponent, 'main', this.config, { header: true });
+                      // LayoutHeader no longer keep track of property precedence, thus let's combine.
+                      layoutHeader[headerType][0].axes.push(mainAxis);
+                      axisComponent.mainExtracted = true;
+                  }
+              }
+          }
+      };
+      FacetModel.prototype.assembleSelectionTopLevelSignals = function (signals) {
+          return this.child.assembleSelectionTopLevelSignals(signals);
+      };
+      FacetModel.prototype.assembleSelectionSignals = function () {
+          this.child.assembleSelectionSignals();
+          return [];
+      };
+      FacetModel.prototype.assembleSelectionData = function (data) {
+          return this.child.assembleSelectionData(data);
+      };
+      FacetModel.prototype.getHeaderLayoutMixins = function () {
+          var _this = this;
+          var layoutMixins = {};
+          ['row', 'column'].forEach(function (channel) {
+              ['header', 'footer'].forEach(function (headerType) {
+                  var layoutHeaderComponent = _this.component.layoutHeaders[channel];
+                  var headerComponent = layoutHeaderComponent[headerType];
+                  if (headerComponent && headerComponent[0]) {
+                      // set header/footerBand
+                      var sizeType = channel === 'row' ? 'height' : 'width';
+                      var bandType = headerType === 'header' ? 'headerBand' : 'footerBand';
+                      if (!_this.child.component.layoutSize.get(sizeType)) {
+                          // If facet child does not have size signal, then apply headerBand
+                          layoutMixins[bandType] = layoutMixins[bandType] || {};
+                          layoutMixins[bandType][channel] = 0.5;
+                      }
+                      if (layoutHeaderComponent.title) {
+                          layoutMixins.offset = layoutMixins.offset || {};
+                          layoutMixins.offset[channel === 'row' ? 'rowTitle' : 'columnTitle'] = 10;
+                      }
+                  }
+              });
+          });
+          return layoutMixins;
+      };
+      FacetModel.prototype.assembleDefaultLayout = function () {
+          var columns = this.channelHasField('column') ? this.columnDistinctSignal() : 1;
+          // TODO: determine default align based on shared / independent scales
+          return __assign({}, this.getHeaderLayoutMixins(), { columns: columns, bounds: 'full', align: 'all' });
+      };
+      FacetModel.prototype.assembleLayoutSignals = function () {
+          // FIXME(https://github.com/vega/vega-lite/issues/1193): this can be incorrect if we have independent scales.
+          return this.child.assembleLayoutSignals();
+      };
+      FacetModel.prototype.columnDistinctSignal = function () {
+          if (this.parent && (this.parent instanceof FacetModel)) {
+              // For nested facet, we will add columns to group mark instead
+              // See discussion in https://github.com/vega/vega/issues/952
+              // and https://github.com/vega/vega-view/releases/tag/v1.2.6
+              return undefined;
+          }
+          else {
+              // In facetNode.assemble(), the name is always this.getName('column') + '_layout'.
+              var facetLayoutDataName = this.getName('column_domain');
+              return { signal: "length(data('" + facetLayoutDataName + "'))" };
+          }
+      };
+      FacetModel.prototype.assembleGroup = function (signals) {
+          if (this.parent && (this.parent instanceof FacetModel)) {
+              // Provide number of columns for layout.
+              // See discussion in https://github.com/vega/vega/issues/952
+              // and https://github.com/vega/vega-view/releases/tag/v1.2.6
+              return __assign({}, (this.channelHasField('column') ? {
+                  encode: {
+                      update: {
+                          // TODO(https://github.com/vega/vega-lite/issues/2759):
+                          // Correct the signal for facet of concat of facet_column
+                          columns: { field: vgField(this.facet.column, { prefix: 'distinct' }) }
+                      }
+                  }
+              } : {}), _super.prototype.assembleGroup.call(this, signals));
+          }
+          return _super.prototype.assembleGroup.call(this, signals);
+      };
+      /**
+       * Aggregate cardinality for calculating size
+       */
+      FacetModel.prototype.getCardinalityAggregateForChild = function () {
+          var fields = [];
+          var ops = [];
+          var as = [];
+          if (this.child instanceof FacetModel) {
+              if (this.child.channelHasField('column')) {
+                  var field$$1 = vgField(this.child.facet.column);
+                  fields.push(field$$1);
+                  ops.push('distinct');
+                  as.push("distinct_" + field$$1);
+              }
+          }
+          else {
+              for (var _i = 0, _a = ['x', 'y']; _i < _a.length; _i++) {
+                  var channel = _a[_i];
+                  var childScaleComponent = this.child.component.scales[channel];
+                  if (childScaleComponent && !childScaleComponent.merged) {
+                      var type = childScaleComponent.get('type');
+                      var range = childScaleComponent.get('range');
+                      if (hasDiscreteDomain(type) && isVgRangeStep(range)) {
+                          var domain = assembleDomain(this.child, channel);
+                          var field$$1 = getFieldFromDomain(domain);
+                          if (field$$1) {
+                              fields.push(field$$1);
+                              ops.push('distinct');
+                              as.push("distinct_" + field$$1);
+                          }
+                          else {
+                              warn('Unknown field for ${channel}.  Cannot calculate view size.');
+                          }
+                      }
+                  }
+              }
+          }
+          return { fields: fields, ops: ops, as: as };
+      };
+      FacetModel.prototype.assembleFacet = function () {
+          var _this = this;
+          var _a = this.component.data.facetRoot, name = _a.name, data = _a.data;
+          var _b = this.facet, row = _b.row, column = _b.column;
+          var _c = this.getCardinalityAggregateForChild(), fields = _c.fields, ops = _c.ops, as = _c.as;
+          var groupby = [];
+          ['row', 'column'].forEach(function (channel) {
+              var fieldDef = _this.facet[channel];
+              if (fieldDef) {
+                  groupby.push(vgField(fieldDef));
+                  var sort = fieldDef.sort;
+                  if (isSortField(sort)) {
+                      var field$$1 = sort.field, op = sort.op;
+                      var outputName = facetSortFieldName(fieldDef, sort);
+                      if (row && column) {
+                          // For crossed facet, use pre-calculate field as it requires a different groupby
+                          // For each calculated field, apply max and assign them to the same name as
+                          // all values of the same group should be the same anyway.
+                          fields.push(outputName);
+                          ops.push('max');
+                          as.push(outputName);
+                      }
+                      else {
+                          fields.push(field$$1);
+                          ops.push(op);
+                          as.push(outputName);
+                      }
+                  }
+                  else if (isArray(sort)) {
+                      var outputName = sortArrayIndexField(fieldDef, channel);
+                      fields.push(outputName);
+                      ops.push('max');
+                      as.push(outputName);
+                  }
+              }
+          });
+          var cross = !!row && !!column;
+          return __assign({ name: name,
+              data: data,
+              groupby: groupby }, (cross || fields.length ? {
+              aggregate: __assign({}, (cross ? { cross: cross } : {}), (fields.length ? { fields: fields, ops: ops, as: as } : {}))
+          } : {}));
+      };
+      FacetModel.prototype.headerSortFields = function (channel) {
+          var facet = this.facet;
+          var fieldDef = facet[channel];
+          if (fieldDef) {
+              if (isSortField(fieldDef.sort)) {
+                  return [facetSortFieldName(fieldDef, fieldDef.sort, 'datum')];
+              }
+              else if (isArray(fieldDef.sort)) {
+                  return [sortArrayIndexField(fieldDef, channel, 'datum')];
+              }
+              return [vgField(fieldDef, { expr: 'datum' })];
+          }
+          return [];
+      };
+      FacetModel.prototype.headerSortOrder = function (channel) {
+          var facet = this.facet;
+          var fieldDef = facet[channel];
+          if (fieldDef) {
+              var sort = fieldDef.sort;
+              var order = (isSortField(sort) ? sort.order : !isArray(sort) && sort) || 'ascending';
+              return [order];
+          }
+          return [];
+      };
+      FacetModel.prototype.assembleMarks = function () {
+          var child = this.child;
+          var facetRoot = this.component.data.facetRoot;
+          var data = assembleFacetData(facetRoot);
+          // If we facet by two dimensions, we need to add a cross operator to the aggregation
+          // so that we create all groups
+          var layoutSizeEncodeEntry = child.assembleLayoutSize();
+          var title$$1 = child.assembleTitle();
+          var style = child.assembleGroupStyle();
+          var markGroup = __assign({ name: this.getName('cell'), type: 'group' }, (title$$1 ? { title: title$$1 } : {}), (style ? { style: style } : {}), { from: {
+                  facet: this.assembleFacet()
+              }, 
+              // TODO: move this to after data
+              sort: {
+                  field: this.headerSortFields('row').concat(this.headerSortFields('column')),
+                  order: this.headerSortOrder('row').concat(this.headerSortOrder('column'))
+              } }, (data.length > 0 ? { data: data } : {}), (layoutSizeEncodeEntry ? { encode: { update: layoutSizeEncodeEntry } } : {}), child.assembleGroup());
+          return [markGroup];
+      };
+      FacetModel.prototype.getMapping = function () {
+          return this.facet;
+      };
+      return FacetModel;
+  }(ModelWithField));
+
+  /**
+   * A class for the window transform nodes
+   */
+  var WindowTransformNode = /** @class */ (function (_super) {
+      __extends(WindowTransformNode, _super);
+      function WindowTransformNode(parent, transform) {
+          var _this = _super.call(this, parent) || this;
+          _this.transform = transform;
+          return _this;
+      }
+      WindowTransformNode.makeFromFacet = function (parent, facet) {
+          var row = facet.row, column = facet.column;
+          if (row && column) {
+              var newParent = null;
+              // only need to make one for crossed facet
+              for (var _i = 0, _a = [row, column]; _i < _a.length; _i++) {
+                  var fieldDef = _a[_i];
+                  if (isSortField(fieldDef.sort)) {
+                      var _b = fieldDef.sort, field = _b.field, op = _b.op;
+                      parent = newParent = new WindowTransformNode(parent, {
+                          window: [{
+                                  op: op,
+                                  field: field,
+                                  as: facetSortFieldName(fieldDef, fieldDef.sort)
+                              }],
+                          groupby: [vgField(fieldDef)],
+                          frame: [null, null]
+                      });
+                  }
+              }
+              return newParent;
+          }
+          return null;
+      };
+      WindowTransformNode.prototype.clone = function () {
+          return new WindowTransformNode(this.parent, duplicate(this.transform));
+      };
+      WindowTransformNode.prototype.producedFields = function () {
+          var _this = this;
+          var out = {};
+          this.transform.window.forEach(function (windowFieldDef) {
+              out[_this.getDefaultName(windowFieldDef)] = true;
+          });
+          return out;
+      };
+      WindowTransformNode.prototype.getDefaultName = function (windowFieldDef) {
+          return windowFieldDef.as || vgField(windowFieldDef);
+      };
+      WindowTransformNode.prototype.assemble = function () {
+          var fields = [];
+          var ops = [];
+          var as = [];
+          var params = [];
+          for (var _i = 0, _a = this.transform.window; _i < _a.length; _i++) {
+              var window_1 = _a[_i];
+              ops.push(window_1.op);
+              as.push(this.getDefaultName(window_1));
+              params.push(window_1.param === undefined ? null : window_1.param);
+              fields.push(window_1.field === undefined ? null : window_1.field);
+          }
+          var frame = this.transform.frame;
+          var groupby = this.transform.groupby;
+          var sortFields = [];
+          var sortOrder = [];
+          if (this.transform.sort !== undefined) {
+              for (var _b = 0, _c = this.transform.sort; _b < _c.length; _b++) {
+                  var sortField = _c[_b];
+                  sortFields.push(sortField.field);
+                  sortOrder.push(sortField.order || 'ascending');
+              }
+          }
+          var sort = {
+              field: sortFields,
+              order: sortOrder,
+          };
+          var ignorePeers = this.transform.ignorePeers;
+          var result = {
+              type: 'window',
+              params: params,
+              as: as,
+              ops: ops,
+              fields: fields,
+              sort: sort,
+          };
+          if (ignorePeers !== undefined) {
+              result.ignorePeers = ignorePeers;
+          }
+          if (groupby !== undefined) {
+              result.groupby = groupby;
+          }
+          if (frame !== undefined) {
+              result.frame = frame;
+          }
+          return result;
+      };
+      return WindowTransformNode;
+  }(DataFlowNode));
+
+  function parseRoot(model, sources) {
+      if (model.data || !model.parent) {
+          // if the model defines a data source or is the root, create a source node
+          var source = new SourceNode(model.data);
+          var hash$$1 = source.hash();
+          if (hash$$1 in sources) {
+              // use a reference if we already have a source
+              return sources[hash$$1];
+          }
+          else {
+              // otherwise add a new one
+              sources[hash$$1] = source;
+              return source;
+          }
+      }
+      else {
+          // If we don't have a source defined (overriding parent's data), use the parent's facet root or main.
+          return model.parent.component.data.facetRoot ? model.parent.component.data.facetRoot : model.parent.component.data.main;
+      }
+  }
+  /**
+   * Parses a transforms array into a chain of connected dataflow nodes.
+   */
+  function parseTransformArray(head, model, ancestorParse) {
+      var lookupCounter = 0;
+      model.transforms.forEach(function (t) {
+          if (isCalculate(t)) {
+              head = new CalculateNode(head, t);
+              ancestorParse.set(t.as, 'derived', false);
+          }
+          else if (isFilter(t)) {
+              head = ParseNode.makeImplicitFromFilterTransform(head, t, ancestorParse) || head;
+              head = new FilterNode(head, model, t.filter);
+          }
+          else if (isBin(t)) {
+              var bin = head = BinNode.makeFromTransform(head, t, model);
+              for (var _i = 0, _a = keys(bin.producedFields()); _i < _a.length; _i++) {
+                  var field = _a[_i];
+                  ancestorParse.set(field, 'number', false);
+              }
+          }
+          else if (isTimeUnit$1(t)) {
+              head = TimeUnitNode.makeFromTransform(head, t);
+              ancestorParse.set(t.as, 'date', false);
+          }
+          else if (isAggregate$1(t)) {
+              var agg = head = AggregateNode.makeFromTransform(head, t);
+              if (requiresSelectionId(model)) {
+                  head = new IdentifierNode(head);
+              }
+              for (var _b = 0, _c = keys(agg.producedFields()); _b < _c.length; _b++) {
+                  var field = _c[_b];
+                  ancestorParse.set(field, 'derived', false);
+              }
+          }
+          else if (isLookup(t)) {
+              var lookup = head = LookupNode.make(head, model, t, lookupCounter++);
+              for (var _d = 0, _e = keys(lookup.producedFields()); _d < _e.length; _d++) {
+                  var field = _e[_d];
+                  ancestorParse.set(field, 'derived', false);
+              }
+          }
+          else if (isWindow(t)) {
+              var window_1 = head = new WindowTransformNode(head, t);
+              for (var _f = 0, _g = keys(window_1.producedFields()); _f < _g.length; _f++) {
+                  var field = _g[_f];
+                  ancestorParse.set(field, 'derived', false);
+              }
+          }
+          else if (isStack(t)) {
+              var stack = head = StackNode.makeFromTransform(head, t);
+              for (var _h = 0, _j = keys(stack.producedFields()); _h < _j.length; _h++) {
+                  var field = _j[_h];
+                  ancestorParse.set(field, 'derived', false);
+              }
+          }
+          else {
+              warn(message.invalidTransformIgnored(t));
+              return;
+          }
+      });
+      return head;
+  }
+  /*
+  Description of the dataflow (http://asciiflow.com/):
+       +--------+
+       | Source |
+       +---+----+
+           |
+           v
+       FormatParse
+       (explicit)
+           |
+           v
+       Transforms
+  (Filter, Calculate, Binning, TimeUnit, Aggregate, Window, ...)
+           |
+           v
+       FormatParse
+       (implicit)
+           |
+           v
+   Binning (in `encoding`)
+           |
+           v
+   Timeunit (in `encoding`)
+           |
+           v
+  Formula From Sort Array
+           |
+           v
+        +--+--+
+        | Raw |
+        +-----+
+           |
+           v
+    Aggregate (in `encoding`)
+           |
+           v
+    Stack (in `encoding`)
+           |
+           v
+    Invalid Filter
+           |
+           v
+     +----------+
+     |   Main   |
+     +----------+
+           |
+           v
+       +-------+
+       | Facet |----> "column", "column-layout", and "row"
+       +-------+
+           |
+           v
+    ...Child data...
+  */
+  function parseData(model) {
+      var head = parseRoot(model, model.component.data.sources);
+      var _a = model.component.data, outputNodes = _a.outputNodes, outputNodeRefCounts = _a.outputNodeRefCounts;
+      var ancestorParse = model.parent ? model.parent.component.data.ancestorParse.clone() : new AncestorParse();
+      // format.parse: null means disable parsing
+      if (model.data && model.data.format && model.data.format.parse === null) {
+          ancestorParse.parseNothing = true;
+      }
+      head = ParseNode.makeExplicit(head, model, ancestorParse) || head;
+      // Default discrete selections require an identifier transform to
+      // uniquely identify data points as the _id field is volatile. Add
+      // this transform at the head of our pipeline such that the identifier
+      // field is available for all subsequent datasets. Additional identifier
+      // transforms will be necessary when new tuples are constructed
+      // (e.g., post-aggregation).
+      if (requiresSelectionId(model) && (isUnitModel(model) || isLayerModel(model))) {
+          head = new IdentifierNode(head);
+      }
+      // HACK: This is equivalent for merging bin extent for union scale.
+      // FIXME(https://github.com/vega/vega-lite/issues/2270): Correctly merge extent / bin node for shared bin scale
+      var parentIsLayer = model.parent && isLayerModel(model.parent);
+      if (isUnitModel(model) || isFacetModel(model)) {
+          if (parentIsLayer) {
+              head = BinNode.makeFromEncoding(head, model) || head;
+          }
+      }
+      if (model.transforms.length > 0) {
+          head = parseTransformArray(head, model, ancestorParse);
+      }
+      head = ParseNode.makeImplicitFromEncoding(head, model, ancestorParse) || head;
+      if (isUnitModel(model)) {
+          head = GeoJSONNode.parseAll(head, model);
+          head = GeoPointNode.parseAll(head, model);
+      }
+      if (isUnitModel(model) || isFacetModel(model)) {
+          if (!parentIsLayer) {
+              head = BinNode.makeFromEncoding(head, model) || head;
+          }
+          head = TimeUnitNode.makeFromEncoding(head, model) || head;
+          head = CalculateNode.parseAllForSortIndex(head, model);
+      }
+      // add an output node pre aggregation
+      var rawName = model.getName(RAW);
+      var raw = new OutputNode(head, rawName, RAW, outputNodeRefCounts);
+      outputNodes[rawName] = raw;
+      head = raw;
+      if (isUnitModel(model)) {
+          var agg = AggregateNode.makeFromEncoding(head, model);
+          if (agg) {
+              head = agg;
+              if (requiresSelectionId(model)) {
+                  head = new IdentifierNode(head);
+              }
+          }
+          head = StackNode.makeFromEncoding(head, model) || head;
+      }
+      if (isUnitModel(model)) {
+          head = FilterInvalidNode.make(head, model) || head;
+      }
+      // output node for marks
+      var mainName = model.getName(MAIN);
+      var main = new OutputNode(head, mainName, MAIN, outputNodeRefCounts);
+      outputNodes[mainName] = main;
+      head = main;
+      // add facet marker
+      var facetRoot = null;
+      if (isFacetModel(model)) {
+          var facetName = model.getName('facet');
+          // Derive new sort index field for facet's sort array
+          head = CalculateNode.parseAllForSortIndex(head, model);
+          // Derive new aggregate (via window) for facet's sort field
+          // TODO: use JoinAggregate once we have it
+          // augment data source with new fields for crossed facet
+          head = WindowTransformNode.makeFromFacet(head, model.facet) || head;
+          facetRoot = new FacetNode(head, model, facetName, main.getSource());
+          outputNodes[facetName] = facetRoot;
+          head = facetRoot;
+      }
+      return __assign({}, model.component.data, { outputNodes: outputNodes,
+          outputNodeRefCounts: outputNodeRefCounts,
+          raw: raw,
+          main: main,
+          facetRoot: facetRoot,
+          ancestorParse: ancestorParse });
+  }
+
+  var BaseConcatModel = /** @class */ (function (_super) {
+      __extends(BaseConcatModel, _super);
+      function BaseConcatModel(spec, parent, parentGivenName, config, repeater, resolve) {
+          return _super.call(this, spec, parent, parentGivenName, config, repeater, resolve) || this;
+      }
+      BaseConcatModel.prototype.parseData = function () {
+          this.component.data = parseData(this);
+          this.children.forEach(function (child) {
+              child.parseData();
+          });
+      };
+      BaseConcatModel.prototype.parseSelection = function () {
+          var _this = this;
+          // Merge selections up the hierarchy so that they may be referenced
+          // across unit specs. Persist their definitions within each child
+          // to assemble signals which remain within output Vega unit groups.
+          this.component.selection = {};
+          var _loop_1 = function (child) {
+              child.parseSelection();
+              keys(child.component.selection).forEach(function (key) {
+                  _this.component.selection[key] = child.component.selection[key];
+              });
+          };
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              _loop_1(child);
+          }
+      };
+      BaseConcatModel.prototype.parseMarkGroup = function () {
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              child.parseMarkGroup();
+          }
+      };
+      BaseConcatModel.prototype.parseAxisAndHeader = function () {
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              child.parseAxisAndHeader();
+          }
+          // TODO(#2415): support shared axes
+      };
+      BaseConcatModel.prototype.assembleSelectionTopLevelSignals = function (signals) {
+          return this.children.reduce(function (sg, child) { return child.assembleSelectionTopLevelSignals(sg); }, signals);
+      };
+      BaseConcatModel.prototype.assembleSelectionSignals = function () {
+          this.children.forEach(function (child) { return child.assembleSelectionSignals(); });
+          return [];
+      };
+      BaseConcatModel.prototype.assembleLayoutSignals = function () {
+          return this.children.reduce(function (signals, child) {
+              return signals.concat(child.assembleLayoutSignals());
+          }, assembleLayoutSignals(this));
+      };
+      BaseConcatModel.prototype.assembleSelectionData = function (data) {
+          return this.children.reduce(function (db, child) { return child.assembleSelectionData(db); }, data);
+      };
+      BaseConcatModel.prototype.assembleMarks = function () {
+          // only children have marks
+          return this.children.map(function (child) {
+              var title = child.assembleTitle();
+              var style = child.assembleGroupStyle();
+              var layoutSizeEncodeEntry = child.assembleLayoutSize();
+              return __assign({ type: 'group', name: child.getName('group') }, (title ? { title: title } : {}), (style ? { style: style } : {}), (layoutSizeEncodeEntry ? {
+                  encode: {
+                      update: layoutSizeEncodeEntry
+                  }
+              } : {}), child.assembleGroup());
+          });
+      };
+      return BaseConcatModel;
+  }(Model));
+
+  var ConcatModel = /** @class */ (function (_super) {
+      __extends(ConcatModel, _super);
+      function ConcatModel(spec, parent, parentGivenName, repeater, config) {
+          var _this = _super.call(this, spec, parent, parentGivenName, config, repeater, spec.resolve) || this;
+          _this.type = 'concat';
+          if (spec.resolve && spec.resolve.axis && (spec.resolve.axis.x === 'shared' || spec.resolve.axis.y === 'shared')) {
+              warn(message.CONCAT_CANNOT_SHARE_AXIS);
+          }
+          _this.isVConcat = isVConcatSpec(spec);
+          _this.children = (isVConcatSpec(spec) ? spec.vconcat : spec.hconcat).map(function (child, i) {
+              return buildModel(child, _this, _this.getName('concat_' + i), undefined, repeater, config, false);
+          });
+          return _this;
+      }
+      ConcatModel.prototype.parseLayoutSize = function () {
+          parseConcatLayoutSize(this);
+      };
+      ConcatModel.prototype.parseAxisGroup = function () {
+          return null;
+      };
+      ConcatModel.prototype.assembleDefaultLayout = function () {
+          return __assign({}, (this.isVConcat ? { columns: 1 } : {}), { bounds: 'full', 
+              // Use align each so it can work with multiple plots with different size
+              align: 'each' });
+      };
+      return ConcatModel;
+  }(BaseConcatModel));
+
+  function isFalseOrNull(v) {
+      return v === false || v === null;
+  }
+  var AxisComponent = /** @class */ (function (_super) {
+      __extends(AxisComponent, _super);
+      function AxisComponent(explicit, implicit, mainExtracted) {
+          if (explicit === void 0) { explicit = {}; }
+          if (implicit === void 0) { implicit = {}; }
+          if (mainExtracted === void 0) { mainExtracted = false; }
+          var _this = _super.call(this) || this;
+          _this.explicit = explicit;
+          _this.implicit = implicit;
+          _this.mainExtracted = mainExtracted;
+          return _this;
+      }
+      AxisComponent.prototype.clone = function () {
+          return new AxisComponent(duplicate(this.explicit), duplicate(this.implicit), this.mainExtracted);
+      };
+      AxisComponent.prototype.hasAxisPart = function (part) {
+          // FIXME(https://github.com/vega/vega-lite/issues/2552) this method can be wrong if users use a Vega theme.
+          if (part === 'axis') { // always has the axis container part
+              return true;
+          }
+          if (part === 'grid' || part === 'title') {
+              return !!this.get(part);
+          }
+          // Other parts are enabled by default, so they should not be false or null.
+          return !isFalseOrNull(this.get(part));
+      };
+      return AxisComponent;
+  }(Split));
+
+  function getAxisConfig(property, config, channel, orient, scaleType) {
+      if (orient === void 0) { orient = ''; }
+      // configTypes to loop, starting from higher precedence
+      var configTypes = (scaleType === 'band' ? ['axisBand'] : []).concat([
+          channel === 'x' ? 'axisX' : 'axisY',
+          'axis' + orient.substr(0, 1).toUpperCase() + orient.substr(1),
+          'axis'
+      ]);
+      for (var _i = 0, configTypes_1 = configTypes; _i < configTypes_1.length; _i++) {
+          var configType = configTypes_1[_i];
+          if (config[configType] && config[configType][property] !== undefined) {
+              return config[configType][property];
+          }
+      }
+      return undefined;
+  }
+
+  function labels$1(model, channel, specifiedLabelsSpec, orient) {
+      var fieldDef = model.fieldDef(channel) ||
+          (channel === 'x' ? model.fieldDef('x2') :
+              channel === 'y' ? model.fieldDef('y2') :
+                  undefined);
+      var axis = model.axis(channel);
+      var config = model.config;
+      var labelsSpec = {};
+      // Text
+      if (isTimeFieldDef(fieldDef)) {
+          var isUTCScale = model.getScaleComponent(channel).get('type') === ScaleType.UTC;
+          var expr = timeFormatExpression('datum.value', fieldDef.timeUnit, axis.format, config.axis.shortTimeLabels, config.timeFormat, isUTCScale);
+          if (expr) {
+              labelsSpec.text = { signal: expr };
+          }
+      }
+      // Label Angle
+      var angle = getAxisConfig('labelAngle', model.config, channel, orient, model.getScaleComponent(channel).get('type'));
+      if (angle === undefined) {
+          angle = labelAngle(axis, channel, fieldDef);
+          if (angle) {
+              labelsSpec.angle = { value: angle };
+          }
+      }
+      if (angle !== undefined) {
+          var align = labelAlign$1(angle, orient);
+          if (align) {
+              labelsSpec.align = { value: align };
+          }
+          labelsSpec.baseline = labelBaseline$1(angle, orient);
+      }
+      labelsSpec = __assign({}, labelsSpec, specifiedLabelsSpec);
+      return keys(labelsSpec).length === 0 ? undefined : labelsSpec;
+  }
+  function labelBaseline$1(angle, orient) {
+      if (orient === 'top' || orient === 'bottom') {
+          if (angle <= 45 || 315 <= angle) {
+              return { value: orient === 'top' ? 'bottom' : 'top' };
+          }
+          else if (135 <= angle && angle <= 225) {
+              return { value: orient === 'top' ? 'top' : 'bottom' };
+          }
+          else {
+              return { value: 'middle' };
+          }
+      }
+      else {
+          if ((angle <= 45 || 315 <= angle) || (135 <= angle && angle <= 225)) {
+              return { value: 'middle' };
+          }
+          else if (45 <= angle && angle <= 135) {
+              return { value: orient === 'left' ? 'top' : 'bottom' };
+          }
+          else {
+              return { value: orient === 'left' ? 'bottom' : 'top' };
+          }
+      }
+  }
+  function labelAngle(axis, channel, fieldDef) {
+      if (axis.labelAngle !== undefined) {
+          // Make angle within [0,360)
+          return ((axis.labelAngle % 360) + 360) % 360;
+      }
+      else {
+          if (channel === X && contains([NOMINAL, ORDINAL], fieldDef.type)) {
+              return 270;
+          }
+      }
+      return undefined;
+  }
+  function labelAlign$1(angle, orient) {
+      angle = ((angle % 360) + 360) % 360;
+      if (orient === 'top' || orient === 'bottom') {
+          if (angle % 180 === 0) {
+              return 'center';
+          }
+          else if (0 < angle && angle < 180) {
+              return orient === 'top' ? 'right' : 'left';
+          }
+          else {
+              return orient === 'top' ? 'left' : 'right';
+          }
+      }
+      else {
+          if ((angle + 90) % 180 === 0) {
+              return 'center';
+          }
+          else if (90 <= angle && angle < 270) {
+              return orient === 'left' ? 'left' : 'right';
+          }
+          else {
+              return orient === 'left' ? 'right' : 'left';
+          }
+      }
+  }
+
+  // TODO: we need to refactor this method after we take care of config refactoring
+  /**
+   * Default rules for whether to show a grid should be shown for a channel.
+   * If `grid` is unspecified, the default value is `true` for ordinal scales that are not binned
+   */
+  function grid(scaleType, fieldDef) {
+      return !hasDiscreteDomain(scaleType) && !fieldDef.bin;
+  }
+  function gridScale(model, channel) {
+      var gridChannel = channel === 'x' ? 'y' : 'x';
+      if (model.getScaleComponent(gridChannel)) {
+          return model.scaleName(gridChannel);
+      }
+      return undefined;
+  }
+  function labelFlush(fieldDef, channel, specifiedAxis) {
+      if (specifiedAxis.labelFlush !== undefined) {
+          return specifiedAxis.labelFlush;
+      }
+      if (channel === 'x' && contains(['quantitative', 'temporal'], fieldDef.type)) {
+          return true;
+      }
+      return undefined;
+  }
+  function labelOverlap(fieldDef, specifiedAxis, channel, scaleType) {
+      if (specifiedAxis.labelOverlap !== undefined) {
+          return specifiedAxis.labelOverlap;
+      }
+      // do not prevent overlap for nominal data because there is no way to infer what the missing labels are
+      if (fieldDef.type !== 'nominal') {
+          if (scaleType === 'log') {
+              return 'greedy';
+          }
+          return true;
+      }
+      return undefined;
+  }
+  function orient(channel) {
+      switch (channel) {
+          case X:
+              return 'bottom';
+          case Y:
+              return 'left';
+      }
+      /* istanbul ignore next: This should never happen. */
+      throw new Error(message.INVALID_CHANNEL_FOR_AXIS);
+  }
+  function tickCount(channel, fieldDef, scaleType, size) {
+      if (!hasDiscreteDomain(scaleType) && scaleType !== 'log' && !contains(['month', 'hours', 'day', 'quarter'], fieldDef.timeUnit)) {
+          if (fieldDef.bin) {
+              // for binned data, we don't want more ticks than maxbins
+              return { signal: "ceil(" + size.signal + "/20)" };
+          }
+          return { signal: "ceil(" + size.signal + "/40)" };
+      }
+      return undefined;
+  }
+  function values$1(specifiedAxis, model, fieldDef, channel) {
+      var vals$$1 = specifiedAxis.values;
+      if (vals$$1) {
+          return valueArray(fieldDef, vals$$1);
+      }
+      if (fieldDef.bin && fieldDef.type === QUANTITATIVE) {
+          var domain = model.scaleDomain(channel);
+          if (domain && domain !== 'unaggregated' && !isSelectionDomain(domain)) { // explicit value
+              return undefined;
+          }
+          var signal = model.getName(binToString(fieldDef.bin) + "_" + fieldDef.field + "_bins");
+          return { signal: "sequence(" + signal + ".start, " + signal + ".stop + " + signal + ".step, " + signal + ".step)" };
+      }
+      return undefined;
+  }
+
+  function parseUnitAxis(model) {
+      return POSITION_SCALE_CHANNELS.reduce(function (axis, channel) {
+          if (model.component.scales[channel] && model.axis(channel)) {
+              axis[channel] = [parseAxis(channel, model)];
+          }
+          return axis;
+      }, {});
+  }
+  var OPPOSITE_ORIENT = {
+      bottom: 'top',
+      top: 'bottom',
+      left: 'right',
+      right: 'left'
+  };
+  function parseLayerAxis(model) {
+      var _a = model.component, axes = _a.axes, resolve = _a.resolve;
+      var axisCount = { top: 0, bottom: 0, right: 0, left: 0 };
+      for (var _i = 0, _b = model.children; _i < _b.length; _i++) {
+          var child = _b[_i];
+          child.parseAxisAndHeader();
+          for (var _c = 0, _d = keys(child.component.axes); _c < _d.length; _c++) {
+              var channel = _d[_c];
+              resolve.axis[channel] = parseGuideResolve(model.component.resolve, channel);
+              if (resolve.axis[channel] === 'shared') {
+                  // If the resolve says shared (and has not been overridden)
+                  // We will try to merge and see if there is a conflict
+                  axes[channel] = mergeAxisComponents(axes[channel], child.component.axes[channel]);
+                  if (!axes[channel]) {
+                      // If merge returns nothing, there is a conflict so we cannot make the axis shared.
+                      // Thus, mark axis as independent and remove the axis component.
+                      resolve.axis[channel] = 'independent';
+                      delete axes[channel];
+                  }
+              }
+          }
+      }
+      // Move axes to layer's axis component and merge shared axes
+      for (var _e = 0, _f = [X, Y]; _e < _f.length; _e++) {
+          var channel = _f[_e];
+          for (var _g = 0, _h = model.children; _g < _h.length; _g++) {
+              var child = _h[_g];
+              if (!child.component.axes[channel]) {
+                  // skip if the child does not have a particular axis
+                  continue;
+              }
+              if (resolve.axis[channel] === 'independent') {
+                  // If axes are independent, concat the axisComponent array.
+                  axes[channel] = (axes[channel] || []).concat(child.component.axes[channel]);
+                  // Automatically adjust orient
+                  for (var _j = 0, _k = child.component.axes[channel]; _j < _k.length; _j++) {
+                      var axisComponent = _k[_j];
+                      var _l = axisComponent.getWithExplicit('orient'), orient$$1 = _l.value, explicit = _l.explicit;
+                      if (axisCount[orient$$1] > 0 && !explicit) {
+                          // Change axis orient if the number do not match
+                          var oppositeOrient = OPPOSITE_ORIENT[orient$$1];
+                          if (axisCount[orient$$1] > axisCount[oppositeOrient]) {
+                              axisComponent.set('orient', oppositeOrient, false);
+                          }
+                      }
+                      axisCount[orient$$1]++;
+                      // TODO(https://github.com/vega/vega-lite/issues/2634): automaticaly add extra offset?
+                  }
+              }
+              // After merging, make sure to remove axes from child
+              delete child.component.axes[channel];
+          }
+      }
+  }
+  function mergeAxisComponents(mergedAxisCmpts, childAxisCmpts) {
+      if (mergedAxisCmpts) {
+          // FIXME: this is a bit wrong once we support multiple axes
+          if (mergedAxisCmpts.length !== childAxisCmpts.length) {
+              return undefined; // Cannot merge axis component with different number of axes.
+          }
+          var length_1 = mergedAxisCmpts.length;
+          for (var i = 0; i < length_1; i++) {
+              var merged = mergedAxisCmpts[i];
+              var child = childAxisCmpts[i];
+              if ((!!merged) !== (!!child)) {
+                  return undefined;
+              }
+              else if (merged && child) {
+                  var mergedOrient = merged.getWithExplicit('orient');
+                  var childOrient = child.getWithExplicit('orient');
+                  if (mergedOrient.explicit && childOrient.explicit && mergedOrient.value !== childOrient.value) {
+                      // TODO: throw warning if resolve is explicit (We don't have info about explicit/implicit resolve yet.)
+                      // Cannot merge due to inconsistent orient
+                      return undefined;
+                  }
+                  else {
+                      mergedAxisCmpts[i] = mergeAxisComponent(merged, child);
+                  }
+              }
+          }
+      }
+      else {
+          // For first one, return a copy of the child
+          return childAxisCmpts.map(function (axisComponent) { return axisComponent.clone(); });
+      }
+      return mergedAxisCmpts;
+  }
+  function mergeAxisComponent(merged, child) {
+      var _loop_1 = function (prop) {
+          var mergedValueWithExplicit = mergeValuesWithExplicit(merged.getWithExplicit(prop), child.getWithExplicit(prop), prop, 'axis', 
+          // Tie breaker function
+          function (v1, v2) {
+              switch (prop) {
+                  case 'title':
+                      return mergeTitleComponent(v1, v2);
+                  case 'gridScale':
+                      return {
+                          explicit: v1.explicit,
+                          value: v1.value || v2.value
+                      };
+              }
+              return defaultTieBreaker(v1, v2, prop, 'axis');
+          });
+          merged.setWithExplicit(prop, mergedValueWithExplicit);
+      };
+      for (var _i = 0, VG_AXIS_PROPERTIES_1 = VG_AXIS_PROPERTIES; _i < VG_AXIS_PROPERTIES_1.length; _i++) {
+          var prop = VG_AXIS_PROPERTIES_1[_i];
+          _loop_1(prop);
+      }
+      return merged;
+  }
+  function getFieldDefTitle(model, channel) {
+      var channel2 = channel === 'x' ? 'x2' : 'y2';
+      var fieldDef = model.fieldDef(channel);
+      var fieldDef2 = model.fieldDef(channel2);
+      var title1 = fieldDef ? fieldDef.title : undefined;
+      var title2 = fieldDef2 ? fieldDef2.title : undefined;
+      if (title1 && title2) {
+          return mergeTitle(title1, title2);
+      }
+      else if (title1) {
+          return title1;
+      }
+      else if (title2) {
+          return title2;
+      }
+      else if (title1 !== undefined) { // falsy value to disable config
+          return title1;
+      }
+      else if (title2 !== undefined) { // falsy value to disable config
+          return title2;
+      }
+      return undefined;
+  }
+  function parseAxis(channel, model) {
+      var axis = model.axis(channel);
+      var axisComponent = new AxisComponent();
+      // 1.2. Add properties
+      VG_AXIS_PROPERTIES.forEach(function (property) {
+          var value = getProperty$1(property, axis, channel, model);
+          if (value !== undefined) {
+              var explicit = 
+              // specified axis.values is already respected, but may get transformed.
+              property === 'values' ? !!axis.values :
+                  // both VL axis.encoding and axis.labelAngle affect VG axis.encode
+                  property === 'encode' ? !!axis.encoding || !!axis.labelAngle :
+                      // title can be explicit if fieldDef.title is set
+                      property === 'title' && value === getFieldDefTitle(model, channel) ? true :
+                          // Otherwise, things are explicit if the returned value matches the specified property
+                          value === axis[property];
+              var configValue = getAxisConfig(property, model.config, channel, axisComponent.get('orient'), model.getScaleComponent(channel).get('type'));
+              // only set property if it is explicitly set or has no config value (otherwise we will accidentally override config)
+              if (explicit || configValue === undefined) {
+                  // Do not apply implicit rule if there is a config value
+                  axisComponent.set(property, value, explicit);
+              }
+              else if (property === 'grid' && configValue) {
+                  // Grid is an exception because we need to set grid = true to generate another grid axis
+                  axisComponent.set(property, configValue, false);
+              }
+          }
+      });
+      // 2) Add guide encode definition groups
+      var axisEncoding = axis.encoding || {};
+      var axisEncode = AXIS_PARTS.reduce(function (e, part) {
+          if (!axisComponent.hasAxisPart(part)) {
+              // No need to create encode for a disabled part.
+              return e;
+          }
+          var axisEncodingPart = guideEncodeEntry(axisEncoding[part] || {}, model);
+          var value = part === 'labels' ?
+              labels$1(model, channel, axisEncodingPart, axisComponent.get('orient')) :
+              axisEncodingPart;
+          if (value !== undefined && keys(value).length > 0) {
+              e[part] = { update: value };
+          }
+          return e;
+      }, {});
+      // FIXME: By having encode as one property, we won't have fine grained encode merging.
+      if (keys(axisEncode).length > 0) {
+          axisComponent.set('encode', axisEncode, !!axis.encoding || axis.labelAngle !== undefined);
+      }
+      return axisComponent;
+  }
+  function getProperty$1(property, specifiedAxis, channel, model) {
+      var fieldDef = model.fieldDef(channel);
+      switch (property) {
+          case 'scale':
+              return model.scaleName(channel);
+          case 'gridScale':
+              return gridScale(model, channel);
+          case 'format':
+              // We don't include temporal field here as we apply format in encode block
+              return numberFormat(fieldDef, specifiedAxis.format, model.config);
+          case 'grid': {
+              var scaleType = model.getScaleComponent(channel).get('type');
+              return getSpecifiedOrDefaultValue(specifiedAxis.grid, grid(scaleType, fieldDef));
+          }
+          case 'labelFlush':
+              return labelFlush(fieldDef, channel, specifiedAxis);
+          case 'labelOverlap': {
+              var scaleType = model.getScaleComponent(channel).get('type');
+              return labelOverlap(fieldDef, specifiedAxis, channel, scaleType);
+          }
+          case 'orient':
+              return getSpecifiedOrDefaultValue(specifiedAxis.orient, orient(channel));
+          case 'tickCount': {
+              var scaleType = model.getScaleComponent(channel).get('type');
+              var sizeType = channel === 'x' ? 'width' : channel === 'y' ? 'height' : undefined;
+              var size = sizeType ? model.getSizeSignalRef(sizeType)
+                  : undefined;
+              return getSpecifiedOrDefaultValue(specifiedAxis.tickCount, tickCount(channel, fieldDef, scaleType, size));
+          }
+          case 'title':
+              var channel2 = channel === 'x' ? 'x2' : 'y2';
+              var fieldDef2 = model.fieldDef(channel2);
+              // Keep undefined so we use default if title is unspecified.
+              // For other falsy value, keep them so we will hide the title.
+              var fieldDefTitle = getFieldDefTitle(model, channel);
+              var specifiedTitle = fieldDefTitle !== undefined ? fieldDefTitle :
+                  specifiedAxis.title === undefined ? undefined : specifiedAxis.title;
+              return getSpecifiedOrDefaultValue(specifiedTitle, 
+              // If title not specified, store base parts of fieldDef (and fieldDef2 if exists)
+              mergeTitleFieldDefs([toFieldDefBase(fieldDef)], fieldDef2 ? [toFieldDefBase(fieldDef2)] : []));
+          case 'values':
+              return values$1(specifiedAxis, model, fieldDef, channel);
+      }
+      // Otherwise, return specified property.
+      return isAxisProperty(property) ? specifiedAxis[property] : undefined;
+  }
+
+  function normalizeMarkDef(mark, encoding, config) {
+      var markDef = isMarkDef(mark) ? __assign({}, mark) : { type: mark };
+      // set orient, which can be overridden by rules as sometimes the specified orient is invalid.
+      var specifiedOrient = markDef.orient || getMarkConfig('orient', markDef, config);
+      markDef.orient = orient$1(markDef.type, encoding, specifiedOrient);
+      if (specifiedOrient !== undefined && specifiedOrient !== markDef.orient) {
+          warn(message.orientOverridden(markDef.orient, specifiedOrient));
+      }
+      // set opacity and filled if not specified in mark config
+      var specifiedOpacity = markDef.opacity !== undefined ? markDef.opacity : getMarkConfig('opacity', markDef, config);
+      if (specifiedOpacity === undefined) {
+          markDef.opacity = opacity(markDef.type, encoding);
+      }
+      var specifiedFilled = markDef.filled;
+      if (specifiedFilled === undefined) {
+          markDef.filled = filled(markDef, config);
+      }
+      // set cursor, which should be pointer if href channel is present unless otherwise specified
+      var specifiedCursor = markDef.cursor || getMarkConfig('cursor', markDef, config);
+      if (specifiedCursor === undefined) {
+          markDef.cursor = cursor(markDef, encoding, config);
+      }
+      return markDef;
+  }
+  function cursor(markDef, encoding, config) {
+      if (encoding.href || markDef.href || getMarkConfig('href', markDef, config)) {
+          return 'pointer';
+      }
+      return markDef.cursor;
+  }
+  function opacity(mark, encoding) {
+      if (contains([POINT, TICK, CIRCLE, SQUARE], mark)) {
+          // point-based marks
+          if (!isAggregate(encoding)) {
+              return 0.7;
+          }
+      }
+      return undefined;
+  }
+  function filled(markDef, config) {
+      var filledConfig = getMarkConfig('filled', markDef, config);
+      var mark = markDef.type;
+      return filledConfig !== undefined ? filledConfig : mark !== POINT && mark !== LINE && mark !== RULE;
+  }
+  function orient$1(mark, encoding, specifiedOrient) {
+      switch (mark) {
+          case POINT:
+          case CIRCLE:
+          case SQUARE:
+          case TEXT$1:
+          case RECT:
+              // orient is meaningless for these marks.
+              return undefined;
+      }
+      var yIsRange = encoding.y2;
+      var xIsRange = encoding.x2;
+      switch (mark) {
+          case BAR:
+              if (yIsRange || xIsRange) {
+                  // Ranged bar does not always have clear orientation, so we allow overriding
+                  if (specifiedOrient) {
+                      return specifiedOrient;
+                  }
+                  // If y is range and x is non-range, non-bin Q, y is likely a prebinned field
+                  var xDef = encoding.x;
+                  if (!xIsRange && isFieldDef(xDef) && xDef.type === QUANTITATIVE && !xDef.bin) {
+                      return 'horizontal';
+                  }
+                  // If x is range and y is non-range, non-bin Q, x is likely a prebinned field
+                  var yDef = encoding.y;
+                  if (!yIsRange && isFieldDef(yDef) && yDef.type === QUANTITATIVE && !yDef.bin) {
+                      return 'vertical';
+                  }
+              }
+          /* tslint:disable */
+          case RULE: // intentionally fall through
+              // return undefined for line segment rule and bar with both axis ranged
+              if (xIsRange && yIsRange) {
+                  return undefined;
+              }
+          case AREA: // intentionally fall through
+              // If there are range for both x and y, y (vertical) has higher precedence.
+              if (yIsRange) {
+                  return 'vertical';
+              }
+              else if (xIsRange) {
+                  return 'horizontal';
+              }
+              else if (mark === RULE) {
+                  if (encoding.x && !encoding.y) {
+                      return 'vertical';
+                  }
+                  else if (encoding.y && !encoding.x) {
+                      return 'horizontal';
+                  }
+              }
+          case LINE: // intentional fall through
+          case TICK: // Tick is opposite to bar, line, area and never have ranged mark.
+              /* tslint:enable */
+              var xIsContinuous = isFieldDef(encoding.x) && isContinuous(encoding.x);
+              var yIsContinuous = isFieldDef(encoding.y) && isContinuous(encoding.y);
+              if (xIsContinuous && !yIsContinuous) {
+                  return mark !== 'tick' ? 'horizontal' : 'vertical';
+              }
+              else if (!xIsContinuous && yIsContinuous) {
+                  return mark !== 'tick' ? 'vertical' : 'horizontal';
+              }
+              else if (xIsContinuous && yIsContinuous) {
+                  var xDef = encoding.x; // we can cast here since they are surely fieldDef
+                  var yDef = encoding.y;
+                  var xIsTemporal = xDef.type === TEMPORAL;
+                  var yIsTemporal = yDef.type === TEMPORAL;
+                  // temporal without timeUnit is considered continuous, but better serves as dimension
+                  if (xIsTemporal && !yIsTemporal) {
+                      return mark !== 'tick' ? 'vertical' : 'horizontal';
+                  }
+                  else if (!xIsTemporal && yIsTemporal) {
+                      return mark !== 'tick' ? 'horizontal' : 'vertical';
+                  }
+                  if (!xDef.aggregate && yDef.aggregate) {
+                      return mark !== 'tick' ? 'vertical' : 'horizontal';
+                  }
+                  else if (xDef.aggregate && !yDef.aggregate) {
+                      return mark !== 'tick' ? 'horizontal' : 'vertical';
+                  }
+                  if (specifiedOrient) {
+                      // When ambiguous, use user specified one.
+                      return specifiedOrient;
+                  }
+                  return 'vertical';
+              }
+              else {
+                  // Discrete x Discrete case
+                  if (specifiedOrient) {
+                      // When ambiguous, use user specified one.
+                      return specifiedOrient;
+                  }
+                  return undefined;
+              }
+      }
+      return 'vertical';
+  }
+
+  var area = {
+      vgMark: 'area',
+      encodeEntry: function (model) {
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'include' }), pointPosition('x', model, 'zeroOrMin'), pointPosition('y', model, 'zeroOrMin'), pointPosition2(model, 'zeroOrMin', model.markDef.orient === 'horizontal' ? 'x2' : 'y2'), defined(model));
+      }
+  };
+
+  var bar = {
+      vgMark: 'rect',
+      encodeEntry: function (model) {
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }), x(model), y(model));
+      }
+  };
+  function x(model) {
+      var config = model.config, encoding = model.encoding, markDef = model.markDef, width = model.width;
+      var orient = markDef.orient;
+      var sizeDef = encoding.size;
+      var xDef = encoding.x;
+      var x2Def = encoding.x2;
+      var xScaleName = model.scaleName(X);
+      var xScale = model.getScaleComponent(X);
+      // x, x2, and width -- we must specify two of these in all conditions
+      if (orient === 'horizontal' || x2Def) {
+          return __assign({}, pointPosition('x', model, 'zeroOrMin'), pointPosition2(model, 'zeroOrMin', 'x2'));
+      }
+      else { // vertical
+          if (isFieldDef(xDef)) {
+              var xScaleType = xScale.get('type');
+              if (xDef.bin && !sizeDef && !hasDiscreteDomain(xScaleType)) {
+                  return binnedPosition(xDef, 'x', model.scaleName('x'), markDef.binSpacing === undefined ? config.bar.binSpacing : markDef.binSpacing, xScale.get('reverse'));
+              }
+              else {
+                  if (xScaleType === ScaleType.BAND) {
+                      return bandPosition(xDef, 'x', model);
+                  }
+              }
+          }
+          // sized bin, normal point-ordinal axis, quantitative x-axis, or no x
+          return centeredBandPosition('x', model, __assign({}, mid(width)), defaultSizeRef(markDef, xScaleName, xScale, config));
+      }
+  }
+  function y(model) {
+      var config = model.config, encoding = model.encoding, height = model.height, markDef = model.markDef;
+      var orient = markDef.orient;
+      var sizeDef = encoding.size;
+      var yDef = encoding.y;
+      var y2Def = encoding.y2;
+      var yScaleName = model.scaleName(Y);
+      var yScale = model.getScaleComponent(Y);
+      // y, y2 & height -- we must specify two of these in all conditions
+      if (orient === 'vertical' || y2Def) {
+          return __assign({}, pointPosition('y', model, 'zeroOrMin'), pointPosition2(model, 'zeroOrMin', 'y2'));
+      }
+      else {
+          if (isFieldDef(yDef)) {
+              var yScaleType = yScale.get('type');
+              if (yDef.bin && !sizeDef && !hasDiscreteDomain(yScaleType)) {
+                  return binnedPosition(yDef, 'y', model.scaleName('y'), markDef.binSpacing === undefined ? config.bar.binSpacing : markDef.binSpacing, yScale.get('reverse'));
+              }
+              else if (yScaleType === ScaleType.BAND) {
+                  return bandPosition(yDef, 'y', model);
+              }
+          }
+          return centeredBandPosition('y', model, mid(height), defaultSizeRef(markDef, yScaleName, yScale, config));
+      }
+  }
+  function defaultSizeRef(markDef, scaleName, scale, config) {
+      if (markDef.size !== undefined) {
+          return { value: markDef.size };
+      }
+      else if (config.bar.discreteBandSize) {
+          return { value: config.bar.discreteBandSize };
+      }
+      else if (scale) {
+          var scaleType = scale.get('type');
+          if (scaleType === ScaleType.POINT) {
+              var scaleRange = scale.get('range');
+              if (isVgRangeStep(scaleRange) && isNumber(scaleRange.step)) {
+                  return { value: scaleRange.step - 1 };
+              }
+              warn(message.BAR_WITH_POINT_SCALE_AND_RANGESTEP_NULL);
+          }
+          else if (scaleType === ScaleType.BAND) {
+              return bandRef(scaleName);
+          }
+          else { // non-ordinal scale
+              return { value: config.bar.continuousBandSize };
+          }
+      }
+      else if (config.scale.rangeStep && config.scale.rangeStep !== null) {
+          return { value: config.scale.rangeStep - 1 };
+      }
+      return { value: 20 };
+  }
+
+  var geoshape = {
+      vgMark: 'shape',
+      encodeEntry: function (model) {
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }));
+      },
+      postEncodingTransform: function (model) {
+          var encoding = model.encoding;
+          var shapeDef = encoding.shape;
+          var transform = __assign({ type: 'geoshape', projection: model.projectionName() }, (shapeDef && isFieldDef(shapeDef) && shapeDef.type === GEOJSON ? { field: vgField(shapeDef, { expr: 'datum' }) } : {}));
+          return [transform];
+      }
+  };
+
+  var line = {
+      vgMark: 'line',
+      encodeEntry: function (model) {
+          var width = model.width, height = model.height;
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }), pointPosition('x', model, mid(width)), pointPosition('y', model, mid(height)), nonPosition('size', model, {
+              vgChannel: 'strokeWidth' // VL's line size is strokeWidth
+          }), defined(model));
+      }
+  };
+  var trail = {
+      vgMark: 'trail',
+      encodeEntry: function (model) {
+          var width = model.width, height = model.height;
+          return __assign({}, baseEncodeEntry(model, { size: 'include', orient: 'ignore' }), pointPosition('x', model, mid(width)), pointPosition('y', model, mid(height)), nonPosition('size', model), defined(model));
+      }
+  };
+
+  function encodeEntry(model, fixedShape) {
+      var config = model.config, width = model.width, height = model.height;
+      return __assign({}, baseEncodeEntry(model, { size: 'include', orient: 'ignore' }), pointPosition('x', model, mid(width)), pointPosition('y', model, mid(height)), nonPosition('size', model), shapeMixins(model, config, fixedShape));
+  }
+  function shapeMixins(model, config, fixedShape) {
+      if (fixedShape) {
+          return { shape: { value: fixedShape } };
+      }
+      return nonPosition('shape', model, { defaultValue: getMarkConfig('shape', model.markDef, config) });
+  }
+  var point = {
+      vgMark: 'symbol',
+      encodeEntry: function (model) {
+          return encodeEntry(model);
+      }
+  };
+  var circle = {
+      vgMark: 'symbol',
+      encodeEntry: function (model) {
+          return encodeEntry(model, 'circle');
+      }
+  };
+  var square = {
+      vgMark: 'symbol',
+      encodeEntry: function (model) {
+          return encodeEntry(model, 'square');
+      }
+  };
+
+  var rect = {
+      vgMark: 'rect',
+      encodeEntry: function (model) {
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }), x$1(model), y$1(model));
+      }
+  };
+  function x$1(model) {
+      var xDef = model.encoding.x;
+      var x2Def = model.encoding.x2;
+      var xScale = model.getScaleComponent(X);
+      var xScaleType = xScale ? xScale.get('type') : undefined;
+      if (isFieldDef(xDef) && xDef.bin && !x2Def) {
+          return binnedPosition(xDef, 'x', model.scaleName('x'), 0, xScale.get('reverse'));
+      }
+      else if (isFieldDef(xDef) && xScale && hasDiscreteDomain(xScaleType)) {
+          /* istanbul ignore else */
+          if (xScaleType === ScaleType.BAND) {
+              return bandPosition(xDef, 'x', model);
+          }
+          else {
+              // We don't support rect mark with point/ordinal scale
+              throw new Error(message.scaleTypeNotWorkWithMark(RECT, xScaleType));
+          }
+      }
+      else { // continuous scale or no scale
+          return __assign({}, pointPosition('x', model, 'zeroOrMax'), pointPosition2(model, 'zeroOrMin', 'x2'));
+      }
+  }
+  function y$1(model) {
+      var yDef = model.encoding.y;
+      var y2Def = model.encoding.y2;
+      var yScale = model.getScaleComponent(Y);
+      var yScaleType = yScale ? yScale.get('type') : undefined;
+      if (isFieldDef(yDef) && yDef.bin && !y2Def) {
+          return binnedPosition(yDef, 'y', model.scaleName('y'), 0, yScale.get('reverse'));
+      }
+      else if (isFieldDef(yDef) && yScale && hasDiscreteDomain(yScaleType)) {
+          /* istanbul ignore else */
+          if (yScaleType === ScaleType.BAND) {
+              return bandPosition(yDef, 'y', model);
+          }
+          else {
+              // We don't support rect mark with point/ordinal scale
+              throw new Error(message.scaleTypeNotWorkWithMark(RECT, yScaleType));
+          }
+      }
+      else { // continuous scale or no scale
+          return __assign({}, pointPosition('y', model, 'zeroOrMax'), pointPosition2(model, 'zeroOrMin', 'y2'));
+      }
+  }
+
+  var rule = {
+      vgMark: 'rule',
+      encodeEntry: function (model) {
+          var _config = model.config, markDef = model.markDef, width = model.width, height = model.height;
+          var orient = markDef.orient;
+          if (!model.encoding.x && !model.encoding.y && !model.encoding.latitude && !model.encoding.longitude) {
+              // Show nothing if we have none of x, y, lat, and long.
+              return {};
+          }
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }), pointPosition('x', model, orient === 'horizontal' ? 'zeroOrMin' : mid(width)), pointPosition('y', model, orient === 'vertical' ? 'zeroOrMin' : mid(height)), (orient !== 'vertical' ? pointPosition2(model, 'zeroOrMax', 'x2') : {}), (orient !== 'horizontal' ? pointPosition2(model, 'zeroOrMax', 'y2') : {}), nonPosition('size', model, {
+              vgChannel: 'strokeWidth',
+              defaultValue: markDef.size
+          }));
+      }
+  };
+
+  var text$3 = {
+      vgMark: 'text',
+      encodeEntry: function (model) {
+          var config = model.config, encoding = model.encoding, width = model.width, height = model.height, markDef = model.markDef;
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }), pointPosition('x', model, mid(width)), pointPosition('y', model, mid(height)), text$2(model), nonPosition('size', model, __assign({}, (markDef.size ? { defaultValue: markDef.size } : {}), { vgChannel: 'fontSize' // VL's text size is fontSize
+           })), valueIfDefined('align', align(model.markDef, encoding, config)));
+      }
+  };
+  function align(markDef, encoding, config) {
+      var a = markDef.align || getMarkConfig('align', markDef, config);
+      if (a === undefined) {
+          return 'center';
+      }
+      // If there is a config, Vega-parser will process this already.
+      return undefined;
+  }
+
+  var tick = {
+      vgMark: 'rect',
+      encodeEntry: function (model) {
+          var _a;
+          var config = model.config, markDef = model.markDef, width = model.width, height = model.height;
+          var orient = markDef.orient;
+          var vgSizeChannel = orient === 'horizontal' ? 'width' : 'height';
+          var vgThicknessChannel = orient === 'horizontal' ? 'height' : 'width';
+          return __assign({}, baseEncodeEntry(model, { size: 'ignore', orient: 'ignore' }), pointPosition('x', model, mid(width), 'xc'), pointPosition('y', model, mid(height), 'yc'), nonPosition('size', model, {
+              defaultValue: defaultSize(model),
+              vgChannel: vgSizeChannel
+          }), (_a = {}, _a[vgThicknessChannel] = { value: markDef.thickness || config.tick.thickness }, _a));
+      }
+  };
+  function defaultSize(model) {
+      var config = model.config, markDef = model.markDef;
+      var orient = markDef.orient;
+      var scale = model.getScaleComponent(orient === 'horizontal' ? 'x' : 'y');
+      if (markDef.size !== undefined) {
+          return markDef.size;
+      }
+      else if (config.tick.bandSize !== undefined) {
+          return config.tick.bandSize;
+      }
+      else {
+          var scaleRange = scale ? scale.get('range') : undefined;
+          var rangeStep = scaleRange && isVgRangeStep(scaleRange) ?
+              scaleRange.step :
+              config.scale.rangeStep;
+          if (typeof rangeStep !== 'number') {
+              // FIXME consolidate this log
+              throw new Error('Function does not handle non-numeric rangeStep');
+          }
+          return rangeStep / 1.5;
+      }
+  }
+
+  var markCompiler = {
+      area: area,
+      bar: bar,
+      circle: circle,
+      geoshape: geoshape,
+      line: line,
+      point: point,
+      rect: rect,
+      rule: rule,
+      square: square,
+      text: text$3,
+      tick: tick,
+      trail: trail
+  };
+  function parseMarkGroup(model) {
+      if (contains([LINE, AREA, TRAIL], model.mark)) {
+          return parsePathMark(model);
+      }
+      else {
+          return getMarkGroups(model);
+      }
+  }
+  var FACETED_PATH_PREFIX = 'faceted_path_';
+  function parsePathMark(model) {
+      var details = pathGroupingFields(model.mark, model.encoding);
+      var pathMarks = getMarkGroups(model, {
+          // If has subfacet for line/area group, need to use faceted data from below.
+          fromPrefix: (details.length > 0 ? FACETED_PATH_PREFIX : '')
+      });
+      if (details.length > 0) { // have level of details - need to facet line into subgroups
+          // TODO: for non-stacked plot, map order to zindex. (Maybe rename order for layer to zindex?)
+          return [{
+                  name: model.getName('pathgroup'),
+                  type: 'group',
+                  from: {
+                      facet: {
+                          name: FACETED_PATH_PREFIX + model.requestDataName(MAIN),
+                          data: model.requestDataName(MAIN),
+                          groupby: details,
+                      }
+                  },
+                  encode: {
+                      update: {
+                          width: { field: { group: 'width' } },
+                          height: { field: { group: 'height' } }
+                      }
+                  },
+                  marks: pathMarks
+              }];
+      }
+      else {
+          return pathMarks;
+      }
+  }
+  function getSort$1(model) {
+      var encoding = model.encoding, stack = model.stack, mark = model.mark, markDef = model.markDef;
+      var order = encoding.order;
+      if (!isArray(order) && isValueDef(order)) {
+          return undefined;
+      }
+      else if ((isArray(order) || isFieldDef(order)) && !stack) {
+          // Sort by the order field if it is specified and the field is not stacked. (For stacked field, order specify stack order.)
+          return sortParams(order, { expr: 'datum' });
+      }
+      else if (isPathMark(mark)) {
+          // For both line and area, we sort values based on dimension by default
+          var dimensionChannelDef = encoding[markDef.orient === 'horizontal' ? 'y' : 'x'];
+          if (isFieldDef(dimensionChannelDef)) {
+              var s = dimensionChannelDef.sort;
+              var sortField = isSortField(s) ?
+                  vgField({
+                      // FIXME: this op might not already exist?
+                      // FIXME: what if dimensionChannel (x or y) contains custom domain?
+                      aggregate: isAggregate(model.encoding) ? s.op : undefined,
+                      field: s.field
+                  }, { expr: 'datum' }) :
+                  vgField(dimensionChannelDef, {
+                      // For stack with imputation, we only have bin_mid
+                      binSuffix: model.stack && model.stack.impute ? 'mid' : undefined,
+                      expr: 'datum'
+                  });
+              return {
+                  field: sortField,
+                  order: 'descending'
+              };
+          }
+          return undefined;
+      }
+      return undefined;
+  }
+  function getMarkGroups(model, opt) {
+      if (opt === void 0) { opt = { fromPrefix: '' }; }
+      var mark = model.mark;
+      var clip = model.markDef.clip !== undefined ?
+          !!model.markDef.clip : scaleClip(model);
+      var style = getStyles(model.markDef);
+      var key$$1 = model.encoding.key;
+      var sort = getSort$1(model);
+      var postEncodingTransform = markCompiler[mark].postEncodingTransform ? markCompiler[mark].postEncodingTransform(model) : null;
+      return [__assign({ name: model.getName('marks'), type: markCompiler[mark].vgMark }, (clip ? { clip: true } : {}), (style ? { style: style } : {}), (key$$1 ? { key: { field: key$$1.field } } : {}), (sort ? { sort: sort } : {}), { from: { data: opt.fromPrefix + model.requestDataName(MAIN) }, encode: {
+                  update: markCompiler[mark].encodeEntry(model)
+              } }, (postEncodingTransform ? {
+              transform: postEncodingTransform
+          } : {}))];
+  }
+  /**
+   * Returns list of path grouping fields
+   * that the model's spec contains.
+   */
+  function pathGroupingFields(mark, encoding) {
+      return keys(encoding).reduce(function (details, channel) {
+          switch (channel) {
+              // x, y, x2, y2, lat, long, lat1, long2, order, tooltip, href, cursor should not cause lines to group
+              case 'x':
+              case 'y':
+              case 'order':
+              case 'tooltip':
+              case 'href':
+              case 'x2':
+              case 'y2':
+              case 'latitude':
+              case 'longitude':
+              case 'latitude2':
+              case 'longitude2':
+              // TODO: case 'cursor':
+              // text, shape, shouldn't be a part of line/trail/area
+              case 'text':
+              case 'shape':
+                  return details;
+              case 'detail':
+              case 'key':
+                  var channelDef = encoding[channel];
+                  if (channelDef) {
+                      (isArray(channelDef) ? channelDef : [channelDef]).forEach(function (fieldDef) {
+                          if (!fieldDef.aggregate) {
+                              details.push(vgField(fieldDef, {}));
+                          }
+                      });
+                  }
+                  return details;
+              case 'size':
+                  if (mark === 'trail') {
+                      // For trail, size should not group trail lines.
+                      return details;
+                  }
+              // For line, it should group lines.
+              /* tslint:disable */
+              // intentional fall through
+              case 'color':
+              case 'fill':
+              case 'stroke':
+              case 'opacity':
+                  // TODO strokeDashOffset:
+                  /* tslint:enable */
+                  var fieldDef = getFieldDef(encoding[channel]);
+                  if (fieldDef && !fieldDef.aggregate) {
+                      details.push(vgField(fieldDef, {}));
+                  }
+                  return details;
+              default:
+                  throw new Error("Bug: Channel " + channel + " unimplemented for line mark");
+          }
+      }, []);
+  }
+  /**
+   * If scales are bound to interval selections, we want to automatically clip
+   * marks to account for panning/zooming interactions. We identify bound scales
+   * by the domainRaw property, which gets added during scale parsing.
+   */
+  function scaleClip(model) {
+      var xScale = model.getScaleComponent('x');
+      var yScale = model.getScaleComponent('y');
+      return (xScale && xScale.get('domainRaw')) ||
+          (yScale && yScale.get('domainRaw')) ? true : false;
+  }
+
+  /**
+   * Internal model of Vega-Lite specification for the compiler.
+   */
+  var UnitModel = /** @class */ (function (_super) {
+      __extends(UnitModel, _super);
+      function UnitModel(spec, parent, parentGivenName, parentGivenSize, repeater, config, fit) {
+          if (parentGivenSize === void 0) { parentGivenSize = {}; }
+          var _this = _super.call(this, spec, parent, parentGivenName, config, repeater, undefined) || this;
+          _this.fit = fit;
+          _this.type = 'unit';
+          _this.specifiedScales = {};
+          _this.specifiedAxes = {};
+          _this.specifiedLegends = {};
+          _this.specifiedProjection = {};
+          _this.selection = {};
+          _this.children = [];
+          _this.initSize(__assign({}, parentGivenSize, (spec.width ? { width: spec.width } : {}), (spec.height ? { height: spec.height } : {})));
+          var mark = isMarkDef(spec.mark) ? spec.mark.type : spec.mark;
+          var encoding = _this.encoding = normalizeEncoding(replaceRepeaterInEncoding(spec.encoding || {}, repeater), mark);
+          _this.markDef = normalizeMarkDef(spec.mark, encoding, config);
+          // calculate stack properties
+          _this.stack = stack(mark, encoding, _this.config.stack);
+          _this.specifiedScales = _this.initScales(mark, encoding);
+          _this.specifiedAxes = _this.initAxes(encoding);
+          _this.specifiedLegends = _this.initLegend(encoding);
+          _this.specifiedProjection = spec.projection;
+          // Selections will be initialized upon parse.
+          _this.selection = spec.selection;
+          return _this;
+      }
+      Object.defineProperty(UnitModel.prototype, "hasProjection", {
+          get: function () {
+              var encoding = this.encoding;
+              var isGeoShapeMark = this.mark === GEOSHAPE;
+              var hasGeoPosition = encoding && GEOPOSITION_CHANNELS.some(function (channel) { return isFieldDef(encoding[channel]); });
+              return isGeoShapeMark || hasGeoPosition;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      /**
+       * Return specified Vega-lite scale domain for a particular channel
+       * @param channel
+       */
+      UnitModel.prototype.scaleDomain = function (channel) {
+          var scale = this.specifiedScales[channel];
+          return scale ? scale.domain : undefined;
+      };
+      UnitModel.prototype.axis = function (channel) {
+          return this.specifiedAxes[channel];
+      };
+      UnitModel.prototype.legend = function (channel) {
+          return this.specifiedLegends[channel];
+      };
+      UnitModel.prototype.initScales = function (mark, encoding) {
+          return SCALE_CHANNELS.reduce(function (scales, channel) {
+              var fieldDef;
+              var specifiedScale;
+              var channelDef = encoding[channel];
+              if (isFieldDef(channelDef)) {
+                  fieldDef = channelDef;
+                  specifiedScale = channelDef.scale;
+              }
+              else if (hasConditionalFieldDef(channelDef)) {
+                  fieldDef = channelDef.condition;
+                  specifiedScale = channelDef.condition['scale'];
+              }
+              else if (channel === 'x') {
+                  fieldDef = getFieldDef(encoding.x2);
+              }
+              else if (channel === 'y') {
+                  fieldDef = getFieldDef(encoding.y2);
+              }
+              if (fieldDef) {
+                  scales[channel] = specifiedScale || {};
+              }
+              return scales;
+          }, {});
+      };
+      UnitModel.prototype.initAxes = function (encoding) {
+          return [X, Y].reduce(function (_axis, channel) {
+              // Position Axis
+              // TODO: handle ConditionFieldDef
+              var channelDef = encoding[channel];
+              if (isFieldDef(channelDef) ||
+                  (channel === X && isFieldDef(encoding.x2)) ||
+                  (channel === Y && isFieldDef(encoding.y2))) {
+                  var axisSpec = isFieldDef(channelDef) ? channelDef.axis : null;
+                  // We no longer support false in the schema, but we keep false here for backward compatibility.
+                  if (axisSpec !== null && axisSpec !== false) {
+                      _axis[channel] = __assign({}, axisSpec);
+                  }
+              }
+              return _axis;
+          }, {});
+      };
+      UnitModel.prototype.initLegend = function (encoding) {
+          return NONPOSITION_SCALE_CHANNELS.reduce(function (_legend, channel) {
+              var channelDef = encoding[channel];
+              if (channelDef) {
+                  var legend = isFieldDef(channelDef) ? channelDef.legend :
+                      (hasConditionalFieldDef(channelDef)) ? channelDef.condition['legend'] : null;
+                  if (legend !== null && legend !== false) {
+                      _legend[channel] = __assign({}, legend);
+                  }
+              }
+              return _legend;
+          }, {});
+      };
+      UnitModel.prototype.parseData = function () {
+          this.component.data = parseData(this);
+      };
+      UnitModel.prototype.parseLayoutSize = function () {
+          parseUnitLayoutSize(this);
+      };
+      UnitModel.prototype.parseSelection = function () {
+          this.component.selection = parseUnitSelection(this, this.selection);
+      };
+      UnitModel.prototype.parseMarkGroup = function () {
+          this.component.mark = parseMarkGroup(this);
+      };
+      UnitModel.prototype.parseAxisAndHeader = function () {
+          this.component.axes = parseUnitAxis(this);
+      };
+      UnitModel.prototype.assembleSelectionTopLevelSignals = function (signals) {
+          return assembleTopLevelSignals(this, signals);
+      };
+      UnitModel.prototype.assembleSelectionSignals = function () {
+          return assembleUnitSelectionSignals(this, []);
+      };
+      UnitModel.prototype.assembleSelectionData = function (data) {
+          return assembleUnitSelectionData(this, data);
+      };
+      UnitModel.prototype.assembleLayout = function () {
+          return null;
+      };
+      UnitModel.prototype.assembleLayoutSignals = function () {
+          return assembleLayoutSignals(this);
+      };
+      UnitModel.prototype.assembleMarks = function () {
+          var marks = this.component.mark || [];
+          // If this unit is part of a layer, selections should augment
+          // all in concert rather than each unit individually. This
+          // ensures correct interleaving of clipping and brushed marks.
+          if (!this.parent || !isLayerModel(this.parent)) {
+              marks = assembleUnitSelectionMarks(this, marks);
+          }
+          return marks.map(this.correctDataNames);
+      };
+      UnitModel.prototype.assembleLayoutSize = function () {
+          return {
+              width: this.getSizeSignalRef('width'),
+              height: this.getSizeSignalRef('height')
+          };
+      };
+      UnitModel.prototype.getMapping = function () {
+          return this.encoding;
+      };
+      UnitModel.prototype.toSpec = function (excludeConfig, excludeData) {
+          var encoding = duplicate(this.encoding);
+          var spec;
+          spec = {
+              mark: this.markDef,
+              encoding: encoding
+          };
+          if (!excludeConfig) {
+              spec.config = duplicate(this.config);
+          }
+          if (!excludeData) {
+              spec.data = duplicate(this.data);
+          }
+          // remove defaults
+          return spec;
+      };
+      Object.defineProperty(UnitModel.prototype, "mark", {
+          get: function () {
+              return this.markDef.type;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      UnitModel.prototype.channelHasField = function (channel) {
+          return channelHasField(this.encoding, channel);
+      };
+      UnitModel.prototype.fieldDef = function (channel) {
+          var channelDef = this.encoding[channel];
+          return getFieldDef(channelDef);
+      };
+      return UnitModel;
+  }(ModelWithField));
+
+  var LayerModel = /** @class */ (function (_super) {
+      __extends(LayerModel, _super);
+      function LayerModel(spec, parent, parentGivenName, parentGivenSize, repeater, config, fit) {
+          var _this = _super.call(this, spec, parent, parentGivenName, config, repeater, spec.resolve) || this;
+          _this.type = 'layer';
+          var layoutSize = __assign({}, parentGivenSize, (spec.width ? { width: spec.width } : {}), (spec.height ? { height: spec.height } : {}));
+          _this.initSize(layoutSize);
+          _this.children = spec.layer.map(function (layer, i) {
+              if (isLayerSpec(layer)) {
+                  return new LayerModel(layer, _this, _this.getName('layer_' + i), layoutSize, repeater, config, fit);
+              }
+              if (isUnitSpec(layer)) {
+                  return new UnitModel(layer, _this, _this.getName('layer_' + i), layoutSize, repeater, config, fit);
+              }
+              throw new Error(message.INVALID_SPEC);
+          });
+          return _this;
+      }
+      LayerModel.prototype.parseData = function () {
+          this.component.data = parseData(this);
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              child.parseData();
+          }
+      };
+      LayerModel.prototype.parseLayoutSize = function () {
+          parseLayerLayoutSize(this);
+      };
+      LayerModel.prototype.parseSelection = function () {
+          var _this = this;
+          // Merge selections up the hierarchy so that they may be referenced
+          // across unit specs. Persist their definitions within each child
+          // to assemble signals which remain within output Vega unit groups.
+          this.component.selection = {};
+          var _loop_1 = function (child) {
+              child.parseSelection();
+              keys(child.component.selection).forEach(function (key) {
+                  _this.component.selection[key] = child.component.selection[key];
+              });
+          };
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              _loop_1(child);
+          }
+      };
+      LayerModel.prototype.parseMarkGroup = function () {
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              child.parseMarkGroup();
+          }
+      };
+      LayerModel.prototype.parseAxisAndHeader = function () {
+          parseLayerAxis(this);
+      };
+      LayerModel.prototype.assembleSelectionTopLevelSignals = function (signals) {
+          return this.children.reduce(function (sg, child) { return child.assembleSelectionTopLevelSignals(sg); }, signals);
+      };
+      // TODO: Support same named selections across children.
+      LayerModel.prototype.assembleSelectionSignals = function () {
+          return this.children.reduce(function (signals, child) {
+              return signals.concat(child.assembleSelectionSignals());
+          }, []);
+      };
+      LayerModel.prototype.assembleLayoutSignals = function () {
+          return this.children.reduce(function (signals, child) {
+              return signals.concat(child.assembleLayoutSignals());
+          }, assembleLayoutSignals(this));
+      };
+      LayerModel.prototype.assembleSelectionData = function (data) {
+          return this.children.reduce(function (db, child) { return child.assembleSelectionData(db); }, data);
+      };
+      LayerModel.prototype.assembleTitle = function () {
+          var title = _super.prototype.assembleTitle.call(this);
+          if (title) {
+              return title;
+          }
+          // If title does not provide layer, look into children
+          for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+              var child = _a[_i];
+              title = child.assembleTitle();
+              if (title) {
+                  return title;
+              }
+          }
+          return undefined;
+      };
+      LayerModel.prototype.assembleLayout = function () {
+          return null;
+      };
+      LayerModel.prototype.assembleMarks = function () {
+          return assembleLayerSelectionMarks(this, flatten(this.children.map(function (child) {
+              return child.assembleMarks();
+          })));
+      };
+      LayerModel.prototype.assembleLegends = function () {
+          return this.children.reduce(function (legends, child) {
+              return legends.concat(child.assembleLegends());
+          }, assembleLegends(this));
+      };
+      return LayerModel;
+  }(Model));
+
+  var RepeatModel = /** @class */ (function (_super) {
+      __extends(RepeatModel, _super);
+      function RepeatModel(spec, parent, parentGivenName, repeatValues, config) {
+          var _this = _super.call(this, spec, parent, parentGivenName, config, repeatValues, spec.resolve) || this;
+          _this.type = 'repeat';
+          if (spec.resolve && spec.resolve.axis && (spec.resolve.axis.x === 'shared' || spec.resolve.axis.y === 'shared')) {
+              warn(message.REPEAT_CANNOT_SHARE_AXIS);
+          }
+          _this.repeat = spec.repeat;
+          _this.children = _this._initChildren(spec, _this.repeat, repeatValues, config);
+          return _this;
+      }
+      RepeatModel.prototype._initChildren = function (spec, repeat, repeater, config) {
+          var children = [];
+          var row = repeat.row || [repeater ? repeater.row : null];
+          var column = repeat.column || [repeater ? repeater.column : null];
+          // cross product
+          for (var _i = 0, row_1 = row; _i < row_1.length; _i++) {
+              var rowField = row_1[_i];
+              for (var _a = 0, column_1 = column; _a < column_1.length; _a++) {
+                  var columnField = column_1[_a];
+                  var name_1 = (rowField ? '_' + rowField : '') + (columnField ? '_' + columnField : '');
+                  var childRepeat = {
+                      row: rowField,
+                      column: columnField
+                  };
+                  children.push(buildModel(spec.spec, this, this.getName('child' + name_1), undefined, childRepeat, config, false));
+              }
+          }
+          return children;
+      };
+      RepeatModel.prototype.parseLayoutSize = function () {
+          parseRepeatLayoutSize(this);
+      };
+      RepeatModel.prototype.assembleDefaultLayout = function () {
+          return {
+              columns: this.repeat && this.repeat.column ? this.repeat.column.length : 1,
+              bounds: 'full',
+              align: 'all'
+          };
+      };
+      return RepeatModel;
+  }(BaseConcatModel));
+
+  function buildModel(spec, parent, parentGivenName, unitSize, repeater, config, fit) {
+      if (isFacetSpec(spec)) {
+          return new FacetModel(spec, parent, parentGivenName, repeater, config);
+      }
+      if (isLayerSpec(spec)) {
+          return new LayerModel(spec, parent, parentGivenName, unitSize, repeater, config, fit);
+      }
+      if (isUnitSpec(spec)) {
+          return new UnitModel(spec, parent, parentGivenName, unitSize, repeater, config, fit);
+      }
+      if (isRepeatSpec(spec)) {
+          return new RepeatModel(spec, parent, parentGivenName, repeater, config);
+      }
+      if (isConcatSpec(spec)) {
+          return new ConcatModel(spec, parent, parentGivenName, repeater, config);
+      }
+      throw new Error(message.INVALID_SPEC);
+  }
+
+  /**
+   * Vega-Lite's main function, for compiling Vega-lite spec into Vega spec.
+   *
+   * At a high-level, we make the following transformations in different phases:
+   *
+   * Input spec
+   *     |
+   *     |  (Normalization)
+   *     v
+   * Normalized Spec (Row/Column channels in single-view specs becomes faceted specs, composite marks becomes layered specs.)
+   *     |
+   *     |  (Build Model)
+   *     v
+   * A model tree of the spec
+   *     |
+   *     |  (Parse)
+   *     v
+   * A model tree with parsed components (intermediate structure of visualization primitives in a format that can be easily merged)
+   *     |
+   *     | (Optimize)
+   *     v
+   * A model tree with parsed components with the data component optimized
+   *     |
+   *     | (Assemble)
+   *     v
+   * Vega spec
+   */
+  function compile(inputSpec, opt) {
+      if (opt === void 0) { opt = {}; }
+      // 0. Augment opt with default opts
+      if (opt.logger) {
+          // set the singleton logger to the provided logger
+          set(opt.logger);
+      }
+      if (opt.fieldTitle) {
+          // set the singleton field title formatter
+          setTitleFormatter(opt.fieldTitle);
+      }
+      try {
+          // 1. Initialize config by deep merging default config with the config provided via option and the input spec.
+          var config = initConfig(mergeDeep({}, opt.config, inputSpec.config));
+          // 2. Normalize: Convert input spec -> normalized spec
+          // - Decompose all extended unit specs into composition of unit spec.  For example, a box plot get expanded into multiple layers of bars, ticks, and rules. The shorthand row/column channel is also expanded to a facet spec.
+          var spec = normalize$2(inputSpec, config);
+          // - Normalize autosize to be a autosize properties object.
+          var autosize = normalizeAutoSize(inputSpec.autosize, config.autosize, isLayerSpec(spec) || isUnitSpec(spec));
+          // 3. Build Model: normalized spec -> Model (a tree structure)
+          // This phases instantiates the models with default config by doing a top-down traversal. This allows us to pass properties that child models derive from their parents via their constructors.
+          // See the abstract `Model` class and its children (UnitModel, LayerModel, FacetModel, RepeatModel, ConcatModel) for different types of models.
+          var model = buildModel(spec, null, '', undefined, undefined, config, autosize.type === 'fit');
+          // 4 Parse: Model --> Model with components
+          // Note that components = intermediate representations that are equivalent to Vega specs.
+          // We need these intermediate representation because we need to merge many visualizaiton "components" like projections, scales, axes, and legends.
+          // We will later convert these components into actual Vega specs in the assemble phase.
+          // In this phase, we do a bottom-up traversal over the whole tree to
+          // parse for each type of components once (e.g., data, layout, mark, scale).
+          // By doing bottom-up traversal, we start parsing components of unit specs and
+          // then merge child components of parent composite specs.
+          //
+          // Please see inside model.parse() for order of different components parsed.
+          model.parse();
+          // 5. Optimize the dataflow.  This will modify the data component of the model.
+          optimizeDataflow(model.component.data);
+          // 6. Assemble: convert model components --> Vega Spec.
+          return assembleTopLevelModel(model, getTopLevelProperties(inputSpec, config, autosize));
+      }
+      finally {
+          // Reset the singleton logger if a logger is provided
+          if (opt.logger) {
+              reset();
+          }
+          // Reset the singleton field title formatter if provided
+          if (opt.fieldTitle) {
+              resetTitleFormatter();
+          }
+      }
+  }
+  function getTopLevelProperties(topLevelSpec, config, autosize) {
+      return __assign({ autosize: keys(autosize).length === 1 && autosize.type ? autosize.type : autosize }, extractTopLevelProperties(config), extractTopLevelProperties(topLevelSpec));
+  }
+  /*
+   * Assemble the top-level model.
+   *
+   * Note: this couldn't be `model.assemble()` since the top-level model
+   * needs some special treatment to generate top-level properties.
+   */
+  function assembleTopLevelModel(model, topLevelProperties) {
+      // TODO: change type to become VgSpec
+      // Config with Vega-Lite only config removed.
+      var vgConfig = model.config ? stripAndRedirectConfig(model.config) : undefined;
+      var data = [].concat(model.assembleSelectionData([]), 
+      // only assemble data in the root
+      assembleRootData(model.component.data, topLevelProperties.datasets || {}));
+      delete topLevelProperties.datasets;
+      var projections = model.assembleProjections();
+      var title$$1 = model.assembleTitle();
+      var style = model.assembleGroupStyle();
+      var layoutSignals = model.assembleLayoutSignals();
+      // move width and height signals with values to top level
+      layoutSignals = layoutSignals.filter(function (signal) {
+          if ((signal.name === 'width' || signal.name === 'height') && signal.value !== undefined) {
+              topLevelProperties[signal.name] = +signal.value;
+              return false;
+          }
+          return true;
+      });
+      var output = __assign({ $schema: 'https://vega.github.io/schema/vega/v4.json' }, (model.description ? { description: model.description } : {}), topLevelProperties, (title$$1 ? { title: title$$1 } : {}), (style ? { style: style } : {}), { data: data }, (projections.length > 0 ? { projections: projections } : {}), model.assembleGroup(layoutSignals.concat(model.assembleSelectionTopLevelSignals([]))), (vgConfig ? { config: vgConfig } : {}));
+      return {
+          spec: output
+          // TODO: add warning / errors here
+      };
+  }
+
+
+
+  var facet = /*#__PURE__*/Object.freeze({
+
+  });
+
+  /**
+   * Required Encoding Channels for each mark type
+   */
+  var DEFAULT_REQUIRED_CHANNEL_MAP = {
+      text: ['text'],
+      line: ['x', 'y'],
+      trail: ['x', 'y'],
+      area: ['x', 'y']
+  };
+  /**
+   * Supported Encoding Channel for each mark type
+   */
+  var DEFAULT_SUPPORTED_CHANNEL_TYPE = {
+      bar: toSet(['row', 'column', 'x', 'y', 'size', 'color', 'fill', 'stroke', 'detail']),
+      line: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'color', 'detail']),
+      trail: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'color', 'detail', 'size']),
+      area: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'detail']),
+      tick: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'detail']),
+      circle: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'size', 'detail']),
+      square: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'size', 'detail']),
+      point: toSet(['row', 'column', 'x', 'y', 'color', 'fill', 'stroke', 'size', 'detail', 'shape']),
+      geoshape: toSet(['row', 'column', 'color', 'fill', 'stroke', 'detail', 'shape']),
+      text: toSet(['row', 'column', 'size', 'color', 'fill', 'stroke', 'text']) // TODO(#724) revise
+  };
+  // TODO: consider if we should add validate method and
+  // requires ZSchema in the main vega-lite repo
+  /**
+   * Further check if encoding mapping of a spec is invalid and
+   * return error if it is invalid.
+   *
+   * This checks if
+   * (1) all the required encoding channels for the mark type are specified
+   * (2) all the specified encoding channels are supported by the mark type
+   * @param  {[type]} spec [description]
+   * @param  {RequiredChannelMap = DefaultRequiredChannelMap}  requiredChannelMap
+   * @param  {SupportedChannelMap = DefaultSupportedChannelMap} supportedChannelMap
+   * @return {String} Return one reason why the encoding is invalid,
+   *                  or null if the encoding is valid.
+   */
+  function getEncodingMappingError(spec, requiredChannelMap, supportedChannelMap) {
+      if (requiredChannelMap === void 0) { requiredChannelMap = DEFAULT_REQUIRED_CHANNEL_MAP; }
+      if (supportedChannelMap === void 0) { supportedChannelMap = DEFAULT_SUPPORTED_CHANNEL_TYPE; }
+      var mark = isMarkDef(spec.mark) ? spec.mark.type : spec.mark;
+      var encoding = spec.encoding;
+      var requiredChannels = requiredChannelMap[mark];
+      var supportedChannels = supportedChannelMap[mark];
+      for (var i in requiredChannels) { // all required channels are in encoding`
+          if (!(requiredChannels[i] in encoding)) {
+              return 'Missing encoding channel \"' + requiredChannels[i] +
+                  '\" for mark \"' + mark + '\"';
+          }
+      }
+      for (var channel in encoding) { // all channels in encoding are supported
+          if (!supportedChannels[channel]) {
+              return 'Encoding channel \"' + channel +
+                  '\" is not supported by mark type \"' + mark + '\"';
+          }
+      }
+      if (mark === BAR && !encoding.x && !encoding.y) {
+          return 'Missing both x and y for bar';
+      }
+      return null;
+  }
+
+  var validate = /*#__PURE__*/Object.freeze({
+    DEFAULT_REQUIRED_CHANNEL_MAP: DEFAULT_REQUIRED_CHANNEL_MAP,
+    DEFAULT_SUPPORTED_CHANNEL_TYPE: DEFAULT_SUPPORTED_CHANNEL_TYPE,
+    getEncodingMappingError: getEncodingMappingError
+  });
+
+  var name = "vega-lite";
+  var author = "Jeffrey Heer, Dominik Moritz, Kanit \"Ham\" Wongsuphasawat";
+  var version = "2.7.0";
+  var collaborators = [
+  	"Kanit Wongsuphasawat <kanitw@gmail.com> (http://kanitw.yellowpigz.com)",
+  	"Dominik Moritz <domoritz@cs.washington.edu> (https://www.domoritz.de)",
+  	"Jeffrey Heer <jheer@uw.edu> (http://jheer.org)"
+  ];
+  var homepage = "https://vega.github.io/vega-lite/";
+  var description = "Vega-Lite is a concise high-level language for interactive visualization.";
+  var main$1 = "build/vega-lite.js";
+  var unpkg = "build/vega-lite.min.js";
+  var jsdelivr = "build/vega-lite.min.js";
+  var module$1 = "build/src/index";
+  var types = "build/src/index.d.ts";
+  var bin$2 = {
+  	vl2png: "./bin/vl2png",
+  	vl2svg: "./bin/vl2svg",
+  	vl2vg: "./bin/vl2vg"
+  };
+  var directories = {
+  	test: "test"
+  };
+  var scripts = {
+  	prebuild: "mkdir -p build/src",
+  	build: "npm run build:only",
+  	"build:only": "tsc && rollup -c",
+  	postbuild: "uglifyjs build/vega-lite.js -cm --source-map content=build/vega-lite.js.map,filename=build/vega-lite.min.js.map -o build/vega-lite.min.js && npm run schema",
+  	"build:examples": "npm run data && TZ=America/Los_Angeles scripts/build-examples.sh",
+  	"build:examples-full": "TZ=America/Los_Angeles scripts/build-examples.sh 1",
+  	"build:example": "TZ=America/Los_Angeles scripts/build-example.sh",
+  	"build:toc": "bundle exec jekyll build -q && scripts/generate-toc",
+  	"build:site": "tsc -p site && webpack --config site/webpack.config.js",
+  	"build:versions": "scripts/update-version.sh",
+  	"check:examples": "scripts/check-examples.sh",
+  	"check:schema": "scripts/check-schema.sh",
+  	clean: "rm -rf build && rm -f examples/compiled/*.png && find site/examples ! -name 'index.md' -type f -delete",
+  	data: "rsync -r node_modules/vega-datasets/data/* data",
+  	deploy: "scripts/deploy.sh",
+  	"deploy:gh": "scripts/deploy-gh.sh",
+  	"deploy:schema": "scripts/deploy-schema.sh",
+  	preschema: "npm run prebuild",
+  	schema: "node --stack-size=1200 ./node_modules/.bin/ts-json-schema-generator --path tsconfig.json --type TopLevelSpec > build/vega-lite-schema.json && npm run renameschema && cp build/vega-lite-schema.json _data/",
+  	renameschema: "scripts/rename-schema.sh",
+  	presite: "npm run prebuild && npm run data && npm run build:site && npm run build:toc && npm run build:versions && scripts/create-example-pages",
+  	site: "bundle exec jekyll serve --incremental",
+  	lint: "tslint -p . -e 'package.json'",
+  	test: "jest test/ && npm run lint && npm run schema && jest examples/ && npm run test:runtime",
+  	"test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand test",
+  	"test:runtime": "TZ=America/Los_Angeles TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' wdio wdio.conf.js",
+  	"test:runtime:generate": "rm -Rf test-runtime/resources && VL_GENERATE_TESTS=true npm run test:runtime",
+  	"watch:build": "npm run build:only && concurrently --kill-others -n Typescript,Rollup 'tsc -w' 'rollup -c -w'",
+  	"watch:site": "concurrently --kill-others -n Typescript,Webpack 'tsc -p site --watch' 'webpack --config site/webpack.config.js --mode development --watch'",
+  	"watch:test": "jest --watch"
+  };
+  var repository = {
+  	type: "git",
+  	url: "https://github.com/vega/vega-lite.git"
+  };
+  var license = "BSD-3-Clause";
+  var bugs = {
+  	url: "https://github.com/vega/vega-lite/issues"
+  };
+  var devDependencies = {
+  	"@types/chai": "^4.1.4",
+  	"@types/d3": "^5.0.0",
+  	"@types/highlight.js": "^9.12.3",
+  	"@types/jest": "^23.1.1",
+  	"@types/mkdirp": "^0.5.2",
+  	"@types/node": "^9.0.0",
+  	"@types/webdriverio": "^4.10.2",
+  	ajv: "^6.5.1",
+  	chai: "^4.1.2",
+  	cheerio: "^1.0.0-rc.2",
+  	chromedriver: "^2.40.0",
+  	codecov: "^3.0.2",
+  	concurrently: "^3.6.0",
+  	d3: "^5.5.0",
+  	"highlight.js": "^9.12.0",
+  	jest: "^23.1.0",
+  	mkdirp: "^0.5.1",
+  	rollup: "^0.59.4",
+  	"rollup-plugin-commonjs": "^9.1.3",
+  	"rollup-plugin-json": "^3.0.0",
+  	"rollup-plugin-node-resolve": "^3.3.0",
+  	"rollup-plugin-sourcemaps": "^0.4.2",
+  	"source-map-support": "^0.5.6",
+  	"svg2png-many": "^0.0.7",
+  	"ts-jest": "^22.4.6",
+  	"ts-json-schema-generator": "^0.28.0",
+  	"ts-node": "^6.1.1",
+  	tslint: "5.10.0",
+  	"tslint-eslint-rules": "^5.3.1",
+  	typescript: "^2.9.2",
+  	"uglify-js": "^3.4.1",
+  	vega: "^4.0.0",
+  	"vega-datasets": "^1.19.0",
+  	"vega-embed": "^3.16.0",
+  	"vega-tooltip": "^0.11.0",
+  	"wdio-chromedriver-service": "^0.1.3",
+  	"wdio-dot-reporter": "0.0.9",
+  	"wdio-mocha-framework": "^0.5.13",
+  	"wdio-static-server-service": "^1.0.1",
+  	webdriverio: "^4.13.0",
+  	webpack: "^4.12.0",
+  	"webpack-cli": "^3.0.8",
+  	"yaml-front-matter": "^4.0.0"
+  };
+  var dependencies = {
+  	"@types/json-stable-stringify": "^1.0.32",
+  	"json-stable-stringify": "^1.0.1",
+  	tslib: "^1.9.2",
+  	"vega-event-selector": "^2.0.0",
+  	"vega-typings": "^0.3.17",
+  	"vega-util": "^1.10.0",
+  	yargs: "^11.0.0"
+  };
+  var peerDependencies = {
+  	vega: "^3.0.0 || ^4.0.0"
+  };
+  var jest = {
+  	transform: {
+  		"^.+\\.tsx?$": "ts-jest"
+  	},
+  	testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  	moduleFileExtensions: [
+  		"ts",
+  		"tsx",
+  		"js",
+  		"jsx",
+  		"json",
+  		"node"
+  	],
+  	testPathIgnorePatterns: [
+  		"node_modules",
+  		"test-runtime",
+  		"<rootDir>/build",
+  		"_site",
+  		"src"
+  	],
+  	coverageDirectory: "./coverage/",
+  	collectCoverage: false
+  };
+  var pkg = {
+  	name: name,
+  	author: author,
+  	version: version,
+  	collaborators: collaborators,
+  	homepage: homepage,
+  	description: description,
+  	main: main$1,
+  	unpkg: unpkg,
+  	jsdelivr: jsdelivr,
+  	module: module$1,
+  	types: types,
+  	bin: bin$2,
+  	directories: directories,
+  	scripts: scripts,
+  	repository: repository,
+  	license: license,
+  	bugs: bugs,
+  	devDependencies: devDependencies,
+  	dependencies: dependencies,
+  	peerDependencies: peerDependencies,
+  	jest: jest
+  };
+
+  var version$1 = pkg.version;
+
+  exports.aggregate = aggregate;
+  exports.axis = axis;
+  exports.bin = bin;
+  exports.channel = channel;
+  exports.compositeMark = index;
+  exports.config = config;
+  exports.data = data;
+  exports.datetime = datetime;
+  exports.encoding = encoding;
+  exports.facet = facet;
+  exports.fieldDef = fielddef;
+  exports.header = header;
+  exports.legend = legend;
+  exports.mark = mark;
+  exports.scale = scale;
+  exports.sort = sort;
+  exports.spec = spec;
+  exports.stack = stack$1;
+  exports.timeUnit = timeunit;
+  exports.transform = transform;
+  exports.type = type;
+  exports.util = util;
+  exports.validate = validate;
+  exports.version = version$1;
+  exports.compile = compile;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=vega-lite.js.map
