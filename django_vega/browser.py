@@ -2,9 +2,11 @@ import json
 
 import websockets
 from urllib.request import urlopen
+from urllib.error import URLError
 import asyncio
 import logging
 from collections import defaultdict
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +50,10 @@ class Browser:
 
             elif "id" in message:
                 if message["id"] in self.results:
-                    await self.results[message['id']].put(message)
+                    if 'result' in message:
+                        await self.results[message['id']].put(message['result'])
+                    elif 'error' in message:
+                        raise RuntimeError(f'Error message: {message}')
 
     async def handle_event_loop(self):
         while not self._stopped.is_set():
@@ -63,8 +68,12 @@ class Browser:
                     logger.error("callback %s exception" % event['method'], exc_info=True)
 
     def get_tabs(self):
-        self.tabs = json.loads(urlopen('http://{}:{}/json'.format(self.host, self.port)).read())
-        print(self.tabs)
+        try:
+            self.tabs = json.loads(urlopen('http://{}:{}/json'.format(self.host, self.port), timeout=TIMEOUT).read())
+        except URLError:
+            time.sleep(1)
+            self.tabs = json.loads(urlopen('http://{}:{}/json'.format(self.host, self.port), timeout=TIMEOUT).read())
+
 
     async def call(self, method, **kwargs):
         self.message_counter += 1
@@ -72,7 +81,7 @@ class Browser:
         payload = {'id': msg_id, 'method': method, 'params': kwargs}
         await self.ws.send(json.dumps(payload))
 
-        return await asyncio.wait_for(self.results[msg_id].get(), TIMEOUT)
+        return await asyncio.wait_for(self.results[msg_id].get(), timeout=self.timeout)
 
     async def connect(self, tab=0, update_tabs=True):
         if update_tabs or self.tabs is None:
