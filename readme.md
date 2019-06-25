@@ -85,4 +85,5 @@ Automated testing is on the todo list.
 ## todo
 
 - allow for multiple versions of vega, vega-lite and vega-embed in rendering
-
+- set background color during render
+- regression ([example](https://altair-viz.github.io/gallery/poly_fit.html), [lib](https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.fit.html))
