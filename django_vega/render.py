@@ -3,9 +3,10 @@ import asyncio
 from string import Template
 import json
 import subprocess
-from typing import Dict
+from typing import Dict, Union
 import logging
 from pathlib import Path
+from .utils import JSONEncoder
 
 logger = logging.getLogger()
 
@@ -69,7 +70,7 @@ def get_libs():
     }
 
 
-def render(vega_spec: Dict, scale: int = 1, browser: Browser = None, spawn: str = None) -> Dict[str, str]:
+def render(vega_spec: Union[Dict, str], scale: int = 1, browser: Browser = None, spawn: str = None) -> Dict[str, str]:
     """
 
     :param vega_spec: Vega specfication to render, as dict
@@ -103,16 +104,11 @@ def render(vega_spec: Dict, scale: int = 1, browser: Browser = None, spawn: str 
 
         await browser.call('Page.setDocumentContent', frameId=frameId, **session, html=html_content())
 
-        code = expression.substitute(spec=vega_spec, scale=scale)
+        spec = vega_spec if isinstance(vega_spec, str) else json.dumps(vega_spec, cls=JSONEncoder)
+
+        code = expression.substitute(spec=spec, scale=scale)
 
         result = await browser.call('Runtime.evaluate', expression=code, awaitPromise=True, **session)
-
-        screenshot = await browser.call('Page.captureScreenshot', **session)
-
-        with open('screenshot.png', 'wb') as f:
-
-            import base64
-            f.write(base64.b64decode(screenshot['data']))
 
         await browser.call('Target.closeTarget', **target, **session)
 
