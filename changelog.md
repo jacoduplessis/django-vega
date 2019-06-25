@@ -1,6 +1,7 @@
 0.2.2 2019-06-25
 
 Improve headless rendering performance.
+Handle datetime data.
 
 0.2.1 2019-06-24
 
