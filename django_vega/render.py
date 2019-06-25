@@ -12,9 +12,7 @@ logger = logging.getLogger()
 expression = Template("""
         
         var spec = $spec;
-        var scaleFactor = $scale;
-        
-        vegaEmbed('#viz', spec, {})    
+        var scaleFactor = $scale; 
         
         new Promise((resolve, reject) => {
         
@@ -56,7 +54,6 @@ def html_content():
   <title>Embedding Vega-Lite</title>
   <script>$vega</script>
   <script>$vega_lite</script>
-  <script>$vega_embed</script>
 </head>
 <body>
   <div id="viz"></div>
@@ -69,7 +66,6 @@ def get_libs():
     return {
         'vega': (Path(__file__).parent / 'static' / 'django_vega' / 'vega.js').read_text(),
         'vega_lite': (Path(__file__).parent / 'static' / 'django_vega' / 'vega-lite.js').read_text(),
-        'vega_embed': (Path(__file__).parent / 'static' / 'django_vega' / 'vega-embed.js').read_text(),
     }
 
 
@@ -126,7 +122,7 @@ def render(vega_spec: Dict, scale: int = 1, browser: Browser = None, spawn: str 
         if 'value' in result['result']:
             return json.loads(result['result']['value'])
         else:
-            print(result)
+            logger.exception(f'Error during JavaScript execution: {result}')
             return None
 
     try:
