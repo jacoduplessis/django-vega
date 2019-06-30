@@ -1,3 +1,7 @@
+0.3.0 2019-06-30
+
+Add function to screenshot of arbitrary HTML (no waiting yet).
+
 0.2.2 2019-06-25
 
 Improve headless rendering performance.

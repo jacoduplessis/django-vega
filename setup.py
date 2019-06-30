@@ -13,7 +13,7 @@ setup(
             'templates/django_vega/*.html'
         ]
     },
-    version='0.2.2',
+    version='0.3.0',
     packages=['django_vega'],
     install_requires=[
         'websockets',
