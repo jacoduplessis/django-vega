@@ -1,3 +1,7 @@
+0.3.1 2019-09-12
+
+Update static files.
+
 0.3.0 2019-06-30
 
 Add function to screenshot of arbitrary HTML (no waiting yet).

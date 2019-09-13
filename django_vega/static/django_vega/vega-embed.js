@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vega'), require('vega-lite')) :
   typeof define === 'function' && define.amd ? define(['vega', 'vega-lite'], factory) :
-  (global = global || self, global.vegaEmbed = factory(global.vega, global.vl));
-}(this, function (vegaImport, vlImport) { 'use strict';
+  (global = global || self, global.vegaEmbed = factory(global.vega, global.vegaLite));
+}(this, function (vegaImport, vegaLiteImport) { 'use strict';
 
   var xhtml = "http://www.w3.org/1999/xhtml";
 
@@ -866,7 +866,7 @@
   }
 
   var name = "vega-embed";
-  var version = "4.2.0";
+  var version = "5.1.2";
   var description = "Publish Vega visualizations as embedded web components.";
   var keywords = [
   	"vega",
@@ -885,22 +885,8 @@
   };
   var contributors = [
   	{
-  		name: "Jeffrey Heer",
-  		url: "https://homes.cs.washington.edu/~jheer/"
-  	},
-  	{
   		name: "Dominik Moritz",
   		url: "https://www.domoritz.de"
-  	},
-  	{
-  		name: "Arvind Satyanarayan",
-  		url: "http://arvindsatya.com"
-  	},
-  	{
-  		name: "Younghoon Kim"
-  	},
-  	{
-  		name: "Yuri Astrakhan"
   	}
   ];
   var license = "BSD-3-Clause";
@@ -911,33 +897,24 @@
   var types = "build/src/embed.d.ts";
   var devDependencies = {
   	"@types/d3-selection": "^1.4.1",
-  	"@types/jest": "^24.0.13",
+  	"@types/jest": "^24.0.18",
   	"@types/json-stable-stringify": "^1.0.32",
-  	"@types/semver": "^6.0.0",
-  	"@typescript-eslint/eslint-plugin": "^1.9.0",
-  	"@typescript-eslint/parser": "^1.9.0",
-  	"browser-sync": "^2.26.5",
-  	concurrently: "^4.1.0",
-  	eslint: "^5.16.0",
-  	"eslint-config-airbnb": "^17.1.0",
-  	"eslint-config-prettier": "^4.3.0",
-  	"eslint-plugin-import": "^2.17.2",
-  	"eslint-plugin-jsx-a11y": "^6.2.1",
-  	"eslint-plugin-prettier": "^3.1.0",
-  	"eslint-plugin-react": "^7.13.0",
-  	jest: "^24.8.0",
-  	"jest-canvas-mock": "^2.1.0",
+  	"@types/semver": "^6.0.1",
+  	"browser-sync": "^2.26.7",
+  	concurrently: "^4.1.2",
+  	jest: "^24.9.0",
+  	"jest-canvas-mock": "^2.1.1",
   	"node-sass": "^4.12.0",
-  	prettier: "^1.17.1",
-  	rollup: "^1.12.1",
-  	"rollup-plugin-commonjs": "^10.0.0",
+  	rollup: "^1.20.3",
+  	"rollup-plugin-commonjs": "^10.1.0",
   	"rollup-plugin-json": "^4.0.0",
-  	"rollup-plugin-node-resolve": "^5.0.0",
-  	terser: "^3.17.0",
+  	"rollup-plugin-node-resolve": "^5.2.0",
+  	terser: "^4.2.1",
   	"ts-jest": "^24.0.2",
-  	typescript: "^3.4.5",
-  	vega: "^5.1.0",
-  	"vega-lite": "^3.0.0"
+  	typescript: "~3.5.0",
+  	vega: "~5.4.0",
+  	"vega-lite": "^4.0.0-beta.1",
+  	"vega-lite-dev-config": "^0.2.5"
   };
   var peerDependencies = {
   	vega: "*",
@@ -945,29 +922,44 @@
   };
   var dependencies = {
   	"d3-selection": "^1.4.0",
+  	deepmerge: "^4.0.0",
   	"json-stringify-pretty-compact": "^2.0.0",
-  	semver: "^6.0.0",
+  	semver: "^6.3.0",
   	"vega-schema-url-parser": "^1.1.0",
-  	"vega-themes": "^2.3.0",
-  	"vega-tooltip": "^0.17.0"
+  	"vega-themes": "^2.4.0",
+  	"vega-tooltip": "^0.19.1"
   };
   var scripts = {
-  	prebuild: "npm run clean && ./build-style.sh && tsc && cp package.json build/",
+  	"tsc:src": "tsc -p tsconfig.src.json",
+  	prebuild: "./build-style.sh && yarn tsc:src",
   	build: "rollup -c",
-  	quickbuild: "./build-style.sh && tsc && rollup -c",
   	clean: "rm -rf build && rm -f src/style.ts && mkdir build",
-  	eslintbase: "eslint '{src,test}/**/*.ts' '*.js'",
-  	prettierbase: "prettier '*.scss' '*.html'",
-  	format: "npm run eslintbase -- --fix && npm run prettierbase -- --write",
-  	lint: "npm run eslintbase && npm run prettierbase -- --check",
   	postbuild: "terser build/vega-embed.js -cm > build/vega-embed.min.js",
-  	prepublishOnly: "npm run build",
-  	preversion: "npm run lint && npm run test",
+  	prepublishOnly: "yarn clean && yarn build",
+  	preversion: "yarn lint && yarn test",
   	serve: "browser-sync start --directory -s -f build *.html",
-  	start: "npm run build && concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'",
+  	start: "yarn build && concurrently --kill-others -n Server,Typescript,Rollup 'yarn serve' 'yarn tsc:src -w' 'rollup -c -w'",
   	pretest: "./build-style.sh",
   	test: "jest",
-  	"test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand"
+  	"test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
+  	prepare: "beemo create-config",
+  	prettierbase: "beemo prettier '*.{css,html}'",
+  	eslintbase: "beemo eslint '{src,test}/**/*.ts'",
+  	format: "yarn eslintbase --fix && yarn prettierbase --write",
+  	lint: "yarn eslintbase && yarn prettierbase --check"
+  };
+  var beemo = {
+  	module: "vega-lite-dev-config",
+  	drivers: [
+  		"prettier",
+  		"eslint"
+  	],
+  	prettier: {
+  		ignore: [
+  			"src/style.ts",
+  			"README.md"
+  		]
+  	}
   };
   var jest = {
   	testURL: "http://localhost/",
@@ -1010,6 +1002,7 @@
   	peerDependencies: peerDependencies,
   	dependencies: dependencies,
   	scripts: scripts,
+  	beemo: beemo,
   	jest: jest
   };
 
@@ -1036,6 +1029,116 @@
           step((generator = generator.apply(thisArg, _arguments || [])).next());
       });
   }
+
+  var isMergeableObject = function isMergeableObject(value) {
+  	return isNonNullObject(value)
+  		&& !isSpecial(value)
+  };
+
+  function isNonNullObject(value) {
+  	return !!value && typeof value === 'object'
+  }
+
+  function isSpecial(value) {
+  	var stringValue = Object.prototype.toString.call(value);
+
+  	return stringValue === '[object RegExp]'
+  		|| stringValue === '[object Date]'
+  		|| isReactElement(value)
+  }
+
+  // see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
+  var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
+  var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
+
+  function isReactElement(value) {
+  	return value.$$typeof === REACT_ELEMENT_TYPE
+  }
+
+  function emptyTarget(val) {
+  	return Array.isArray(val) ? [] : {}
+  }
+
+  function cloneUnlessOtherwiseSpecified(value, options) {
+  	return (options.clone !== false && options.isMergeableObject(value))
+  		? deepmerge(emptyTarget(value), value, options)
+  		: value
+  }
+
+  function defaultArrayMerge(target, source, options) {
+  	return target.concat(source).map(function(element) {
+  		return cloneUnlessOtherwiseSpecified(element, options)
+  	})
+  }
+
+  function getMergeFunction(key, options) {
+  	if (!options.customMerge) {
+  		return deepmerge
+  	}
+  	var customMerge = options.customMerge(key);
+  	return typeof customMerge === 'function' ? customMerge : deepmerge
+  }
+
+  function getEnumerableOwnPropertySymbols(target) {
+  	return Object.getOwnPropertySymbols
+  		? Object.getOwnPropertySymbols(target).filter(function(symbol) {
+  			return target.propertyIsEnumerable(symbol)
+  		})
+  		: []
+  }
+
+  function getKeys(target) {
+  	return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
+  }
+
+  function mergeObject(target, source, options) {
+  	var destination = {};
+  	if (options.isMergeableObject(target)) {
+  		getKeys(target).forEach(function(key) {
+  			destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
+  		});
+  	}
+  	getKeys(source).forEach(function(key) {
+  		if (!options.isMergeableObject(source[key]) || !target[key]) {
+  			destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
+  		} else {
+  			destination[key] = getMergeFunction(key, options)(target[key], source[key], options);
+  		}
+  	});
+  	return destination
+  }
+
+  function deepmerge(target, source, options) {
+  	options = options || {};
+  	options.arrayMerge = options.arrayMerge || defaultArrayMerge;
+  	options.isMergeableObject = options.isMergeableObject || isMergeableObject;
+
+  	var sourceIsArray = Array.isArray(source);
+  	var targetIsArray = Array.isArray(target);
+  	var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+
+  	if (!sourceAndTargetTypesMatch) {
+  		return cloneUnlessOtherwiseSpecified(source, options)
+  	} else if (sourceIsArray) {
+  		return options.arrayMerge(target, source, options)
+  	} else {
+  		return mergeObject(target, source, options)
+  	}
+  }
+
+  deepmerge.all = function deepmergeAll(array, options) {
+  	if (!Array.isArray(array)) {
+  		throw new Error('first argument should be an array')
+  	}
+
+  	return array.reduce(function(prev, next) {
+  		return deepmerge(prev, next, options)
+  	}, {})
+  };
+
+  var deepmerge_1 = deepmerge;
+
+  var cjs = deepmerge_1;
 
   // Note: This regex matches even invalid JSON strings, but since we’re
   // working on the output of `JSON.stringify` we know that only valid strings
@@ -1175,7 +1278,12 @@
   // The actual regexps go on exports.re
   var re = exports.re = [];
   var src = exports.src = [];
+  var t = exports.tokens = {};
   var R = 0;
+
+  function tok (n) {
+    t[n] = R++;
+  }
 
   // The following Regular Expressions can be used for tokenizing,
   // validating, and parsing SemVer version strings.
@@ -1183,67 +1291,67 @@
   // ## Numeric Identifier
   // A single `0`, or a non-zero digit followed by zero or more digits.
 
-  var NUMERICIDENTIFIER = R++;
-  src[NUMERICIDENTIFIER] = '0|[1-9]\\d*';
-  var NUMERICIDENTIFIERLOOSE = R++;
-  src[NUMERICIDENTIFIERLOOSE] = '[0-9]+';
+  tok('NUMERICIDENTIFIER');
+  src[t.NUMERICIDENTIFIER] = '0|[1-9]\\d*';
+  tok('NUMERICIDENTIFIERLOOSE');
+  src[t.NUMERICIDENTIFIERLOOSE] = '[0-9]+';
 
   // ## Non-numeric Identifier
   // Zero or more digits, followed by a letter or hyphen, and then zero or
   // more letters, digits, or hyphens.
 
-  var NONNUMERICIDENTIFIER = R++;
-  src[NONNUMERICIDENTIFIER] = '\\d*[a-zA-Z-][a-zA-Z0-9-]*';
+  tok('NONNUMERICIDENTIFIER');
+  src[t.NONNUMERICIDENTIFIER] = '\\d*[a-zA-Z-][a-zA-Z0-9-]*';
 
   // ## Main Version
   // Three dot-separated numeric identifiers.
 
-  var MAINVERSION = R++;
-  src[MAINVERSION] = '(' + src[NUMERICIDENTIFIER] + ')\\.' +
-                     '(' + src[NUMERICIDENTIFIER] + ')\\.' +
-                     '(' + src[NUMERICIDENTIFIER] + ')';
+  tok('MAINVERSION');
+  src[t.MAINVERSION] = '(' + src[t.NUMERICIDENTIFIER] + ')\\.' +
+                     '(' + src[t.NUMERICIDENTIFIER] + ')\\.' +
+                     '(' + src[t.NUMERICIDENTIFIER] + ')';
 
-  var MAINVERSIONLOOSE = R++;
-  src[MAINVERSIONLOOSE] = '(' + src[NUMERICIDENTIFIERLOOSE] + ')\\.' +
-                          '(' + src[NUMERICIDENTIFIERLOOSE] + ')\\.' +
-                          '(' + src[NUMERICIDENTIFIERLOOSE] + ')';
+  tok('MAINVERSIONLOOSE');
+  src[t.MAINVERSIONLOOSE] = '(' + src[t.NUMERICIDENTIFIERLOOSE] + ')\\.' +
+                          '(' + src[t.NUMERICIDENTIFIERLOOSE] + ')\\.' +
+                          '(' + src[t.NUMERICIDENTIFIERLOOSE] + ')';
 
   // ## Pre-release Version Identifier
   // A numeric identifier, or a non-numeric identifier.
 
-  var PRERELEASEIDENTIFIER = R++;
-  src[PRERELEASEIDENTIFIER] = '(?:' + src[NUMERICIDENTIFIER] +
-                              '|' + src[NONNUMERICIDENTIFIER] + ')';
+  tok('PRERELEASEIDENTIFIER');
+  src[t.PRERELEASEIDENTIFIER] = '(?:' + src[t.NUMERICIDENTIFIER] +
+                              '|' + src[t.NONNUMERICIDENTIFIER] + ')';
 
-  var PRERELEASEIDENTIFIERLOOSE = R++;
-  src[PRERELEASEIDENTIFIERLOOSE] = '(?:' + src[NUMERICIDENTIFIERLOOSE] +
-                                   '|' + src[NONNUMERICIDENTIFIER] + ')';
+  tok('PRERELEASEIDENTIFIERLOOSE');
+  src[t.PRERELEASEIDENTIFIERLOOSE] = '(?:' + src[t.NUMERICIDENTIFIERLOOSE] +
+                                   '|' + src[t.NONNUMERICIDENTIFIER] + ')';
 
   // ## Pre-release Version
   // Hyphen, followed by one or more dot-separated pre-release version
   // identifiers.
 
-  var PRERELEASE = R++;
-  src[PRERELEASE] = '(?:-(' + src[PRERELEASEIDENTIFIER] +
-                    '(?:\\.' + src[PRERELEASEIDENTIFIER] + ')*))';
+  tok('PRERELEASE');
+  src[t.PRERELEASE] = '(?:-(' + src[t.PRERELEASEIDENTIFIER] +
+                    '(?:\\.' + src[t.PRERELEASEIDENTIFIER] + ')*))';
 
-  var PRERELEASELOOSE = R++;
-  src[PRERELEASELOOSE] = '(?:-?(' + src[PRERELEASEIDENTIFIERLOOSE] +
-                         '(?:\\.' + src[PRERELEASEIDENTIFIERLOOSE] + ')*))';
+  tok('PRERELEASELOOSE');
+  src[t.PRERELEASELOOSE] = '(?:-?(' + src[t.PRERELEASEIDENTIFIERLOOSE] +
+                         '(?:\\.' + src[t.PRERELEASEIDENTIFIERLOOSE] + ')*))';
 
   // ## Build Metadata Identifier
   // Any combination of digits, letters, or hyphens.
 
-  var BUILDIDENTIFIER = R++;
-  src[BUILDIDENTIFIER] = '[0-9A-Za-z-]+';
+  tok('BUILDIDENTIFIER');
+  src[t.BUILDIDENTIFIER] = '[0-9A-Za-z-]+';
 
   // ## Build Metadata
   // Plus sign, followed by one or more period-separated build metadata
   // identifiers.
 
-  var BUILD = R++;
-  src[BUILD] = '(?:\\+(' + src[BUILDIDENTIFIER] +
-               '(?:\\.' + src[BUILDIDENTIFIER] + ')*))';
+  tok('BUILD');
+  src[t.BUILD] = '(?:\\+(' + src[t.BUILDIDENTIFIER] +
+               '(?:\\.' + src[t.BUILDIDENTIFIER] + ')*))';
 
   // ## Full Version String
   // A main version, followed optionally by a pre-release version and
@@ -1254,129 +1362,133 @@
   // capturing group, because it should not ever be used in version
   // comparison.
 
-  var FULL = R++;
-  var FULLPLAIN = 'v?' + src[MAINVERSION] +
-                  src[PRERELEASE] + '?' +
-                  src[BUILD] + '?';
+  tok('FULL');
+  tok('FULLPLAIN');
+  src[t.FULLPLAIN] = 'v?' + src[t.MAINVERSION] +
+                    src[t.PRERELEASE] + '?' +
+                    src[t.BUILD] + '?';
 
-  src[FULL] = '^' + FULLPLAIN + '$';
+  src[t.FULL] = '^' + src[t.FULLPLAIN] + '$';
 
   // like full, but allows v1.2.3 and =1.2.3, which people do sometimes.
   // also, 1.0.0alpha1 (prerelease without the hyphen) which is pretty
   // common in the npm registry.
-  var LOOSEPLAIN = '[v=\\s]*' + src[MAINVERSIONLOOSE] +
-                   src[PRERELEASELOOSE] + '?' +
-                   src[BUILD] + '?';
+  tok('LOOSEPLAIN');
+  src[t.LOOSEPLAIN] = '[v=\\s]*' + src[t.MAINVERSIONLOOSE] +
+                    src[t.PRERELEASELOOSE] + '?' +
+                    src[t.BUILD] + '?';
 
-  var LOOSE = R++;
-  src[LOOSE] = '^' + LOOSEPLAIN + '$';
+  tok('LOOSE');
+  src[t.LOOSE] = '^' + src[t.LOOSEPLAIN] + '$';
 
-  var GTLT = R++;
-  src[GTLT] = '((?:<|>)?=?)';
+  tok('GTLT');
+  src[t.GTLT] = '((?:<|>)?=?)';
 
   // Something like "2.*" or "1.2.x".
   // Note that "x.x" is a valid xRange identifer, meaning "any version"
   // Only the first item is strictly required.
-  var XRANGEIDENTIFIERLOOSE = R++;
-  src[XRANGEIDENTIFIERLOOSE] = src[NUMERICIDENTIFIERLOOSE] + '|x|X|\\*';
-  var XRANGEIDENTIFIER = R++;
-  src[XRANGEIDENTIFIER] = src[NUMERICIDENTIFIER] + '|x|X|\\*';
+  tok('XRANGEIDENTIFIERLOOSE');
+  src[t.XRANGEIDENTIFIERLOOSE] = src[t.NUMERICIDENTIFIERLOOSE] + '|x|X|\\*';
+  tok('XRANGEIDENTIFIER');
+  src[t.XRANGEIDENTIFIER] = src[t.NUMERICIDENTIFIER] + '|x|X|\\*';
 
-  var XRANGEPLAIN = R++;
-  src[XRANGEPLAIN] = '[v=\\s]*(' + src[XRANGEIDENTIFIER] + ')' +
-                     '(?:\\.(' + src[XRANGEIDENTIFIER] + ')' +
-                     '(?:\\.(' + src[XRANGEIDENTIFIER] + ')' +
-                     '(?:' + src[PRERELEASE] + ')?' +
-                     src[BUILD] + '?' +
+  tok('XRANGEPLAIN');
+  src[t.XRANGEPLAIN] = '[v=\\s]*(' + src[t.XRANGEIDENTIFIER] + ')' +
+                     '(?:\\.(' + src[t.XRANGEIDENTIFIER] + ')' +
+                     '(?:\\.(' + src[t.XRANGEIDENTIFIER] + ')' +
+                     '(?:' + src[t.PRERELEASE] + ')?' +
+                     src[t.BUILD] + '?' +
                      ')?)?';
 
-  var XRANGEPLAINLOOSE = R++;
-  src[XRANGEPLAINLOOSE] = '[v=\\s]*(' + src[XRANGEIDENTIFIERLOOSE] + ')' +
-                          '(?:\\.(' + src[XRANGEIDENTIFIERLOOSE] + ')' +
-                          '(?:\\.(' + src[XRANGEIDENTIFIERLOOSE] + ')' +
-                          '(?:' + src[PRERELEASELOOSE] + ')?' +
-                          src[BUILD] + '?' +
+  tok('XRANGEPLAINLOOSE');
+  src[t.XRANGEPLAINLOOSE] = '[v=\\s]*(' + src[t.XRANGEIDENTIFIERLOOSE] + ')' +
+                          '(?:\\.(' + src[t.XRANGEIDENTIFIERLOOSE] + ')' +
+                          '(?:\\.(' + src[t.XRANGEIDENTIFIERLOOSE] + ')' +
+                          '(?:' + src[t.PRERELEASELOOSE] + ')?' +
+                          src[t.BUILD] + '?' +
                           ')?)?';
 
-  var XRANGE = R++;
-  src[XRANGE] = '^' + src[GTLT] + '\\s*' + src[XRANGEPLAIN] + '$';
-  var XRANGELOOSE = R++;
-  src[XRANGELOOSE] = '^' + src[GTLT] + '\\s*' + src[XRANGEPLAINLOOSE] + '$';
+  tok('XRANGE');
+  src[t.XRANGE] = '^' + src[t.GTLT] + '\\s*' + src[t.XRANGEPLAIN] + '$';
+  tok('XRANGELOOSE');
+  src[t.XRANGELOOSE] = '^' + src[t.GTLT] + '\\s*' + src[t.XRANGEPLAINLOOSE] + '$';
 
   // Coercion.
   // Extract anything that could conceivably be a part of a valid semver
-  var COERCE = R++;
-  src[COERCE] = '(?:^|[^\\d])' +
+  tok('COERCE');
+  src[t.COERCE] = '(^|[^\\d])' +
                 '(\\d{1,' + MAX_SAFE_COMPONENT_LENGTH + '})' +
                 '(?:\\.(\\d{1,' + MAX_SAFE_COMPONENT_LENGTH + '}))?' +
                 '(?:\\.(\\d{1,' + MAX_SAFE_COMPONENT_LENGTH + '}))?' +
                 '(?:$|[^\\d])';
+  tok('COERCERTL');
+  re[t.COERCERTL] = new RegExp(src[t.COERCE], 'g');
 
   // Tilde ranges.
   // Meaning is "reasonably at or greater than"
-  var LONETILDE = R++;
-  src[LONETILDE] = '(?:~>?)';
+  tok('LONETILDE');
+  src[t.LONETILDE] = '(?:~>?)';
 
-  var TILDETRIM = R++;
-  src[TILDETRIM] = '(\\s*)' + src[LONETILDE] + '\\s+';
-  re[TILDETRIM] = new RegExp(src[TILDETRIM], 'g');
+  tok('TILDETRIM');
+  src[t.TILDETRIM] = '(\\s*)' + src[t.LONETILDE] + '\\s+';
+  re[t.TILDETRIM] = new RegExp(src[t.TILDETRIM], 'g');
   var tildeTrimReplace = '$1~';
 
-  var TILDE = R++;
-  src[TILDE] = '^' + src[LONETILDE] + src[XRANGEPLAIN] + '$';
-  var TILDELOOSE = R++;
-  src[TILDELOOSE] = '^' + src[LONETILDE] + src[XRANGEPLAINLOOSE] + '$';
+  tok('TILDE');
+  src[t.TILDE] = '^' + src[t.LONETILDE] + src[t.XRANGEPLAIN] + '$';
+  tok('TILDELOOSE');
+  src[t.TILDELOOSE] = '^' + src[t.LONETILDE] + src[t.XRANGEPLAINLOOSE] + '$';
 
   // Caret ranges.
   // Meaning is "at least and backwards compatible with"
-  var LONECARET = R++;
-  src[LONECARET] = '(?:\\^)';
+  tok('LONECARET');
+  src[t.LONECARET] = '(?:\\^)';
 
-  var CARETTRIM = R++;
-  src[CARETTRIM] = '(\\s*)' + src[LONECARET] + '\\s+';
-  re[CARETTRIM] = new RegExp(src[CARETTRIM], 'g');
+  tok('CARETTRIM');
+  src[t.CARETTRIM] = '(\\s*)' + src[t.LONECARET] + '\\s+';
+  re[t.CARETTRIM] = new RegExp(src[t.CARETTRIM], 'g');
   var caretTrimReplace = '$1^';
 
-  var CARET = R++;
-  src[CARET] = '^' + src[LONECARET] + src[XRANGEPLAIN] + '$';
-  var CARETLOOSE = R++;
-  src[CARETLOOSE] = '^' + src[LONECARET] + src[XRANGEPLAINLOOSE] + '$';
+  tok('CARET');
+  src[t.CARET] = '^' + src[t.LONECARET] + src[t.XRANGEPLAIN] + '$';
+  tok('CARETLOOSE');
+  src[t.CARETLOOSE] = '^' + src[t.LONECARET] + src[t.XRANGEPLAINLOOSE] + '$';
 
   // A simple gt/lt/eq thing, or just "" to indicate "any version"
-  var COMPARATORLOOSE = R++;
-  src[COMPARATORLOOSE] = '^' + src[GTLT] + '\\s*(' + LOOSEPLAIN + ')$|^$';
-  var COMPARATOR = R++;
-  src[COMPARATOR] = '^' + src[GTLT] + '\\s*(' + FULLPLAIN + ')$|^$';
+  tok('COMPARATORLOOSE');
+  src[t.COMPARATORLOOSE] = '^' + src[t.GTLT] + '\\s*(' + src[t.LOOSEPLAIN] + ')$|^$';
+  tok('COMPARATOR');
+  src[t.COMPARATOR] = '^' + src[t.GTLT] + '\\s*(' + src[t.FULLPLAIN] + ')$|^$';
 
   // An expression to strip any whitespace between the gtlt and the thing
   // it modifies, so that `> 1.2.3` ==> `>1.2.3`
-  var COMPARATORTRIM = R++;
-  src[COMPARATORTRIM] = '(\\s*)' + src[GTLT] +
-                        '\\s*(' + LOOSEPLAIN + '|' + src[XRANGEPLAIN] + ')';
+  tok('COMPARATORTRIM');
+  src[t.COMPARATORTRIM] = '(\\s*)' + src[t.GTLT] +
+                        '\\s*(' + src[t.LOOSEPLAIN] + '|' + src[t.XRANGEPLAIN] + ')';
 
   // this one has to use the /g flag
-  re[COMPARATORTRIM] = new RegExp(src[COMPARATORTRIM], 'g');
+  re[t.COMPARATORTRIM] = new RegExp(src[t.COMPARATORTRIM], 'g');
   var comparatorTrimReplace = '$1$2$3';
 
   // Something like `1.2.3 - 1.2.4`
   // Note that these all use the loose form, because they'll be
   // checked against either the strict or loose comparator form
   // later.
-  var HYPHENRANGE = R++;
-  src[HYPHENRANGE] = '^\\s*(' + src[XRANGEPLAIN] + ')' +
+  tok('HYPHENRANGE');
+  src[t.HYPHENRANGE] = '^\\s*(' + src[t.XRANGEPLAIN] + ')' +
                      '\\s+-\\s+' +
-                     '(' + src[XRANGEPLAIN] + ')' +
+                     '(' + src[t.XRANGEPLAIN] + ')' +
                      '\\s*$';
 
-  var HYPHENRANGELOOSE = R++;
-  src[HYPHENRANGELOOSE] = '^\\s*(' + src[XRANGEPLAINLOOSE] + ')' +
+  tok('HYPHENRANGELOOSE');
+  src[t.HYPHENRANGELOOSE] = '^\\s*(' + src[t.XRANGEPLAINLOOSE] + ')' +
                           '\\s+-\\s+' +
-                          '(' + src[XRANGEPLAINLOOSE] + ')' +
+                          '(' + src[t.XRANGEPLAINLOOSE] + ')' +
                           '\\s*$';
 
   // Star ranges basically just allow anything at all.
-  var STAR = R++;
-  src[STAR] = '(<|>)?=?\\s*\\*';
+  tok('STAR');
+  src[t.STAR] = '(<|>)?=?\\s*\\*';
 
   // Compile to actual regexp objects.
   // All are flag-free, unless they were created above with a flag.
@@ -1408,7 +1520,7 @@
       return null
     }
 
-    var r = options.loose ? re[LOOSE] : re[FULL];
+    var r = options.loose ? re[t.LOOSE] : re[t.FULL];
     if (!r.test(version)) {
       return null
     }
@@ -1463,7 +1575,7 @@
     this.options = options;
     this.loose = !!options.loose;
 
-    var m = version.trim().match(options.loose ? re[LOOSE] : re[FULL]);
+    var m = version.trim().match(options.loose ? re[t.LOOSE] : re[t.FULL]);
 
     if (!m) {
       throw new TypeError('Invalid Version: ' + version)
@@ -1556,6 +1668,30 @@
     do {
       var a = this.prerelease[i];
       var b = other.prerelease[i];
+      debug('prerelease compare', i, a, b);
+      if (a === undefined && b === undefined) {
+        return 0
+      } else if (b === undefined) {
+        return 1
+      } else if (a === undefined) {
+        return -1
+      } else if (a === b) {
+        continue
+      } else {
+        return compareIdentifiers(a, b)
+      }
+    } while (++i)
+  };
+
+  SemVer.prototype.compareBuild = function (other) {
+    if (!(other instanceof SemVer)) {
+      other = new SemVer(other, this.options);
+    }
+
+    var i = 0;
+    do {
+      var a = this.build[i];
+      var b = other.build[i];
       debug('prerelease compare', i, a, b);
       if (a === undefined && b === undefined) {
         return 0
@@ -1765,6 +1901,13 @@
     return compare(a, b, true)
   }
 
+  exports.compareBuild = compareBuild;
+  function compareBuild (a, b, loose) {
+    var versionA = new SemVer(a, loose);
+    var versionB = new SemVer(b, loose);
+    return versionA.compare(versionB) || versionA.compareBuild(versionB)
+  }
+
   exports.rcompare = rcompare;
   function rcompare (a, b, loose) {
     return compare(b, a, loose)
@@ -1773,14 +1916,14 @@
   exports.sort = sort;
   function sort (list, loose) {
     return list.sort(function (a, b) {
-      return exports.compare(a, b, loose)
+      return exports.compareBuild(a, b, loose)
     })
   }
 
   exports.rsort = rsort;
   function rsort (list, loose) {
     return list.sort(function (a, b) {
-      return exports.rcompare(a, b, loose)
+      return exports.compareBuild(b, a, loose)
     })
   }
 
@@ -1893,14 +2036,14 @@
 
   var ANY = {};
   Comparator.prototype.parse = function (comp) {
-    var r = this.options.loose ? re[COMPARATORLOOSE] : re[COMPARATOR];
+    var r = this.options.loose ? re[t.COMPARATORLOOSE] : re[t.COMPARATOR];
     var m = comp.match(r);
 
     if (!m) {
       throw new TypeError('Invalid comparator: ' + comp)
     }
 
-    this.operator = m[1];
+    this.operator = m[1] !== undefined ? m[1] : '';
     if (this.operator === '=') {
       this.operator = '';
     }
@@ -1920,12 +2063,16 @@
   Comparator.prototype.test = function (version) {
     debug('Comparator.test', version, this.options.loose);
 
-    if (this.semver === ANY) {
+    if (this.semver === ANY || version === ANY) {
       return true
     }
 
     if (typeof version === 'string') {
-      version = new SemVer(version, this.options);
+      try {
+        version = new SemVer(version, this.options);
+      } catch (er) {
+        return false
+      }
     }
 
     return cmp(version, this.operator, this.semver, this.options)
@@ -1946,9 +2093,15 @@
     var rangeTmp;
 
     if (this.operator === '') {
+      if (this.value === '') {
+        return true
+      }
       rangeTmp = new Range(comp.value, options);
       return satisfies(this.value, rangeTmp, options)
     } else if (comp.operator === '') {
+      if (comp.value === '') {
+        return true
+      }
       rangeTmp = new Range(this.value, options);
       return satisfies(comp.semver, rangeTmp, options)
     }
@@ -2038,18 +2191,18 @@
     var loose = this.options.loose;
     range = range.trim();
     // `1.2.3 - 1.2.4` => `>=1.2.3 <=1.2.4`
-    var hr = loose ? re[HYPHENRANGELOOSE] : re[HYPHENRANGE];
+    var hr = loose ? re[t.HYPHENRANGELOOSE] : re[t.HYPHENRANGE];
     range = range.replace(hr, hyphenReplace);
     debug('hyphen replace', range);
     // `> 1.2.3 < 1.2.5` => `>1.2.3 <1.2.5`
-    range = range.replace(re[COMPARATORTRIM], comparatorTrimReplace);
-    debug('comparator trim', range, re[COMPARATORTRIM]);
+    range = range.replace(re[t.COMPARATORTRIM], comparatorTrimReplace);
+    debug('comparator trim', range, re[t.COMPARATORTRIM]);
 
     // `~ 1.2.3` => `~1.2.3`
-    range = range.replace(re[TILDETRIM], tildeTrimReplace);
+    range = range.replace(re[t.TILDETRIM], tildeTrimReplace);
 
     // `^ 1.2.3` => `^1.2.3`
-    range = range.replace(re[CARETTRIM], caretTrimReplace);
+    range = range.replace(re[t.CARETTRIM], caretTrimReplace);
 
     // normalize spaces
     range = range.split(/\s+/).join(' ');
@@ -2057,7 +2210,7 @@
     // At this point, the range is completely trimmed and
     // ready to be split into comparators.
 
-    var compRe = loose ? re[COMPARATORLOOSE] : re[COMPARATOR];
+    var compRe = loose ? re[t.COMPARATORLOOSE] : re[t.COMPARATOR];
     var set = range.split(' ').map(function (comp) {
       return parseComparator(comp, this.options)
     }, this).join(' ').split(/\s+/);
@@ -2157,7 +2310,7 @@
   }
 
   function replaceTilde (comp, options) {
-    var r = options.loose ? re[TILDELOOSE] : re[TILDE];
+    var r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE];
     return comp.replace(r, function (_, M, m, p, pr) {
       debug('tilde', comp, _, M, m, p, pr);
       var ret;
@@ -2198,7 +2351,7 @@
 
   function replaceCaret (comp, options) {
     debug('caret', comp, options);
-    var r = options.loose ? re[CARETLOOSE] : re[CARET];
+    var r = options.loose ? re[t.CARETLOOSE] : re[t.CARET];
     return comp.replace(r, function (_, M, m, p, pr) {
       debug('caret', comp, _, M, m, p, pr);
       var ret;
@@ -2257,7 +2410,7 @@
 
   function replaceXRange (comp, options) {
     comp = comp.trim();
-    var r = options.loose ? re[XRANGELOOSE] : re[XRANGE];
+    var r = options.loose ? re[t.XRANGELOOSE] : re[t.XRANGE];
     return comp.replace(r, function (ret, gtlt, M, m, p, pr) {
       debug('xRange', comp, ret, gtlt, M, m, p, pr);
       var xM = isX(M);
@@ -2269,10 +2422,14 @@
         gtlt = '';
       }
 
+      // if we're including prereleases in the match, then we need
+      // to fix this to -0, the lowest possible prerelease value
+      pr = options.includePrerelease ? '-0' : '';
+
       if (xM) {
         if (gtlt === '>' || gtlt === '<') {
           // nothing is allowed
-          ret = '<0.0.0';
+          ret = '<0.0.0-0';
         } else {
           // nothing is forbidden
           ret = '*';
@@ -2309,11 +2466,12 @@
           }
         }
 
-        ret = gtlt + M + '.' + m + '.' + p;
+        ret = gtlt + M + '.' + m + '.' + p + pr;
       } else if (xm) {
-        ret = '>=' + M + '.0.0 <' + (+M + 1) + '.0.0';
+        ret = '>=' + M + '.0.0' + pr + ' <' + (+M + 1) + '.0.0' + pr;
       } else if (xp) {
-        ret = '>=' + M + '.' + m + '.0 <' + M + '.' + (+m + 1) + '.0';
+        ret = '>=' + M + '.' + m + '.0' + pr +
+          ' <' + M + '.' + (+m + 1) + '.0' + pr;
       }
 
       debug('xRange return', ret);
@@ -2327,10 +2485,10 @@
   function replaceStars (comp, options) {
     debug('replaceStars', comp, options);
     // Looseness is ignored here.  star is always as loose as it gets!
-    return comp.trim().replace(re[STAR], '')
+    return comp.trim().replace(re[t.STAR], '')
   }
 
-  // This function is passed to string.replace(re[HYPHENRANGE])
+  // This function is passed to string.replace(re[t.HYPHENRANGE])
   // M, m, patch, prerelease, build
   // 1.2 - 3.4.5 => >=1.2.0 <=3.4.5
   // 1.2.3 - 3.4 => >=1.2.0 <3.5.0 Any 3.4.x will do
@@ -2370,7 +2528,11 @@
     }
 
     if (typeof version === 'string') {
-      version = new SemVer(version, this.options);
+      try {
+        version = new SemVer(version, this.options);
+      } catch (er) {
+        return false
+      }
     }
 
     for (var i = 0; i < this.set.length; i++) {
@@ -2632,66 +2794,98 @@
   }
 
   exports.coerce = coerce;
-  function coerce (version) {
+  function coerce (version, options) {
     if (version instanceof SemVer) {
       return version
+    }
+
+    if (typeof version === 'number') {
+      version = String(version);
     }
 
     if (typeof version !== 'string') {
       return null
     }
 
-    var match = version.match(re[COERCE]);
+    options = options || {};
 
-    if (match == null) {
+    var match = null;
+    if (!options.rtl) {
+      match = version.match(re[t.COERCE]);
+    } else {
+      // Find the right-most coercible string that does not share
+      // a terminus with a more left-ward coercible string.
+      // Eg, '1.2.3.4' wants to coerce '2.3.4', not '3.4' or '4'
+      //
+      // Walk through the string checking with a /g regexp
+      // Manually set the index so as to pick up overlapping matches.
+      // Stop when we get a match that ends at the string end, since no
+      // coercible string can be more right-ward without the same terminus.
+      var next;
+      while ((next = re[t.COERCERTL].exec(version)) &&
+        (!match || match.index + match[0].length !== version.length)
+      ) {
+        if (!match ||
+            next.index + next[0].length !== match.index + match[0].length) {
+          match = next;
+        }
+        re[t.COERCERTL].lastIndex = next.index + next[1].length + next[2].length;
+      }
+      // leave it in a clean state
+      re[t.COERCERTL].lastIndex = -1;
+    }
+
+    if (match === null) {
       return null
     }
 
-    return parse(match[1] +
-      '.' + (match[2] || '0') +
-      '.' + (match[3] || '0'))
+    return parse(match[2] +
+      '.' + (match[3] || '0') +
+      '.' + (match[4] || '0'), options)
   }
   });
   var semver_1 = semver.SEMVER_SPEC_VERSION;
   var semver_2 = semver.re;
   var semver_3 = semver.src;
-  var semver_4 = semver.parse;
-  var semver_5 = semver.valid;
-  var semver_6 = semver.clean;
-  var semver_7 = semver.SemVer;
-  var semver_8 = semver.inc;
-  var semver_9 = semver.diff;
-  var semver_10 = semver.compareIdentifiers;
-  var semver_11 = semver.rcompareIdentifiers;
-  var semver_12 = semver.major;
-  var semver_13 = semver.minor;
-  var semver_14 = semver.patch;
-  var semver_15 = semver.compare;
-  var semver_16 = semver.compareLoose;
-  var semver_17 = semver.rcompare;
-  var semver_18 = semver.sort;
-  var semver_19 = semver.rsort;
-  var semver_20 = semver.gt;
-  var semver_21 = semver.lt;
-  var semver_22 = semver.eq;
-  var semver_23 = semver.neq;
-  var semver_24 = semver.gte;
-  var semver_25 = semver.lte;
-  var semver_26 = semver.cmp;
-  var semver_27 = semver.Comparator;
-  var semver_28 = semver.Range;
-  var semver_29 = semver.toComparators;
-  var semver_30 = semver.satisfies;
-  var semver_31 = semver.maxSatisfying;
-  var semver_32 = semver.minSatisfying;
-  var semver_33 = semver.minVersion;
-  var semver_34 = semver.validRange;
-  var semver_35 = semver.ltr;
-  var semver_36 = semver.gtr;
-  var semver_37 = semver.outside;
-  var semver_38 = semver.prerelease;
-  var semver_39 = semver.intersects;
-  var semver_40 = semver.coerce;
+  var semver_4 = semver.tokens;
+  var semver_5 = semver.parse;
+  var semver_6 = semver.valid;
+  var semver_7 = semver.clean;
+  var semver_8 = semver.SemVer;
+  var semver_9 = semver.inc;
+  var semver_10 = semver.diff;
+  var semver_11 = semver.compareIdentifiers;
+  var semver_12 = semver.rcompareIdentifiers;
+  var semver_13 = semver.major;
+  var semver_14 = semver.minor;
+  var semver_15 = semver.patch;
+  var semver_16 = semver.compare;
+  var semver_17 = semver.compareLoose;
+  var semver_18 = semver.compareBuild;
+  var semver_19 = semver.rcompare;
+  var semver_20 = semver.sort;
+  var semver_21 = semver.rsort;
+  var semver_22 = semver.gt;
+  var semver_23 = semver.lt;
+  var semver_24 = semver.eq;
+  var semver_25 = semver.neq;
+  var semver_26 = semver.gte;
+  var semver_27 = semver.lte;
+  var semver_28 = semver.cmp;
+  var semver_29 = semver.Comparator;
+  var semver_30 = semver.Range;
+  var semver_31 = semver.toComparators;
+  var semver_32 = semver.satisfies;
+  var semver_33 = semver.maxSatisfying;
+  var semver_34 = semver.minSatisfying;
+  var semver_35 = semver.minVersion;
+  var semver_36 = semver.validRange;
+  var semver_37 = semver.ltr;
+  var semver_38 = semver.gtr;
+  var semver_39 = semver.outside;
+  var semver_40 = semver.prerelease;
+  var semver_41 = semver.intersects;
+  var semver_42 = semver.coerce;
 
   var vegaSchemaUrlParser = createCommonjsModule(function (module, exports) {
   Object.defineProperty(exports, "__esModule", { value: true });
@@ -2708,6 +2902,126 @@
   });
 
   var schemaParser = unwrapExports(vegaSchemaUrlParser);
+
+  var name$1 = "vega-themes";
+  var version$1 = "2.4.0";
+  var description$1 = "Themes for stylized Vega and Vega-Lite visualizations.";
+  var keywords$1 = [
+  	"vega",
+  	"vega-lite",
+  	"themes",
+  	"style"
+  ];
+  var license$1 = "BSD-3-Clause";
+  var author$1 = {
+  	name: "UW Interactive Data Lab",
+  	url: "https://idl.cs.washington.edu"
+  };
+  var contributors$1 = [
+  	{
+  		name: "Emily Gu",
+  		url: "https://github.com/emilygu"
+  	},
+  	{
+  		name: "Arvind Satyanarayan",
+  		url: "http://arvindsatya.com"
+  	},
+  	{
+  		name: "Jeffrey Heer",
+  		url: "http://idl.cs.washington.edu"
+  	},
+  	{
+  		name: "Dominik Moritz",
+  		url: "https://www.domoritz.de"
+  	}
+  ];
+  var main$1 = "build/vega-themes.js";
+  var module$1 = "build/src/index.js";
+  var unpkg$1 = "build/vega-themes.min.js";
+  var jsdelivr$1 = "build/vega-themes.min.js";
+  var typings = "build/src/index.d.ts";
+  var repository$1 = {
+  	type: "git",
+  	url: "https://github.com/vega/vega-themes.git"
+  };
+  var scripts$1 = {
+  	prepare: "beemo create-config --silent",
+  	clean: "rm -rf build examples/build",
+  	prettierbase: "beemo prettier 'examples/*.{html,scss,css}'",
+  	eslintbase: "beemo eslint 'src/**/*.ts'",
+  	format: "yarn eslintbase --fix && yarn prettierbase --write",
+  	lint: "yarn eslintbase && yarn prettierbase --check",
+  	prebuild: "mkdir -p build",
+  	build: "tsc && rollup -c",
+  	postbuild: "terser build/vega-themes.js -cm > build/vega-themes.min.js",
+  	"deploy:gh": "yarn build && mkdir -p examples/build && rsync -r build/* examples/build && gh-pages -d examples",
+  	prepublishOnly: "yarn clean && yarn build",
+  	preversion: "yarn lint",
+  	serve: "browser-sync start -s -f build examples --serveStatic examples",
+  	start: "yarn build && concurrently --kill-others -n Server,Typescript,Rollup 'yarn serve' 'tsc -w' 'rollup -c -w'"
+  };
+  var devDependencies$1 = {
+  	"browser-sync": "^2.26.7",
+  	concurrently: "^4.1.2",
+  	"gh-pages": "^2.1.1",
+  	rollup: "^1.20.3",
+  	"rollup-plugin-json": "^4.0.0",
+  	terser: "^4.2.1",
+  	typescript: "~3.5.3",
+  	vega: "^5.5.2",
+  	"vega-lite": "^4.0.0-beta.1",
+  	"vega-lite-dev-config": "^0.2.5"
+  };
+  var peerDependencies$1 = {
+  	vega: "*",
+  	"vega-lite": "*"
+  };
+  var beemo$1 = {
+  	module: "vega-lite-dev-config",
+  	drivers: [
+  		"prettier",
+  		"eslint"
+  	]
+  };
+  var pkg$1 = {
+  	name: name$1,
+  	version: version$1,
+  	description: description$1,
+  	keywords: keywords$1,
+  	license: license$1,
+  	author: author$1,
+  	contributors: contributors$1,
+  	main: main$1,
+  	module: module$1,
+  	unpkg: unpkg$1,
+  	jsdelivr: jsdelivr$1,
+  	typings: typings,
+  	repository: repository$1,
+  	scripts: scripts$1,
+  	devDependencies: devDependencies$1,
+  	peerDependencies: peerDependencies$1,
+  	beemo: beemo$1
+  };
+
+  const lightColor = '#fff';
+  const medColor = '#888';
+  const darkTheme = {
+      background: '#333',
+      title: { color: lightColor },
+      style: {
+          'guide-label': {
+              fill: lightColor
+          },
+          'guide-title': {
+              fill: lightColor
+          }
+      },
+      axis: {
+          domainColor: lightColor,
+          gridColor: medColor,
+          tickColor: lightColor
+      }
+  };
 
   const markColor = '#4572a7';
   const excelTheme = {
@@ -2727,17 +3041,17 @@
           gridWidth: 0.5,
           labelPadding: 10,
           tickSize: 5,
-          tickWidth: 0.5,
+          tickWidth: 0.5
       },
       axisBand: {
           grid: false,
-          tickExtra: true,
+          tickExtra: true
       },
       legend: {
           labelBaseline: 'middle',
           labelFontSize: 11,
           symbolSize: 50,
-          symbolType: 'square',
+          symbolType: 'square'
       },
       range: {
           category: [
@@ -2750,251 +3064,40 @@
               '#94aace',
               '#d09393',
               '#b9cc98',
-              '#a99cbc',
-          ],
-      },
+              '#a99cbc'
+          ]
+      }
   };
 
-  const markColor$1 = '#000';
-  const ggplot2Theme = {
-      group: {
-          fill: '#e5e5e5',
-      },
-      arc: { fill: markColor$1 },
-      area: { fill: markColor$1 },
-      line: { stroke: markColor$1 },
-      path: { stroke: markColor$1 },
-      rect: { fill: markColor$1 },
-      shape: { stroke: markColor$1 },
-      symbol: { fill: markColor$1, size: 40 },
-      axis: {
-          domain: false,
-          grid: true,
-          gridColor: '#FFFFFF',
-          gridOpacity: 1,
-          labelColor: '#7F7F7F',
-          labelPadding: 4,
-          tickColor: '#7F7F7F',
-          tickSize: 5.67,
-          titleFontSize: 16,
-          titleFontWeight: 'normal',
-      },
-      legend: {
-          labelBaseline: 'middle',
-          labelFontSize: 11,
-          symbolSize: 40,
-      },
-      range: {
-          category: [
-              '#000000',
-              '#7F7F7F',
-              '#1A1A1A',
-              '#999999',
-              '#333333',
-              '#B0B0B0',
-              '#4D4D4D',
-              '#C9C9C9',
-              '#666666',
-              '#DCDCDC',
-          ],
-      },
-  };
-
-  const markColor$2 = '#ab5787';
-  const axisColor = '#979797';
-  const quartzTheme = {
-      background: '#f9f9f9',
-      arc: { fill: markColor$2 },
-      area: { fill: markColor$2 },
-      line: { stroke: markColor$2 },
-      path: { stroke: markColor$2 },
-      rect: { fill: markColor$2 },
-      shape: { stroke: markColor$2 },
-      symbol: { fill: markColor$2, size: 30 },
-      axis: {
-          domainColor: axisColor,
-          domainWidth: 0.5,
-          gridWidth: 0.2,
-          labelColor: axisColor,
-          tickColor: axisColor,
-          tickWidth: 0.2,
-          titleColor: axisColor,
-      },
-      axisBand: {
-          grid: false,
-      },
-      axisX: {
-          grid: true,
-          tickSize: 10,
-      },
-      axisY: {
-          domain: false,
-          grid: true,
-          tickSize: 0,
-      },
-      legend: {
-          labelFontSize: 11,
-          padding: 1,
-          symbolSize: 30,
-          symbolType: 'square',
-      },
-      range: {
-          category: [
-              '#ab5787',
-              '#51b2e5',
-              '#703c5c',
-              '#168dd9',
-              '#d190b6',
-              '#00609f',
-              '#d365ba',
-              '#154866',
-              '#666666',
-              '#c4c4c4',
-          ],
-      },
-  };
-
-  const markColor$3 = '#3e5c69';
-  const voxTheme = {
-      background: '#fff',
-      arc: { fill: markColor$3 },
-      area: { fill: markColor$3 },
-      line: { stroke: markColor$3 },
-      path: { stroke: markColor$3 },
-      rect: { fill: markColor$3 },
-      shape: { stroke: markColor$3 },
-      symbol: { fill: markColor$3 },
-      axis: {
-          domainWidth: 0.5,
-          grid: true,
-          labelPadding: 2,
-          tickSize: 5,
-          tickWidth: 0.5,
-          titleFontWeight: 'normal',
-      },
-      axisBand: {
-          grid: false,
-      },
-      axisX: {
-          gridWidth: 0.2,
-      },
-      axisY: {
-          gridDash: [3],
-          gridWidth: 0.4,
-      },
-      legend: {
-          labelFontSize: 11,
-          padding: 1,
-          symbolType: 'square',
-      },
-      range: {
-          category: [
-              '#3e5c69',
-              '#6793a6',
-              '#182429',
-              '#0570b0',
-              '#3690c0',
-              '#74a9cf',
-              '#a6bddb',
-              '#e2ddf2',
-          ],
-      },
-  };
-
-  const lightColor = '#fff';
-  const medColor = '#888';
-  const darkTheme = {
-      background: '#333',
-      title: { color: lightColor },
-      style: {
-          'guide-label': {
-              fill: lightColor,
-          },
-          'guide-title': {
-              fill: lightColor,
-          },
-      },
-      axis: {
-          domainColor: lightColor,
-          gridColor: medColor,
-          tickColor: lightColor,
-      },
-  };
-
-  const markColor$4 = '#30a2da';
-  const axisColor$1 = '#cbcbcb';
+  const markColor$1 = '#30a2da';
+  const axisColor = '#cbcbcb';
   const guideLabelColor = '#999';
+  const guideTitleColor = '#333';
   const backgroundColor = '#f0f0f0';
   const blackTitle = '#333';
   const fiveThirtyEightTheme = {
-      arc: { fill: markColor$4 },
-      area: { fill: markColor$4 },
+      arc: { fill: markColor$1 },
+      area: { fill: markColor$1 },
+      axis: {
+          domainColor: axisColor,
+          grid: true,
+          gridColor: axisColor,
+          gridWidth: 1,
+          labelColor: guideLabelColor,
+          labelFontSize: 10,
+          titleColor: guideTitleColor,
+          tickColor: axisColor,
+          tickSize: 10,
+          titleFontSize: 14,
+          titlePadding: 10,
+          labelPadding: 4
+      },
       axisBand: {
-          grid: false,
-      },
-      axisBottom: {
-          domain: false,
-          domainColor: blackTitle,
-          domainWidth: 3,
-          grid: true,
-          gridColor: axisColor$1,
-          gridWidth: 1,
-          labelColor: guideLabelColor,
-          labelFontSize: 10,
-          labelPadding: 4,
-          tickColor: axisColor$1,
-          tickSize: 10,
-          titleFontSize: 14,
-          titlePadding: 10,
-      },
-      axisLeft: {
-          domainColor: axisColor$1,
-          domainWidth: 1,
-          grid: true,
-          gridColor: axisColor$1,
-          gridWidth: 1,
-          labelColor: guideLabelColor,
-          labelFontSize: 10,
-          labelPadding: 4,
-          tickColor: axisColor$1,
-          tickSize: 10,
-          ticks: true,
-          titleFontSize: 14,
-          titlePadding: 10,
-      },
-      axisRight: {
-          domainColor: blackTitle,
-          domainWidth: 1,
-          grid: true,
-          gridColor: axisColor$1,
-          gridWidth: 1,
-          labelColor: guideLabelColor,
-          labelFontSize: 10,
-          labelPadding: 4,
-          tickColor: axisColor$1,
-          tickSize: 10,
-          ticks: true,
-          titleFontSize: 14,
-          titlePadding: 10,
-      },
-      axisTop: {
-          domain: false,
-          domainColor: blackTitle,
-          domainWidth: 3,
-          grid: true,
-          gridColor: axisColor$1,
-          gridWidth: 1,
-          labelColor: guideLabelColor,
-          labelFontSize: 10,
-          labelPadding: 4,
-          tickColor: axisColor$1,
-          tickSize: 10,
-          titleFontSize: 14,
-          titlePadding: 10,
+          grid: false
       },
       background: backgroundColor,
       group: {
-          fill: backgroundColor,
+          fill: backgroundColor
       },
       legend: {
           labelColor: blackTitle,
@@ -3004,14 +3107,14 @@
           symbolType: 'square',
           titleColor: blackTitle,
           titleFontSize: 14,
-          titlePadding: 10,
+          titlePadding: 10
       },
       line: {
-          stroke: markColor$4,
-          strokeWidth: 2,
+          stroke: markColor$1,
+          strokeWidth: 2
       },
-      path: { stroke: markColor$4, strokeWidth: 0.5 },
-      rect: { fill: markColor$4 },
+      path: { stroke: markColor$1, strokeWidth: 0.5 },
+      rect: { fill: markColor$1 },
       range: {
           category: [
               '#30a2da',
@@ -3025,111 +3128,122 @@
               '#52d2ca',
               '#52689e',
               '#545454',
-              '#9fe4f8',
+              '#9fe4f8'
           ],
-          diverging: [
-              '#cc0020',
-              '#e77866',
-              '#f6e7e1',
-              '#d6e8ed',
-              '#91bfd9',
-              '#1d78b5',
-          ],
-          heatmap: ['#d6e8ed', '#cee0e5', '#91bfd9', '#549cc6', '#1d78b5'],
+          diverging: ['#cc0020', '#e77866', '#f6e7e1', '#d6e8ed', '#91bfd9', '#1d78b5'],
+          heatmap: ['#d6e8ed', '#cee0e5', '#91bfd9', '#549cc6', '#1d78b5']
       },
-      symbol: {
+      point: {
           filled: true,
-          shape: 'circle',
+          shape: 'circle'
       },
-      shape: { stroke: markColor$4 },
+      shape: { stroke: markColor$1 },
       style: {
           bar: {
               binSpacing: 2,
-              fill: markColor$4,
-              stroke: null,
-          },
+              fill: markColor$1,
+              stroke: null
+          }
       },
       title: {
           anchor: 'start',
           fontSize: 24,
           fontWeight: 600,
-          offset: 20,
+          offset: 20
+      }
+  };
+
+  const markColor$2 = '#000';
+  const ggplot2Theme = {
+      group: {
+          fill: '#e5e5e5'
       },
+      arc: { fill: markColor$2 },
+      area: { fill: markColor$2 },
+      line: { stroke: markColor$2 },
+      path: { stroke: markColor$2 },
+      rect: { fill: markColor$2 },
+      shape: { stroke: markColor$2 },
+      symbol: { fill: markColor$2, size: 40 },
+      axis: {
+          domain: false,
+          grid: true,
+          gridColor: '#FFFFFF',
+          gridOpacity: 1,
+          labelColor: '#7F7F7F',
+          labelPadding: 4,
+          tickColor: '#7F7F7F',
+          tickSize: 5.67,
+          titleFontSize: 16,
+          titleFontWeight: 'normal'
+      },
+      legend: {
+          labelBaseline: 'middle',
+          labelFontSize: 11,
+          symbolSize: 40
+      },
+      range: {
+          category: [
+              '#000000',
+              '#7F7F7F',
+              '#1A1A1A',
+              '#999999',
+              '#333333',
+              '#B0B0B0',
+              '#4D4D4D',
+              '#C9C9C9',
+              '#666666',
+              '#DCDCDC'
+          ]
+      }
   };
 
   const headlineFontSize = 22;
   const headlineFontWeight = 'normal';
-  const labelFont = 'Benton Gothic, sans';
+  const labelFont = 'Benton Gothic, sans-serif';
   const labelFontSize = 11.5;
   const labelFontWeight = 'normal';
-  const markColor$5 = '#82c6df';
-  const titleFont = 'Benton Gothic Bold, sans';
+  const markColor$3 = '#82c6df';
+  // const markHighlight = '#006d8f';
+  // const markDemocrat = '#5789b8';
+  // const markRepublican = '#d94f54';
+  const titleFont = 'Benton Gothic Bold, sans-serif';
   const titleFontWeight = 'normal';
   const titleFontSize = 13;
   const colorSchemes = {
-      'category-6': [
-          '#ec8431',
-          '#829eb1',
-          '#c89d29',
-          '#3580b1',
-          '#adc839',
-          '#ab7fb4',
-      ],
-      'fire-7': [
-          '#fbf2c7',
-          '#f9e39c',
-          '#f8d36e',
-          '#f4bb6a',
-          '#e68a4f',
-          '#d15a40',
-          '#ab4232',
-      ],
-      'fireandice-6': [
-          '#e68a4f',
-          '#f4bb6a',
-          '#f9e39c',
-          '#dadfe2',
-          '#a6b7c6',
-          '#849eae',
-      ],
-      'ice-7': [
-          '#edefee',
-          '#dadfe2',
-          '#c4ccd2',
-          '#a6b7c6',
-          '#849eae',
-          '#607785',
-          '#47525d',
-      ],
+      'category-6': ['#ec8431', '#829eb1', '#c89d29', '#3580b1', '#adc839', '#ab7fb4'],
+      'fire-7': ['#fbf2c7', '#f9e39c', '#f8d36e', '#f4bb6a', '#e68a4f', '#d15a40', '#ab4232'],
+      'fireandice-6': ['#e68a4f', '#f4bb6a', '#f9e39c', '#dadfe2', '#a6b7c6', '#849eae'],
+      'ice-7': ['#edefee', '#dadfe2', '#c4ccd2', '#a6b7c6', '#849eae', '#607785', '#47525d']
   };
   const latimesTheme = {
       background: '#ffffff',
       title: {
           anchor: 'start',
+          color: '#000000',
           font: titleFont,
-          fontColor: '#000000',
           fontSize: headlineFontSize,
-          fontWeight: headlineFontWeight,
+          fontWeight: headlineFontWeight
       },
-      arc: { fill: markColor$5 },
-      area: { fill: markColor$5 },
-      line: { stroke: markColor$5, strokeWidth: 2 },
-      path: { stroke: markColor$5 },
-      rect: { fill: markColor$5 },
-      shape: { stroke: markColor$5 },
-      symbol: { fill: markColor$5, size: 30 },
+      arc: { fill: markColor$3 },
+      area: { fill: markColor$3 },
+      line: { stroke: markColor$3, strokeWidth: 2 },
+      path: { stroke: markColor$3 },
+      rect: { fill: markColor$3 },
+      shape: { stroke: markColor$3 },
+      symbol: { fill: markColor$3, size: 30 },
       axis: {
           labelFont,
           labelFontSize,
           labelFontWeight,
           titleFont,
           titleFontSize,
-          titleFontWeight,
+          titleFontWeight
       },
       axisX: {
           labelAngle: 0,
           labelPadding: 4,
-          tickSize: 3,
+          tickSize: 3
       },
       axisY: {
           labelBaseline: 'middle',
@@ -3139,7 +3253,7 @@
           titleAlign: 'left',
           titleAngle: 0,
           titleX: -45,
-          titleY: -11,
+          titleY: -11
       },
       legend: {
           labelFont,
@@ -3147,27 +3261,120 @@
           symbolType: 'square',
           titleFont,
           titleFontSize,
-          titleFontWeight,
+          titleFontWeight
       },
       range: {
           category: colorSchemes['category-6'],
           diverging: colorSchemes['fireandice-6'],
           heatmap: colorSchemes['fire-7'],
           ordinal: colorSchemes['fire-7'],
-          ramp: colorSchemes['fire-7'],
-      },
+          ramp: colorSchemes['fire-7']
+      }
   };
 
+  const markColor$4 = '#ab5787';
+  const axisColor$1 = '#979797';
+  const quartzTheme = {
+      background: '#f9f9f9',
+      arc: { fill: markColor$4 },
+      area: { fill: markColor$4 },
+      line: { stroke: markColor$4 },
+      path: { stroke: markColor$4 },
+      rect: { fill: markColor$4 },
+      shape: { stroke: markColor$4 },
+      symbol: { fill: markColor$4, size: 30 },
+      axis: {
+          domainColor: axisColor$1,
+          domainWidth: 0.5,
+          gridWidth: 0.2,
+          labelColor: axisColor$1,
+          tickColor: axisColor$1,
+          tickWidth: 0.2,
+          titleColor: axisColor$1
+      },
+      axisBand: {
+          grid: false
+      },
+      axisX: {
+          grid: true,
+          tickSize: 10
+      },
+      axisY: {
+          domain: false,
+          grid: true,
+          tickSize: 0
+      },
+      legend: {
+          labelFontSize: 11,
+          padding: 1,
+          symbolSize: 30,
+          symbolType: 'square'
+      },
+      range: {
+          category: [
+              '#ab5787',
+              '#51b2e5',
+              '#703c5c',
+              '#168dd9',
+              '#d190b6',
+              '#00609f',
+              '#d365ba',
+              '#154866',
+              '#666666',
+              '#c4c4c4'
+          ]
+      }
+  };
 
+  const markColor$5 = '#3e5c69';
+  const voxTheme = {
+      background: '#fff',
+      arc: { fill: markColor$5 },
+      area: { fill: markColor$5 },
+      line: { stroke: markColor$5 },
+      path: { stroke: markColor$5 },
+      rect: { fill: markColor$5 },
+      shape: { stroke: markColor$5 },
+      symbol: { fill: markColor$5 },
+      axis: {
+          domainWidth: 0.5,
+          grid: true,
+          labelPadding: 2,
+          tickSize: 5,
+          tickWidth: 0.5,
+          titleFontWeight: 'normal'
+      },
+      axisBand: {
+          grid: false
+      },
+      axisX: {
+          gridWidth: 0.2
+      },
+      axisY: {
+          gridDash: [3],
+          gridWidth: 0.4
+      },
+      legend: {
+          labelFontSize: 11,
+          padding: 1,
+          symbolType: 'square'
+      },
+      range: {
+          category: ['#3e5c69', '#6793a6', '#182429', '#0570b0', '#3690c0', '#74a9cf', '#a6bddb', '#e2ddf2']
+      }
+  };
+
+  const version$2 = pkg$1.version;
 
   var themes = /*#__PURE__*/Object.freeze({
-    excel: excelTheme,
-    ggplot2: ggplot2Theme,
-    quartz: quartzTheme,
-    vox: voxTheme,
+    version: version$2,
     dark: darkTheme,
+    excel: excelTheme,
     fivethirtyeight: fiveThirtyEightTheme,
-    latimes: latimesTheme
+    ggplot2: ggplot2Theme,
+    latimes: latimesTheme,
+    quartz: quartzTheme,
+    vox: voxTheme
   });
 
   // generated with build-style.sh
@@ -3389,32 +3596,15 @@
 
   var falsy = accessor(function() { return false; }, empty$1, 'false');
 
-  /**
-   * Span-preserving range clamp. If the span of the input range is less
-   * than (max - min) and an endpoint exceeds either the min or max value,
-   * the range is translated such that the span is preserved and one
-   * endpoint touches the boundary of the min/max range.
-   * If the span exceeds (max - min), the range [min, max] is returned.
-   */
-
-  /**
-   * Return an array with minimum and maximum values, in the
-   * form [min, max]. Ignores null, undefined, and NaN values.
-   */
-
-  /**
-   * Predicate that returns true if the value lies within the span
-   * of the given range. The left and right flags control the use
-   * of inclusive (true) or exclusive (false) comparisons.
-   */
-
   var __rest = (undefined && undefined.__rest) || function (s, e) {
       var t = {};
       for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
           t[p] = s[p];
       if (s != null && typeof Object.getOwnPropertySymbols === "function")
-          for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-              t[p[i]] = s[p[i]];
+          for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+              if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                  t[p[i]] = s[p[i]];
+          }
       return t;
   };
   /**
@@ -3438,6 +3628,10 @@
               content += '<table>';
               for (const key of keys) {
                   let val = rest[key];
+                  // ignore undefined properties
+                  if (val === undefined) {
+                      continue;
+                  }
                   if (isObject(val)) {
                       val = stringify(val, maxDepth);
                   }
@@ -3504,10 +3698,10 @@
        * @param options Tooltip Options
        */
       constructor(options) {
-          this.options = Object.assign({}, DEFAULT_OPTIONS, options);
+          this.options = Object.assign(Object.assign({}, DEFAULT_OPTIONS), options);
           const elementId = this.options.id;
           // bind this to call
-          this.call = this.tooltip_handler.bind(this);
+          this.call = this.tooltipHandler.bind(this);
           // prepend a default stylesheet for tooltips to the head
           if (!this.options.disableDefaultStyle && !document.getElementById(this.options.styleId)) {
               const style = document.createElement('style');
@@ -3522,6 +3716,7 @@
               }
           }
           // append a div element that we use as a tooltip unless it already exists
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           this.el = document.getElementById(elementId);
           if (!this.el) {
               this.el = document.createElement('div');
@@ -3533,7 +3728,7 @@
       /**
        * The tooltip handler function.
        */
-      tooltip_handler(handler, event, item, value) {
+      tooltipHandler(handler, event, item, value) {
           // console.log(handler, event, item, value);
           // hide tooltip for null, undefined, or empty string values
           if (value == null || value === '') {
@@ -3592,6 +3787,7 @@
     top: 0;
     right: 0;
     padding: 6px;
+    height: 14px;
     z-index: 1000;
     background: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -3667,51 +3863,13 @@
     transform: scale(1); } }
 `;
 
-  /* eslint-disable */
-  function deepMerge_(dest, src) {
-      if (typeof src !== 'object' || src === null) {
-          return dest;
-      }
-      for (const p in src) {
-          if (!src.hasOwnProperty(p)) {
-              continue;
-          }
-          if (src[p] === undefined) {
-              continue;
-          }
-          if (typeof src[p] !== 'object' || vegaImport.isArray(src[p]) || src[p] === null) {
-              dest[p] = src[p];
-          }
-          else if (typeof dest[p] !== 'object' || dest[p] === null) {
-              dest[p] = mergeDeep(vegaImport.isArray(src[p].constructor) ? [] : {}, src[p]);
-          }
-          else {
-              mergeDeep(dest[p], src[p]);
-          }
-      }
-      return dest;
-  }
-  /* eslint-enable */
-  function mergeDeep(dest, ...src) {
-      for (const s of src) {
-          // eslint-disable-next-line no-param-reassign
-          dest = deepMerge_(dest, s);
-      }
-      return dest;
-  }
-  // polyfill for IE
-  if (!String.prototype.startsWith) {
-      // eslint-disable-next-line no-extend-native,func-names
-      String.prototype.startsWith = function (search, pos) {
-          return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
-      };
-  }
-  function isURL(s) {
-      return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');
-  }
-
   const vega = vegaImport;
-  const vl = vlImport;
+  let vegaLite = vegaLiteImport;
+  // For backwards compatibility with Vega-Lite before v4.
+  const w = window;
+  if (vegaLite === undefined && w['vl'] && w['vl'].compile) {
+      vegaLite = w['vl'];
+  }
   const I18N = {
       CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
       COMPILED_ACTION: 'View Compiled Vega',
@@ -3726,11 +3884,11 @@
   };
   const VERSION = {
       vega: vega.version,
-      'vega-lite': vl ? vl.version : 'not available'
+      'vega-lite': vegaLite ? vegaLite.version : 'not available'
   };
   const PREPROCESSOR = {
-      vega: vgjson => vgjson,
-      'vega-lite': (vljson, config) => vl.compile(vljson, { config: config }).spec
+      vega: vgSpec => vgSpec,
+      'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec, { config: config }).spec
   };
   const SVG_CIRCLES = `
 <svg viewBox="0 0 16 16" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
@@ -3761,8 +3919,8 @@
               console.warn(`The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[providedMode] || providedMode}.`);
           }
           const mode = parsed.library;
-          if (!semver_30(VERSION[mode], `^${parsed.version.slice(1)}`)) {
-              console.warn(`The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`);
+          if (!semver_32(VERSION[mode], `^${parsed.version.slice(1)}`)) {
+              console.warn(`The input spec uses ${NAMES[mode]} ${parsed.version}, but the current version of ${NAMES[mode]} is v${VERSION[mode]}.`);
           }
           return mode;
       }
@@ -3800,22 +3958,20 @@
               const data = yield loader.load(spec);
               return embed(el, JSON.parse(data), opt);
           }
-          // eslint-disable-next-line no-param-reassign, dot-notation
-          opt = mergeDeep(opt, spec.usermeta && spec.usermeta['embedOptions']);
-          const patch = opt.patch || opt.onBeforeParse;
-          const actions = opt.actions === true || opt.actions === false
-              ? opt.actions
-              : mergeDeep({}, { export: { svg: true, png: true }, source: true, compiled: true, editor: true }, opt.actions || {});
-          const i18n = Object.assign({}, I18N, opt.i18n);
-          const renderer = opt.renderer || 'canvas';
-          const logLevel = opt.logLevel || vega.Warn;
-          const downloadFileName = opt.downloadFileName || 'visualization';
+          opt = cjs(opt, (spec.usermeta && spec.usermeta['embedOptions']) || {});
           // Load Vega theme/configuration.
           let config = opt.config || {};
           if (vega.isString(config)) {
               const data = yield loader.load(config);
               return embed(el, spec, Object.assign({}, opt, { config: JSON.parse(data) }));
           }
+          const actions = vegaImport.isBoolean(opt.actions)
+              ? opt.actions
+              : cjs({ export: { svg: true, png: true }, source: true, compiled: true, editor: true }, opt.actions || {});
+          const i18n = Object.assign({}, I18N, opt.i18n);
+          const renderer = opt.renderer || 'canvas';
+          const logLevel = opt.logLevel || vega.Warn;
+          const downloadFileName = opt.downloadFileName || 'visualization';
           if (opt.defaultStyle !== false) {
               // Add a default stylesheet to the head of the document.
               const ID = 'vega-embed-style';
@@ -3823,20 +3979,20 @@
                   const style = document.createElement('style');
                   style.id = ID;
                   style.innerText =
-                      opt.defaultStyle === undefined || opt.defaultStyle === true ? (embedStyle).toString() : opt.defaultStyle;
+                      opt.defaultStyle === undefined || opt.defaultStyle === true ? (embedStyle ).toString() : opt.defaultStyle;
                   document.head.appendChild(style);
               }
           }
           if (opt.theme) {
-              config = mergeDeep({}, themes[opt.theme], config);
+              config = cjs(themes[opt.theme], config);
           }
           const mode = guessMode(spec, opt.mode);
           let vgSpec = PREPROCESSOR[mode](spec, config);
           if (mode === 'vega-lite') {
               if (vgSpec.$schema) {
                   const parsed = schemaParser(vgSpec.$schema);
-                  if (!semver_30(VERSION.vega, `^${parsed.version.slice(1)}`)) {
-                      console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is ${VERSION.vega}.`);
+                  if (!semver_32(VERSION.vega, `^${parsed.version.slice(1)}`)) {
+                      console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is v${VERSION.vega}.`);
                   }
               }
           }
@@ -3844,16 +4000,18 @@
           const div = select(el) // d3.select supports elements and strings
               .classed('vega-embed', true)
               .html(''); // clear container
+          const patch = opt.patch;
           if (patch) {
               if (patch instanceof Function) {
                   vgSpec = patch(vgSpec);
               }
               else if (vega.isString(patch)) {
                   const patchString = yield loader.load(patch);
-                  vgSpec = mergeDeep(vgSpec, JSON.parse(patchString));
+                  // eslint-disable-next-line require-atomic-updates
+                  vgSpec = cjs(vgSpec, JSON.parse(patchString));
               }
               else {
-                  vgSpec = mergeDeep(vgSpec, patch);
+                  vgSpec = cjs(vgSpec, patch);
               }
           }
           // Do not apply the config to Vega when we have already applied it to Vega-Lite.
@@ -3876,9 +4034,8 @@
               view.tooltip(handler);
           }
           let { hover } = opt;
-          // Enable hover for Vega by default.
           if (hover === undefined) {
-              hover = mode !== 'vega-lite';
+              hover = mode === 'vega';
           }
           if (hover) {
               const { hoverSet, updateSet } = (typeof hover === 'boolean' ? {} : hover);
@@ -4002,8 +4159,19 @@
       });
   }
 
+  // polyfill for IE
+  if (!String.prototype.startsWith) {
+      // eslint-disable-next-line no-extend-native,func-names
+      String.prototype.startsWith = function (search, pos) {
+          return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
+      };
+  }
+  function isURL(s) {
+      return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');
+  }
+
   /**
-   * Returns true of the object is an HTML element.
+   * Returns true if the object is an HTML element.
    */
   function isElement(obj) {
       return obj instanceof selection || typeof HTMLElement === 'object'
@@ -4016,7 +4184,8 @@
       }
       return container(args[0], args[1]);
   };
-  wrapper.vl = vl;
+  wrapper.vegaLite = vegaLite;
+  wrapper.vl = vegaLite; // backwards compatbility
   wrapper.container = container;
   wrapper.embed = embed;
   wrapper.vega = vega;
