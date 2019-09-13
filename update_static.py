@@ -3,12 +3,12 @@ import shutil
 from pathlib import Path
 
 paths = [
-    'vega/build/vega.js',
-    'vega/build/vega.min.js',
-    'vega-lite/build/vega-lite.js',
-    'vega-lite/build/vega-lite.min.js',
-    'vega-embed/build/vega-embed.js',
-    'vega-embed/build/vega-embed.min.js',
+    'vega@5/build/vega.js',
+    'vega@5/build/vega.min.js',
+    'vega-lite@3/build/vega-lite.js',
+    'vega-lite@3/build/vega-lite.min.js',
+    'vega-embed@5/build/vega-embed.js',
+    'vega-embed@5/build/vega-embed.min.js',
 ]
 
 for path in paths:
